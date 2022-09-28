@@ -6,6 +6,7 @@ import App from './App'
 import './index.css'
 import common_en from "./translations/en/common.json"
 import common_no from "./translations/no/common.json"
+import common_sarcasm from "./translations/sarcasm/common.json"
 
 i18next.init({
   interpolation: {escapeValue: false},
@@ -16,7 +17,10 @@ i18next.init({
     },
     no: {
       common: common_no
-    }
+    },
+    sarcasm: {
+      common: common_sarcasm
+    },
   }
 });
 
