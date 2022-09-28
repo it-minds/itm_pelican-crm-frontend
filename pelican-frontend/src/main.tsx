@@ -4,9 +4,20 @@ import ReactDOM from 'react-dom/client'
 import { I18nextProvider } from 'react-i18next'
 import App from './App'
 import './index.css'
+import common_en from "./translations/en/common.json"
+import common_no from "./translations/no/common.json"
 
 i18next.init({
-  interpolation: {escapeValue: false}
+  interpolation: {escapeValue: false},
+  lng: 'en',
+  resources: {
+    en: {
+      common: common_en
+    },
+    no: {
+      common: common_no
+    }
+  }
 });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
