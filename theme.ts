@@ -25,13 +25,12 @@ export const darkTheme: ThemeOptions = createTheme({
 			main: secondary,
 		},
 	},
-	typography,
 });
 
-darkTheme.typography.h1 = {
-	fontSize: 60,
-	fontWeight: 800,
-	[darkTheme.breakpoints.down('md')]: {
-		fontSize: 40,
-	},
-};
+// darkTheme.typography.h1 = {
+// 	fontSize: 60,
+// 	fontWeight: 800,
+// 	[darkTheme.breakpoints.down('md')]: {
+// 		fontSize: 40,
+// 	},
+// };

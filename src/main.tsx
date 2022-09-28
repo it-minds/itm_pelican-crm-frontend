@@ -11,7 +11,7 @@ import common_sarcasm from "./translations/sarcasm/common.json"
 
 i18next.init({
   interpolation: {escapeValue: false},
-  lng: 'en',
+  lng: 'en',  // Default language
   resources: {
     en: {
       common: common_en
