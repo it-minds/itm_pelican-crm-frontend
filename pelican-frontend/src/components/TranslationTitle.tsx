@@ -15,6 +15,7 @@ const TranslationTitle = () => {
       </h1>
       <button onClick={() => i18n.changeLanguage('en')}>English</button>
       <button onClick={() => i18n.changeLanguage('no')}>Norsk</button>
+      <button onClick={() => i18n.changeLanguage('sarcasm')}>Sarcasm</button>
     </div>
   )
 }
