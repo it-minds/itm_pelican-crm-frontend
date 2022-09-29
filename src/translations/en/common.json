@@ -41,9 +41,12 @@
     }
   },
   "Suppliers": {
-
+    "pageTitle": "Pelican suppliers",
+    "nameSearchBoxDefault": "Name",
+    "officeFilterButtonDefault": "Office location"
   },
   "Contacts": {
+    "pageTitle": "Contact persons",
     "customerSearchBoxDefault": "Customer",
     "contactPersonSearchBoxDefault": "Contact person"
   },
