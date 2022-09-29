@@ -1,5 +1,5 @@
-export const pageContainer: object = {
-	background: '#303030',
+export const pageContainer = {
+	backgroundColor: 'background.default',
 	minHeight: '100vh',
 	minWidth: '100vw',
 	m: 0,
