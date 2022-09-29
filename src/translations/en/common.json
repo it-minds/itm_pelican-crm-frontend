@@ -40,17 +40,18 @@
       "multipleAccountManagers": "Multiple account managers"
     }
   },
-  "Suppliers": {
+  "suppliers": {
     "pageTitle": "Pelican suppliers",
     "nameSearchBoxDefault": "Name",
     "officeFilterButtonDefault": "Office location"
   },
-  "Contacts": {
+  "contacts": {
     "pageTitle": "Contact persons",
     "customerSearchBoxDefault": "Customer",
     "contactPersonSearchBoxDefault": "Contact person"
   },
-  "Recommendations": {
+  "recommendations": {
+    "pageTitle": "Recommendations",
     "recommendationsParagraph": "These recommendations are based on similarities between your already existing clients, segments, and customers from other account managers with areas similar to yours.",
     "recommendationsListItemContent": {
       "dealStatus": {
