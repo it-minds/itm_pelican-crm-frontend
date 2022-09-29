@@ -1,11 +1,19 @@
+import { AppBar, Grid, Toolbar } from '@mui/material'
 import React from 'react'
 import { Link } from "react-router-dom"
+import AppHideOnScroll from './HideOnScroll'
 
 const NavigationBar = () => {
   return (
     <>
-      <div>Navigation</div>
-      
+      <AppHideOnScroll>
+        <AppBar>
+          <Toolbar>
+            <Link to="/clients">Wall of clients</Link>
+            <Link to="/recommendations">Recommendations</Link>
+          </Toolbar>
+        </AppBar>
+      </AppHideOnScroll>
     </>
   )
 }

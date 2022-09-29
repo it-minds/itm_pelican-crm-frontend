@@ -10,6 +10,7 @@ import common_en from './translations/en/common.json';
 import common_no from './translations/no/common.json';
 import common_sarcasm from './translations/sarcasm/common.json';
 import { BrowserRouter } from "react-router-dom"
+import Content from './Content';
 
 i18next.init({
 	interpolation: { escapeValue: false },
@@ -29,14 +30,14 @@ i18next.init({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
-		<CssBaseline>
-			<ThemeProvider theme={darkTheme}>
-				<I18nextProvider i18n={i18next}>
-					<BrowserRouter>
-            <App />
-          </BrowserRouter>
-				</I18nextProvider>
-			</ThemeProvider>
-		</CssBaseline>
+    <BrowserRouter>
+      <CssBaseline>
+        <ThemeProvider theme={darkTheme}>
+          <I18nextProvider i18n={i18next}>
+            <Content />
+          </I18nextProvider>
+        </ThemeProvider>
+      </CssBaseline>
+    </BrowserRouter>
 	</React.StrictMode>
 );
