@@ -9,6 +9,7 @@ import { darkTheme } from '../theme';
 import common_en from './translations/en/common.json';
 import common_no from './translations/no/common.json';
 import common_sarcasm from './translations/sarcasm/common.json';
+import { BrowserRouter } from "react-router-dom"
 
 i18next.init({
 	interpolation: { escapeValue: false },
@@ -31,7 +32,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 		<CssBaseline>
 			<ThemeProvider theme={darkTheme}>
 				<I18nextProvider i18n={i18next}>
-					<App />
+					<BrowserRouter>
+            <App />
+          </BrowserRouter>
 				</I18nextProvider>
 			</ThemeProvider>
 		</CssBaseline>

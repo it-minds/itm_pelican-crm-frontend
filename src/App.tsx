@@ -5,6 +5,7 @@ import TranslationTitle from './components/TranslationTitle';
 import { Button, Grid, Typography } from '@mui/material';
 import { pageContainer } from './styles/containers';
 import { Box } from '@mui/system';
+import NavigationBar from './components/NavigationBar';
 
 function App() {
 	const [count, setCount] = useState(0);
