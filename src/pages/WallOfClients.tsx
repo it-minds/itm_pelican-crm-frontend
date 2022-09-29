@@ -1,8 +1,12 @@
+import { Grid } from '@mui/material'
 import React from 'react'
+import { pageContainer } from '../styles/containers'
 
 const WallOfClients = () => {
   return (
-    <div>WallOfClients yolo</div>
+    <Grid sx={pageContainer} container>
+      <div>WallOfClients yolo</div>
+    </Grid>
   )
 }
 

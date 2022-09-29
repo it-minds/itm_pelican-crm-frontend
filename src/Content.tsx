@@ -12,7 +12,8 @@ const Content = () => {
     <Routes>
       <Route path='/clients' element={<WallOfClients />} />
       <Route path='/recommendations' element={<Recommendations />} />
-      <Route path='/' element={ <Navigate to="/clients" /> } />
+      {/* <Route path='/' element={ <Navigate to="/clients" /> } /> // THIS IS THE ACTUAL ROUTE THAT WE WANT "/" TO REPRESENT */}
+      <Route path='/' element={<App />} />
     </Routes>
     </>
   )
