@@ -10,6 +10,8 @@ const NavigationBar = () => {
         <AppBar>
           <Toolbar>
             <Link to="/clients">Wall of clients</Link>
+            <Link to="/contacts">Contacts</Link>
+            <Link to="/suppliers">Suppliers</Link>
             <Link to="/recommendations">Recommendations</Link>
           </Toolbar>
         </AppBar>
