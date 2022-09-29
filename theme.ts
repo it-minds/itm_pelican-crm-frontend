@@ -32,6 +32,12 @@ export const darkTheme: ThemeOptions = createTheme({
 			main: secondary,
 		},
 	},
+	typography: {
+		h1: {
+			fontSize: 60,
+			fontWeight: 800,
+		},
+	},
 });
 
 // darkTheme.typography.h1 = {
