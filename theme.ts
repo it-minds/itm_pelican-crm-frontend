@@ -1,5 +1,6 @@
 import { Theme } from '@mui/material';
-import { createTheme, ThemeOptions } from '@mui/material/styles';
+import { Breakpoints, BreakpointsOptions, createTheme, ThemeOptions } from '@mui/material/styles';
+import { TypographyOptions } from '@mui/material/styles/createTypography';
 
 declare module '@mui/material/styles' {
 	interface Theme {
@@ -9,11 +10,37 @@ declare module '@mui/material/styles' {
 	}
 }
 
+// Tailwind inspired breakpoints
+export const breakpoints: BreakpointsOptions = {
+	values: {
+		xs: 0,
+		sm: 640,
+		md: 768,
+		lg: 1024,
+		xl: 1280,
+	},
+};
+
 const primary = '#0E83C6';
 
 const secondary = '#DD0C6A';
 
 const darkBackground = '#303030';
+
+const typography: TypographyOptions = {
+	// fontFamily: 'Poppins', <-- Looks gross but is apparently used in Sursen project??
+	subtitle2: {
+		fontSize: 12,
+		fontWeight: 300,
+	},
+	button: {
+		textTransform: 'none',
+	},
+	h1: {
+		fontSize: 60,
+		fontWeight: 800,
+	},
+};
 
 export const darkTheme: ThemeOptions = createTheme({
 	palette: {
@@ -32,18 +59,26 @@ export const darkTheme: ThemeOptions = createTheme({
 			main: secondary,
 		},
 	},
-	typography: {
-		h1: {
-			fontSize: 60,
-			fontWeight: 800,
-		},
-	},
+	typography,
+	breakpoints,
 });
 
-// darkTheme.typography.h1 = {
+// darkTheme?.typography?.h1 = {
 // 	fontSize: 60,
 // 	fontWeight: 800,
 // 	[darkTheme.breakpoints.down('md')]: {
 // 		fontSize: 40,
 // 	},
 // };
+
+darkTheme.typography = {
+	...darkTheme.typography,
+	h1: {
+		fontSize: 60,
+		fontWeight: 800,
+		// @ts-ignore
+		[darkTheme.breakpoints.down('md')]: {
+			fontSize: 40,
+		},
+	},
+};
