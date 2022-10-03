@@ -28,17 +28,13 @@ const secondary = '#DD0C6A';
 const darkBackground = '#303030';
 
 const typography: TypographyOptions = {
-	// fontFamily: 'Poppins', <-- Looks gross but is apparently used in Sursen project??
+	fontFamily: 'Poppins',
 	subtitle2: {
 		fontSize: 12,
 		fontWeight: 300,
 	},
 	button: {
 		textTransform: 'none',
-	},
-	h1: {
-		fontSize: 60,
-		fontWeight: 800,
 	},
 };
 
