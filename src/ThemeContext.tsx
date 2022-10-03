@@ -1,7 +1,6 @@
 import { ThemeOptions, ThemeProvider } from '@mui/material/styles';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { lightTheme, darkTheme } from '../theme';
-import createPersistedState from 'use-persisted-state';
 
 type Theme = 'light' | 'dark';
 type ThemeContext = { theme: ThemeOptions; toggleTheme: () => void };

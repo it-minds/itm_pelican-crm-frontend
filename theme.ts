@@ -1,11 +1,5 @@
 import { Theme } from '@mui/material';
-import {
-	Breakpoints,
-	BreakpointsOptions,
-	createMuiTheme,
-	createTheme,
-	ThemeOptions,
-} from '@mui/material/styles';
+import { BreakpointsOptions, createTheme, ThemeOptions } from '@mui/material/styles';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 
 declare module '@mui/material/styles' {
@@ -64,14 +58,6 @@ export const darkTheme: ThemeOptions = createTheme({
 	typography,
 	breakpoints,
 });
-
-// darkTheme?.typography?.h1 = {
-// 	fontSize: 60,
-// 	fontWeight: 800,
-// 	[darkTheme.breakpoints.down('md')]: {
-// 		fontSize: 40,
-// 	},
-// };
 
 darkTheme.typography = {
 	...darkTheme.typography,
