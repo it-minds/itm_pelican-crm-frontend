@@ -89,6 +89,7 @@ export const lightTheme: ThemeOptions = createTheme({
 		},
 	},
 	typography,
+	breakpoints,
 });
 
 lightTheme.typography = {
@@ -97,7 +98,7 @@ lightTheme.typography = {
 		fontSize: 60,
 		fontWeight: 800,
 		// @ts-ignore
-		[darkTheme.breakpoints.down('md')]: {
+		[lightTheme.breakpoints.down('md')]: {
 			fontSize: 40,
 		},
 	},

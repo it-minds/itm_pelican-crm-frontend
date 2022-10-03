@@ -1,43 +1,67 @@
-import { AppBar, Button, Toolbar, useMediaQuery, useTheme } from '@mui/material';
+import {
+	AppBar,
+	Box,
+	Button,
+	ButtonBase,
+	Toolbar,
+	Typography,
+	useMediaQuery,
+	useTheme,
+} from '@mui/material';
 import { t } from 'i18next';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { flexRow } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from './HideOnScroll';
+import AppUnderlined from './underlined.component';
 
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const currentTheme = useTheme();
 	const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
+
+	const links = [
+		{
+			name: 'common:navbar.clientsLink',
+			path: '/clients',
+		},
+		{
+			name: 'common:navbar.contactsLink',
+			path: '/contacts',
+		},
+		// {
+		// 	name: 'common:navbar.segmentsLink',
+		// 	path: '/segments',
+		// },
+		{
+			name: 'common:navbar.suppliersLink',
+			path: '/suppliers',
+		},
+		{
+			name: 'common:navbar.recommendationsLink',
+			path: '/recommendations',
+		},
+	];
+
 	return (
 		<>
 			<AppHideOnScroll>
 				<AppBar color="transparent" elevation={0}>
 					<Toolbar>
-						<Button component={Link} to="/" sx={styles.brand}>
+						<Button component={Link} to="/" sx={classes.brand}>
 							<img src="/pelican512.png" alt="logo" height={32} />
 						</Button>
-						<Button component={Link} to="/clients">
-							{/* @ts-ignore */}
-							{t('common:navbar.clientsLink')}
-						</Button>
-						<Button component={Link} to="/contacts">
-							{/* @ts-ignore */}
-							{t('common:navbar.contactsLink')}
-						</Button>
-						<Button component={Link} to="/contacts">
-							{/* @ts-ignore */}
-							{t('common:navbar.segmentsLink')}
-						</Button>
-						<Button component={Link} to="/suppliers">
-							{/* @ts-ignore */}
-							{t('common:navbar.suppliersLink')}
-						</Button>
-						<Button component={Link} to="/recommendations">
-							{/* @ts-ignore */}
-							{t('common:navbar.recommendationsLink')}
-						</Button>
+						<Box sx={{ ...flexRow, gap: 2 }}>
+							{links.map(link => (
+								<ButtonBase component={Link} to={link.path} key={link.name}>
+									<Typography sx={classes.linkElem} variant="h6">
+										{/* @ts-ignore */}
+										{t(link.name)}
+									</Typography>
+								</ButtonBase>
+							))}
+						</Box>
 					</Toolbar>
 				</AppBar>
 			</AppHideOnScroll>
@@ -45,7 +69,7 @@ const NavigationBar = () => {
 	);
 };
 
-const styles = {
+const classes = {
 	brand: {
 		display: 'flex',
 		alignItems: 'center',
@@ -66,6 +90,7 @@ const styles = {
 		height: 24,
 	},
 	linkElem: {
+		fontSize: '1rem',
 		textDecoration: 'none',
 		color: 'text.primary',
 	},
