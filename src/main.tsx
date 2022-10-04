@@ -8,6 +8,7 @@ import common_no from './translations/no/common.json';
 import common_sarcasm from './translations/sarcasm/common.json';
 import { BrowserRouter } from 'react-router-dom';
 import Content from './Content';
+import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import AppThemeProvider from './ThemeContext';
 
 i18next.init({
@@ -26,16 +27,28 @@ i18next.init({
 	},
 });
 
+// Set uri to port/outlet running backend
+const httpLink = createHttpLink({
+	uri: 'http://localhost:4000',
+});
+
+const client = new ApolloClient({
+	link: httpLink,
+	cache: new InMemoryCache(),
+});
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<CssBaseline>
-				<AppThemeProvider>
-					<I18nextProvider i18n={i18next}>
-						<Content />
-					</I18nextProvider>
-				</AppThemeProvider>
-			</CssBaseline>
+			<ApolloProvider client={client}>
+				<CssBaseline>
+					<AppThemeProvider>
+						<I18nextProvider i18n={i18next}>
+							<Content />
+						</I18nextProvider>
+					</AppThemeProvider>
+				</CssBaseline>
+			</ApolloProvider>
 		</BrowserRouter>
 	</React.StrictMode>
 );
