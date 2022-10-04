@@ -1,74 +1,74 @@
 {
-  "welcome": {
-    "title": "Welcome to Pelican"
-  },
-  "shared": {
-    "numberOfHitsText": "Found {{hits}} results"
-  },
-  "navbar": {
-    "customersLink": "Customers",
-    "suppliersLink": "Suppliers",
-    "segmentsLink": "Segments",
-    "contactsLink": "Contacts",
-    "recommendationsLink": "Recommendations"
-  },
-  "wallOfClients": {
-    "pageTitle": "Wall of Clients",
-    "nameSearchBoxDefault": "Name",
-    "contactPersonSearchBoxDefault": "Contact person",
-    "officeFilterButtonDefault": "Office location",
-    "supplierFilterButtonDefault": "Supplier",
-    "segmentFilterButtonDefault": "Segment",
-    "accountManagerFilterButtonDefault": "Account Manager",
-    "classificationFilterButtonDefault": "Classification",
-    "dealStatusFilterButtonDefault": "Deal status",
-    "clientListItemContent": {
-      "dealStatus": {
-        "active": "Active",
-        "activeUntilDate": "Active until {{date}}",
-        "inactive": "Inactive",
-        "inactiveSinceDate": "Inactive since {{date}}",
-        "dialog": "Dialog",
-        "multipleActive": "Multiple active"
-      },
-      "customerSize": {
-        "small": "Small customer",
-        "medium": "Medium customer",
-        "top": "Top customer"
-      },
-      "knownContactPersons": "Known contact persons",
-      "multipleAccountManagers": "Multiple account managers"
-    }
-  },
-  "suppliers": {
-    "pageTitle": "Pelican suppliers",
-    "nameSearchBoxDefault": "Name",
-    "officeFilterButtonDefault": "Office location"
-  },
-  "contacts": {
-    "pageTitle": "Contact persons",
-    "customerSearchBoxDefault": "Customer",
-    "contactPersonSearchBoxDefault": "Contact person"
-  },
-  "recommendations": {
-    "pageTitle": "Recommendations",
-    "recommendationsParagraph": "These recommendations are based on similarities between your already existing clients, segments, and customers from other account managers with areas similar to yours.",
-    "recommendationsListItemContent": {
-      "dealStatus": {
-        "active": "Active",
-        "activeUntilDate": "Active until {{date}}",
-        "inactive": "Inactive",
-        "inactiveSinceDate": "Inactive since {{date}}",
-        "dialog": "Dialog",
-        "multipleActive": "Multiple active"
-      },
-      "customerSize": {
-        "small": "Small customer",
-        "medium": "Medium customer",
-        "top": "Top customer"
-      },
-      "knownContactPersons": "Known contact persons",
-      "multipleAccountManagers": "Multiple account managers"
-    }
-  }
+	"welcome": {
+		"title": "Welcome to Pelican"
+	},
+	"shared": {
+		"numberOfHitsText": "Found {{hits}} results"
+	},
+	"navbar": {
+		"clientsLink": "Wall of Clients",
+		"suppliersLink": "Suppliers",
+		"segmentsLink": "Segments",
+		"contactsLink": "Contacts",
+		"recommendationsLink": "Recommendations"
+	},
+	"wallOfClients": {
+		"pageTitle": "Wall of Clients",
+		"nameSearchBoxDefault": "Name",
+		"contactPersonSearchBoxDefault": "Contact person",
+		"officeFilterButtonDefault": "Office location",
+		"supplierFilterButtonDefault": "Supplier",
+		"segmentFilterButtonDefault": "Segment",
+		"accountManagerFilterButtonDefault": "Account Manager",
+		"classificationFilterButtonDefault": "Classification",
+		"dealStatusFilterButtonDefault": "Deal status",
+		"clientListItemContent": {
+			"dealStatus": {
+				"active": "Active",
+				"activeUntilDate": "Active until {{date}}",
+				"inactive": "Inactive",
+				"inactiveSinceDate": "Inactive since {{date}}",
+				"dialog": "Dialog",
+				"multipleActive": "Multiple active"
+			},
+			"customerSize": {
+				"small": "Small customer",
+				"medium": "Medium customer",
+				"top": "Top customer"
+			},
+			"knownContactPersons": "Known contact persons",
+			"multipleAccountManagers": "Multiple account managers"
+		}
+	},
+	"suppliers": {
+		"pageTitle": "Pelican suppliers",
+		"nameSearchBoxDefault": "Name",
+		"officeFilterButtonDefault": "Office location"
+	},
+	"contacts": {
+		"pageTitle": "Contact persons",
+		"customerSearchBoxDefault": "Customer",
+		"contactPersonSearchBoxDefault": "Contact person"
+	},
+	"recommendations": {
+		"pageTitle": "Recommendations",
+		"recommendationsParagraph": "These recommendations are based on similarities between your already existing clients, segments, and customers from other account managers with areas similar to yours.",
+		"recommendationsListItemContent": {
+			"dealStatus": {
+				"active": "Active",
+				"activeUntilDate": "Active until {{date}}",
+				"inactive": "Inactive",
+				"inactiveSinceDate": "Inactive since {{date}}",
+				"dialog": "Dialog",
+				"multipleActive": "Multiple active"
+			},
+			"customerSize": {
+				"small": "Small customer",
+				"medium": "Medium customer",
+				"top": "Top customer"
+			},
+			"knownContactPersons": "Known contact persons",
+			"multipleAccountManagers": "Multiple account managers"
+		}
+	}
 }

@@ -5,12 +5,15 @@ import TranslationTitle from './components/TranslationTitle';
 import { Button, Grid, Typography } from '@mui/material';
 import { pageContainer } from './styles/containers';
 import { Box } from '@mui/system';
-import NavigationBar from './components/NavigationBar';
+import NavigationBar from './components/common/NavigationBar';
 import AppThemeProvider, { ThemeContext } from './ThemeContext';
+import { useTheme } from '@mui/material';
 
 function App() {
 	const [count, setCount] = useState(0);
 	const { theme, toggleTheme } = useContext(ThemeContext);
+	const themes = useTheme();
+	console.log(themes);
 
 	return (
 		<Grid sx={pageContainer} container>
