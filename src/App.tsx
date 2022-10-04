@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import TranslationTitle from './components/TranslationTitle';
@@ -6,9 +6,11 @@ import { Button, Grid, Typography } from '@mui/material';
 import { pageContainer } from './styles/containers';
 import { Box } from '@mui/system';
 import NavigationBar from './components/NavigationBar';
+import AppThemeProvider, { ThemeContext } from './ThemeContext';
 
 function App() {
 	const [count, setCount] = useState(0);
+	const { theme, toggleTheme } = useContext(ThemeContext);
 
 	return (
 		<Grid sx={pageContainer} container>
@@ -38,6 +40,9 @@ function App() {
 						onClick={() => setCount(count => count + 1)}
 					>
 						count is {count}
+					</Button>
+					<Button variant="contained" sx={{ height: '45px' }} onClick={() => toggleTheme()}>
+						ThemeBoy
 					</Button>
 					<Typography color="text.primary">
 						Edit <code>src/App.tsx</code> and save to test HMR
