@@ -2,7 +2,7 @@ import { CSSProperties } from '@mui/styled-engine';
 
 export const flexCenter: CSSProperties = {
 	display: 'flex',
-	justifyContent: 'center',
+	justifyItems: 'center',
 	alignItems: 'center',
 };
 

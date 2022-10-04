@@ -1,25 +1,39 @@
 import {
 	AppBar,
+	Avatar,
 	Box,
 	Button,
 	ButtonBase,
+	Grid,
 	Toolbar,
 	Typography,
 	useMediaQuery,
 	useTheme,
 } from '@mui/material';
 import { t } from 'i18next';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { flexRow } from '../../styles/generalStyles';
+import { flexCenter, flexRow } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from './HideOnScroll';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 import AppUnderlined from './underlined.component';
+import { Container } from '@mui/system';
 
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
+	const [isDarkMode, setIsDarkMode] = useState(false);
 	const currentTheme = useTheme();
 	const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
+
+	useEffect(() => {
+		if (currentTheme.palette.mode === 'dark') {
+			setIsDarkMode(true);
+		} else setIsDarkMode(false);
+
+		console.log('currentTheme', currentTheme);
+	}, [theme]);
 
 	const links = [
 		{
@@ -30,10 +44,6 @@ const NavigationBar = () => {
 			name: 'common:navbar.contactsLink',
 			path: '/contacts',
 		},
-		// {
-		// 	name: 'common:navbar.segmentsLink',
-		// 	path: '/segments',
-		// },
 		{
 			name: 'common:navbar.suppliersLink',
 			path: '/suppliers',
@@ -44,15 +54,23 @@ const NavigationBar = () => {
 		},
 	];
 
+	const themeToggle = () => {
+		return isDarkMode ? (
+			<Brightness4Icon sx={{ color: '#fff' }} />
+		) : (
+			<Brightness7Icon sx={{ color: '#707070' }} />
+		);
+	};
+
 	return (
-		<>
-			<AppHideOnScroll>
-				<AppBar color="transparent" elevation={0}>
-					<Toolbar>
-						<Button component={Link} to="/" sx={classes.brand}>
-							<img src="/pelican512.png" alt="logo" height={32} />
-						</Button>
+		<AppHideOnScroll>
+			<AppBar color="transparent" elevation={0}>
+				<Toolbar>
+					<Grid container sx={{ justifyContent: 'space-between' }}>
 						<Box sx={{ ...flexRow, gap: 2 }}>
+							<Button component={Link} to="/" sx={classes.brand}>
+								<img src="/pelican512.png" alt="logo" height={32} />
+							</Button>
 							{links.map(link => (
 								<ButtonBase component={Link} to={link.path} key={link.name}>
 									<Typography sx={classes.linkElem} variant="h6">
@@ -62,10 +80,18 @@ const NavigationBar = () => {
 								</ButtonBase>
 							))}
 						</Box>
-					</Toolbar>
-				</AppBar>
-			</AppHideOnScroll>
-		</>
+						<Box sx={{ ...flexCenter, gap: 2 }}>
+							{' '}
+							<ButtonBase onClick={toggleTheme}>{themeToggle()}</ButtonBase>
+							<Typography variant="subtitle2" sx={classes.linkElem}>
+								Salesman Name
+							</Typography>
+							<Avatar></Avatar>
+						</Box>
+					</Grid>
+				</Toolbar>
+			</AppBar>
+		</AppHideOnScroll>
 	);
 };
 
