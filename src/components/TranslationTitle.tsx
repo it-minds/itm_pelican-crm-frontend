@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 // WILL BE DELETED LATER WHEN TRANSLATIONS ARE FINISHED
 
 const TranslationTitle = () => {
-	const { t, i18n } = useTranslation('common');
+	const { t, i18n } = useTranslation();
 
 	return (
 		<Grid
