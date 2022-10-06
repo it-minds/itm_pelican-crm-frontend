@@ -20,6 +20,7 @@ const TranslationTitle = () => {
 		>
 			<Typography variant="h4" color="textPrimary" mb={2} fontWeight="">
 				{t('welcome.title')}
+				{t('contacts.pageTitle')}
 			</Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
           <Button variant="contained" onClick={() => i18n.changeLanguage('en')}>
