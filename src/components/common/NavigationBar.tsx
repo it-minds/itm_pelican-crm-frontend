@@ -10,7 +10,6 @@ import {
 	useMediaQuery,
 	useTheme,
 } from '@mui/material';
-import { t } from 'i18next';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { flexCenter, flexRow } from '../../styles/generalStyles';
@@ -20,12 +19,15 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import AppUnderlined from './underlined.component';
 import { Container } from '@mui/system';
+import { useTranslation } from 'react-i18next';
 
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	const currentTheme = useTheme();
 	const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
+
+	const { t, i18n } = useTranslation();
 
 	useEffect(() => {
 		if (currentTheme.palette.mode === 'dark') {
@@ -37,19 +39,19 @@ const NavigationBar = () => {
 
 	const links = [
 		{
-			name: 'common:navbar.clientsLink',
+			name: 'navbar.clientsLink',
 			path: '/clients',
 		},
 		{
-			name: 'common:navbar.contactsLink',
+			name: 'navbar.contactsLink',
 			path: '/contacts',
 		},
 		{
-			name: 'common:navbar.suppliersLink',
+			name: 'navbar.suppliersLink',
 			path: '/suppliers',
 		},
 		{
-			name: 'common:navbar.recommendationsLink',
+			name: 'navbar.recommendationsLink',
 			path: '/recommendations',
 		},
 	];
@@ -74,8 +76,7 @@ const NavigationBar = () => {
 							{links.map(link => (
 								<ButtonBase component={Link} to={link.path} key={link.name}>
 									<Typography sx={classes.linkElem} variant="h6">
-										{/* @ts-ignore */}
-										{t(link.name)}
+										{t('navbar.clientsLink')}
 									</Typography>
 								</ButtonBase>
 							))}
