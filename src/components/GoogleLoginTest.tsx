@@ -12,6 +12,7 @@ Missing:
   redirect to wall of clients
   Do whatever needs to be done with the token (pass to backend, generate claims, etc...)
   Create auth-wrapper // or // Create access limitations through routing (protected routes)
+  Correct Typescript types for response, etc.
 */
 
 
