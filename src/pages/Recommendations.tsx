@@ -4,7 +4,7 @@ import { pageContainer } from '../styles/containers'
 import { useTranslation } from 'react-i18next'
 
 const Recommendations = () => {
-  const {t, i18n} = useTranslation('common');
+  const {t, i18n} = useTranslation();
 
   return (
     <Grid sx={pageContainer} container>
