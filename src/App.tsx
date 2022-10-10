@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import TranslationTitle from './components/TranslationTitle';
@@ -8,12 +8,28 @@ import { Box } from '@mui/system';
 import NavigationBar from './components/common/NavigationBar';
 import AppThemeProvider, { ThemeContext } from './ThemeContext';
 import { useTheme } from '@mui/material';
+import GoogleLoginTest from './components/GoogleLoginTest';
+
+/*
+  At some point this page should be made into a landing page for the application
+  Landing page should redirect to /clients if a user is logged in or prompt user to log in, if not logged in
+*/
 
 function App() {
 	const [count, setCount] = useState(0);
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const themes = useTheme();
-	console.log(themes);
+	console.log(themes);  
+  
+  function handleCallbackResponse(response: { credential: any; }) {
+    console.log(`Encoded JWT ID token: ${response.credential}`);
+  }
+  
+  useEffect(() => {
+
+  }, []);
+
+  
 
 	return (
 		<Grid sx={pageContainer} container>
@@ -54,6 +70,7 @@ function App() {
 						Click on the Vite and React logos to learn more
 					</Typography>
 					<TranslationTitle />
+          <GoogleLoginTest />
 				</Grid>
 			</Grid>
 		</Grid>

@@ -1259,6 +1259,11 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.6.tgz"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
+"@react-oauth/google@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.2.8.tgz#68ebce792c6c5e4123c7485d1c60ae562a894924"
+  integrity sha512-W3sRcU6kSZMGUOk10Vy5kPZPzvsi7+UpM2MxnT6fMVp+whDMKCVope5R01gwRydK9OI+0rozAARCD2NgrbkV7w==
+
 "@remix-run/router@1.0.1":
   version "1.0.1"
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.0.1.tgz"
@@ -2355,6 +2360,11 @@ jsonpointer@^5.0.0:
   version "5.0.1"
   resolved "https://registry.npmjs.org/jsonpointer/-/jsonpointer-5.0.1.tgz"
   integrity sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==
+
+jwt-decode@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+  integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
 leven@^3.1.0:
   version "3.1.0"

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { pageContainer } from '../styles/containers'
 
 const WallOfClients = () => {
-  const {t, i18n} = useTranslation('common');
+  const {t, i18n} = useTranslation();
 
   return (
     <Grid sx={pageContainer} container>

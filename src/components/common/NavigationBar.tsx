@@ -76,7 +76,8 @@ const NavigationBar = () => {
 							{links.map(link => (
 								<ButtonBase component={Link} to={link.path} key={link.name}>
 									<Typography sx={classes.linkElem} variant="h6">
-										{t('navbar.clientsLink')}
+										{t(`${link.name}`)}
+                    {/* Giver fejl, men fungerer efter hensigten? */}
 									</Typography>
 								</ButtonBase>
 							))}
