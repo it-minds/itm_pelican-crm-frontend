@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const ProtectedRoute = ({user, redirectPath = '/' , children}: any) => {
-  if (!user) {
-    return <Navigate to={redirectPath} replace />
-  }
+interface Props {
+  policies?: string[];  // Todo: Type should be AccessPolicies as generated from backend database schema
+  children: ReactElement;
+}
+
+const ProtectedRoute = ({ children, policies }: Props) => {
+  
 
   return (
     children ? children : <Outlet />
