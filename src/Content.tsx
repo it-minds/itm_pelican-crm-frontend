@@ -4,6 +4,7 @@ import App from './App';
 import NavigationBar from './components/common/NavigationBar';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Contacts from './pages/Contacts';
+import LandingPage from './pages/LandingPage';
 import NotFound404 from './pages/NotFound404';
 import Recommendations from './pages/Recommendations';
 import Suppliers from './pages/Suppliers';
