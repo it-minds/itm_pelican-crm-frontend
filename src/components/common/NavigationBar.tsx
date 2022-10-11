@@ -17,7 +17,7 @@ import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from './HideOnScroll';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import AppUnderlined from './underlined.component';
+import AppUnderlined from './Underlined';
 import { Container } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 

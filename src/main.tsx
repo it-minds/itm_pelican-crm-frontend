@@ -23,13 +23,13 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<ApolloProvider client={client}>
-				<CssBaseline>
-					<AppThemeProvider>
+				<AppThemeProvider>
+				  <CssBaseline>
 						<I18nextProvider i18n={i18next}>
 							<Content />
 						</I18nextProvider>
-					</AppThemeProvider>
-				</CssBaseline>
+				  </CssBaseline>
+				</AppThemeProvider>
 			</ApolloProvider>
 		</BrowserRouter>
 	</React.StrictMode>
