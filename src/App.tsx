@@ -9,6 +9,7 @@ import NavigationBar from './components/common/NavigationBar';
 import AppThemeProvider, { ThemeContext } from './ThemeContext';
 import { useTheme } from '@mui/material';
 import GoogleLoginTest from './components/GoogleLoginTest';
+import LandingPage from './pages/LandingPage';
 
 /*
   At some point this page should be made into a landing page for the application
@@ -70,8 +71,6 @@ function App() {
             <Typography variant="subtitle2" color="text.primary">
               Click on the Vite and React logos to learn more
             </Typography>
-            <TranslationTitle />
-            <GoogleLoginTest />
           </Grid>
         </Grid>
       </Grid>

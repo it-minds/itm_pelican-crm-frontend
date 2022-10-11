@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import App from './App';
-import NavigationBar from './components/common/NavigationBar';
-import ProtectedRoute from './components/common/ProtectedRoute';
+import WithNav from './components/navWrapper/WithNav';
+import WithoutNav from './components/navWrapper/WithoutNav';
 import Contacts from './pages/Contacts';
 import LandingPage from './pages/LandingPage';
 import NotFound404 from './pages/NotFound404';
@@ -18,11 +18,13 @@ const Content = () => {
 
 	return (
 		<>
-			<NavigationBar />
       <userContext.Provider value={userState}>
         <Routes>
-          <Route path="/" element={<App />} />
-          <Route element={<ProtectedRoute user={user} /> }>
+          <Route element={<WithoutNav />}>
+            <Route path="/" element={<App />} />
+            <Route path="/landing" element={<LandingPage />} />
+          </Route>
+          <Route element={<WithNav />}>
             <Route path="/clients" element={<WallOfClients />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/suppliers" element={<Suppliers />} />
