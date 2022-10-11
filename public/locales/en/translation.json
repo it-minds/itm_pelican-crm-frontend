@@ -70,5 +70,10 @@
 			"knownContactPersons": "Known contact persons",
 			"multipleAccountManagers": "Multiple account managers"
 		}
-	}
+	},
+  "landingPage": {
+    "pageTitle": "pageTitle",
+    "subtitle": "subtitle",
+    "paragraph": "paragraph"
+  }
 }
