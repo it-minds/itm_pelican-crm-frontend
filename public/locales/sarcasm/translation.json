@@ -1,5 +1,10 @@
 {
   "welcome": {
     "title": "jeG ER NorsK OG kAn IKKe FoRStå ENgELSK"
+  },
+  "landingPage": {
+    "pageTitle": "wELComE to pELIcAn Crm",
+    "pageSubtitle": "siGN in via gOOGLe bELoW.",
+    "paragraph": "hERe is aNothEr paRAGRAPH tHAt chAngeS bASeD oN sELeCTeD lanGuAGE."
   }
 }

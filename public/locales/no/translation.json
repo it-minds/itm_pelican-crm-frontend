@@ -6,5 +6,10 @@
 		"pageTitle": "Kontjakt persjoner",
 		"customerSearchBoxDefault": "Customer",
 		"contactPersonSearchBoxDefault": "Contact person"
-	}
+	},
+  "landingPage": {
+    "pageTitle": "Velkommen til Pelican CRM",
+    "pageSubtitle": "Logg på via Google nedenfor.",
+    "paragraph": "Her er et annet avsnitt som endres basert på valgt språk."
+  }
 }
