@@ -1,11 +1,12 @@
 import { Grid, Typography } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import GoogleLoginTest from '../components/GoogleLoginTest'
 import TranslationTitle from '../components/TranslationTitle'
 import { pageContainer } from '../styles/containers'
 import background from '../assets/s37med.jpg'
 import GoogleLoginCard from '../components/GoogleLoginCard'
+import ThemeContext from '../ThemeContext'
 
 const LandingPage = () => {
   const {t, i18n} = useTranslation();
@@ -15,11 +16,9 @@ const LandingPage = () => {
       container 
       style={{backgroundImage:`url(${background})`, 
         backgroundRepeat:"no-repeat", 
-        backgroundSize:"contain",
+        backgroundSize:"cover",
         backgroundPosition: 'center'}}>
       <Grid>
-        <TranslationTitle />
-        <GoogleLoginTest />
         <GoogleLoginCard />
       </Grid>
     </Grid>

@@ -72,8 +72,8 @@
 		}
 	},
   "landingPage": {
-    "pageTitle": "pageTitle",
-    "subtitle": "subtitle",
+    "pageTitle": "Welcome to Pelican CRM",
+    "pageSubtitle": "To access Pelican CRM, sign in via Google below.",
     "paragraph": "paragraph"
   }
 }
