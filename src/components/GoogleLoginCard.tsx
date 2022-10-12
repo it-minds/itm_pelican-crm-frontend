@@ -79,7 +79,7 @@ const GoogleLoginCard = () => {
             <Typography>
               Links til at omgå login:
             </Typography>
-            <Box sx={{ display: 'flex', gap: 2, 'flex-wrap': 'wrap'}}>
+            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap'}}>
               <Button variant="contained">
                 <Link to="/clients">Clients</Link>
               </Button>
