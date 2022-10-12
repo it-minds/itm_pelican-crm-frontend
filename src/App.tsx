@@ -8,7 +8,7 @@ import { Box } from '@mui/system';
 import NavigationBar from './components/common/NavigationBar';
 import AppThemeProvider, { ThemeContext } from './ThemeContext';
 import { useTheme } from '@mui/material';
-import GoogleLoginTest from './components/GoogleLoginTest';
+import GoogleLoginTest from './components/GoogleLoginButton';
 import LandingPage from './pages/LandingPage';
 
 /*

@@ -4,7 +4,8 @@ import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
-import GoogleLoginTest from './GoogleLoginTest';
+import AppUnderlined from './common/Underlined';
+import GoogleLoginPage from './GoogleLoginButton';
 import TranslationTitle from './TranslationTitle';
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -33,23 +34,25 @@ const GoogleLoginCard = () => {
 
   return (
     <>
-      <Card sx={{minWidth: 350, maxWidth: 350}} >
+      <Card sx={{minWidth: 375, maxWidth: 375}} >
         <CardMedia
           component="img"
-          height="350"
+          height="375"
           image="../../pelican256.png"
           alt="Pelican logo"
         />
         <CardContent>
           <Grid container justifyContent="center">
-            <Typography variant='h5' pb={3}>
-              {t("landingPage.pageTitle")}
-            </Typography>
-            <Typography variant='subtitle1' pb={3}>
+            <AppUnderlined>
+              <Typography variant='h5'>
+                {t("landingPage.pageTitle")}
+              </Typography>
+            </AppUnderlined>
+            <Typography variant='subtitle1' pt={3} pb={3}>
               {t("landingPage.pageSubtitle")}
             </Typography>
-            <GoogleLoginTest />
-            <Typography variant="subtitle2">
+            <GoogleLoginPage />
+            <Typography variant="subtitle2" pt={3}>
               {t("landingPage.paragraph")}
             </Typography>
           </Grid>

@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import GoogleLoginTest from '../components/GoogleLoginTest'
+import GoogleLoginTest from '../components/GoogleLoginButton'
 import TranslationTitle from '../components/TranslationTitle'
 import { pageContainer } from '../styles/containers'
 import background from '../assets/s37med.jpg'
