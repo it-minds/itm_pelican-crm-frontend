@@ -37,7 +37,7 @@ const GoogleLoginCard = () => {
         <CardMedia
           component="img"
           height="350"
-          image="../../public/pelican256.png"
+          image="../../pelican256.png"
           alt="Pelican logo"
         />
         <CardContent>
@@ -49,6 +49,9 @@ const GoogleLoginCard = () => {
               {t("landingPage.pageSubtitle")}
             </Typography>
             <GoogleLoginTest />
+            <Typography variant="subtitle2">
+              {t("landingPage.paragraph")}
+            </Typography>
           </Grid>
         </CardContent>
         <CardActions>
