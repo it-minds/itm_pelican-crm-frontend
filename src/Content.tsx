@@ -4,7 +4,6 @@ import App from './App';
 import WithNav from './components/navWrapper/WithNav';
 import WithoutNav from './components/navWrapper/WithoutNav';
 import Contacts from './pages/Contacts';
-import LandingPage from './pages/LandingPage';
 import NotFound404 from './pages/NotFound404';
 import Recommendations from './pages/Recommendations';
 import Suppliers from './pages/Suppliers';
@@ -22,7 +21,6 @@ const Content = () => {
         <Routes>
           <Route element={<WithoutNav />}>
             <Route path="/" element={<App />} />
-            <Route path="/landing" element={<LandingPage />} />
           </Route>
           <Route element={<WithNav />}>
             <Route path="/clients" element={<WallOfClients />} />
