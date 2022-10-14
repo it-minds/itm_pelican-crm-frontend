@@ -1,5 +1,6 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { FC } from 'react'
+
 
 /**
  * Importer tema, så der kan tilgås (farver, spacing, etc.)
@@ -7,6 +8,18 @@ import React, { FC } from 'react'
  * Lav det til en slags wrapper man bare kan smide rundt om et element
  * Skal kun give sit direkte barn den specifikke styling!
  */
+
+/**
+ * Prøv at tjek newdevzone for hvordan man laver klasser der kan bruges i sx
+ * Eventuelt kan komponenten laves som en MUI Box der wrapper noget og bare sætter underline på
+ * Husk animationen skal med! Eksempel kan findes den den codesandbox der er lagt i bogmærker
+ */
+
+const borderWidth = 10;
+
+
+
+// set "active"-stylen conditional via SX-prop
 
 export type Props = {
   children: React.ReactNode;
@@ -17,9 +30,11 @@ const UnderlinedV5: FC<Props> = ({
 }) => {
   return (
     <>
-      <Typography>
-        Her er underlined
-      </Typography>
+      <Box sx={[underlinedStyles]}>
+        <Typography>
+          Her er underlined
+        </Typography>
+      </Box>
       {children}
     </>
   )

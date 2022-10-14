@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
 import { pageContainer } from '../styles/containers'
 import { useTranslation } from 'react-i18next'
@@ -9,13 +9,11 @@ const Contacts = () => {
 
   return (
     <Grid sx={pageContainer} container>
-      <div>
-        <AppUnderlined>
-          <Typography color="text.primary">
-            {t("contacts.pageTitle")}
-          </Typography>
-        </AppUnderlined>
-      </div>
+      <AppUnderlined>
+        <Typography>
+          {t("contacts.pageTitle")}
+        </Typography>
+      </AppUnderlined>
     </Grid>
   )
 }
