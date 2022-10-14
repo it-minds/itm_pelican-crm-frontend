@@ -9,11 +9,9 @@ const Contacts = () => {
 
   return (
     <Grid sx={pageContainer} container>
-      <AppUnderlined>
-        <Typography>
-          {t("contacts.pageTitle")}
-        </Typography>
-      </AppUnderlined>
+      <Typography variant='h1'>
+        {t("contacts.pageTitle")}
+      </Typography>
     </Grid>
   )
 }
