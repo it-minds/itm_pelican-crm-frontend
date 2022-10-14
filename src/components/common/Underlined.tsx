@@ -10,10 +10,11 @@ const borderWidth = 10;
 const underlineStyles = {
   "&::before": {
     backgroundColor: "secondary.main",
-    content: "'hello'",
+    content: "''",
     bottom: `${-borderWidth}%`,
     height: `${borderWidth}%`,
-    
+    width: "60%",
+    position: "absolute"
   },
   display: "inline-block",
   position: "relative",
