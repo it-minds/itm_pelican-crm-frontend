@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
 import AppUnderlined from './common/Underlined';
-import GoogleLoginPage from './GoogleLoginButton';
+import GoogleLoginButton from './GoogleLoginButton';
 import TranslationTitle from './TranslationTitle';
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -51,10 +51,14 @@ const GoogleLoginCard = () => {
             <Typography variant='subtitle1' pt={3} pb={3}>
               {t("landingPage.pageSubtitle")}
             </Typography>
-            <GoogleLoginPage />
             <Typography variant="subtitle2" pt={3}>
               {t("landingPage.paragraph")}
             </Typography>
+          </Grid>
+        </CardContent>
+        <CardContent>
+          <Grid container justifyContent="center">
+            <GoogleLoginButton />
           </Grid>
         </CardContent>
         <CardActions>

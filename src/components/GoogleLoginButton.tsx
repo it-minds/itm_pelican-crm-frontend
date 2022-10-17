@@ -1,41 +1,34 @@
-import React from 'react';
+import { Button, Grid, Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
-import { CredentialResponse, GoogleLoginProps, GoogleOAuthProvider } from '@react-oauth/google';
-import { GoogleLogin } from '@react-oauth/google';
-import { useNavigate } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
-import { circularProgressClasses } from '@mui/material';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-/*
-Missing:
-  Check if email is verified
-  redirect to wall of clients
-  Do whatever needs to be done with the token (pass to backend, generate claims, etc...)
-  Create auth-wrapper // or // Create access limitations through routing (protected routes)
-  Correct Typescript types for response, etc.
-*/
+/**
+ * Knap med google logo og "sign in" tekst
+ * Kalder GraphQL-endpoint i backend
+ * Skal modtage respons fra backend
+ * Ved succes skal der redirectes til /clients (der er en beskyttet route)
+ */
 
+const handleGoogleSignInClick = () => {
+  console.log("Yo yo, vi sender lige en query via GQL til backend");
+}
 
-const GoogleLoginPage = () => {
-  const responseGoogle = (response: CredentialResponse) => {
-    console.log(response);
-    const userObject = jwt_decode(response.credential);
-    console.log(userObject);
-    localStorage.setItem('user', JSON.stringify(userObject));
-  }
-
+const GoogleLoginButton = () => {
+  const {t, i18n} = useTranslation();
+  
   return (
-    <div className="">
-          <div className="">
-            <GoogleOAuthProvider 
-              // clientId must be remade as an environment variable, as critical information should not be included in the app files
-              clientId={`553606492401-2a1pav65lrfebte0hpkh2711sd0keh7r.apps.googleusercontent.com`}
-            >
-             <GoogleLogin onSuccess={responseGoogle}/>
-            </GoogleOAuthProvider>
-          </div>
+    <div>
+      <Button variant="contained" onClick={handleGoogleSignInClick} sx={{width: 125, height: 50}}>
+        <Grid container justifyContent='flex-start' gap='10px'>
+            <GoogleIcon />
+            <Typography variant='body1'>
+              {t("landingPage.loginButtonText")}
+            </Typography>
+        </Grid>
+      </Button>
     </div>
   )
 }
 
-export default GoogleLoginPage
+export default GoogleLoginButton

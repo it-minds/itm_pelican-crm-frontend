@@ -4,7 +4,6 @@ import App from './App';
 import WithNav from './components/navWrapper/WithNav';
 import WithoutNav from './components/navWrapper/WithoutNav';
 import Contacts from './pages/Contacts';
-import LandingPage from './pages/LandingPage';
 import NotFound404 from './pages/NotFound404';
 import Recommendations from './pages/Recommendations';
 import Suppliers from './pages/Suppliers';
@@ -22,7 +21,6 @@ const Content = () => {
         <Routes>
           <Route element={<WithoutNav />}>
             <Route path="/" element={<App />} />
-            <Route path="/landing" element={<LandingPage />} />
           </Route>
           <Route element={<WithNav />}>
             <Route path="/clients" element={<WallOfClients />} />
@@ -30,10 +28,6 @@ const Content = () => {
             <Route path="/suppliers" element={<Suppliers />} />
             <Route path="/recommendations" element={<Recommendations />} />
           </Route>
-          {/* <Route path='/' element={ <Navigate to="/clients" /> } /> // THIS IS THE ACTUAL ROUTE THAT WE WANT "/" TO REPRESENT */}
-          {/* Probably should check for authentication and if authentication is succesful, redirect to clients - Could be a problem, if this way only makes "/" require authentication */}
-          {/* Might need to use auth-wrapper instead and completely ignore "/". Then entry to the site should be through Googles authentication and after succesful login, access should be granted to the platform */}
-
           <Route path="*" element={<NotFound404 />} />
         </Routes>
       </userContext.Provider>
