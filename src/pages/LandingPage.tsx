@@ -6,7 +6,6 @@ import TranslationTitle from '../components/TranslationTitle'
 import { pageContainer } from '../styles/containers'
 import background from '../assets/s37med.jpg'
 import GoogleLoginCard from '../components/GoogleLoginCard'
-import ThemeContext from '../ThemeContext'
 
 const LandingPage = () => {
   const {t, i18n} = useTranslation();
