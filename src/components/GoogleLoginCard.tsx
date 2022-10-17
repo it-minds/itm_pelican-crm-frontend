@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
-import AppUnderlined from './common/Underlined';
+import AppUnderlined from './common/StaticUnderlined';
 import GoogleLoginButton from './GoogleLoginButton';
 import TranslationTitle from './TranslationTitle';
 
