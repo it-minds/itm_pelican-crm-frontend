@@ -14,7 +14,8 @@ const underlineStyles = {
     bottom: `${-borderWidth}%`,
     height: `${borderWidth}%`,
     width: "60%",
-    position: "absolute"
+    position: "absolute",
+    transition: ".2s ease-out width"
   },
   display: "inline-block",
   position: "relative",
