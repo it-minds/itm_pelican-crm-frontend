@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
-import AppUnderlined from './common/StaticUnderlined';
+import Underlined from './common/Underlined';
 import GoogleLoginButton from './GoogleLoginButton';
 import TranslationTitle from './TranslationTitle';
 
@@ -43,11 +43,11 @@ const GoogleLoginCard = () => {
         />
         <CardContent>
           <Grid container justifyContent="center">
-            <AppUnderlined>
+            <Underlined>
               <Typography variant='h5'>
                 {t("landingPage.pageTitle")}
               </Typography>
-            </AppUnderlined>
+            </Underlined>
             <Typography variant='subtitle1' pt={3} pb={3}>
               {t("landingPage.pageSubtitle")}
             </Typography>
