@@ -17,11 +17,10 @@ const underlineStyles = {
       height: `${borderWidth}%`,
       width: "60%",
       position: "absolute",
-      transition: ".2s ease-out width"
     },
     display: "inline-block",
     position: "relative",
-    marginBottom: 8,
+    marginBottom: 3,
     width: "fit-content"
   }
 }
@@ -32,9 +31,8 @@ const Underlined = ({
   ...props
 }: Props) => {
 
-
   return (
-    <Box sx={{...underlineStyles.root}}>
+    <Box sx={{...(active && underlineStyles.root)}}>
       {children}
     </Box>
   )
