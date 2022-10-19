@@ -70,9 +70,14 @@ const NavigationBar = () => {
 				<Toolbar>
 					<Grid container sx={{ justifyContent: 'space-between' }}>
 						<Box sx={{ ...flexRow, gap: 2 }}>
-							<Button component={Link} to="/" sx={classes.brand}>
-								<img src="/pelican512.png" alt="logo" height={32} />
-							</Button>
+							<Underlined>
+                <Button component={Link} to="/" sx={classes.brand}>
+                  <img src="/pelican512.png" alt="logo" height={32} />
+                  <Typography color="text.primary" sx={{pl: 1}}>
+                    Pelican
+                  </Typography>
+                </Button>
+              </Underlined>
 							{links.map(link => (
 								<ButtonBase component={Link} to={link.path} key={link.name}>
 									<Typography sx={classes.linkElem} variant="h6">

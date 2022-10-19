@@ -36,7 +36,7 @@ const underlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => (
 
 const Underlined = ({
   children,
-  active = false,
+  active = true,
   dynamic = false,
   ...props
 }: Props) => {
@@ -51,7 +51,7 @@ const Underlined = ({
   }
   else {
     return (
-      <Box sx={underlineStyles}>
+      <Box>
         {children}
       </Box>
     )
