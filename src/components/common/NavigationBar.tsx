@@ -34,7 +34,7 @@ const NavigationBar = () => {
 			setIsDarkMode(true);
 		} else setIsDarkMode(false);
 
-		console.log('currentTheme', currentTheme);
+		// console.log('currentTheme', currentTheme);
 	}, [theme]);
 
 	const links = [
@@ -76,8 +76,9 @@ const NavigationBar = () => {
 							{links.map(link => (
 								<ButtonBase component={Link} to={link.path} key={link.name}>
 									<Typography sx={classes.linkElem} variant="h6">
+										{/* @ts-ignore */}
 										{t(`${link.name}`)}
-                    {/* Giver fejl, men fungerer efter hensigten? */}
+										{/* Giver fejl, men fungerer efter hensigten? */}
 									</Typography>
 								</ButtonBase>
 							))}

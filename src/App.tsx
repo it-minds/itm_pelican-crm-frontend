@@ -18,22 +18,17 @@ import LandingPage from './pages/LandingPage';
 
 function App() {
 	const themes = useTheme();
-	console.log(themes);
-  
-  function handleCallbackResponse(response: { credential: any; }) {
-    console.log(`Encoded JWT ID token: ${response.credential}`);
-  }
-  
-  useEffect(() => {
 
-  }, []);
+	function handleCallbackResponse(response: { credential: any }) {
+		console.log(`Encoded JWT ID token: ${response.credential}`);
+	}
 
-  
+	useEffect(() => {}, []);
 
 	return (
-    <>
-      <LandingPage />
-    </>
+		<>
+			<LandingPage />
+		</>
 	);
 }
 

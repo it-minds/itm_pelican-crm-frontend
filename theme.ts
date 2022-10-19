@@ -47,6 +47,7 @@ export const darkTheme: ThemeOptions = createTheme({
 		},
 		background: {
 			default: darkBackground,
+			paper: darkBackground,
 		},
 		text: {
 			primary: '#fff',

@@ -10,27 +10,28 @@ import Suppliers from './pages/Suppliers';
 import WallOfClients from './pages/WallOfClients';
 
 const Content = () => {
-  // Hooks for testing protected pages - remove when proper auth is setup
-  const [user, setUser] = useState({});   
-  const userContext = createContext({})
-  const userState = user;
+	// Hooks for testing protected pages - remove when proper auth is setup
+	const [user, setUser] = useState({});
+	const userContext = createContext({});
+	const userState = user;
 
 	return (
 		<>
-      <userContext.Provider value={userState}>
-        <Routes>
-          <Route element={<WithoutNav />}>
-            <Route path="/" element={<App />} />
-          </Route>
-          <Route element={<WithNav />}>
-            <Route path="/clients" element={<WallOfClients />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/suppliers" element={<Suppliers />} />
-            <Route path="/recommendations" element={<Recommendations />} />
-          </Route>
-          <Route path="*" element={<NotFound404 />} />
-        </Routes>
-      </userContext.Provider>
+			<userContext.Provider value={userState}>
+				<Routes>
+					{/* <Route element={<WithoutNav />}>
+						<Route path="/" element={<App />} />
+					</Route> */}
+					<Route element={<WithNav />}>
+						<Route path="/clients" element={<WallOfClients />} />
+						<Route path="/contacts" element={<Contacts />} />
+						<Route path="/suppliers" element={<Suppliers />} />
+						<Route path="/recommendations" element={<Recommendations />} />
+						<Route path="*" element={<WallOfClients />} />
+					</Route>
+					{/* <Route path="*" element={<NotFound404 />} /> */}
+				</Routes>
+			</userContext.Provider>
 		</>
 	);
 };
