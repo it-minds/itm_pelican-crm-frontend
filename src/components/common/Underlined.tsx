@@ -10,7 +10,7 @@ export interface Props {
 
 const borderWidth = 10;
 
-const underlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => ({
+const dynamicUnderlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => ({
   "&::before": {
     backgroundColor: "secondary.main",
     content: "''",
@@ -34,6 +34,21 @@ const underlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => (
   width: "fit-content"
 })
 
+const staticUnderlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => ({
+  "&::before": {
+    backgroundColor: "secondary.main",
+    content: "''",
+    bottom: `${-borderWidth}%`,
+    height: `${borderWidth}%`,
+    width: "60%",
+    position: "absolute",
+  },
+  display: "inline-block",
+  position: "relative",
+  marginBottom: 3,
+  width: "fit-content"
+})
+
 const Underlined = ({
   children,
   active = true,
@@ -41,13 +56,22 @@ const Underlined = ({
   ...props
 }: Props) => {
 
+  // <Box sx={{...(active && underlineStyles)}}>    Comment kept as a reference to previous, cleaner code
   if (active) {
-    return (
-      // <Box sx={{...(active && underlineStyles)}}>    Comment kept as a reference to previous, cleaner code
-      <Box sx={underlineStyles}>
-        {children}
-      </Box>
-    )
+    if (dynamic) {
+      return (
+        <Box sx={dynamicUnderlineStyles}>
+          {children}
+        </Box>
+      )
+    }
+    else {
+      return (
+        <Box sx={staticUnderlineStyles}>
+          {children}
+        </Box>
+      )
+    }
   }
   else {
     return (
