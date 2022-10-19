@@ -1,6 +1,7 @@
 import { Box, styled } from '@mui/material';
 import React, { ReactNode } from 'react'
 import { SystemStyleObject, Theme } from '@mui/system';
+import { dynamicUnderlineStyles, staticUnderlineStyles } from '../../styles/underlinedStyles';
 
 export interface Props {
   children: ReactNode;
@@ -10,47 +11,10 @@ export interface Props {
 
 const borderWidth = 10;
 
-const staticUnderlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => ({
-  "&::before": {
-    backgroundColor: "secondary.main",
-    content: "''",
-    bottom: `${-borderWidth}%`,
-    height: `${borderWidth}%`,
-    width: "60%",
-    position: "absolute",
-  },
-  display: "inline-block",
-  position: "relative",
-  width: "fit-content"
-})
-
-const dynamicUnderlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => ({
-  "&::before": {
-    backgroundColor: "secondary.main",
-    content: "''",
-    bottom: `${-borderWidth}%`,
-    height: `${borderWidth}%`,
-    width: "60%",
-    position: "absolute",
-    "@keyframes expand": {
-      from: {
-        width: "0%"
-      },
-      to: {
-        width: "60%"
-      }
-    },
-    animation: "expand .5s ease"
-  },
-  display: "inline-block",
-  position: "relative",
-  width: "fit-content"
-})
-
 const Underlined = ({
   children,
   active = true,
-  dynamic = false,
+  dynamic = true,
   ...props
 }: Props) => {
 
@@ -58,14 +22,14 @@ const Underlined = ({
   if (active) {
     if (dynamic) {
       return (
-        <Box sx={dynamicUnderlineStyles}>
+        <Box sx={{...dynamicUnderlineStyles}}>
           {children}
         </Box>
       )
     }
     else {
       return (
-        <Box sx={staticUnderlineStyles}>
+        <Box sx={{...staticUnderlineStyles}}>
           {children}
         </Box>
       )
