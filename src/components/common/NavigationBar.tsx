@@ -79,14 +79,14 @@ const NavigationBar = () => {
                 </Button>
               </Underlined>
 							{links.map(link => (
+                <ButtonBase component={Link} to={link.path} key={link.name} disableRipple>
                     <Underlined active={window.location.toString().includes(link.path)} dynamic={true} >
-                  <ButtonBase component={Link} to={link.path} key={link.name} disableRipple>
                       <Typography sx={classes.linkElem} variant="h6">
                         {t(`${link.name}`)}
                         {/* Giver fejl, men fungerer efter hensigten? */}
                       </Typography>
-                  </ButtonBase>
                     </Underlined>
+                  </ButtonBase>
 							))}
 						</Box>
 						<Box sx={{ ...flexCenter, gap: 2 }}>

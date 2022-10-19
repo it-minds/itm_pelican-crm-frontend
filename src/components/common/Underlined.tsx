@@ -10,6 +10,20 @@ export interface Props {
 
 const borderWidth = 10;
 
+const staticUnderlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => ({
+  "&::before": {
+    backgroundColor: "secondary.main",
+    content: "''",
+    bottom: `${-borderWidth}%`,
+    height: `${borderWidth}%`,
+    width: "60%",
+    position: "absolute",
+  },
+  display: "inline-block",
+  position: "relative",
+  width: "fit-content"
+})
+
 const dynamicUnderlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => ({
   "&::before": {
     backgroundColor: "secondary.main",
@@ -30,22 +44,6 @@ const dynamicUnderlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (them
   },
   display: "inline-block",
   position: "relative",
-  marginBottom: 3,
-  width: "fit-content"
-})
-
-const staticUnderlineStyles: (theme: Theme) => SystemStyleObject<Theme> = (theme) => ({
-  "&::before": {
-    backgroundColor: "secondary.main",
-    content: "''",
-    bottom: `${-borderWidth}%`,
-    height: `${borderWidth}%`,
-    width: "60%",
-    position: "absolute",
-  },
-  display: "inline-block",
-  position: "relative",
-  marginBottom: 3,
   width: "fit-content"
 })
 
