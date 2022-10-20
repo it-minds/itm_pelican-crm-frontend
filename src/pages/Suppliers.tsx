@@ -2,17 +2,18 @@ import { Grid, Typography } from '@mui/material'
 import React from 'react'
 import { pageContainer } from '../styles/containers'
 import { useTranslation } from 'react-i18next'
+import Underlined from '../components/common/Underlined'
 
 const Suppliers = () => {
   const {t, i18n} = useTranslation();
 
   return (
     <Grid sx={pageContainer} container>
-      <div>
-        <Typography color="text.primary">
+      <Underlined>
+        <Typography variant="h1">
           {t("suppliers.pageTitle")}
         </Typography>
-      </div>
+      </Underlined>
     </Grid>
   )
 }
