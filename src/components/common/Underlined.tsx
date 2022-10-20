@@ -20,33 +20,14 @@ const StaticUnderline = styled(Box)<Props>(({ theme }) => (props: Props) => ({
     content: "''",
     bottom: `${-borderWidth}%`,
     height: `${borderWidth}%`,
+    position: "absolute",
     [theme.breakpoints.up("xs")]: {
       width: "80%",
-      left: "10%",
-      position: "absolute",
-      "@keyframes expand": {
-        from: {
-          width: "10%"
-        },
-        to: {
-          width: "90%"
-        }
-      },
-      animation: "expand .5s ease"
+      left: "10%"
     },
     [theme.breakpoints.up("md")]: {
       width: "60%",
-      left: "0%",
-      position: "absolute",
-    "@keyframes expand": {
-      from: {
-        width: "0%"
-      },
-      to: {
-        width: "60%"
-      }
-    },
-    animation: "expand .5s ease"
+      left: "0%"
     },
   },
   display: "inline-block",
@@ -69,7 +50,7 @@ const DynamicUnderline = styled(Box)<Props>(({ theme }) => (props: Props) => ({
           width: "10%"
         },
         to: {
-          width: "90%"
+          width: "80%"
         }
       },
       animation: "expand .5s ease"
