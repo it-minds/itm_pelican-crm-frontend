@@ -66,32 +66,6 @@ const NavigationBar = () => {
 		);
 	};
 
-// Sætter korrekte styles med animationer på alle elementer i nav-baren. Skelner ikke mellem hvilken der er aktiv
-// {links.map(link => (
-//   <ButtonBase component={Link} to={link.path} key={link.name} disableRipple>
-//       <Underlined active={window.location.toString().includes(link.path)} dynamic={true} >
-//         <Typography sx={classes.linkElem} variant="h6">
-//           {t(`${link.name}`)}
-//           {/* Giver fejl, men fungerer efter hensigten? */}
-//         </Typography>
-//       </Underlined>
-//     </ButtonBase>
-// ))}
-
-// Klasserne kommer korrekt på elementerne når URL'en skifter, men vises ikke
-// {links.map(link => (
-//   <Button variant="text">
-//     <NavLink to={link.path}
-//       style={({ isActive }) =>
-//       isActive ? {...dynamicUnderlineStyles, position: "relative"} : undefined}
-//     >
-//       <Typography color="text.primary">
-//         {t(`${link.name}`)}
-//       </Typography>
-//     </NavLink>
-//   </Button>
-// ))}
-
 	return (
 		<AppHideOnScroll>
 			<AppBar color="transparent" elevation={0}>
@@ -101,9 +75,9 @@ const NavigationBar = () => {
               <Button component={NavLink} to="/" sx={classes.brand}>
                 <img src="/pelican512.png" alt="logo" height={32} />
                 <Underlined>
-                <Typography color="text.primary" sx={{pl: 1}}>
-                  Pelican
-                </Typography>
+                  <Typography color="text.primary">
+                    Pelican
+                  </Typography>
                 </Underlined>
               </Button>
 							{links.map(link => (
@@ -137,6 +111,7 @@ const classes = {
 		display: 'flex',
 		alignItems: 'center',
 		textDecoration: 'none',
+    gap: 1,
 	},
 	brandUnderlined: {
 		marginLeft: 2,
