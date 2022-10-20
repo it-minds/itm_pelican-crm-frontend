@@ -98,14 +98,14 @@ const NavigationBar = () => {
 				<Toolbar>
 					<Grid container sx={{ justifyContent: 'space-between' }}>
 						<Box sx={{ ...flexRow, gap: 2 }}>
-							<Underlined>
-                <Button component={NavLink} to="/" sx={classes.brand}>
-                  <img src="/pelican512.png" alt="logo" height={32} />
-                  <Typography color="text.primary" sx={{pl: 1}}>
-                    Pelican
-                  </Typography>
-                </Button>
-              </Underlined>
+              <Button component={NavLink} to="/" sx={classes.brand}>
+                <img src="/pelican512.png" alt="logo" height={32} />
+                <Underlined>
+                <Typography color="text.primary" sx={{pl: 1}}>
+                  Pelican
+                </Typography>
+                </Underlined>
+              </Button>
 							{links.map(link => (
                 <ButtonBase component={Link} to={link.path} key={link.name} disableRipple>
                     <Underlined active={window.location.toString().includes(link.path)} dynamic={true} >
