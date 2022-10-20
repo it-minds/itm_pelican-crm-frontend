@@ -1,10 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { ButtonBase, Button as MuiButton, useTheme, Box } from '@mui/material';
 import { styled } from '@mui/system';
-import { makeStyles, StylesContext } from '@mui/styles';
 import { darken, Theme } from '@mui/system';
 import { flexCol } from '../../styles/generalStyles';
-import { ThemeContext } from '../../ThemeContext';
 
 export type Props = {
 	children?: ReactNode;
@@ -25,12 +23,13 @@ const focus = (color: string) => {
 	return darken(color, 0.2);
 };
 
-const TestButton2 = styled(ButtonBase)(({ theme }) => ({
+const TestButton2 = styled(ButtonBase)<Props>(({ theme }) => (props: Props) => ({
 	backgroundColor: theme.palette.secondary.main,
 	display: 'flex',
 	justifyContent: 'center',
 	borderRadius: 200,
 	color: theme.palette.secondary.contrastText,
+	opacity: props.isDisabled ? 0.5 : 1,
 	'&:focus': {
 		backgroundColor: focus(theme.palette.secondary.main),
 		borderColor: focus(theme.palette.secondary.main),
@@ -44,7 +43,7 @@ const Button: FC<Props> = ({ children, onClick, className, ...styleProps }) => {
 	const { size, type, isDisabled, isLoading, isFullWidth, noPad } = styleProps;
 
 	const styles = {
-		opacity: isDisabled ? 0.5 : 1,
+		// opacity: isDisabled ? 0.5 : 1,
 		padding: noPad ? 0 : 1.25,
 	};
 
@@ -53,7 +52,9 @@ const Button: FC<Props> = ({ children, onClick, className, ...styleProps }) => {
 			{/* <TestButton variant="outlined">Test</TestButton>
 			<TestButton2>Test</TestButton2> */}
 			{/* <ButtonBase className={`${classes.root} ${className ?? ''}`}>Base</ButtonBase> */}
-			<TestButton2 sx={styles}>Test</TestButton2>
+			<TestButton2 onClick={() => console.log('Hello')} isDisabled={true} sx={styles}>
+				Test
+			</TestButton2>
 		</Box>
 	);
 };
