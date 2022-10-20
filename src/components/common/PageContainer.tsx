@@ -11,7 +11,7 @@ type StyleProps = {
 }
 
 const StyledPageContainer = styled(Grid)<Props>(({ theme }) => (props: Props) => ({
-  backgroundColor: "red",
+  backgroundColor: "background.default",
   [theme.breakpoints.up("xs")]: {
     width: '90vw',
   },

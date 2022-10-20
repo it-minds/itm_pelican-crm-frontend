@@ -2,7 +2,7 @@ import { Grid, Typography } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 import PageContainer from '../components/common/PageContainer';
-import WallOfClientsCardSkeleton from '../components/common/skeletons/WallOfClientsCardSkeleton';
+import CompanyCardSkeleton from '../components/common/skeletons/CompanyCardSkeleton';
 import Underlined from '../components/common/Underlined';
 import { pageContainer } from '../styles/containers'
 
@@ -16,7 +16,7 @@ const WallOfClients = () => {
           {t("wallOfClients.pageTitle")}
         </Typography>
       </Underlined>
-      <WallOfClientsCardSkeleton />
+      <CompanyCardSkeleton />
     </PageContainer>
   )
 }
