@@ -2,7 +2,7 @@ import { Grid, Typography } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Underlined from '../components/common/Underlined'
-import SupplierCardSkeleton from '../components/common/skeletons/SupplierCardSkeleton'
+import SupplierCardsSkeleton from '../components/common/skeletons/SupplierCardSkeleton'
 import PageContainer from '../components/common/PageContainer'
 import SupplierGraphSkeleton from '../components/common/skeletons/SupplierGraphSkeleton'
 
@@ -19,7 +19,7 @@ const Suppliers = () => {
       <Typography marginTop={2}>
         Skeleton for supplier cards:
       </Typography>
-      <SupplierCardSkeleton numSkeletons={9}/>
+      <SupplierCardsSkeleton numSkeletons={9}/>
       <Typography>
         Skeleton for supplier graph:
       </Typography>

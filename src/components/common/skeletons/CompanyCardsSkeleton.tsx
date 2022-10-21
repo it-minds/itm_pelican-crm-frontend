@@ -6,7 +6,7 @@ interface Props {
   numSkeletons: number;
 }
 
-const CompanyCardSkeleton: FC<Props> = ({numSkeletons}) => {
+const CompanyCardsSkeleton: FC<Props> = ({numSkeletons}) => {
   
   const skeletonsToRender = () => {
     let skeletonCards: Array<ReactNode> = [];
@@ -25,4 +25,4 @@ const CompanyCardSkeleton: FC<Props> = ({numSkeletons}) => {
   )
 }
 
-export default CompanyCardSkeleton
+export default CompanyCardsSkeleton

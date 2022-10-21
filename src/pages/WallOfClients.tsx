@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PageContainer from '../components/common/PageContainer';
-import CompanyCardSkeleton from '../components/common/skeletons/CompanyCardSkeleton';
+import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
 import Button from '../components/common/Button';
 import { flexCol } from '../styles/generalStyles';
@@ -38,7 +38,7 @@ const WallOfClients = () => {
           </Typography>
         </Button>
       </Box>
-      <CompanyCardSkeleton numSkeletons={10}/>
+      <CompanyCardsSkeleton numSkeletons={10}/>
 		</PageContainer>
 	);
 };
