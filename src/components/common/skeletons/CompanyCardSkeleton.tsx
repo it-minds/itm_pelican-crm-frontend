@@ -1,27 +1,29 @@
 import { Skeleton } from '@mui/material'
 import { Stack } from '@mui/system'
-import React from 'react'
+import React, { FC, ReactNode } from 'react'
 
-const skeletonCards = new Array<string>(4);
+interface Props {
+  numSkeletons: number;
+}
 
-const CompanyCardSkeleton = () => {
+const CompanyCardSkeleton: FC<Props> = ({numSkeletons: numSkeletons}) => {
+  
+  
+  const skeletonsToRender = () => {
+    let skeletonCards: Array<ReactNode> = [];
+
+    for (let i = 0; i < numSkeletons; i++) {
+      skeletonCards.push(<Skeleton variant="rounded" height={50} />)
+    }
+
+    return skeletonCards;
+  }
+
   return (
     <Stack spacing={1} marginTop={2}>
-        <Skeleton variant="rounded" height={50} />
-        <Skeleton variant="rounded" height={50} />
-        <Skeleton variant="rounded" height={50} />
-        <Skeleton variant="rounded" height={50} />
+      {skeletonsToRender()}
     </Stack>
   )
 }
 
 export default CompanyCardSkeleton
-
-{/* <Stack spacing={1}>
-      {graphSkeletonAttr.map(skeleton => (
-        <Stack spacing={4} direction="row" alignItems="center">
-          <Skeleton variant="rectangular" height={12} width={"10%"} />
-          <Skeleton variant="rounded" height={20} width={skeleton.width} />
-        </Stack>
-      ))}
-    </Stack> */}

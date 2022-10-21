@@ -38,7 +38,7 @@ const WallOfClients = () => {
           </Typography>
         </Button>
       </Box>
-      <CompanyCardSkeleton />
+      <CompanyCardSkeleton numSkeletons={10}/>
 		</PageContainer>
 	);
 };

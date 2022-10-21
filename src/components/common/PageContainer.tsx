@@ -5,23 +5,19 @@ import React, { ReactNode } from 'react'
 export type Props = {
   children: ReactNode;
   className?: string
-} & StyleProps;
-
-type StyleProps = {
 }
 
 const StyledPageContainer = styled(Grid)<Props>(({ theme }) => (props: Props) => ({
   backgroundColor: "background.default",
-  [theme.breakpoints.up("xs")]: {
-    width: '90vw',
-  },
+  pt: '4rem',
+  alignContent: 'center',
+  flexDirection: 'column',
+  marginTop: "80px",
+  width: '90vw',
   [theme.breakpoints.up("lg")]: {
     width: theme.breakpoints.values.lg,
     maxWidth: "90vw",
   },
-	pt: '4rem',
-  alignContent: 'center',
-	flexDirection: 'column',
 }));
 
 const PageContainer = ({
@@ -29,7 +25,7 @@ const PageContainer = ({
 }: Props) => {
   return (
     <Grid container justifyContent="center">
-      <StyledPageContainer marginTop={10}>
+      <StyledPageContainer container>
         {children}
       </StyledPageContainer>
     </Grid>
