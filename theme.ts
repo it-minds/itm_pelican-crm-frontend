@@ -27,6 +27,8 @@ const secondary = '#DD0C6A';
 
 const darkBackground = '#303030';
 
+export const cubicTransition = 'cubic-bezier(0.4, 0, 0.2, 1) 0s';
+
 const typography: TypographyOptions = {
 	fontFamily: 'Poppins',
 	subtitle2: {
@@ -47,6 +49,7 @@ export const darkTheme: ThemeOptions = createTheme({
 		},
 		background: {
 			default: darkBackground,
+			paper: darkBackground,
 		},
 		text: {
 			primary: '#fff',
