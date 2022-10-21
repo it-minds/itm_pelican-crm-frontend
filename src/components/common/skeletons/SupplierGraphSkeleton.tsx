@@ -49,9 +49,9 @@ const SupplierGraphSkeleton = () => {
     <Stack spacing={1}>
       {graphSkeletonAttr.map(skeleton => (
         <Stack spacing={4} direction="row" alignItems="center">
-        <Skeleton variant="rectangular" height={12} width={"10%"} />
-        <Skeleton variant="rounded" height={20} width={skeleton.width} />
-      </Stack>
+          <Skeleton variant="rectangular" height={12} width={"10%"} />
+          <Skeleton variant="rounded" height={20} width={skeleton.width} />
+        </Stack>
       ))}
     </Stack>
   )
