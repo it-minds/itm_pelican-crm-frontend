@@ -1,20 +1,38 @@
-import { Grid, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Grid, Typography } from '@mui/material';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { pageContainer } from '../styles/containers'
+import Button from '../components/common/Button';
+import { pageContainer } from '../styles/containers';
+import { flexCol } from '../styles/generalStyles';
 
 const WallOfClients = () => {
-  const {t, i18n} = useTranslation();
+	const { t, i18n } = useTranslation();
+	const [isLoading, setIsLoading] = useState(false);
 
-  return (
-    <Grid sx={pageContainer} container>
-      <div>
-        <Typography color="text.primary">
-          {t("wallOfClients.pageTitle")}
-        </Typography>
-      </div>
-    </Grid>
-  )
-}
+	const testLoading = () => {
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 1500);
+	};
 
-export default WallOfClients
+	return (
+		<Grid sx={pageContainer} container>
+			<Box
+				sx={{
+					...flexCol,
+					m: 2,
+					gap: 3,
+					backgroundColor: '#fff2',
+				}}
+			>
+				<Typography color="text.primary">{t('wallOfClients.pageTitle')}</Typography>
+				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
+					Testboy
+				</Button>
+			</Box>
+		</Grid>
+	);
+};
+
+export default WallOfClients;
