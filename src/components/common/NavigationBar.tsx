@@ -11,13 +11,13 @@ import {
 	useTheme,
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { flexCenter, flexRow } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from './HideOnScroll';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import AppUnderlined from './Underlined';
+import Underlined from './Underlined';
 import { useTranslation } from 'react-i18next';
 
 const NavigationBar = () => {
@@ -25,6 +25,7 @@ const NavigationBar = () => {
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	const currentTheme = useTheme();
 	const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
+	const location = useLocation();
 
 	const { t, i18n } = useTranslation();
 
@@ -32,7 +33,9 @@ const NavigationBar = () => {
 		if (currentTheme.palette.mode === 'dark') {
 			setIsDarkMode(true);
 		} else setIsDarkMode(false);
-	}, [theme]);
+
+		console.log('currentTheme', currentTheme);
+	}, [theme, location]);
 
 	const links = [
 		{
@@ -67,16 +70,24 @@ const NavigationBar = () => {
 				<Toolbar>
 					<Grid container sx={{ justifyContent: 'space-between' }}>
 						<Box sx={{ ...flexRow, gap: 2 }}>
-							<Button component={Link} to="/" sx={classes.brand}>
+							<Button component={NavLink} to="/" sx={classes.brand}>
 								<img src="/pelican512.png" alt="logo" height={32} />
+								<Underlined>
+									<Typography color="text.primary">Pelican</Typography>
+								</Underlined>
 							</Button>
 							{links.map(link => (
-								<ButtonBase component={Link} to={link.path} key={link.name}>
-									<Typography sx={classes.linkElem} variant="h6">
-										{/* @ts-ignore */}
-										{t(`${link.name}`)}
-										{/* Giver fejl, men fungerer efter hensigten? */}
-									</Typography>
+								<ButtonBase component={Link} to={link.path} key={link.name} disableRipple>
+									<Underlined
+										active={window.location.toString().includes(link.path)}
+										dynamic={true}
+									>
+										<Typography sx={classes.linkElem} variant="h6">
+											{/* @ts-ignore */}
+											{t(`${link.name}`)}
+											{/* Giver fejl, men fungerer efter hensigten? */}
+										</Typography>
+									</Underlined>
 								</ButtonBase>
 							))}
 						</Box>
@@ -100,6 +111,7 @@ const classes = {
 		display: 'flex',
 		alignItems: 'center',
 		textDecoration: 'none',
+		gap: 1,
 	},
 	brandUnderlined: {
 		marginLeft: 2,
