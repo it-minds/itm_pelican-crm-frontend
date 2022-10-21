@@ -1,21 +1,30 @@
 import { Grid, Skeleton, Stack } from '@mui/material'
-import React from 'react'
+import React, { FC, ReactNode } from 'react'
 
-const SupplierCardSkeleton = () => {
+interface Props {
+  numSkeletons: number;
+}
+
+const SupplierCardSkeleton: FC<Props> = ({numSkeletons}) => {
+
+  const skeletonsToRender = () => {
+    let skeletonCards: Array<ReactNode> = [];
+
+    for (let i = 0; i < numSkeletons; i++) {
+      skeletonCards.push(
+        <Stack spacing={1} margin={1} marginTop={2}>
+          <Skeleton variant="rectangular" width={200} height={150} />
+          <Skeleton variant="rounded" height={15} width={150} />
+        </Stack>
+      )
+    }
+
+    return skeletonCards;
+  }
+
   return (
     <Grid container >
-      <Stack spacing={1} margin={1} marginTop={2}>
-        <Skeleton variant="rectangular" width={200} height={150} />
-        <Skeleton variant="rounded" height={15} width={150} />
-      </Stack>
-      <Stack spacing={1} margin={1} marginTop={2}>
-        <Skeleton variant="rectangular" width={200} height={150} />
-        <Skeleton variant="rounded" height={15} width={150} />
-      </Stack>
-      <Stack spacing={1} margin={1} marginTop={2}>
-        <Skeleton variant="rectangular" width={200} height={150} />
-        <Skeleton variant="rounded" height={15} width={150} />
-      </Stack>
+      {skeletonsToRender()}
     </Grid>
   )
 }

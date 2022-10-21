@@ -6,8 +6,7 @@ interface Props {
   numSkeletons: number;
 }
 
-const CompanyCardSkeleton: FC<Props> = ({numSkeletons: numSkeletons}) => {
-  
+const CompanyCardSkeleton: FC<Props> = ({numSkeletons}) => {
   
   const skeletonsToRender = () => {
     let skeletonCards: Array<ReactNode> = [];

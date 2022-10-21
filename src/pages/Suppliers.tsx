@@ -19,7 +19,7 @@ const Suppliers = () => {
       <Typography marginTop={2}>
         Skeleton for supplier cards:
       </Typography>
-      <SupplierCardSkeleton />
+      <SupplierCardSkeleton numSkeletons={9}/>
       <Typography>
         Skeleton for supplier graph:
       </Typography>
