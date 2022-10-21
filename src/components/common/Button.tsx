@@ -1,16 +1,11 @@
 import React, { FC, ReactNode } from 'react';
-import { ButtonBase, Button as MuiButton, useTheme, Box, CircularProgress } from '@mui/material';
+import { ButtonBase, useTheme, Box, CircularProgress } from '@mui/material';
 import { styled } from '@mui/material';
-import { darken, Theme, SxProps } from '@mui/system';
-import { flexCol } from '../../styles/generalStyles';
+import { darken, SxProps } from '@mui/system';
 import { cubicTransition } from '../../../theme';
 
 export type ButtonType = 'default' | 'outlined';
 export type ButtonSize = 'default' | 'small';
-
-/**
- * Butt
- */
 
 export type Props = {
 	children?: ReactNode;
@@ -41,7 +36,6 @@ const ButtonStyles = styled(ButtonBase)<StyleProps>(
 			isFullWidth = false,
 			noPad,
 		}: StyleProps) => ({
-			// backgroundColor: theme.palette.secondary.main,
 			display: 'flex',
 			justifyContent: 'center',
 			borderRadius: 200,
@@ -67,7 +61,6 @@ const ButtonStyles = styled(ButtonBase)<StyleProps>(
 );
 
 const Button: FC<Props> = ({ children, onClick, sx, ...styleProps }) => {
-	const theme = useTheme();
 	const { size, btnType, isDisabled, isLoading, isFullWidth, noPad } = styleProps;
 
 	return (
