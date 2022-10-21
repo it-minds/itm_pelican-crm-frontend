@@ -25,7 +25,7 @@ const PageContainer = ({
 }: Props) => {
   return (
     <Grid container justifyContent="center">
-      <StyledPageContainer container>
+      <StyledPageContainer>
         {children}
       </StyledPageContainer>
     </Grid>
