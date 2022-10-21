@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { ButtonBase, Button as MuiButton, useTheme, Box, CircularProgress } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material';
 import { darken, Theme, SxProps } from '@mui/system';
 import { flexCol } from '../../styles/generalStyles';
 import { cubicTransition } from '../../../theme';
@@ -19,7 +19,7 @@ export type Props = {
 } & StyleProps;
 
 type StyleProps = {
-	type?: ButtonType;
+	btnType?: ButtonType;
 	size?: ButtonSize;
 	isDisabled?: boolean;
 	isLoading?: boolean;
@@ -31,11 +31,11 @@ const focus = (color: string) => {
 	return darken(color, 0.2);
 };
 
-const ButtonStyles: FC<Props> = styled(ButtonBase)<Props>(
+const ButtonStyles = styled(ButtonBase)<StyleProps>(
 	({ theme }) =>
 		({
 			size = 'default',
-			type = 'default',
+			btnType: btnType = 'default',
 			isDisabled = false,
 			isLoading = false,
 			isFullWidth = false,
@@ -49,8 +49,8 @@ const ButtonStyles: FC<Props> = styled(ButtonBase)<Props>(
 			width: isFullWidth ? '100%' : 'auto',
 			minWidth: 30,
 			backgroundColor:
-				type === 'default' ? theme.palette.secondary.main : theme.palette.background.paper,
-			color: type === 'default' ? theme.palette.secondary.contrastText : undefined,
+				btnType === 'default' ? theme.palette.secondary.main : theme.palette.background.paper,
+			color: btnType === 'default' ? theme.palette.secondary.contrastText : undefined,
 			borderWidth: 2,
 			borderStyle: 'solid',
 			borderColor: theme.palette.secondary.main,
@@ -68,15 +68,15 @@ const ButtonStyles: FC<Props> = styled(ButtonBase)<Props>(
 
 const Button: FC<Props> = ({ children, onClick, sx, ...styleProps }) => {
 	const theme = useTheme();
-	const { size, type, isDisabled, isLoading, isFullWidth, noPad } = styleProps;
+	const { size, btnType, isDisabled, isLoading, isFullWidth, noPad } = styleProps;
 
 	return (
 		<ButtonStyles
 			sx={sx}
 			onClick={onClick}
-			disabled={styleProps.isDisabled || styleProps.isLoading}
+			disabled={isDisabled || isLoading}
 			size={size}
-			type={type}
+			btnType={btnType}
 			isDisabled={isDisabled}
 			isLoading={isLoading}
 			isFullWidth={isFullWidth}
