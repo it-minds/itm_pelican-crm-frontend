@@ -7,6 +7,11 @@ import Underlined from '../components/common/Underlined';
 import Button from '../components/common/Button';
 import { flexCol } from '../styles/generalStyles';
 
+// For ImageContainer testing:
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ImageContainer from '../components/common/ImageContainer';
+import { CalendarMonth } from '@mui/icons-material';
+
 const WallOfClients = () => {
 	const { t, i18n } = useTranslation();
 	const [isLoading, setIsLoading] = useState(false);
@@ -38,6 +43,11 @@ const WallOfClients = () => {
           </Typography>
         </Button>
       </Box>
+      <Grid>
+        <ImageContainer imageInput={<CalendarMonth />} />
+        <ImageContainer imageInput={<CalendarMonth />} />
+        <ImageContainer imageInput={<CalendarMonth />} />
+      </Grid>
       <CompanyCardsSkeleton numSkeletons={10}/>
 		</PageContainer>
 	);
