@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Icon, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PageContainer from '../components/common/PageContainer';
@@ -39,13 +39,15 @@ const WallOfClients = () => {
 					<Typography>Testboy</Typography>
 				</Button>
 				<Card sx={{ width: '100%' }}>
-					<HorizontalDividedContainer noOfItems={6}>
-						<div>Hej</div>
-						<div>Div nummer 2</div>
+					<HorizontalDividedContainer>
+						{/* <div>Hej</div> */}
+						<Box width="40%" sx={{ backgroundColor: 'hotpink' }}>
+							Div 2
+						</Box>
 						<div>Div nummer 3</div>
-						<div>Div nummer 4</div>
+						{/* <div>Div nummer 4</div>
 						<div>Div nummer 5</div>
-						<div>Div nummer 5</div>
+						<div>Div nummer 5</div> */}
 					</HorizontalDividedContainer>
 				</Card>
 			</Box>
