@@ -43,11 +43,9 @@ const WallOfClients = () => {
           </Typography>
         </Button>
       </Box>
-      <Grid>
-        <ImageContainer imageInput={<CalendarMonth />} />
-        <ImageContainer imageInput={<CalendarMonth />} />
-        <ImageContainer imageInput={<CalendarMonth />} />
-      </Grid>
+      <CalendarMonth fontSize='medium'/>
+      <ImageContainer>
+      </ImageContainer>
       <CompanyCardsSkeleton numSkeletons={10}/>
 		</PageContainer>
 	);

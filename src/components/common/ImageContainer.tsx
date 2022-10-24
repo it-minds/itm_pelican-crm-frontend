@@ -1,30 +1,35 @@
 import { Box } from '@mui/system';
 import { styled } from '@mui/system';
-import React, { ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 export type Props = {
+  children: ReactNode;
   className?: string;
 } & StyleProps
 
 type StyleProps = {
-	imageInput: ReactNode | string;
-  imageSize?: string;
-  contain?: boolean;
+  imageSize?: string | number | null;
 };
 
-const StyledImageContainer = styled(Box)<Props>(({ theme }) => (props: Props) => ({
-
+const StyledImageContainer = styled(Box)<StyleProps>(({ theme }) => 
+  ({
+    imageSize = null
+  }: StyleProps) => ({
+    width: imageSize != null ? imageSize : "auto",
+    height: imageSize != null ? imageSize : "100%",
+    objectFit: "contain",
 }));
 
-const ImageContainer = ({ ...styleProps }:Props) => {
-  const { imageInput, imageSize, contain } = styleProps;
+const ImageContainer: FC<Props> = ({children, ...styleProps }:Props) => {
+  const { imageSize } = styleProps;
+
+  // Hvis imageSize er sat, så skal boxen have en bestemt størrelse
+  // - ellers skal den som default bare fylde pladsen ud
+
   return (
     <StyledImageContainer
-    imageInput={imageInput}
-    imageSize={imageSize}
-    contain={contain}
+      imageSize={imageSize}
     >
-      {imageInput}
     </StyledImageContainer>
   )
 }
