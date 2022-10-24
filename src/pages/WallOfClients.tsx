@@ -39,7 +39,7 @@ const WallOfClients = () => {
 					Testboy
 				</Button>
 
-				<Card sx={{ alignItems: 'center' }}>Hello</Card>
+				<Card></Card>
 			</Box>
 		</Grid>
 	);

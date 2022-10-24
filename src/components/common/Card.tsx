@@ -5,7 +5,6 @@ import React, { FC } from 'react';
 import { flexCol, flexRow } from '../../styles/generalStyles';
 
 export type Props = {
-	title?: string;
 	children?: React.ReactNode;
 	direction?: 'row' | 'column';
 	noPad?: boolean;
@@ -34,7 +33,6 @@ const Card: FC<Props> = props => {
 			sx={props.sx}
 			highlight={props.highlight}
 			direction={props.direction}
-			title={props.title}
 			noPad={props.noPad}
 			fillHeight={props.fillHeight}
 		>
@@ -45,7 +43,7 @@ const Card: FC<Props> = props => {
 						alignItems: 'center',
 					}}
 				>
-					Hello
+					Nothing in card
 				</Box>
 			)}
 		</BaseCard>
