@@ -7,6 +7,7 @@ import Underlined from '../components/common/Underlined';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 import { flexCol } from '../styles/generalStyles';
+import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 
 const WallOfClients = () => {
 	const { t, i18n } = useTranslation();
@@ -29,6 +30,7 @@ const WallOfClients = () => {
 			<Box
 				sx={{
 					...flexCol,
+					alignItems: 'center',
 					my: 2,
 					gap: 3,
 				}}
@@ -36,9 +38,18 @@ const WallOfClients = () => {
 				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
 					<Typography>Testboy</Typography>
 				</Button>
-				<Card></Card>
+				<Card sx={{ width: '100%' }}>
+					<HorizontalDividedContainer noOfItems={6}>
+						<div>Hej</div>
+						<div>Div nummer 2</div>
+						<div>Div nummer 3</div>
+						<div>Div nummer 4</div>
+						<div>Div nummer 5</div>
+						<div>Div nummer 5</div>
+					</HorizontalDividedContainer>
+				</Card>
 			</Box>
-			<CompanyCardsSkeleton numSkeletons={9} />
+			{/* <CompanyCardsSkeleton numSkeletons={9} /> */}
 		</PageContainer>
 	);
 };
