@@ -19,6 +19,10 @@ const GoogleLoginButton = () => {
 					<GoogleIcon />
 					<Typography variant="body1">{t('landingPage.loginButtonText')}</Typography>
 				</Grid>
+				<Grid container justifyContent="flex-start" gap="10px">
+					<GoogleIcon />
+					<Typography variant="body1">{t('landingPage.loginButtonText')}</Typography>
+				</Grid>
 			</Button>
 		</div>
 	);
