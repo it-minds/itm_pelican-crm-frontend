@@ -40,7 +40,7 @@ const ButtonStyles = styled(ButtonBase)<StyleProps>(
 			justifyContent: 'center',
 			borderRadius: 200,
 			height: size === 'small' ? 30 : undefined,
-			width: isFullWidth ? '100%' : 'auto',
+			width: isFullWidth ? '100%' : 'fit-content',
 			minWidth: 30,
 			backgroundColor:
 				btnType === 'default' ? theme.palette.secondary.main : theme.palette.background.paper,

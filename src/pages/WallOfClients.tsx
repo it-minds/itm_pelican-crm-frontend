@@ -1,9 +1,11 @@
 import { Box, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import PageContainer from '../components/common/PageContainer';
+import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
+import Underlined from '../components/common/Underlined';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
-import { pageContainer } from '../styles/containers';
 import { flexCol } from '../styles/generalStyles';
 
 const WallOfClients = () => {
@@ -18,30 +20,26 @@ const WallOfClients = () => {
 	};
 
 	return (
-		<Grid sx={pageContainer} container>
+		<PageContainer>
+			<Underlined>
+				<Typography variant="h1" color="text.primary">
+					{t('wallOfClients.pageTitle')}
+				</Typography>
+			</Underlined>
 			<Box
 				sx={{
 					...flexCol,
-					m: 2,
+					my: 2,
 					gap: 3,
-					width: '80%',
-					height: '20vw',
 				}}
 			>
-				<Typography color="text.primary">{t('wallOfClients.pageTitle')}</Typography>
-				<Button
-					sx={{ width: 'fi' }}
-					onClick={testLoading}
-					size="small"
-					isFullWidth={false}
-					isLoading={isLoading}
-				>
-					Testboy
+				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
+					<Typography>Testboy</Typography>
 				</Button>
-
 				<Card></Card>
 			</Box>
-		</Grid>
+			<CompanyCardsSkeleton numSkeletons={9} />
+		</PageContainer>
 	);
 };
 
