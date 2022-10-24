@@ -1,5 +1,4 @@
 import { Box, styled, Fade, ButtonBase, SxProps } from '@mui/material';
-import { fade } from '@mui/material/styles';
 
 import React, { FC } from 'react';
 import { flexCol, flexRow } from '../../styles/generalStyles';
