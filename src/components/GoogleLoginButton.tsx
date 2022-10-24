@@ -5,25 +5,23 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 const GoogleLoginButton = () => {
-  const {t, i18n} = useTranslation();
-  const navigate = useNavigate();
+	const { t, i18n } = useTranslation();
+	const navigate = useNavigate();
 
-  const handleGoogleSignInClick = () => {
-    navigate("/clients");
-  }
-  
-  return (
-    <div>
-      <Button variant="contained" onClick={handleGoogleSignInClick} sx={{width: 125, height: 50}}>
-        <Grid container justifyContent='flex-start' gap='10px'>
-            <GoogleIcon />
-            <Typography variant='body1'>
-              {t("landingPage.loginButtonText")}
-            </Typography>
-        </Grid>
-      </Button>
-    </div>
-  )
-}
+	const handleGoogleSignInClick = () => {
+		navigate('/clients');
+	};
 
-export default GoogleLoginButton
+	return (
+		<div>
+			<Button variant="contained" onClick={handleGoogleSignInClick} sx={{ width: 125, height: 50 }}>
+				<Grid container justifyContent="flex-start" gap="10px">
+					<GoogleIcon />
+					<Typography variant="body1">{t('landingPage.loginButtonText')}</Typography>
+				</Grid>
+			</Button>
+		</div>
+	);
+};
+
+export default GoogleLoginButton;

@@ -20,25 +20,23 @@ const WallOfClients = () => {
 
 	return (
 		<PageContainer>
-      <Underlined>
-        <Typography variant="h1" color="text.primary">
-          {t("wallOfClients.pageTitle")}
-        </Typography>
-      </Underlined>
-      <Box
-        sx={{
-          ...flexCol,
-          m: 2,
-          gap: 3
-        }}
-      >
-        <Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
-          <Typography>
-            Testboy
-          </Typography>
-        </Button>
-      </Box>
-      <CompanyCardsSkeleton numSkeletons={10}/>
+			<Underlined>
+				<Typography variant="h1" color="text.primary">
+					{t('wallOfClients.pageTitle')}
+				</Typography>
+			</Underlined>
+			<Box
+				sx={{
+					...flexCol,
+					m: 2,
+					gap: 3,
+				}}
+			>
+				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
+					<Typography>Testboy</Typography>
+				</Button>
+			</Box>
+			<CompanyCardsSkeleton numSkeletons={10} />
 		</PageContainer>
 	);
 };
