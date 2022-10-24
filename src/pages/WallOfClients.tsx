@@ -25,14 +25,21 @@ const WallOfClients = () => {
 					m: 2,
 					gap: 3,
 					width: '80%',
+					height: '20vw',
 				}}
 			>
 				<Typography color="text.primary">{t('wallOfClients.pageTitle')}</Typography>
-				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
+				<Button
+					sx={{ width: 'fi' }}
+					onClick={testLoading}
+					size="small"
+					isFullWidth={false}
+					isLoading={isLoading}
+				>
 					Testboy
 				</Button>
 
-				<Card></Card>
+				<Card sx={{ alignItems: 'center' }}>Hello</Card>
 			</Box>
 		</Grid>
 	);
