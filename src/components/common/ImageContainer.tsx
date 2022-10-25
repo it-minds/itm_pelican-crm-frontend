@@ -27,19 +27,7 @@ const ImageContainer: FC<Props> = ({ children, ...styleProps }: Props) => {
 	// - ellers skal den som default bare fylde pladsen ud
 
 	return <StyledImageContainer imageSize={imageSize} />;
+	// Der skal laves et img tag i ImageContainer, der source, størrelse, m.m. som properties
 };
 
 export default ImageContainer;
-
-// const StyledPageContainer = styled(Grid)<Props>(({ theme }) => (props: Props) => ({
-//   backgroundColor: "background.default",
-//   pt: '4rem',
-//   alignContent: 'center',
-//   flexDirection: 'column',
-//   marginTop: "80px",
-//   width: '90vw',
-//   [theme.breakpoints.up("lg")]: {
-//     width: theme.breakpoints.values.lg,
-//     maxWidth: "90vw",
-//   },
-// }));
