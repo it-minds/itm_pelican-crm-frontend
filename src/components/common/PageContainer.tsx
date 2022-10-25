@@ -22,7 +22,7 @@ const StyledPageContainer = styled(Grid)<Props>(({ theme }) => (props: Props) =>
 
 const PageContainer = ({ children }: Props) => {
 	return (
-		<Grid container justifyContent="center">
+		<Grid container justifyContent="center" paddingBottom={10}>
 			<StyledPageContainer>{children}</StyledPageContainer>
 		</Grid>
 	);

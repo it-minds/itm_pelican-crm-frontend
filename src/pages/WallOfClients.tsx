@@ -5,6 +5,7 @@ import PageContainer from '../components/common/PageContainer';
 import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
 import Button from '../components/common/Button';
+import Card from '../components/common/Card';
 import { flexCol } from '../styles/generalStyles';
 
 const WallOfClients = () => {
@@ -28,15 +29,16 @@ const WallOfClients = () => {
 			<Box
 				sx={{
 					...flexCol,
-					m: 2,
+					my: 2,
 					gap: 3,
 				}}
 			>
 				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
 					<Typography>Testboy</Typography>
 				</Button>
+				<Card></Card>
 			</Box>
-			<CompanyCardsSkeleton numSkeletons={10} />
+			<CompanyCardsSkeleton numSkeletons={9} />
 		</PageContainer>
 	);
 };
