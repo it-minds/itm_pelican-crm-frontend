@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { Slide, useScrollTrigger } from '@mui/material';
 
 export interface Props {
-  children: React.ReactElement;
+	children: React.ReactElement;
 }
 
-const AppHideOnScroll = ( { children }: Props) => {
-  const scrollTrigger = useScrollTrigger();
-  
-  return (
-    <Slide direction="down" in={!scrollTrigger}>
-      {children}
-    </Slide>
-  )
-}
+const AppHideOnScroll = ({ children }: Props) => {
+	const scrollTrigger = useScrollTrigger();
 
-export default AppHideOnScroll
+	return (
+		<Slide direction="down" in={!scrollTrigger}>
+			{children}
+		</Slide>
+	);
+};
+
+export default AppHideOnScroll;

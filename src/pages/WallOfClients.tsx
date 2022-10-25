@@ -5,6 +5,7 @@ import PageContainer from '../components/common/PageContainer';
 import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
 import Button from '../components/common/Button';
+import Card from '../components/common/Card';
 import { flexCol } from '../styles/generalStyles';
 
 // For ImageContainer testing:
@@ -25,28 +26,24 @@ const WallOfClients = () => {
 
 	return (
 		<PageContainer>
-      <Underlined>
-        <Typography variant="h1" color="text.primary">
-          {t("wallOfClients.pageTitle")}
-        </Typography>
-      </Underlined>
-      <Box
-        sx={{
-          ...flexCol,
-          m: 2,
-          gap: 3
-        }}
-      >
-        <Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
-          <Typography>
-            Testboy
-          </Typography>
-        </Button>
-      </Box>
-      <CalendarMonth fontSize='medium'/>
-      <ImageContainer>
-      </ImageContainer>
-      <CompanyCardsSkeleton numSkeletons={10}/>
+			<Underlined>
+				<Typography variant="h1" color="text.primary">
+					{t('wallOfClients.pageTitle')}
+				</Typography>
+			</Underlined>
+			<Box
+				sx={{
+					...flexCol,
+					my: 2,
+					gap: 3,
+				}}
+			>
+				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
+					<Typography>Testboy</Typography>
+				</Button>
+				<Card></Card>
+			</Box>
+			<CompanyCardsSkeleton numSkeletons={9} />
 		</PageContainer>
 	);
 };

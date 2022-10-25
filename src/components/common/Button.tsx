@@ -30,7 +30,7 @@ const ButtonStyles = styled(ButtonBase)<StyleProps>(
 	({ theme }) =>
 		({
 			size = 'default',
-			btnType: btnType = 'default',
+			btnType = 'default',
 			isDisabled = false,
 			isLoading = false,
 			isFullWidth = false,

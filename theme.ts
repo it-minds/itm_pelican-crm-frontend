@@ -26,6 +26,7 @@ const primary = '#0E83C6';
 const secondary = '#DD0C6A';
 
 const darkBackground = '#303030';
+const darkPaper = '#424242';
 
 export const cubicTransition = 'cubic-bezier(0.4, 0, 0.2, 1) 0s';
 
@@ -49,7 +50,7 @@ export const darkTheme: ThemeOptions = createTheme({
 		},
 		background: {
 			default: darkBackground,
-			paper: darkBackground,
+			paper: darkPaper,
 		},
 		text: {
 			primary: '#fff',
