@@ -41,10 +41,10 @@ const WallOfClients = () => {
 				<Card sx={{ width: '100%' }}>
 					<HorizontalDividedContainer>
 						{/* <div>Hej</div> */}
-						<Box width="40%" sx={{ backgroundColor: 'hotpink' }}>
+						<Box width="50%" sx={{ backgroundColor: 'hotpink' }}>
 							Div 2
 						</Box>
-						<div>Div nummer 3</div>
+						<Box width="50%">Div nummer 3</Box>
 						{/* <div>Div nummer 4</div>
 						<div>Div nummer 5</div>
 						<div>Div nummer 5</div> */}
