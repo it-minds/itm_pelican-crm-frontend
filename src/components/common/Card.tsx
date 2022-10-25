@@ -1,7 +1,7 @@
-import { Box, styled, Fade, ButtonBase, SxProps } from '@mui/material';
-
+import { Box, styled, SxProps } from '@mui/material';
 import React, { FC } from 'react';
-import { flexCol, flexRow } from '../../styles/generalStyles';
+
+import { flexCol } from '../../styles/generalStyles';
 
 export type Props = {
 	children?: React.ReactNode;

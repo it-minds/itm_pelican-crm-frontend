@@ -1,20 +1,17 @@
-import { Box, Grid, Typography } from '@mui/material';
+// For ImageContainer testing:
+import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import Button from '../components/common/Button';
+import Card from '../components/common/Card';
 import PageContainer from '../components/common/PageContainer';
 import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
-import Button from '../components/common/Button';
-import Card from '../components/common/Card';
 import { flexCol } from '../styles/generalStyles';
 
-// For ImageContainer testing:
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import ImageContainer from '../components/common/ImageContainer';
-import { CalendarMonth } from '@mui/icons-material';
-
 const WallOfClients = () => {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 	const [isLoading, setIsLoading] = useState(false);
 
 	const testLoading = () => {

@@ -1,6 +1,5 @@
 import { Box, styled } from '@mui/material';
 import React, { ReactNode } from 'react';
-import { SystemStyleObject, Theme } from '@mui/system';
 
 export type Props = {
 	children: ReactNode;

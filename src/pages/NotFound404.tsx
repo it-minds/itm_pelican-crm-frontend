@@ -2,9 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const NotFound404 = () => {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
-	return <div>Whoops, nothing here (404)!</div>;
+	return <div>{t('wallOfClients.pageTitle')}</div>;
 };
 
 export default NotFound404;

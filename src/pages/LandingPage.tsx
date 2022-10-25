@@ -1,15 +1,11 @@
-import { Grid, Typography } from '@mui/material';
-import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import GoogleLoginTest from '../components/GoogleLoginButton';
-import TranslationTitle from '../components/TranslationTitle';
-import { pageContainer } from '../styles/containers';
+import { Grid } from '@mui/material';
+import React from 'react';
+
 import background from '../assets/s37med.jpg';
 import GoogleLoginCard from '../components/GoogleLoginCard';
+import { pageContainer } from '../styles/containers';
 
 const LandingPage = () => {
-	const { t, i18n } = useTranslation();
-
 	return (
 		<Grid
 			sx={pageContainer}

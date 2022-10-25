@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 // WILL BE DELETED LATER WHEN TRANSLATIONS ARE FINISHED
 
 const TranslationTitle = () => {
-	const { t, i18n } = useTranslation();
+	const { i18n } = useTranslation();
 
 	return (
 		<Grid

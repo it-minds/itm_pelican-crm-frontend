@@ -1,4 +1,3 @@
-import { Theme } from '@mui/material';
 import { BreakpointsOptions, createTheme, ThemeOptions } from '@mui/material/styles';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 

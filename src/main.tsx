@@ -1,13 +1,15 @@
+import './i18n';
+
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { CssBaseline } from '@mui/material';
 import i18next from 'i18next';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
+
 import Content from './Content';
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import AppThemeProvider from './ThemeContext';
-import './i18n';
 
 // Set uri to port/outlet running backend
 const httpLink = createHttpLink({
