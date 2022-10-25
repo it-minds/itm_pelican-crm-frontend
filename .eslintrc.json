@@ -13,18 +13,15 @@
 		}
 	},
 	"extends": [
-		"react-app",
 		"plugin:prettier/recommended", // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
 		"prettier",
 		"plugin:react/recommended"
 	],
-	"plugins": ["unused-imports"],
+	"plugins": [],
 	"rules": {
 		// Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
 		// e.g. "@typescript-eslint/explicit-function-return-type": "off",
-		"sort-imports": "off",
-		"simple-import-sort/imports": "warning",
-		"@typescript-eslint/explicit-module-boundary-types": 0,
-		"unused-imports/no-unused-imports": "error"
+    "react/react-in-jsx-scope": 0
+
 	}
 }
