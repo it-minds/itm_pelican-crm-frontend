@@ -6,7 +6,7 @@ import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSke
 import Underlined from '../components/common/Underlined';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
-import { flexCol } from '../styles/generalStyles';
+import { flexCenter, flexCol } from '../styles/generalStyles';
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 
 const WallOfClients = () => {
@@ -38,18 +38,16 @@ const WallOfClients = () => {
 				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
 					<Typography>Testboy</Typography>
 				</Button>
-				<Card sx={{ width: '100%' }}>
 					<HorizontalDividedContainer>
-						{/* <div>Hej</div> */}
-						<Box width="50%" sx={{ backgroundColor: 'hotpink' }}>
+						<Box  width="20%" sx={flexCenter}>
 							Div 2
 						</Box>
-						<Box width="50%">Div nummer 3</Box>
-						{/* <div>Div nummer 4</div>
-						<div>Div nummer 5</div>
-						<div>Div nummer 5</div> */}
+						<Box width="20%" sx={flexCenter}>Div nummer 3</Box>
+						{/* <Box width="20%" display={"flex"} justifyContent={"center"}>Div nummer 3</Box> */}
+						<Box width="20%" sx={flexCenter}>Div nummer 4</Box>
+						<Box width="20%" sx={flexCenter}>Div nummer 5</Box>
+						<Box width="20%" sx={flexCenter}>Div nummer 6</Box>
 					</HorizontalDividedContainer>
-				</Card>
 			</Box>
 			{/* <CompanyCardsSkeleton numSkeletons={9} /> */}
 		</PageContainer>
