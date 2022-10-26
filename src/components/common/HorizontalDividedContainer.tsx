@@ -10,12 +10,17 @@ export type Props = {
 };
 
 const HorizontalDividedContainer: FC<Props> = ({ sx, children }) => {
-
 	return (
 		<Card fullWidth>
-			<Stack width="100%" gap=".5rem" direction="row" alignItems={"center"} sx={sx}  divider={<Divider orientation="vertical" flexItem/>}>
-			{/* {renderStackItems()} */}
-			{children}
+			<Stack
+				width="100%"
+				gap=".5rem"
+				direction="row"
+				alignItems={'center'}
+				sx={sx}
+				divider={<Divider orientation="vertical" flexItem />}
+			>
+				{children}
 			</Stack>
 		</Card>
 	);
