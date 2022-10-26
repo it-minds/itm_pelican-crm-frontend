@@ -18,7 +18,7 @@ const WallOfClients = () => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-		}, 1500);
+		}, 1200);
 	};
 
 	return (
@@ -40,9 +40,13 @@ const WallOfClients = () => {
 					<Typography>Testboy</Typography>
 				</Button>
 				<HorizontalDividedContainer>
-					<Box width="25%">
-						<ClientInfoSummary title="Legoland" city="Billund" url="LegoGroup.dk" />
-					</Box>
+					<ClientInfoSummary
+						width="25%"
+						title="Legoland"
+						city="Billund"
+						address="Nordmarksvej 9, 7190 Billund, Denmark"
+						url="legoland.dk"
+					/>
 					<Box width="20%" sx={flexCenter}>
 						Div nummer 3
 					</Box>

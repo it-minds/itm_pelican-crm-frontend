@@ -18,7 +18,7 @@ const HorizontalDividedContainer: FC<Props> = ({ sx, children }) => {
 				direction="row"
 				alignItems={'center'}
 				sx={sx}
-				divider={<Divider orientation="vertical" flexItem />}
+				divider={<Divider orientation="vertical" flexItem variant="middle" />}
 			>
 				{children}
 			</Stack>
