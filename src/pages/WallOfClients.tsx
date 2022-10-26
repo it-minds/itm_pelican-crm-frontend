@@ -1,15 +1,18 @@
-import { Box, Grid, Typography } from '@mui/material';
+// For ImageContainer testing:
+import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import Button from '../components/common/Button';
+import Card from '../components/common/Card';
+import ImageContainer from '../components/common/ImageContainer';
 import PageContainer from '../components/common/PageContainer';
 import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
-import Button from '../components/common/Button';
-import Card from '../components/common/Card';
 import { flexCol } from '../styles/generalStyles';
 
 const WallOfClients = () => {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 	const [isLoading, setIsLoading] = useState(false);
 
 	const testLoading = () => {
@@ -38,6 +41,7 @@ const WallOfClients = () => {
 				</Button>
 				<Card></Card>
 			</Box>
+			<ImageContainer imageSource="../../pelican256.png" imageWidth={200} />
 			<CompanyCardsSkeleton numSkeletons={9} />
 		</PageContainer>
 	);

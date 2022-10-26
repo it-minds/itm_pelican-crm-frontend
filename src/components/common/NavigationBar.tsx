@@ -1,3 +1,5 @@
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {
 	AppBar,
 	Avatar,
@@ -7,27 +9,25 @@ import {
 	Grid,
 	Toolbar,
 	Typography,
-	useMediaQuery,
 	useTheme,
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+
 import { flexCenter, flexRow } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from './HideOnScroll';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Underlined from './Underlined';
-import { useTranslation } from 'react-i18next';
 
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	const currentTheme = useTheme();
-	const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
+	// const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
 	const location = useLocation();
 
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		if (currentTheme.palette.mode === 'dark') {
@@ -35,7 +35,7 @@ const NavigationBar = () => {
 		} else setIsDarkMode(false);
 
 		console.log('currentTheme', currentTheme);
-	}, [theme, location]);
+	}, [theme, location, currentTheme]);
 
 	const links = [
 		{

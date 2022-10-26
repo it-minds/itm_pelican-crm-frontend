@@ -1,4 +1,5 @@
 import 'react-i18next';
+
 import en from '../public/locales/en/translation.json';
 import no from '../public/locales/no/translation.json';
 import sarcasm from '../public/locales/sarcasm/translation.json';
