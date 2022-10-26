@@ -24,11 +24,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 		<BrowserRouter>
 			<ApolloProvider client={client}>
 				<AppThemeProvider>
-				  <CssBaseline>
+					<CssBaseline>
 						<I18nextProvider i18n={i18next}>
 							<Content />
 						</I18nextProvider>
-				  </CssBaseline>
+					</CssBaseline>
 				</AppThemeProvider>
 			</ApolloProvider>
 		</BrowserRouter>
