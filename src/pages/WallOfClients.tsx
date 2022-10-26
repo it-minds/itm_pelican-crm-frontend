@@ -41,7 +41,7 @@ const WallOfClients = () => {
 				</Button>
 				<Card></Card>
 			</Box>
-			<ImageContainer imageSource="../../pelican256.png" imageHeight={100} />
+			<ImageContainer imageSource="../../pelican256.png" imageWidth={200} />
 			<CompanyCardsSkeleton numSkeletons={9} />
 		</PageContainer>
 	);
