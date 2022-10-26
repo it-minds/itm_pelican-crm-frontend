@@ -5,7 +5,6 @@ import {
 	Card,
 	CardActions,
 	CardContent,
-	CardHeader,
 	CardMedia,
 	Collapse,
 	Grid,
@@ -17,6 +16,7 @@ import {
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+
 import { ThemeContext } from '../ThemeContext';
 import Underlined from './common/Underlined';
 import GoogleLoginButton from './GoogleLoginButton';
@@ -38,9 +38,9 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 const GoogleLoginCard = () => {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 	const [isExpanded, setIsExpanded] = React.useState(false);
-	const { theme, toggleTheme } = useContext(ThemeContext);
+	const { toggleTheme } = useContext(ThemeContext);
 
 	const handleExpandClick = () => {
 		setIsExpanded(!isExpanded);

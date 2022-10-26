@@ -1,13 +1,14 @@
-import { Grid, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Underlined from '../components/common/Underlined';
-import SupplierCardsSkeleton from '../components/common/skeletons/SupplierCardSkeleton';
+
 import PageContainer from '../components/common/PageContainer';
+import SupplierCardsSkeleton from '../components/common/skeletons/SupplierCardSkeleton';
 import SupplierGraphSkeleton from '../components/common/skeletons/SupplierGraphSkeleton';
+import Underlined from '../components/common/Underlined';
 
 const Suppliers = () => {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
 	return (
 		<PageContainer>

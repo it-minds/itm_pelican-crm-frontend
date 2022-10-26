@@ -1,11 +1,12 @@
 import { ThemeOptions, ThemeProvider } from '@mui/material/styles';
-import React, { FC, useEffect, useMemo, useState } from 'react';
-import { lightTheme, darkTheme } from '../theme';
+import React, { FC, useEffect, useState } from 'react';
 
-type Theme = 'light' | 'dark';
-type ThemeContext = { theme: ThemeOptions; toggleTheme: () => void };
+import { darkTheme, lightTheme } from '../theme';
+
+// type Theme = 'light' | 'dark';
+type ThemeContextType = { theme: ThemeOptions; toggleTheme: () => void };
 type Props = { children: React.ReactNode };
-export const ThemeContext = React.createContext<ThemeContext>({} as ThemeContext);
+export const ThemeContext = React.createContext<ThemeContextType>({} as ThemeContextType);
 
 // const themeState = createPersistedState('theme');
 

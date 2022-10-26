@@ -1,7 +1,8 @@
-import React, { FC, ReactNode } from 'react';
-import { ButtonBase, useTheme, Box, CircularProgress } from '@mui/material';
+import { Box, ButtonBase, CircularProgress } from '@mui/material';
 import { styled } from '@mui/material';
 import { darken, SxProps } from '@mui/system';
+import React, { FC, ReactNode } from 'react';
+
 import { cubicTransition } from '../../../theme';
 
 export type ButtonType = 'default' | 'outlined';

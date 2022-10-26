@@ -1,16 +1,17 @@
-import { Box, Grid, Icon, Typography } from '@mui/material';
+// For ImageContainer testing:
+import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import PageContainer from '../components/common/PageContainer';
-
-import Underlined from '../components/common/Underlined';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
+import ImageContainer from '../components/common/ImageContainer';
+import PageContainer from '../components/common/PageContainer';
+import Underlined from '../components/common/Underlined';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 
 const WallOfClients = () => {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 	const [isLoading, setIsLoading] = useState(false);
 
 	const testLoading = () => {

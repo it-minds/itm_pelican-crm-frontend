@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 interface Props {
 	policies?: string[]; // Todo: Type should be AccessPolicies as generated from backend database schema
