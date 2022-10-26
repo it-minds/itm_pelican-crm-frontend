@@ -8,6 +8,7 @@ export type Props = {
 	direction?: 'row' | 'column';
 	noPad?: boolean;
 	fillHeight?: boolean;
+	fullWidth?: boolean;
 	highlight?: boolean;
 	sx?: SxProps;
 };
@@ -24,6 +25,7 @@ const BaseCard = styled('div')<Props>(({ theme }) => (props: Props) => ({
 	borderWidth: '0.2px',
 	borderColor: props.highlight ? theme.palette.secondary.main : theme.palette.primary.main + '30', // <--- opacity
 	height: props.fillHeight ? '100%' : 'auto',
+	width: props.fullWidth ? '100%' : 'auto',
 }));
 
 const Card: FC<Props> = props => {
@@ -34,6 +36,7 @@ const Card: FC<Props> = props => {
 			direction={props.direction}
 			noPad={props.noPad}
 			fillHeight={props.fillHeight}
+			fullWidth={props.fullWidth}
 		>
 			{props.children || (
 				<Box

@@ -8,6 +8,7 @@ import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
+import { Container } from '@mui/system';
 
 const WallOfClients = () => {
 	const { t, i18n } = useTranslation();
@@ -39,7 +40,7 @@ const WallOfClients = () => {
 					<Typography>Testboy</Typography>
 				</Button>
 					<HorizontalDividedContainer>
-						<Box  width="20%" sx={flexCenter}>
+						<Box  width="20%">
 							Div 2
 						</Box>
 						<Box width="20%" sx={flexCenter}>Div nummer 3</Box>
@@ -50,6 +51,7 @@ const WallOfClients = () => {
 					</HorizontalDividedContainer>
 			</Box>
 			{/* <CompanyCardsSkeleton numSkeletons={9} /> */}
+
 		</PageContainer>
 	);
 };
