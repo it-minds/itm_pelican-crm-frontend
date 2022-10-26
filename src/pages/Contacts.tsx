@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import PageContainer from '../components/common/PageContainer';
 import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
+import TypographyShowcase from '../components/TypographyShowcase';
 
 const Contacts = () => {
 	const { t } = useTranslation();
@@ -15,6 +16,7 @@ const Contacts = () => {
 				<Typography variant="h1">{t('contacts.pageTitle')}</Typography>
 			</Underlined>
 			<CompanyCardsSkeleton numSkeletons={6} />
+			<TypographyShowcase />
 		</PageContainer>
 	);
 };

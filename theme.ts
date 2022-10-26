@@ -31,6 +31,14 @@ export const cubicTransition = 'cubic-bezier(0.4, 0, 0.2, 1) 0s';
 
 const typography: TypographyOptions = {
 	fontFamily: 'Poppins',
+	h1: {
+		fontSize: 60,
+		fontWeight: 800,
+		// @ts-ignore
+		[breakpoints.down('md')]: {
+			fontSize: 40,
+		},
+	},
 	subtitle2: {
 		fontSize: 12,
 		fontWeight: 300,
@@ -62,17 +70,17 @@ export const darkTheme: ThemeOptions = createTheme({
 	breakpoints,
 });
 
-darkTheme.typography = {
-	...darkTheme.typography,
-	h1: {
-		fontSize: 60,
-		fontWeight: 800,
-		// @ts-ignore
-		[darkTheme.breakpoints.down('md')]: {
-			fontSize: 40,
-		},
-	},
-};
+// darkTheme.typography = {
+// 	...darkTheme.typography,
+// 	h1: {
+// 		fontSize: 60,
+// 		fontWeight: 800,
+// 		// @ts-ignore
+// 		[darkTheme.breakpoints.down('md')]: {
+// 			fontSize: 40,
+// 		},
+// 	},
+// };
 
 export const lightTheme: ThemeOptions = createTheme({
 	palette: {
@@ -95,14 +103,14 @@ export const lightTheme: ThemeOptions = createTheme({
 	breakpoints,
 });
 
-lightTheme.typography = {
-	...darkTheme.typography,
-	h1: {
-		fontSize: 60,
-		fontWeight: 800,
-		// @ts-ignore
-		[lightTheme.breakpoints.down('md')]: {
-			fontSize: 40,
-		},
-	},
-};
+// lightTheme.typography = {
+// 	...darkTheme.typography,
+// 	h1: {
+// 		fontSize: 60,
+// 		fontWeight: 800,
+// 		// @ts-ignore
+// 		[lightTheme.breakpoints.down('md')]: {
+// 			fontSize: 40,
+// 		},
+// 	},
+// };
