@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
+import ImageContainer from '../components/common/ImageContainer';
 import PageContainer from '../components/common/PageContainer';
 import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
@@ -40,6 +41,7 @@ const WallOfClients = () => {
 				</Button>
 				<Card></Card>
 			</Box>
+			<ImageContainer imageSource="../../pelican256.png" imageHeight={40} imageWidth={40} />
 			<CompanyCardsSkeleton numSkeletons={9} />
 		</PageContainer>
 	);
