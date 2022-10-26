@@ -2,13 +2,12 @@
 import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import Button from '../components/common/Button';
-import Card from '../components/common/Card';
-import ImageContainer from '../components/common/ImageContainer';
+import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import { flexCenter, flexCol } from '../styles/generalStyles';
-import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -47,6 +46,7 @@ const WallOfClients = () => {
 					<Box width="20%" sx={flexCenter}>
 						Div nummer 4
 					</Box>
+
 					<Box width="20%" sx={flexCenter}>
 						Div nummer 5
 					</Box>

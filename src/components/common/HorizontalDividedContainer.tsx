@@ -1,8 +1,8 @@
-import { Box, Divider, Grid, Paper, styled } from '@mui/material';
-import Card from './Card';
+import { Divider } from '@mui/material';
 import { Stack, SxProps } from '@mui/system';
 import React, { FC } from 'react';
-import { flexRow } from '../../styles/generalStyles';
+
+import Card from './Card';
 
 export type Props = {
 	sx?: SxProps;

@@ -22,9 +22,9 @@ module.exports = {
 		// Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
 		// e.g. "@typescript-eslint/explicit-function-return-type": "off",
 		'sort-imports': 'off',
-		'simple-import-sort/imports': 'error',
+		'simple-import-sort/imports': 'warning',
 		'@typescript-eslint/explicit-module-boundary-types': 0,
-		'unused-imports/no-unused-imports': 'error',
+		'unused-imports/no-unused-imports': 'warning',
 		'react-hooks/exhaustive-deps': 'error',
 	},
 };
