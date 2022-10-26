@@ -4,12 +4,10 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '../components/common/Button';
-import Card from '../components/common/Card';
-import ImageContainer from '../components/common/ImageContainer';
+import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 import PageContainer from '../components/common/PageContainer';
-import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
-import { flexCol } from '../styles/generalStyles';
+import { flexCenter, flexCol } from '../styles/generalStyles';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -32,6 +30,7 @@ const WallOfClients = () => {
 			<Box
 				sx={{
 					...flexCol,
+					alignItems: 'center',
 					my: 2,
 					gap: 3,
 				}}
@@ -39,10 +38,24 @@ const WallOfClients = () => {
 				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
 					<Typography>Testboy</Typography>
 				</Button>
-				<Card></Card>
+				<HorizontalDividedContainer>
+					<Box width="20%">Div 2</Box>
+					<Box width="20%" sx={flexCenter}>
+						Div nummer 3
+					</Box>
+					<Box width="20%" sx={flexCenter}>
+						Div nummer 4
+					</Box>
+
+					<Box width="20%" sx={flexCenter}>
+						Div nummer 5
+					</Box>
+					<Box width="20%" sx={flexCenter}>
+						Div nummer 6
+					</Box>
+				</HorizontalDividedContainer>
 			</Box>
-			<ImageContainer imageSource="../../pelican256.png" imageWidth={200} />
-			<CompanyCardsSkeleton numSkeletons={9} />
+			{/* <CompanyCardsSkeleton numSkeletons={9} /> */}
 		</PageContainer>
 	);
 };
