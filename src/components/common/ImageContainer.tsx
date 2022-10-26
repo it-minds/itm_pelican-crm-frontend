@@ -15,8 +15,8 @@ type StyleProps = {
 const StyledImageContainer = styled(Box)<StyleProps>(
 	({ theme }) =>
 		({ imageWidth = '', imageHeight = '' }: StyleProps) => ({
-			width: imageWidth != null ? imageWidth : 'auto',
-			height: imageHeight != null ? imageHeight : 'auto',
+			width: imageWidth !== null ? imageWidth : 'auto',
+			height: imageHeight !== null ? imageHeight : 'auto',
 			objectFit: 'contain',
 		})
 );
@@ -24,19 +24,19 @@ const StyledImageContainer = styled(Box)<StyleProps>(
 const ImageContainer: FC<Props> = ({ ...styleProps }: Props) => {
 	const { imageSource, imageWidth, imageHeight } = styleProps;
 
-	// Hvis imageSize er sat, så skal boxen have en bestemt størrelse
-	// - ellers skal den som default bare fylde pladsen ud
-
 	return (
 		<StyledImageContainer
 			imageSource={imageSource}
 			imageWidth={imageWidth}
 			imageHeight={imageHeight}
 		>
-			<img alt="" src={imageSource} width={imageWidth} height={imageHeight} />
+			<img
+				alt=""
+				src={imageSource}
+				style={{ height: '100%', width: '100%', objectFit: 'contain' }}
+			/>
 		</StyledImageContainer>
 	);
-	// Der skal laves et img tag i ImageContainer, der source, størrelse, m.m. som properties
 };
 
 export default ImageContainer;
