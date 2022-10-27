@@ -8,5 +8,9 @@ export default defineConfig({
 	plugins: [react(), VitePWA({ injectRegister: 'auto', registerType: 'autoUpdate' }), eslint()],
 	server: {
 		port: 3000,
+
+		hmr: {
+			overlay: false,
+		},
 	},
 });

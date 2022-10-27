@@ -7,6 +7,7 @@ import Button from '../components/common/Button';
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
+import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 
 const WallOfClients = () => {
@@ -17,7 +18,7 @@ const WallOfClients = () => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-		}, 1500);
+		}, 1200);
 	};
 
 	return (
@@ -39,7 +40,13 @@ const WallOfClients = () => {
 					<Typography>Testboy</Typography>
 				</Button>
 				<HorizontalDividedContainer>
-					<Box width="20%">Div 2</Box>
+					<ClientInfoSummary
+						width="25%"
+						title="Legoland A/S"
+						city="Billund"
+						address="Nordmarksvej 9, 7190 Billund, Denmark"
+						url="legoland.dk"
+					/>
 					<Box width="20%" sx={flexCenter}>
 						Div nummer 3
 					</Box>
