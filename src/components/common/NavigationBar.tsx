@@ -33,8 +33,6 @@ const NavigationBar = () => {
 		if (currentTheme.palette.mode === 'dark') {
 			setIsDarkMode(true);
 		} else setIsDarkMode(false);
-
-		console.log('currentTheme', currentTheme);
 	}, [theme, location, currentTheme]);
 
 	const links = [
