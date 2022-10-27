@@ -1,5 +1,8 @@
 import { Typography } from '@mui/material';
 import React from 'react';
+import { mainTheme } from '../../theme';
+
+const typographies = mainTheme.typography;
 
 const TypographyShowcase = () => {
 	return (
@@ -14,6 +17,16 @@ const TypographyShowcase = () => {
 			<Typography variant="subtitle2">subtitle2.tekst</Typography>
 			<Typography variant="body1">body1.tekst</Typography>
 			<Typography variant="body2">body2.tekst</Typography>
+			<Typography variant="body3">body3.tekst</Typography>
+			<br />
+			<Typography variant="body4">body4.tekst</Typography>
+			<br />
+			<Typography variant="subbody1">subbody1.tekst</Typography>
+			<br />
+			<Typography variant="subbody2">subbody2.tekst</Typography>
+			<br />
+			<Typography variant="subbody3">subbody3.tekst</Typography>
+			<br />
 			<Typography variant="button">button.tekst</Typography>
 			<br />
 			<Typography variant="caption">caption.tekst</Typography>
