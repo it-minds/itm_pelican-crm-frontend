@@ -1,13 +1,18 @@
+import LanguageIcon from '@mui/icons-material/Language';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import WebIcon from '@mui/icons-material/Web';
-import { Box, Grid, SxProps, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { FC, useEffect, useRef, useState } from 'react';
-/**
- * ! Needs the following:
- * 	* Responsiveness (useMediaQuery)
- * 	* Tooltip (hover) til adresse?
- * 	* Lav hjemmesideikon til link til kundens hjemmeside?
- */
+import {
+	Box,
+	Fade,
+	Grid,
+	SxProps,
+	Tooltip,
+	Typography,
+	useMediaQuery,
+	useTheme,
+} from '@mui/material';
+import React, { FC, useEffect, useState } from 'react';
+
 type Props = {
 	children?: JSX.Element | JSX.Element[];
 	title: string;
@@ -20,9 +25,10 @@ type Props = {
 
 const ClientInfoSummary: FC<Props> = ({ children, title, city, url, width, address }) => {
 	const theme = useTheme();
-	const titleRef = useRef<HTMLDivElement>(null);
-	const smallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
+	const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
+	const [openTitleTooltip, setOpenTitleTooltip] = useState(false);
+	const [openAddressTooltip, setOpenAddressTooltip] = useState(false);
 	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
 
 	useEffect(() => {
@@ -33,44 +39,89 @@ const ClientInfoSummary: FC<Props> = ({ children, title, city, url, width, addre
 		}
 	}, [theme]);
 
-	// Uppercase generator
-	const urlToDisplay = () => {
-		if (!url) return;
-		return url?.charAt(0).toUpperCase() + url?.slice(1);
+	const urlToDisplay = (): JSX.Element => {
+		if (url && isLarge) {
+			return (
+				<>
+					<WebIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />
+					<Typography variant="subtitle2" noWrap>
+						{titleCase(url ? url : '')}
+					</Typography>
+				</>
+			);
+		} else {
+			return <LanguageIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />;
+		}
+	};
+
+	const handleTitleClick = () => {
+		setOpenTitleTooltip(true);
+		setTimeout(() => {
+			setOpenTitleTooltip(false);
+		}, 1200);
+	};
+	const handleAddressClick = () => {
+		if (!isSmall) return;
+
+		setOpenAddressTooltip(true);
+		setTimeout(() => {
+			setOpenAddressTooltip(false);
+		}, 1500);
 	};
 
 	return (
 		<Grid width={width} container direction="column" paddingX="0.4rem" gap="2px">
 			<Grid item width="100%">
-				<Tooltip ref={titleRef} title={smallScreen ? title : ''} placement="top-start">
-					<Typography noWrap variant="h6">
+				<Tooltip
+					TransitionComponent={Fade}
+					TransitionProps={{ timeout: 200 }}
+					enterDelay={500}
+					leaveDelay={200}
+					open={openTitleTooltip}
+					title={isSmall ? title : ''}
+					placement="top-start"
+				>
+					<Typography onClick={handleTitleClick} noWrap variant="h6">
 						{title}
 					</Typography>
 				</Tooltip>
 			</Grid>
 			<Grid sx={{ justifyContent: 'space-between', ml: '-1px' }} direction="row" container item>
-				<Tooltip title={address || ''} placement="bottom-start">
-					<Box display="flex" justifyContent="center" alignItems="end" gap="2px">
-						<LocationCityIcon sx={{ color: iconColor, mb: '1px' }} />
-						<Typography variant="subtitle2">{city || 'unknown'}</Typography>
+				<Tooltip open={openAddressTooltip} title={address || ''} placement="bottom-start">
+					<Box
+						onMouseEnter={() => setOpenAddressTooltip(true)}
+						onMouseLeave={() => setOpenAddressTooltip(false)}
+						display="flex"
+						sx={{ flexWrap: 'nowrap' }}
+						justifyContent="center"
+						alignItems="end"
+						gap="2px"
+					>
+						<LocationCityIcon sx={{ color: iconColor, mb: '1px' }} onClick={handleAddressClick} />
+						{!isSmall && <Typography variant="subtitle2">{city || 'unknown'}</Typography>}
 					</Box>
 				</Tooltip>
-				<Tooltip title={url}>
+				<Tooltip title={titleCase(url)}>
 					<Box
 						display="flex"
 						justifyContent="center"
 						alignItems="end"
 						gap="2px"
-						sx={{ cursor: 'pointer' }}
+						sx={{ cursor: 'pointer', flexWrap: 'nowrap' }}
 						onClick={() => window.open(`https://www.${url}`, '_blank')}
 					>
-						<WebIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />
-						<Typography variant="subtitle2">{urlToDisplay()}</Typography>
+						{urlToDisplay()}
 					</Box>
 				</Tooltip>
 			</Grid>
 		</Grid>
 	);
 };
+
+// Uppercase generator
+function titleCase(word: string | undefined) {
+	if (!word) return '';
+	return word?.charAt(0).toUpperCase() + word?.slice(1);
+}
 
 export default ClientInfoSummary;

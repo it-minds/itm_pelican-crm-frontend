@@ -12,8 +12,8 @@ declare module '@mui/material/styles' {
 // Tailwind inspired breakpoints
 export const breakpoints: BreakpointsOptions = {
 	values: {
-		xs: 0,
-		sm: 640,
+		xs: 375,
+		sm: 576,
 		md: 768,
 		lg: 1024,
 		xl: 1280,

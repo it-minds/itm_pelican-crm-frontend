@@ -42,7 +42,7 @@ const WallOfClients = () => {
 				<HorizontalDividedContainer>
 					<ClientInfoSummary
 						width="25%"
-						title="Legoland"
+						title="Legoland A/S"
 						city="Billund"
 						address="Nordmarksvej 9, 7190 Billund, Denmark"
 						url="legoland.dk"
