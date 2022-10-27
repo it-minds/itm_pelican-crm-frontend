@@ -1,8 +1,5 @@
 import { Typography } from '@mui/material';
 import React from 'react';
-import { mainTheme } from '../../theme';
-
-const typographies = mainTheme.typography;
 
 const TypographyShowcase = () => {
 	return (
