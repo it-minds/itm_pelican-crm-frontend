@@ -14,7 +14,6 @@ import {
 import React, { FC, useEffect, useState } from 'react';
 
 type Props = {
-	children?: JSX.Element | JSX.Element[];
 	title: string;
 	city: string;
 	address?: string;
@@ -23,7 +22,7 @@ type Props = {
 	sx?: SxProps;
 };
 
-const ClientInfoSummary: FC<Props> = ({ children, title, city, url, width, address }) => {
+const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
@@ -81,13 +80,27 @@ const ClientInfoSummary: FC<Props> = ({ children, title, city, url, width, addre
 					title={isSmall ? title : ''}
 					placement="top-start"
 				>
-					<Typography onClick={handleTitleClick} noWrap variant="h6">
+					<Typography
+						onMouseEnter={() => setOpenTitleTooltip(true)}
+						onMouseLeave={() => setOpenTitleTooltip(false)}
+						onTouchStart={handleTitleClick}
+						noWrap
+						variant="h6"
+					>
 						{title}
 					</Typography>
 				</Tooltip>
 			</Grid>
 			<Grid sx={{ justifyContent: 'space-between', ml: '-1px' }} direction="row" container item>
-				<Tooltip open={openAddressTooltip} title={address || ''} placement="bottom-start">
+				<Tooltip
+					TransitionComponent={Fade}
+					TransitionProps={{ timeout: 200 }}
+					enterDelay={500}
+					leaveDelay={200}
+					open={openAddressTooltip}
+					title={address || ''}
+					placement="bottom-start"
+				>
 					<Box
 						onMouseEnter={() => setOpenAddressTooltip(true)}
 						onMouseLeave={() => setOpenAddressTooltip(false)}
@@ -97,11 +110,20 @@ const ClientInfoSummary: FC<Props> = ({ children, title, city, url, width, addre
 						alignItems="end"
 						gap="2px"
 					>
-						<LocationCityIcon sx={{ color: iconColor, mb: '1px' }} onClick={handleAddressClick} />
+						<LocationCityIcon
+							sx={{ color: iconColor, mb: '1px' }}
+							onTouchStart={handleAddressClick}
+						/>
 						{!isSmall && <Typography variant="subtitle2">{city || 'unknown'}</Typography>}
 					</Box>
 				</Tooltip>
-				<Tooltip title={titleCase(url)}>
+				<Tooltip
+					TransitionComponent={Fade}
+					TransitionProps={{ timeout: 200 }}
+					enterDelay={500}
+					leaveDelay={200}
+					title={titleCase(url)}
+				>
 					<Box
 						display="flex"
 						justifyContent="center"
