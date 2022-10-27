@@ -18,6 +18,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { flexCenter, flexRow } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from './HideOnScroll';
+import ImageContainer from './ImageContainer';
 import Underlined from './Underlined';
 
 const NavigationBar = () => {
@@ -71,9 +72,11 @@ const NavigationBar = () => {
 					<Grid container sx={{ justifyContent: 'space-between' }}>
 						<Box sx={{ ...flexRow, gap: 2 }}>
 							<Button component={NavLink} to="/" sx={classes.brand}>
-								<img src="/pelican512.png" alt="logo" height={32} />
+								<ImageContainer imageSource="/pelican512.png" imageHeight={32} />
 								<Underlined>
-									<Typography color="text.primary">Pelican</Typography>
+									<Typography variant="h4" color="text.primary">
+										Pelican
+									</Typography>
 								</Underlined>
 							</Button>
 							{links.map(link => (
