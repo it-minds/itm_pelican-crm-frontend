@@ -43,7 +43,7 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 			return (
 				<>
 					<WebIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />
-					<Typography variant="subbody3" noWrap>
+					<Typography variant="subtitle3" noWrap>
 						{titleCase(url ? url : '')}
 					</Typography>
 				</>
@@ -114,7 +114,7 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 							sx={{ color: iconColor, mb: '1px' }}
 							onTouchStart={handleAddressClick}
 						/>
-						{!isSmall && <Typography variant="subbody3">{city || 'unknown'}</Typography>}
+						{!isSmall && <Typography variant="subtitle3">{city || 'unknown'}</Typography>}
 					</Box>
 				</Tooltip>
 				<Tooltip

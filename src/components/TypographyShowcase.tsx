@@ -12,6 +12,7 @@ const TypographyShowcase = () => {
 			<Typography variant="h6">h6.tekst</Typography>
 			<Typography variant="subtitle1">subtitle1.tekst</Typography>
 			<Typography variant="subtitle2">subtitle2.tekst</Typography>
+			<Typography variant="subtitle3">subtitle3.tekst</Typography>
 			<Typography variant="body1">body1.tekst</Typography>
 			<Typography variant="body2">body2.tekst</Typography>
 			<Typography variant="body3">body3.tekst</Typography>

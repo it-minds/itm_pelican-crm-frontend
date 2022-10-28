@@ -16,16 +16,12 @@ declare module '@mui/material/styles' {
 	interface TypographyVariants {
 		body3: React.CSSProperties;
 		body4: React.CSSProperties;
-		subbody1: React.CSSProperties;
-		subbody2: React.CSSProperties;
-		subbody3: React.CSSProperties;
+		subtitle3: React.CSSProperties;
 	}
 	interface TypographyVariantsOptions {
 		body3?: React.CSSProperties;
 		body4?: React.CSSProperties;
-		subbody1?: React.CSSProperties;
-		subbody2?: React.CSSProperties;
-		subbody3?: React.CSSProperties;
+		subtitle3?: React.CSSProperties;
 	}
 }
 
@@ -33,9 +29,7 @@ declare module '@mui/material/Typography' {
 	interface TypographyPropsVariantOverrides {
 		body3: true;
 		body4: true;
-		subbody1: true;
-		subbody2: true;
-		subbody3: true;
+		subtitle3: true;
 	}
 }
 
@@ -53,9 +47,7 @@ export const mainTheme: ThemeOptions = createTheme({
 	typography: {
 		body3: {},
 		body4: {},
-		subbody1: {},
-		subbody2: {},
-		subbody3: {},
+		subtitle3: {},
 	},
 });
 
@@ -96,51 +88,47 @@ mainTheme.typography = {
 	},
 	h4: {
 		fontSize: 20,
-		fontWeight: 400,
+		fontWeight: 500,
 		letterSpacing: '0.05em',
 	},
 	h5: {
 		fontSize: 18,
-		fontWeight: 500,
+		fontWeight: 400,
 	},
 	h6: {
 		fontSize: 16,
-		fontWeight: 300,
+		fontWeight: 400,
 	},
 	body1: {
 		fontSize: 16,
 	},
 	body2: {
-		fontSize: 13,
-		fontWeight: 300,
+		fontSize: 14,
+		fontWeight: 200,
 	},
 	body3: {
-		fontSize: 13,
-		fontWeight: 300,
-		opacity: 0.8,
+		fontSize: 14,
+		fontWeight: 100,
 	},
 	body4: {
 		fontSize: 12,
-		fontWeight: 100,
+		letterSpacing: '0.05em',
+	},
+	subtitle1: {
+		fontSize: 14,
+		fontWeight: 200,
 	},
 	subtitle2: {
 		fontSize: 12,
-		fontWeight: 300,
+		fontWeight: 400,
+	},
+	subtitle3: {
+		fontSize: 12,
+		fontWeight: 400,
+		opacity: 0.7,
 	},
 	button: {
 		textTransform: 'none',
-	},
-	subbody1: {
-		fontSize: 12,
-	},
-	subbody2: {
-		fontSize: 12,
-		fontWeight: 300,
-	},
-	subbody3: {
-		fontSize: 12,
-		fontWeight: 300,
-		opacity: 0.6,
 	},
 };
 
