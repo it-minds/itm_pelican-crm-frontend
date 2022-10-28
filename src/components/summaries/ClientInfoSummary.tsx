@@ -43,7 +43,7 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 			return (
 				<>
 					<WebIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />
-					<Typography variant="subtitle2" noWrap>
+					<Typography variant="subbody3" noWrap>
 						{titleCase(url ? url : '')}
 					</Typography>
 				</>
@@ -85,7 +85,7 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 						onMouseLeave={() => setOpenTitleTooltip(false)}
 						onTouchStart={handleTitleClick}
 						noWrap
-						variant="h6"
+						variant="h5"
 					>
 						{title}
 					</Typography>
@@ -114,7 +114,7 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 							sx={{ color: iconColor, mb: '1px' }}
 							onTouchStart={handleAddressClick}
 						/>
-						{!isSmall && <Typography variant="subtitle2">{city || 'unknown'}</Typography>}
+						{!isSmall && <Typography variant="subbody3">{city || 'unknown'}</Typography>}
 					</Box>
 				</Tooltip>
 				<Tooltip

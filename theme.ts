@@ -51,21 +51,11 @@ export const cubicTransition = 'cubic-bezier(0.4, 0, 0.2, 1) 0s';
 // Creating and overwriting default theme
 export const mainTheme: ThemeOptions = createTheme({
 	typography: {
-		body3: {
-			fontSize: 10,
-		},
-		body4: {
-			fontSize: 10,
-		},
-		subbody1: {
-			fontSize: 10,
-		},
-		subbody2: {
-			fontSize: 10,
-		},
-		subbody3: {
-			fontSize: 10,
-		},
+		body3: {},
+		body4: {},
+		subbody1: {},
+		subbody2: {},
+		subbody3: {},
 	},
 });
 
@@ -88,6 +78,9 @@ mainTheme.palette = {
 	secondary: {
 		main: secondaryColor,
 	},
+	text: {
+		secondary: 'rgba(0,0,0,0.3)',
+	},
 };
 
 mainTheme.typography = {
@@ -95,7 +88,7 @@ mainTheme.typography = {
 	fontFamily: 'Poppins',
 	h1: {
 		fontSize: 60,
-		fontWeight: 800,
+		fontWeight: 700,
 		// @ts-ignore
 		[mainTheme.breakpoints.down('md')]: {
 			fontSize: 40,
@@ -103,14 +96,32 @@ mainTheme.typography = {
 	},
 	h4: {
 		fontSize: 20,
-		fontWeight: 500,
+		fontWeight: 400,
+		letterSpacing: '0.05em',
 	},
 	h5: {
 		fontSize: 18,
+		fontWeight: 500,
 	},
 	h6: {
 		fontSize: 16,
 		fontWeight: 300,
+	},
+	body1: {
+		fontSize: 16,
+	},
+	body2: {
+		fontSize: 13,
+		fontWeight: 300,
+	},
+	body3: {
+		fontSize: 13,
+		fontWeight: 300,
+		opacity: 0.8,
+	},
+	body4: {
+		fontSize: 12,
+		fontWeight: 100,
 	},
 	subtitle2: {
 		fontSize: 12,
@@ -118,6 +129,18 @@ mainTheme.typography = {
 	},
 	button: {
 		textTransform: 'none',
+	},
+	subbody1: {
+		fontSize: 12,
+	},
+	subbody2: {
+		fontSize: 12,
+		fontWeight: 300,
+	},
+	subbody3: {
+		fontSize: 12,
+		fontWeight: 300,
+		opacity: 0.6,
 	},
 };
 
