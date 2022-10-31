@@ -48,14 +48,14 @@ const WallOfClients = () => {
 						url="legoland.dk"
 					/>
 					<Box width="20%" sx={flexCenter}>
-						Div nummer 3
+						<Typography variant="body1">Div nummer 3</Typography>
 					</Box>
 					<Box width="20%" sx={flexCenter}>
-						Div nummer 4
+						<Typography variant="body2">Div nummer 4</Typography>
 					</Box>
 
 					<Box width="20%" sx={flexCenter}>
-						Div nummer 5
+						<Typography variant="body3">Div nummer 5</Typography>
 					</Box>
 					<Box width="20%" sx={flexCenter}>
 						Div nummer 6
