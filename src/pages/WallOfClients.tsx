@@ -10,6 +10,7 @@ import Underlined from '../components/common/Underlined';
 import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
 import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
+import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -21,6 +22,21 @@ const WallOfClients = () => {
 			setIsLoading(false);
 		}, 1200);
 	};
+
+	const dummySuppliers: SupplierSummary[] = [
+		{
+			id: '1',
+			name: 'IT-Minds',
+			logo: 'https://sursen.it-minds.dk/images/logo.svg',
+			location: 'Copenhagen',
+		},
+		// {
+		// 	id: '2',
+		// 	name: 'Kapacity',
+		// 	logo: 'https://admin.foreningsadministration.dk/files/DSvU14/Nyheder/NewsEntry//636637032088078634Kapacity_Logo.png',
+		// 	location: 'Copenhagen',
+		// },
+	];
 
 	return (
 		<PageContainer>
@@ -49,7 +65,7 @@ const WallOfClients = () => {
 						url="legoland.dk"
 					/>
 					<Box width="20%" sx={flexCenter}>
-						<SupplierInfoSummary name="IT-Minds" />
+						<SupplierInfoSummary suppliers={dummySuppliers} />
 					</Box>
 					<Box width="20%" sx={flexCenter}>
 						<Typography variant="body2">Div nummer 4</Typography>
