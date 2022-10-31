@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, Typography } from '@mui/material';
 import React, { FC } from 'react';
+
 import ImageContainer from '../common/ImageContainer';
 
 type Props = {
@@ -20,7 +20,9 @@ const SupplierInfoSummary: FC<Props> = ({ name }) => {
 				width="100%"
 			>
 				<ImageContainer imageHeight="30px" imageSource="./pelican512.png"></ImageContainer>
-				<Typography variant="body2">{name}</Typography>
+				<Typography mt="3px" variant="body2">
+					{name}
+				</Typography>
 			</Box>
 		</>
 	);

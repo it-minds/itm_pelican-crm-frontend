@@ -8,6 +8,7 @@ import HorizontalDividedContainer from '../components/common/HorizontalDividedCo
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
+import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 
 const WallOfClients = () => {
@@ -48,7 +49,7 @@ const WallOfClients = () => {
 						url="legoland.dk"
 					/>
 					<Box width="20%" sx={flexCenter}>
-						<Typography variant="body1">Div nummer 3</Typography>
+						<SupplierInfoSummary name="IT-Minds" />
 					</Box>
 					<Box width="20%" sx={flexCenter}>
 						<Typography variant="body2">Div nummer 4</Typography>
