@@ -71,10 +71,14 @@
 			"multipleAccountManagers": "Multiple account managers"
 		}
 	},
-  "landingPage": {
-    "pageTitle": "Welcome to Pelican CRM",
-    "pageSubtitle": "Sign in via Google below.",
-    "paragraph": "Here is another paragraph that changes based on selected language.",
-    "loginButtonText": "Sign in"
-  }
+	"landingPage": {
+		"pageTitle": "Welcome to Pelican CRM",
+		"pageSubtitle": "Sign in via Google below.",
+		"paragraph": "Here is another paragraph that changes based on selected language.",
+		"loginButtonText": "Sign in"
+	},
+	"notFound": {
+		"pageTitle": "404 - Not found",
+		"paragraph": "Seems like we cant find what you are looking for."
+	}
 }
