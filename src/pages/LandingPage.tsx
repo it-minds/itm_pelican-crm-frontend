@@ -25,11 +25,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
-/**
- * Landing page:
- *  (Done gennem nav-wrappers) : Ingen nav-bar
- *  Baggrund (Logo eller lignende - bare noget lollern indtil vi har det)
- *  Div (Card?) til højre på siden der har en knap til at logge ind via google
- *    Skal også have knap til at gå til /clients, så man kan bruge siden normalt, da auth ikke virker
- */

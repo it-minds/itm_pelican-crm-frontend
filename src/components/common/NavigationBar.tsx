@@ -95,7 +95,7 @@ const NavigationBar = () => {
 						<Box sx={{ ...flexCenter, gap: 2 }}>
 							{' '}
 							<ButtonBase onClick={toggleTheme}>{themeToggle()}</ButtonBase>
-							<Typography variant="subtitle2" sx={classes.linkElem}>
+							<Typography variant="body1" sx={classes.linkElem}>
 								Salesman Name
 							</Typography>
 							<Avatar></Avatar>
