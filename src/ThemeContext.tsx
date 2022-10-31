@@ -1,7 +1,7 @@
 import { ThemeOptions, ThemeProvider } from '@mui/material/styles';
 import React, { FC, useEffect, useState } from 'react';
 
-import { darkTheme, lightTheme, mainTheme } from '../theme';
+import { darkTheme, lightTheme } from '../theme';
 
 // type Theme = 'light' | 'dark';
 type ThemeContextType = { theme: ThemeOptions; toggleTheme: () => void };
@@ -22,10 +22,6 @@ export const AppThemeProvider: FC<Props> = ({ children }) => {
 			setTheme(darkMode ? darkTheme : lightTheme);
 		}
 	}, []);
-
-	console.log(mainTheme);
-	console.log(darkTheme);
-	console.log(lightTheme);
 
 	const toggleTheme = () => {
 		setTheme(theme === lightTheme ? darkTheme : lightTheme);
