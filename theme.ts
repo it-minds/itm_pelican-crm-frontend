@@ -125,6 +125,7 @@ mainTheme.typography = {
 	subtitle3: {
 		fontSize: 12,
 		fontWeight: 400,
+		letterSpacing: '-0.08em',
 		opacity: 0.7,
 	},
 	button: {

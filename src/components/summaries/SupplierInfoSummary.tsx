@@ -1,5 +1,5 @@
 import { Box, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import ImageContainer from '../common/ImageContainer';
 
@@ -17,7 +17,14 @@ type Props = {
 const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 	const multipleSuppliers = suppliers.length > 1;
 	const theme = useTheme();
-	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
+	const isBelowMedium = useMediaQuery(theme.breakpoints.down(765));
+
+	console.log(theme.breakpoints.down(765));
+
+	useEffect(() => {
+		console.log(theme.breakpoints);
+	}, [theme]);
+
 	const multipleSupplierRender = () => {
 		if (!multipleSuppliers) return null;
 
@@ -55,16 +62,41 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 					flexDirection="row"
 					justifyContent="center"
 					alignItems="center"
-					gap="10px"
+					gap="5px"
 					width="100%"
 				>
-					<ImageContainer
-						imageHeight="30px"
-						imageSource={suppliers[0].logo ? suppliers[0].logo : ''}
-					/>
-					<Typography mt="3px" variant="body1" noWrap>
-						{suppliers[0].name}
-					</Typography>
+					<Box width="40%">
+						<ImageContainer
+							imageHeight="40px"
+							imageSource={suppliers[0].logo ? suppliers[0].logo : ''}
+						/>
+					</Box>
+					{!isBelowMedium && (
+						<Box
+							width="60%"
+							display="flex"
+							flexDirection="column"
+							alignItems="start"
+							gap="0"
+							mt="2px"
+						>
+							<Box width="100%" height="fit-content" maxHeight="22px">
+								<Typography variant="body1" noWrap>
+									{suppliers[0].name}
+								</Typography>
+							</Box>
+							<Box width="100%" mt="-3px">
+								<Typography
+									variant="subtitle2"
+									letterSpacing="-0.06em"
+									sx={{ opacity: '0.7', fontSize: '12px' }}
+									noWrap
+								>
+									{suppliers[0].location}
+								</Typography>
+							</Box>
+						</Box>
+					)}
 				</Box>
 			</Tooltip>
 		);
