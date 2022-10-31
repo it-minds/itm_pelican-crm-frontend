@@ -19,12 +19,6 @@ const TypographyShowcase = () => {
 			<br />
 			<Typography variant="body4">body4.tekst</Typography>
 			<br />
-			<Typography variant="subbody1">subbody1.tekst</Typography>
-			<br />
-			<Typography variant="subbody2">subbody2.tekst</Typography>
-			<br />
-			<Typography variant="subbody3">subbody3.tekst</Typography>
-			<br />
 			<Typography variant="button">button.tekst</Typography>
 			<br />
 			<Typography variant="caption">caption.tekst</Typography>

@@ -1,4 +1,4 @@
-import { Box, styled, SxProps } from '@mui/material';
+import { Box, styled, SxProps, Typography } from '@mui/material';
 import React, { FC } from 'react';
 
 import { flexCol } from '../../styles/generalStyles';
@@ -45,7 +45,7 @@ const Card: FC<Props> = props => {
 						alignItems: 'center',
 					}}
 				>
-					Nothing in card
+					<Typography variant="body1">Nothing in card</Typography>
 				</Box>
 			)}
 		</BaseCard>
