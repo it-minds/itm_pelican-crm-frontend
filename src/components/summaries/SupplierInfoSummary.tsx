@@ -17,13 +17,7 @@ type Props = {
 const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 	const multipleSuppliers = suppliers.length > 1;
 	const theme = useTheme();
-	const isBelowMedium = useMediaQuery(theme.breakpoints.down(765));
-
-	console.log(theme.breakpoints.down(765));
-
-	useEffect(() => {
-		console.log(theme.breakpoints);
-	}, [theme]);
+	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 
 	const multipleSupplierRender = () => {
 		if (!multipleSuppliers) return null;
@@ -62,7 +56,6 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 					flexDirection="row"
 					justifyContent="center"
 					alignItems="center"
-					gap="5px"
 					width="100%"
 				>
 					<Box width="40%">
@@ -87,9 +80,11 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 							</Box>
 							<Box width="100%" mt="-3px">
 								<Typography
-									variant="subtitle2"
-									letterSpacing="-0.06em"
-									sx={{ opacity: '0.7', fontSize: '12px' }}
+									variant="body2"
+									letterSpacing="-0.08em"
+									fontSize={13}
+									lineHeight={1.3}
+									sx={{ opacity: '0.6' }}
 									noWrap
 								>
 									{suppliers[0].location}
