@@ -7,7 +7,7 @@ export type Props = {
 	className?: string;
 };
 
-const StyledPageContainer = styled(Grid)<Props>(({ theme }) => (props: Props) => ({
+const StyledPageContainer = styled(Grid)<Props>(({ theme }) => ({
 	backgroundColor: 'background.default',
 	pt: '4rem',
 	alignContent: 'center',

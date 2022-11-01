@@ -14,7 +14,7 @@ type StyleProps = {
 
 const StyledImageContainer = styled(Box)<StyleProps>(
 	() =>
-		({ imageWidth = '', imageHeight = '' }: StyleProps) => ({
+		({ imageWidth, imageHeight }: StyleProps) => ({
 			width: imageWidth !== null ? imageWidth : 'auto',
 			height: imageHeight !== null ? imageHeight : 'auto',
 		})
