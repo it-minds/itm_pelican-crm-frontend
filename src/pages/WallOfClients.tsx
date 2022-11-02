@@ -1,4 +1,3 @@
-// For ImageContainer testing:
 import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,8 +8,8 @@ import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
 import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
-import { flexCenter, flexCol } from '../styles/generalStyles';
 import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
+import { flexCenter, flexCol } from '../styles/generalStyles';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -30,12 +29,24 @@ const WallOfClients = () => {
 			logo: 'https://sursen.it-minds.dk/images/logo.svg',
 			location: 'Copenhagen',
 		},
-		// {
-		// 	id: '2',
-		// 	name: 'Kapacity',
-		// 	logo: 'https://admin.foreningsadministration.dk/files/DSvU14/Nyheder/NewsEntry//636637032088078634Kapacity_Logo.png',
-		// 	location: 'Copenhagen',
-		// },
+		{
+			id: '2',
+			name: 'Kapacity',
+			logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/z7cgtl0o2hizipgezq5a',
+			location: 'Copenhagen',
+		},
+		{
+			id: '1',
+			name: 'IT-Minds',
+			logo: 'https://sursen.it-minds.dk/images/logo.svg',
+			location: 'Copenhagen',
+		},
+		{
+			id: '2',
+			name: 'Kapacity',
+			logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/z7cgtl0o2hizipgezq5a',
+			location: 'Copenhagen',
+		},
 	];
 
 	return (

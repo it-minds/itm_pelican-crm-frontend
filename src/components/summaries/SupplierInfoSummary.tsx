@@ -1,5 +1,5 @@
 import { Box, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 import ImageContainer from '../common/ImageContainer';
 
@@ -18,6 +18,34 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 	const multipleSuppliers = suppliers.length > 1;
 	const theme = useTheme();
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
+
+	const suppliersArrayGeneration = (supplierArray: SupplierSummary[]) => {
+		if (supplierArray.length === 0) {
+			console.log('0 suppliers');
+			return null;
+		} else if (supplierArray.length === 1) {
+			console.log('1 supplier');
+			return supplierArray;
+			// Return komponent som single-view
+		} else if (supplierArray.length >= 2 && supplierArray.length <= 3) {
+			console.log('2 eller 3 suppliers');
+			return null;
+			// Return alle komponenter fra arrayet i multi-view (kun billeder)
+		} else if (supplierArray.length > 3) {
+			const arraySlice: SupplierSummary[] = supplierArray.slice(0, 2);
+			const generatedArray: SupplierSummary[] = arraySlice.map(supplier => (
+				<Box>
+					<Typography>yolo, vi kører!</Typography>
+				</Box>
+			));
+			console.log('Mange suppliers');
+			return generatedArray;
+			// Return de 2 første suppliers kun som billeder, samt et "+X" der viser hvor mange der er ud over de 2 der vises
+		} else {
+			console.log('Der er noget rygende galt');
+			return null;
+		}
+	};
 
 	const multipleSupplierRender = () => {
 		if (!multipleSuppliers) return null;
@@ -45,6 +73,7 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 					width="100%"
 				>
 					{multipleSupplierRender()}
+					{suppliersArrayGeneration(suppliers)}
 				</Box>
 			</>
 		);
