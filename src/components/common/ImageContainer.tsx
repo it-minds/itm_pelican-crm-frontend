@@ -16,7 +16,9 @@ const StyledImageContainer = styled(Box)<StyleProps>(
 	() =>
 		({ imageWidth, imageHeight }: StyleProps) => ({
 			width: imageWidth !== null ? imageWidth : 'auto',
+			minWidth: imageWidth !== null ? imageWidth : '',
 			height: imageHeight !== null ? imageHeight : 'auto',
+			minHeight: imageHeight !== null ? imageHeight : '',
 		})
 );
 

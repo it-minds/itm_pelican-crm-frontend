@@ -5,6 +5,11 @@ import React, { FC, ReactNode } from 'react';
 
 import { cubicTransition } from '../../../theme';
 
+/**
+ * * Possible refactor of styled():
+ * https://stackoverflow.com/a/71571674
+ */
+
 export type ButtonType = 'default' | 'outlined';
 export type ButtonSize = 'default' | 'small';
 
@@ -27,7 +32,9 @@ const focus = (color: string) => {
 	return darken(color, 0.2);
 };
 
-const ButtonStyles = styled(ButtonBase)<StyleProps>(
+const ButtonStyles = styled(ButtonBase, {
+	shouldForwardProp: prop => typeof prop !== 'string' || prop !== 'noPad',
+})<StyleProps>(
 	({ theme }) =>
 		({
 			size = 'default',

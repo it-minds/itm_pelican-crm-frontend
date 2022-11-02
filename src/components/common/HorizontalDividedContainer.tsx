@@ -1,4 +1,4 @@
-import { Divider } from '@mui/material';
+import { Divider, useTheme } from '@mui/material';
 import { Stack, SxProps } from '@mui/system';
 import React, { FC } from 'react';
 
@@ -9,7 +9,11 @@ export type Props = {
 	children?: JSX.Element | JSX.Element[];
 };
 
+const darkModeDivider = { backgroundColor: '#fff', opacity: '20%' };
+
 const HorizontalDividedContainer: FC<Props> = ({ sx, children }) => {
+	const theme = useTheme();
+	const isDarkMode = theme.palette.mode === 'dark';
 	return (
 		<Card fullWidth>
 			<Stack
@@ -18,7 +22,14 @@ const HorizontalDividedContainer: FC<Props> = ({ sx, children }) => {
 				direction="row"
 				alignItems={'center'}
 				sx={sx}
-				divider={<Divider orientation="vertical" flexItem variant="middle" />}
+				divider={
+					<Divider
+						orientation="vertical"
+						flexItem
+						variant="middle"
+						sx={isDarkMode ? darkModeDivider : {}}
+					/>
+				}
 			>
 				{children}
 			</Stack>
