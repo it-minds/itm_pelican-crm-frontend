@@ -25,7 +25,11 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 		const supplierList = suppliers.map(supplier => (
 			<Tooltip title={supplier.name}>
 				<Box>
-					<ImageContainer imageHeight="30px" imageSource={!!supplier.logo ? supplier.logo : ''} />
+					<ImageContainer
+						imageWidth="30px"
+						imageHeight="30px"
+						imageSource={!!supplier.logo ? supplier.logo : ''}
+					/>
 				</Box>
 			</Tooltip>
 		));
@@ -39,6 +43,7 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 				<Box
 					display="flex"
 					flexDirection="row"
+					flexWrap="wrap"
 					justifyContent="center"
 					alignItems="center"
 					gap="10px"
@@ -57,11 +62,11 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 					justifyContent="center"
 					alignItems="center"
 					width="100%"
+					gap="5px"
 				>
-					<Box width="40%">
+					<Box width={isBelowMedium ? '100%' : '40%'}>
 						<ImageContainer
 							imageHeight={40}
-							imageWidth={40}
 							imageSource={suppliers[0].logo ? suppliers[0].logo : ''}
 						/>
 					</Box>

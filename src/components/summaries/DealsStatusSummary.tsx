@@ -3,6 +3,7 @@ import ForumIcon from '@mui/icons-material/Forum';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import { Box, Stack, SxProps, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
+import { flexCenter } from '../../styles/generalStyles';
 
 export enum DealStatus {
 	Active = 'Active',
@@ -31,12 +32,12 @@ const DealsStatusSummary: FC<Props> = ({ dealStatus, sx }) => {
 	switch (dealStatus) {
 		case 'Active': {
 			return (
-				<Stack direction={'row'} sx={{ alignItems: 'center' }}>
-					<Box width="30%">
-						<HistoryEduIcon fontSize="large" sx={{ color: iconColor, mr: 1 }} />
+				<Stack direction="row" justifyContent="center" alignItems="center">
+					<Box width="30%" sx={flexCenter}>
+						<HistoryEduIcon fontSize="large" sx={{ color: iconColor }} />
 					</Box>
 					{isSmall && (
-						<Stack width="70%">
+						<Stack width="70%" sx={{ ml: 1 }}>
 							<Typography variant="body1" noWrap>
 								Active
 							</Typography>

@@ -35,7 +35,19 @@ const WallOfClients = () => {
 		{
 			id: '2',
 			name: 'Kapacity',
-			logo: 'https://admin.foreningsadministration.dk/files/DSvU14/Nyheder/NewsEntry//636637032088078634Kapacity_Logo.png',
+			logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/z7cgtl0o2hizipgezq5a',
+			location: 'Copenhagen',
+		},
+		{
+			id: '1',
+			name: 'IT-Minds',
+			logo: 'https://sursen.it-minds.dk/images/logo.svg',
+			location: 'Copenhagen',
+		},
+		{
+			id: '2',
+			name: 'Kapacity',
+			logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/z7cgtl0o2hizipgezq5a',
 			location: 'Copenhagen',
 		},
 	];
@@ -66,14 +78,11 @@ const WallOfClients = () => {
 						address="Nordmarksvej 9, 7190 Billund, Denmark"
 						url="legoland.dk"
 					/>
-					<Box width="15%">
-						<DealsStatusSummary dealStatus={DealStatus.Active} />
-					</Box>
-					<Box width="20%" sx={flexCenter}>
+					<Box minWidth="20%" width="20%" maxWidth="20%" sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 						<SupplierInfoSummary suppliers={dummySuppliers} />
 					</Box>
-					<Box width="20%" sx={flexCenter}>
-						<Typography variant="body2">Div nummer 4</Typography>
+					<Box minWidth="15%">
+						<DealsStatusSummary dealStatus={DealStatus.Active} />
 					</Box>
 
 					<Box width="20%" sx={flexCenter}>
