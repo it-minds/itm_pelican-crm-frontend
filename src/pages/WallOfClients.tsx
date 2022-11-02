@@ -8,6 +8,8 @@ import HorizontalDividedContainer from '../components/common/HorizontalDividedCo
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
+import DealsStatusSummary from '../components/summaries/DealsStatusSummary';
+import { DealStatus } from '../components/summaries/DealsStatusSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 
 const WallOfClients = () => {
@@ -47,15 +49,15 @@ const WallOfClients = () => {
 						address="Nordmarksvej 9, 7190 Billund, Denmark"
 						url="legoland.dk"
 					/>
-					<Box width="20%" sx={flexCenter}>
-						<Typography variant="body1">Div nummer 3</Typography>
+					<Box width="15%">
+						<DealsStatusSummary dealStatus={DealStatus.Active} />
 					</Box>
-					<Box width="20%" sx={flexCenter}>
-						<Typography variant="body2">Div nummer 4</Typography>
+					<Box width="20%">
+						<DealsStatusSummary dealStatus={DealStatus.Dialog} />
 					</Box>
 
-					<Box width="20%" sx={flexCenter}>
-						<Typography variant="body3">Div nummer 5</Typography>
+					<Box width="20%">
+						<DealsStatusSummary dealStatus={DealStatus.Inactive} />
 					</Box>
 					<Box width="20%" sx={flexCenter}>
 						Div nummer 6
