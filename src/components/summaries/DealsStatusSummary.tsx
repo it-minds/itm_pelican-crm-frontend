@@ -4,6 +4,7 @@ import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import { Box, Stack, SxProps, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { flexCenter } from '../../styles/generalStyles';
 
 export enum DealStatus {
