@@ -49,18 +49,16 @@ export const mainTheme: ThemeOptions = createTheme({
 		body4: {},
 		subtitle3: {},
 	},
-});
-
-mainTheme.breakpoints = {
-	...mainTheme.breakpoints,
-	values: {
-		xs: 375,
-		sm: 576,
-		md: 768,
-		lg: 1024,
-		xl: 1280,
+	breakpoints: {
+		values: {
+			xs: 375,
+			sm: 576,
+			md: 768,
+			lg: 1024,
+			xl: 1280,
+		},
 	},
-};
+});
 
 mainTheme.palette = {
 	...mainTheme.palette,
@@ -74,6 +72,10 @@ mainTheme.palette = {
 		secondary: 'rgba(0,0,0,0.3)',
 	},
 };
+
+/**
+ * ! New typographies not working as intended !
+ */
 
 mainTheme.typography = {
 	...mainTheme.typography,
@@ -125,6 +127,7 @@ mainTheme.typography = {
 	subtitle3: {
 		fontSize: 12,
 		fontWeight: 400,
+		letterSpacing: '-0.08em',
 		opacity: 0.7,
 	},
 	button: {

@@ -12,6 +12,7 @@ export const ThemeContext = React.createContext<ThemeContextType>({} as ThemeCon
 
 export const AppThemeProvider: FC<Props> = ({ children }) => {
 	const [theme, setTheme] = useState<ThemeOptions>(lightTheme);
+
 	useEffect(() => {
 		const localTheme = localStorage.getItem('theme');
 		if (localTheme) {
