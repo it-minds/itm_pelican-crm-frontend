@@ -52,19 +52,18 @@ const WallOfClients = () => {
 					<Box width="15%">
 						<DealsStatusSummary dealStatus={DealStatus.Active} />
 					</Box>
-					<Box width="20%">
-						<DealsStatusSummary dealStatus={DealStatus.Dialog} />
+					<Box width="20%" sx={flexCenter}>
+						<Typography variant="body2">Div nummer 4</Typography>
 					</Box>
 
-					<Box width="20%">
-						<DealsStatusSummary dealStatus={DealStatus.Inactive} />
+					<Box width="20%" sx={flexCenter}>
+						<Typography variant="body3">Div nummer 5</Typography>
 					</Box>
 					<Box width="20%" sx={flexCenter}>
 						Div nummer 6
 					</Box>
 				</HorizontalDividedContainer>
 			</Box>
-			{/* <CompanyCardsSkeleton numSkeletons={9} /> */}
 		</PageContainer>
 	);
 };
