@@ -3,6 +3,7 @@ import ForumIcon from '@mui/icons-material/Forum';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import { Box, Stack, SxProps, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { flexCenter } from '../../styles/generalStyles';
 
 export enum DealStatus {
@@ -20,6 +21,7 @@ const DealsStatusSummary: FC<Props> = ({ dealStatus, sx }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
 	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		if (theme.palette.mode === 'dark') {
@@ -39,10 +41,12 @@ const DealsStatusSummary: FC<Props> = ({ dealStatus, sx }) => {
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
 							<Typography variant="body1" noWrap>
-								Active
+								{t('wallOfClients.clientListItemContent.dealStatus.active')}
 							</Typography>
 							<Typography variant="subtitle2" noWrap>
-								Until: some date
+								{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
+									date: 'some date',
+								})}
 							</Typography>
 						</Stack>
 					)}
@@ -51,14 +55,14 @@ const DealsStatusSummary: FC<Props> = ({ dealStatus, sx }) => {
 		}
 		case 'Dialog': {
 			return (
-				<Stack direction={'row'} sx={{ alignItems: 'center' }}>
-					<Box width="30%">
-						<ForumIcon fontSize="large" sx={{ color: iconColor, mr: 1 }} />
+				<Stack direction="row" justifyContent="center" alignItems="center">
+					<Box width="30%" sx={flexCenter}>
+						<ForumIcon fontSize="large" sx={{ color: iconColor }} />
 					</Box>
 					{isSmall && (
-						<Stack width="70%">
+						<Stack width="70%" sx={{ ml: 1 }}>
 							<Typography variant="body1" noWrap>
-								Dialog
+								{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
 							</Typography>
 						</Stack>
 					)}
@@ -67,17 +71,19 @@ const DealsStatusSummary: FC<Props> = ({ dealStatus, sx }) => {
 		}
 		case 'Inactive': {
 			return (
-				<Stack direction={'row'} sx={{ alignItems: 'center' }}>
-					<Box width="30%">
-						<AcUnitIcon fontSize="large" sx={{ color: iconColor, mr: 1 }} />
+				<Stack direction="row" justifyContent="center" alignItems="center">
+					<Box width="30%" sx={flexCenter}>
+						<AcUnitIcon fontSize="large" sx={{ color: iconColor }} />
 					</Box>
 					{isSmall && (
-						<Stack width="70%">
+						<Stack width="70%" sx={{ ml: 1 }}>
 							<Typography variant="body1" noWrap>
-								Inactive
+								{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
 							</Typography>
 							<Typography variant="subtitle2" noWrap>
-								Since: some date
+								{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
+									date: 'some date',
+								})}
 							</Typography>
 						</Stack>
 					)}
