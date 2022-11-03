@@ -7,8 +7,10 @@ import HorizontalDividedContainer from '../components/common/HorizontalDividedCo
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
+import DealsStatusSummary from '../components/summaries/DealsStatusSummary';
 import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
+
 // Dummy classes for testing
 import {
 	dummySuppliers0,
@@ -54,18 +56,17 @@ const WallOfClients = () => {
 						address="Nordmarksvej 9, 7190 Billund, Denmark"
 						url="legoland.dk"
 					/>
-					<Box width="20%" sx={flexCenter}>
-						<SupplierInfoSummary suppliers={dummySuppliers0} />
-					</Box>
-					<Box width="20%" sx={flexCenter}>
-						<SupplierInfoSummary suppliers={dummySuppliers1} />
-					</Box>
-
-					<Box width="20%" sx={flexCenter}>
-						<SupplierInfoSummary suppliers={dummySuppliers3} />
-					</Box>
-					<Box width="20%" sx={flexCenter}>
+					<Box minWidth="20%" width="20%" maxWidth="20%" sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 						<SupplierInfoSummary suppliers={dummySuppliers4} />
+					</Box>
+					<Box minWidth="15%">
+						<DealsStatusSummary dealStatus={'Active'} />
+					</Box>
+					<Box width="20%" sx={flexCenter}>
+						Div 4
+					</Box>
+					<Box width="20%" sx={flexCenter}>
+						Div 5
 					</Box>
 				</HorizontalDividedContainer>
 			</Box>

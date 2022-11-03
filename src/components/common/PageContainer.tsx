@@ -1,13 +1,20 @@
 import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
-import React, { ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 
-export type Props = {
+export type PageContainerProps = {
 	children: ReactNode;
-	className?: string;
 };
 
-const StyledPageContainer = styled(Grid)<Props>(({ theme }) => (props: Props) => ({
+const PageContainer: FC<PageContainerProps> = ({ children }) => {
+	return (
+		<Grid container justifyContent="center" paddingBottom={10}>
+			<StyledPageContainer>{children}</StyledPageContainer>
+		</Grid>
+	);
+};
+
+const StyledPageContainer = styled(Grid)<PageContainerProps>(({ theme }) => ({
 	backgroundColor: 'background.default',
 	pt: '4rem',
 	alignContent: 'center',
@@ -19,13 +26,5 @@ const StyledPageContainer = styled(Grid)<Props>(({ theme }) => (props: Props) =>
 		maxWidth: '90vw',
 	},
 }));
-
-const PageContainer = ({ children }: Props) => {
-	return (
-		<Grid container justifyContent="center" paddingBottom={10}>
-			<StyledPageContainer>{children}</StyledPageContainer>
-		</Grid>
-	);
-};
 
 export default PageContainer;

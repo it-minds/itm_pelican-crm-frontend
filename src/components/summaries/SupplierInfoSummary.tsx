@@ -10,11 +10,11 @@ export type SupplierSummary = {
 	location: string;
 };
 
-type Props = {
+type SupplierInfoSummaryProps = {
 	suppliers: SupplierSummary[];
 };
 
-const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
+const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 	const theme = useTheme();
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 

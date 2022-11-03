@@ -25,9 +25,9 @@
 		"clientListItemContent": {
 			"dealStatus": {
 				"active": "Active",
-				"activeUntilDate": "Active until {{date}}",
+				"activeUntilDate": "Until: {{date}}",
 				"inactive": "Inactive",
-				"inactiveSinceDate": "Inactive since {{date}}",
+				"inactiveSinceDate": "Since: {{date}}",
 				"dialog": "Dialog",
 				"multipleActive": "Multiple active"
 			},
