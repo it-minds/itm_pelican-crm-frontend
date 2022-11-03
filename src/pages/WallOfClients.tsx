@@ -8,8 +8,14 @@ import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
 import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
-import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
+// Dummy classes for testing
+import {
+	dummySuppliers0,
+	dummySuppliers1,
+	dummySuppliers3,
+	dummySuppliers4,
+} from '../utils/dummyClasses';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -21,33 +27,6 @@ const WallOfClients = () => {
 			setIsLoading(false);
 		}, 1200);
 	};
-
-	const dummySuppliers: SupplierSummary[] = [
-		{
-			id: '1',
-			name: 'IT-Minds',
-			logo: 'https://sursen.it-minds.dk/images/logo.svg',
-			location: 'Copenhagen',
-		},
-		{
-			id: '2',
-			name: 'Kapacity',
-			logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/z7cgtl0o2hizipgezq5a',
-			location: 'Copenhagen',
-		},
-		{
-			id: '1',
-			name: 'IT-Minds',
-			logo: 'https://sursen.it-minds.dk/images/logo.svg',
-			location: 'Copenhagen',
-		},
-		{
-			id: '2',
-			name: 'Kapacity',
-			logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/z7cgtl0o2hizipgezq5a',
-			location: 'Copenhagen',
-		},
-	];
 
 	return (
 		<PageContainer>
@@ -76,21 +55,20 @@ const WallOfClients = () => {
 						url="legoland.dk"
 					/>
 					<Box width="20%" sx={flexCenter}>
-						<SupplierInfoSummary suppliers={dummySuppliers} />
+						<SupplierInfoSummary suppliers={dummySuppliers0} />
 					</Box>
 					<Box width="20%" sx={flexCenter}>
-						<Typography variant="body2">Div nummer 4</Typography>
+						<SupplierInfoSummary suppliers={dummySuppliers1} />
 					</Box>
 
 					<Box width="20%" sx={flexCenter}>
-						<Typography variant="body3">Div nummer 5</Typography>
+						<SupplierInfoSummary suppliers={dummySuppliers3} />
 					</Box>
 					<Box width="20%" sx={flexCenter}>
-						Div nummer 6
+						<SupplierInfoSummary suppliers={dummySuppliers4} />
 					</Box>
 				</HorizontalDividedContainer>
 			</Box>
-			{/* <CompanyCardsSkeleton numSkeletons={9} /> */}
 		</PageContainer>
 	);
 };
