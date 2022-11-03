@@ -2,35 +2,28 @@ import { Box } from '@mui/system';
 import { styled } from '@mui/system';
 import React, { FC } from 'react';
 
-export type Props = {
-	className?: string;
-} & StyleProps;
-
-type StyleProps = {
+export type ImageContainerProps = {
 	imageSource: string;
+} & ImageContainerStyleProps;
+
+type ImageContainerStyleProps = {
 	imageWidth?: string | number;
 	imageHeight?: string | number;
 };
 
-const StyledImageContainer = styled(Box)<StyleProps>(
+const StyledImageContainer = styled(Box)<ImageContainerStyleProps>(
 	() =>
-		({ imageWidth, imageHeight }: StyleProps) => ({
-			width: imageWidth !== null ? imageWidth : 'auto',
-			minWidth: imageWidth !== null ? imageWidth : '',
-			height: imageHeight !== null ? imageHeight : 'auto',
-			minHeight: imageHeight !== null ? imageHeight : '',
+		({ imageWidth, imageHeight }: ImageContainerStyleProps) => ({
+			width: imageWidth || 'auto',
+			minWidth: imageWidth || '',
+			height: imageHeight || 'auto',
+			minHeight: imageHeight || '',
 		})
 );
 
-const ImageContainer: FC<Props> = ({ ...styleProps }: Props) => {
-	const { imageSource, imageWidth, imageHeight } = styleProps;
-
+const ImageContainer: FC<ImageContainerProps> = ({ imageSource, imageWidth, imageHeight }) => {
 	return (
-		<StyledImageContainer
-			imageSource={imageSource}
-			imageWidth={imageWidth}
-			imageHeight={imageHeight}
-		>
+		<StyledImageContainer imageWidth={imageWidth} imageHeight={imageHeight}>
 			<img
 				alt=""
 				src={imageSource}
