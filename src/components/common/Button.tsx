@@ -1,6 +1,5 @@
 import { Box, ButtonBase, CircularProgress } from '@mui/material';
 import { styled } from '@mui/material';
-import { rootShouldForwardProp } from '@mui/material/styles/styled';
 import { darken, SxProps } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
 

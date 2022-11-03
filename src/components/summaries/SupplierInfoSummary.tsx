@@ -1,5 +1,5 @@
 import { Box, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 import ImageContainer from '../common/ImageContainer';
 
@@ -10,11 +10,11 @@ export type SupplierSummary = {
 	location: string;
 };
 
-type Props = {
+type SupplierInfoSummaryProps = {
 	suppliers: SupplierSummary[];
 };
 
-const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
+const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 	const multipleSuppliers = suppliers.length > 1;
 	const theme = useTheme();
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
@@ -25,7 +25,7 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 		const supplierList = suppliers.map(supplier => (
 			<Tooltip title={supplier.name}>
 				<Box>
-					<ImageContainer imageHeight="30px" imageSource={!!supplier.logo ? supplier.logo : ''} />
+					<ImageContainer imageWidth="30px" imageHeight="30px" imageSource={supplier.logo || ''} />
 				</Box>
 			</Tooltip>
 		));
@@ -57,10 +57,11 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 					justifyContent="center"
 					alignItems="center"
 					width="100%"
+					gap="5px"
 				>
-					<Box width="40%">
+					<Box width={isBelowMedium ? '100%' : '40%'}>
 						<ImageContainer
-							imageHeight="40px"
+							imageHeight={40}
 							imageSource={suppliers[0].logo ? suppliers[0].logo : ''}
 						/>
 					</Box>
