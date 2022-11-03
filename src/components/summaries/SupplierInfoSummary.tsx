@@ -4,10 +4,10 @@ import React, { FC } from 'react';
 import ImageContainer from '../common/ImageContainer';
 
 export type SupplierSummary = {
-	id?: string;
-	name: string;
-	logo?: string;
 	location: string;
+	name: string;
+	id?: string;
+	logo?: string;
 };
 
 type SupplierInfoSummaryProps = {
