@@ -10,11 +10,11 @@ export type SupplierSummary = {
 	location: string;
 };
 
-type Props = {
+type SupplierInfoSummaryProps = {
 	suppliers: SupplierSummary[];
 };
 
-const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
+const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 	const multipleSuppliers = suppliers.length > 1;
 	const theme = useTheme();
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
@@ -25,11 +25,7 @@ const SupplierInfoSummary: FC<Props> = ({ suppliers }) => {
 		const supplierList = suppliers.map(supplier => (
 			<Tooltip title={supplier.name}>
 				<Box>
-					<ImageContainer
-						imageWidth="30px"
-						imageHeight="30px"
-						imageSource={!!supplier.logo ? supplier.logo : ''}
-					/>
+					<ImageContainer imageWidth="30px" imageHeight="30px" imageSource={supplier.logo || ''} />
 				</Box>
 			</Tooltip>
 		));

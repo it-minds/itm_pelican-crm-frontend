@@ -82,7 +82,7 @@ const WallOfClients = () => {
 						<SupplierInfoSummary suppliers={dummySuppliers} />
 					</Box>
 					<Box minWidth="15%">
-						<DealsStatusSummary dealStatus={DealStatus.Active} />
+						<DealsStatusSummary dealStatus={'Active'} />
 					</Box>
 
 					<Box width="20%" sx={flexCenter}>

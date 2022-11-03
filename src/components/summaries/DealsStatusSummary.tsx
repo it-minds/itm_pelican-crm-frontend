@@ -1,24 +1,17 @@
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import ForumIcon from '@mui/icons-material/Forum';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
-import { Box, Stack, SxProps, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { flexCenter } from '../../styles/generalStyles';
 
-export enum DealStatus {
-	Active = 'Active',
-	Dialog = 'Dialog',
-	Inactive = 'Inactive',
-}
-
-type Props = {
-	sx?: SxProps;
-	dealStatus: DealStatus;
+type DealStatusProps = {
+	dealStatus: 'Active' | 'Dialog' | 'Inactive';
 };
 
-const DealsStatusSummary: FC<Props> = ({ dealStatus, sx }) => {
+const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
 	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
@@ -30,7 +23,7 @@ const DealsStatusSummary: FC<Props> = ({ dealStatus, sx }) => {
 		} else {
 			setIconColor(theme.palette.primary.main);
 		}
-	}, [theme]);
+	}, [theme.palette]);
 
 	switch (dealStatus) {
 		case 'Active': {
