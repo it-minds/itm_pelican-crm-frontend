@@ -7,9 +7,9 @@ import Button from '../components/common/Button';
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
+import ClientClassificationSummary from '../components/summaries/ClientClassificationSummary';
 import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
 import DealsStatusSummary from '../components/summaries/DealsStatusSummary';
-import { DealStatus } from '../components/summaries/DealsStatusSummary';
 import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
@@ -86,7 +86,9 @@ const WallOfClients = () => {
 					</Box>
 
 					<Box width="20%" sx={flexCenter}>
-						<Typography variant="body3">Div nummer 5</Typography>
+						<ClientClassificationSummary classification="normal" />
+						{/* <ClientClassificationSummary classification="Normal" />
+						<ClientClassificationSummary classification="Small" /> */}
 					</Box>
 					<Box width="20%" sx={flexCenter}>
 						Div nummer 6

@@ -141,7 +141,7 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 };
 
 // Uppercase generator
-function titleCase(word: string | undefined) {
+export function titleCase(word: string | undefined) {
 	if (!word) return '';
 	return word?.charAt(0).toUpperCase() + word?.slice(1);
 }
