@@ -32,9 +32,12 @@
 				"multipleActive": "Multiple active"
 			},
 			"customerSize": {
-				"small": "Small customer",
-				"medium": "Medium customer",
-				"top": "Top customer"
+				"small": "Small client",
+				"medium": "Medium client",
+				"top": "Top client"
+			},
+			"supplier": {
+				"noSupplier": "No supplier attached"
 			},
 			"knownContactPersons": "Known contact persons",
 			"multipleAccountManagers": "Multiple account managers"
