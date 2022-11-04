@@ -59,17 +59,44 @@ const WallOfClients = () => {
 						address="Nordmarksvej 9, 7190 Billund, Denmark"
 						url="legoland.dk"
 					/>
-					<Box minWidth="20%" width="20%" maxWidth="20%" sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+					<Box minWidth="15%" width="15%" maxWidth="15%" sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 						<SupplierInfoSummary suppliers={dummySuppliers4} />
 					</Box>
-					<Box minWidth="15%">
+					<Box minWidth="15%" sx={flexCenter}>
 						<DealsStatusSummary dealStatus={'Active'} />
 					</Box>
-					<Box width="20%" sx={flexCenter}>
+					<Box minWidth="20%" maxWidth="20%" sx={flexCenter}>
+						<ClientClassificationSummary classification="small" />
+					</Box>
+					<Box width="15%" sx={flexCenter}>
+						Div 5
+					</Box>
+					<Box width="15%" sx={flexCenter}>
+						Div 6
+					</Box>
+				</HorizontalDividedContainer>
+				<HorizontalDividedContainer>
+					<ClientInfoSummary
+						width="25%"
+						title="Legoland A/S"
+						city="Billund"
+						address="Nordmarksvej 9, 7190 Billund, Denmark"
+						url="legoland.dk"
+					/>
+					<Box minWidth="15%" width="15%" maxWidth="15%" sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+						<SupplierInfoSummary suppliers={dummySuppliers4} />
+					</Box>
+					<Box minWidth="15%" sx={flexCenter}>
+						<DealsStatusSummary dealStatus={'Active'} />
+					</Box>
+					<Box minWidth="20%" sx={flexCenter}>
 						<ClientClassificationSummary classification="medium" />
 					</Box>
-					<Box width="20%" sx={flexCenter}>
+					<Box width="15%" sx={flexCenter}>
 						Div 5
+					</Box>
+					<Box width="15%" sx={flexCenter}>
+						Div 6
 					</Box>
 				</HorizontalDividedContainer>
 			</Box>

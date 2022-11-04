@@ -1,8 +1,9 @@
-import { Box, Rating, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { FC, useEffect, useState } from 'react';
-import { StarOutline, StarHalf, Star } from '@mui/icons-material';
-import { flexCenter, flexCol, flexRow } from '../../styles/generalStyles';
+import { Star } from '@mui/icons-material';
+import { Box, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
+import React, { FC, useEffect, useState } from 'react';
+
+import { flexRow } from '../../styles/generalStyles';
 import { titleCase } from './ClientInfoSummary';
 
 type ClientClassificationSummaryProps = {
@@ -11,7 +12,6 @@ type ClientClassificationSummaryProps = {
 
 const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ classification }) => {
 	const theme = useTheme();
-	const [iconSize, setIconSize] = useState(36);
 	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
@@ -32,7 +32,7 @@ const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ cla
 	};
 
 	const tooltipText = (): string => {
-		return isLarge ? '' : `${titleCase(classification)} Customer`;
+		return isLarge ? '' : `${titleCase(classification)} Client`;
 	};
 
 	const renderClassification = () => {
@@ -74,8 +74,7 @@ const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ cla
 					...flexRow,
 					gap: isMedium ? '5px' : 0,
 					alignItems: 'center',
-					justifyContent: isMedium && !isLarge ? 'space-between' : 'center',
-					paddingX: isMedium && !isLarge ? '6%' : 0,
+					justifyContent: 'center',
 					width: '100%',
 				}}
 			>
@@ -87,7 +86,7 @@ const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ cla
 				>
 					{renderClassification()}
 				</Stack>
-				<Typography noWrap variant="body1" lineHeight={'1rem'}>
+				<Typography mt={'2px'} noWrap variant="body1" lineHeight={'1rem'}>
 					{isMedium && titleCase(classification)} {isLarge && ' Client'}
 				</Typography>
 			</Box>
