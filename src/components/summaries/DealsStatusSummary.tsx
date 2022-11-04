@@ -28,7 +28,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 	switch (dealStatus) {
 		case 'Active': {
 			return (
-				<Stack direction="row" justifyContent="center" alignItems="center">
+				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
 						<HistoryEduIcon fontSize="large" sx={{ color: iconColor }} />
 					</Box>
