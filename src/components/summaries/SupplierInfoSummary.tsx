@@ -20,6 +20,40 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
 
+	const renderSupplierSummary = () => {
+		// Renders differently depending on the number of suppliers
+		if (!suppliers) return;
+		switch (suppliers.length) {
+			case 0:
+				return (
+					<Typography noWrap>
+						{t('wallOfClients.clientListItemContent.supplier.noSupplier')}
+					</Typography>
+				);
+
+			case 1: {
+				fullSupplierSummary();
+				break;
+			}
+
+			case 2 | 3:
+				return supplierLogos(suppliers);
+
+			default: // more than 3 suppliers
+				const arraySlice: SupplierSummary[] = suppliers.slice(0, 2);
+
+				// return the first two suppliers and a +x more indication
+				return (
+					<>
+						{supplierLogos(arraySlice)}
+						<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
+							+{suppliers.length - 2}
+						</Typography>
+					</>
+				);
+		}
+	};
+
 	function fullSupplierSummary() {
 		return (
 			<Tooltip title={isBelowMedium ? suppliers[0].name : ''}>
@@ -62,56 +96,16 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 			</Tooltip>
 		);
 	}
-	const renderSupplierSummaries = () => {
-		if (!suppliers) return;
-		switch (suppliers.length) {
-			case 0:
-				return (
-					<Typography noWrap>
-						{t('wallOfClients.clientListItemContent.supplier.noSupplier')}
-					</Typography>
-				);
-			case 1: {
-				fullSupplierSummary();
-				break;
-			}
-			case 2 | 3:
-				return (
-					<>
-						{suppliers.map(supplier => (
-							<Tooltip title={supplier.name}>
-								<Box>
-									<ImageContainer
-										imageHeight="40px"
-										imageSource={!!supplier.logo ? supplier.logo : ''}
-									/>
-								</Box>
-							</Tooltip>
-						))}
-					</>
-				);
-			default:
-				const arraySlice: SupplierSummary[] = suppliers.slice(0, 2);
 
-				return (
-					<>
-						{arraySlice.map(supplier => (
-							<Tooltip title={supplier.name}>
-								<Box>
-									<ImageContainer
-										imageHeight="40px"
-										imageSource={!!supplier.logo ? supplier.logo : ''}
-									/>
-								</Box>
-							</Tooltip>
-						))}
-						<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
-							+{suppliers.length - 2}
-						</Typography>
-					</>
-				);
-		}
-	};
+	function supplierLogos(suppliers: SupplierSummary[]) {
+		return suppliers.map(supplier => (
+			<Tooltip title={supplier.name}>
+				<Box>
+					<ImageContainer imageHeight="35px" imageSource={!!supplier.logo ? supplier.logo : ''} />
+				</Box>
+			</Tooltip>
+		));
+	}
 
 	return (
 		<Box
@@ -122,7 +116,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 			width="100%"
 			gap="5px"
 		>
-			{renderSupplierSummaries()}
+			{renderSupplierSummary()}
 		</Box>
 	);
 };
