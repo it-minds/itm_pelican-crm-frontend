@@ -86,7 +86,7 @@ const WallOfClients = () => {
 					</Box>
 
 					<Box width="20%" sx={flexCenter}>
-						<ClientClassificationSummary classification="normal" />
+						<ClientClassificationSummary classification="medium" />
 						{/* <ClientClassificationSummary classification="Normal" />
 						<ClientClassificationSummary classification="Small" /> */}
 					</Box>

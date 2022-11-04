@@ -1,12 +1,12 @@
 import { Box, Rating, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { StarOutline, StarHalf, Star } from '@mui/icons-material';
 import { flexCenter, flexCol, flexRow } from '../../styles/generalStyles';
 import { Stack } from '@mui/system';
 import { titleCase } from './ClientInfoSummary';
 
 type ClientClassificationSummaryProps = {
-	classification: 'top' | 'normal' | 'small';
+	classification: 'top' | 'medium' | 'small';
 };
 
 const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ classification }) => {
@@ -14,6 +14,22 @@ const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ cla
 	const [iconSize, setIconSize] = useState(36);
 	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
+	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
+
+	useEffect(() => {
+		if (theme.palette.mode === 'dark') {
+			setIconColor('#fff');
+		} else {
+			setIconColor(theme.palette.primary.main);
+		}
+	}, [theme.palette]);
+
+	const iconContainerStyle = {
+		...flexRow,
+		justifyContent: 'center',
+		alignItems: 'center',
+		color: iconColor,
+	};
 
 	const tooltipText = (): string => {
 		return isLarge ? '' : `${titleCase(classification)} Customer`;
@@ -24,25 +40,25 @@ const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ cla
 			case 'top':
 				return (
 					<>
-						<Box sx={{ ...flexRow, alignItems: 'center', justifyContent: 'center' }}>
+						<Box sx={iconContainerStyle}>
 							<Star />
 						</Box>
-						<Box sx={{ ...flexRow, alignItems: 'center', justifyContent: 'center' }}>
+						<Box sx={iconContainerStyle}>
 							<Star />
 							<Star />
 						</Box>
 					</>
 				);
-			case 'normal':
+			case 'medium':
 				return (
-					<Box sx={{ ...flexRow, alignItems: 'center', justifyContent: 'center' }}>
+					<Box sx={iconContainerStyle}>
 						<Star />
 						<Star />
 					</Box>
 				);
 			case 'small':
 				return (
-					<Box sx={{ ...flexRow, alignItems: 'center', justifyContent: 'center' }}>
+					<Box sx={iconContainerStyle}>
 						<Star />
 					</Box>
 				);
@@ -56,15 +72,23 @@ const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ cla
 			<Box
 				sx={{
 					...flexRow,
-					gap: '6px',
+					gap: isMedium ? '5px' : 0,
 					alignItems: 'center',
-					justifyContent: 'center',
+					justifyContent: isMedium && !isLarge ? 'space-between' : 'center',
+					paddingX: isMedium && !isLarge ? '6%' : 0,
 					width: '100%',
 				}}
 			>
-				<Stack maxWidth="30%">{renderClassification()}</Stack>
+				<Stack
+					maxWidth={isMedium ? '30%' : '75%'}
+					marginRight={isMedium ? '3px' : 0}
+					display="flex"
+					alignItems="center"
+				>
+					{renderClassification()}
+				</Stack>
 				<Typography noWrap variant="body1" lineHeight={'1rem'}>
-					{isMedium && titleCase(classification)} {isLarge && ' Customer'}
+					{isMedium && titleCase(classification)} {isLarge && ' Client'}
 				</Typography>
 			</Box>
 		</Tooltip>

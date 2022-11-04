@@ -36,7 +36,7 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 		} else {
 			setIconColor(theme.palette.primary.main);
 		}
-	}, [theme]);
+	}, [theme.palette]);
 
 	const urlToDisplay = (): JSX.Element => {
 		if (url && isLarge) {
