@@ -1,13 +1,14 @@
 import { Box, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ImageContainer from '../common/ImageContainer';
 
 export type SupplierSummary = {
-	id?: string;
-	name: string;
-	logo?: string;
 	location: string;
+	name: string;
+	id?: string;
+	logo?: string;
 };
 
 type SupplierInfoSummaryProps = {
@@ -15,59 +16,56 @@ type SupplierInfoSummaryProps = {
 };
 
 const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
-	const multipleSuppliers = suppliers.length > 1;
 	const theme = useTheme();
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
+	const { t } = useTranslation();
 
-	const multipleSupplierRender = () => {
-		if (!multipleSuppliers) return null;
+	const renderSupplierSummary = () => {
+		// Renders differently depending on the number of suppliers
+		if (!suppliers) return;
+		switch (suppliers.length) {
+			case 0:
+				return (
+					<Typography noWrap>
+						{t('wallOfClients.clientListItemContent.supplier.noSupplier')}
+					</Typography>
+				);
 
-		const supplierList = suppliers.map(supplier => (
-			<Tooltip title={supplier.name}>
-				<Box>
-					<ImageContainer imageWidth="30px" imageHeight="30px" imageSource={supplier.logo || ''} />
-				</Box>
-			</Tooltip>
-		));
+			case 1: {
+				return fullSupplierSummary();
+			}
 
-		return supplierList;
+			case 2 | 3:
+				return supplierLogos(suppliers);
+
+			default: // more than 3 suppliers
+				const arraySlice: SupplierSummary[] = suppliers.slice(0, 2);
+
+				// return the first two suppliers and a +x more indication
+				return (
+					<>
+						{supplierLogos(arraySlice)}
+						<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
+							+{suppliers.length - 2}
+						</Typography>
+					</>
+				);
+		}
 	};
 
-	if (multipleSuppliers) {
-		return (
-			<>
-				<Box
-					display="flex"
-					flexDirection="row"
-					justifyContent="center"
-					alignItems="center"
-					gap="10px"
-					width="100%"
-				>
-					{multipleSupplierRender()}
-				</Box>
-			</>
-		);
-	} else {
+	function fullSupplierSummary() {
 		return (
 			<Tooltip title={isBelowMedium ? suppliers[0].name : ''}>
-				<Box
-					display="flex"
-					flexDirection="row"
-					justifyContent="center"
-					alignItems="center"
-					width="100%"
-					gap="5px"
-				>
-					<Box width={isBelowMedium ? '100%' : '40%'}>
+				<>
+					<Box width="30%">
 						<ImageContainer
-							imageHeight={40}
+							imageHeight="40px"
 							imageSource={suppliers[0].logo ? suppliers[0].logo : ''}
 						/>
 					</Box>
 					{!isBelowMedium && (
 						<Box
-							width="60%"
+							width="70%"
 							display="flex"
 							flexDirection="column"
 							alignItems="start"
@@ -93,10 +91,33 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 							</Box>
 						</Box>
 					)}
-				</Box>
+				</>
 			</Tooltip>
 		);
 	}
+
+	function supplierLogos(suppliers: SupplierSummary[]) {
+		return suppliers.map(supplier => (
+			<Tooltip title={supplier.name}>
+				<Box>
+					<ImageContainer imageHeight="35px" imageSource={!!supplier.logo ? supplier.logo : ''} />
+				</Box>
+			</Tooltip>
+		));
+	}
+
+	return (
+		<Box
+			display="flex"
+			flexDirection="row"
+			justifyContent="center"
+			alignItems="center"
+			width="100%"
+			gap="5px"
+		>
+			{renderSupplierSummary()}
+		</Box>
+	);
 };
 
 export default SupplierInfoSummary;

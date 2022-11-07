@@ -1,4 +1,3 @@
-// For ImageContainer testing:
 import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,8 +10,20 @@ import AccountManagerInfoSummary from '../components/summaries/AccountManagerInf
 import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
 import DealsStatusSummary from '../components/summaries/DealsStatusSummary';
 import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
-import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
+// eslint-disable
+import {
+	dummySuppliers0,
+	dummySuppliers1,
+	dummySuppliers3,
+	dummySuppliers4,
+	contactDummy0,
+	contactDummy1,
+	contactDummy2,
+} from '../utils/dummyClasses';
+/**
+ * TODO: Dummy suppliers above^ - remove when real data is available
+ */
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -24,33 +35,6 @@ const WallOfClients = () => {
 			setIsLoading(false);
 		}, 1200);
 	};
-
-	const dummySuppliers: SupplierSummary[] = [
-		{
-			id: '1',
-			name: 'IT-Minds',
-			logo: 'https://sursen.it-minds.dk/images/logo.svg',
-			location: 'Copenhagen',
-		},
-		{
-			id: '2',
-			name: 'Kapacity',
-			logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/z7cgtl0o2hizipgezq5a',
-			location: 'Copenhagen',
-		},
-		{
-			id: '1',
-			name: 'IT-Minds',
-			logo: 'https://sursen.it-minds.dk/images/logo.svg',
-			location: 'Copenhagen',
-		},
-		{
-			id: '2',
-			name: 'Kapacity',
-			logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/z7cgtl0o2hizipgezq5a',
-			location: 'Copenhagen',
-		},
-	];
 
 	return (
 		<PageContainer>
@@ -79,17 +63,16 @@ const WallOfClients = () => {
 						url="legoland.dk"
 					/>
 					<Box minWidth="20%" width="20%" maxWidth="20%" sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-						<SupplierInfoSummary suppliers={dummySuppliers} />
+						<SupplierInfoSummary suppliers={dummySuppliers4} />
 					</Box>
 					<Box minWidth="15%">
 						<DealsStatusSummary dealStatus={'Active'} />
 					</Box>
-
 					<Box width="20%" sx={flexCenter}>
-						<Typography variant="body3">Div nummer 5</Typography>
+						Div 4
 					</Box>
 					<Box width="20%" sx={flexCenter}>
-						<AccountManagerInfoSummary />
+						<AccountManagerInfoSummary contactPersons={contactDummy0} />
 					</Box>
 				</HorizontalDividedContainer>
 			</Box>
