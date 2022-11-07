@@ -16,6 +16,7 @@ import {
 	contactDummy1,
 	contactDummy2,
 	contactDummy3,
+	contactDummy4,
 	dummySuppliers1,
 	dummySuppliers4,
 } from '../utils/dummyClasses';
@@ -70,7 +71,7 @@ const WallOfClients = () => {
 						Div 4
 					</Box>
 					<Box width="20%" sx={flexCenter}>
-						<AccountManagerInfoSummary contactPersons={contactDummy3} />
+						<AccountManagerInfoSummary contactPersons={contactDummy4} />
 					</Box>
 				</HorizontalDividedContainer>
 			</Box>

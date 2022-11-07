@@ -140,10 +140,33 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 					</Stack>
 				);
 			default:
+				const slicedArray = contactPersons.slice(0, 2);
 				return (
-					<Typography noWrap>
-						{t('wallOfClients.clientListItemContent.accountManagers.multipleAccountManagers')}
-					</Typography>
+					<Stack width="100%" direction="row" gap={'3px'} alignItems="center">
+						{slicedArray.map(contact => (
+							<Tooltip
+								title={
+									contact.firstName +
+									' ' +
+									contact.lastName +
+									' | ' +
+									contact.email +
+									' | ' +
+									contact.phoneNum
+								}
+								placement="top-start"
+							>
+								<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
+									<Typography variant="subtitle2">
+										{contact.firstName.charAt(0) + contact.lastName.charAt(0)}
+									</Typography>
+								</Avatar>
+							</Tooltip>
+						))}
+						<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
+							+{contactPersons.length - 2}
+						</Typography>
+					</Stack>
 				);
 		}
 	};

@@ -54,6 +54,37 @@ export const contactDummy3: ContactPersonSummary[] = [
 	},
 ];
 
+export const contactDummy4: ContactPersonSummary[] = [
+	{
+		id: '1',
+		firstName: 'Din',
+		lastName: 'Mor',
+		email: 'eret@godtmenneske.dk',
+		phoneNum: '8008135',
+	},
+	{
+		id: '2',
+		firstName: 'Min',
+		lastName: 'Far',
+		email: 'erstærkere@endin.dk',
+		phoneNum: '12345678',
+	},
+	{
+		id: '3',
+		firstName: 'Kontaktperson',
+		lastName: 'Kontaktpersonsen',
+		email: 'kontaktperson@kontaktperson.dk',
+		phoneNum: '87654321',
+	},
+	{
+		id: '3',
+		firstName: 'Kontaktperson',
+		lastName: 'Kontaktpersonsen',
+		email: 'kontaktperson@kontaktperson.dk',
+		phoneNum: '87654321',
+	},
+];
+
 export const dummySuppliers0: SupplierSummary[] = [];
 
 export const dummySuppliers1: SupplierSummary[] = [
