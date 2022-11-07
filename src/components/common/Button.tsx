@@ -10,7 +10,7 @@ import { cubicTransition } from '../../../theme';
  * https://stackoverflow.com/a/71571674
  */
 
-export type ButtonType = 'default' | 'outlined';
+export type ButtonType = 'default' | 'outlined' | undefined;
 export type ButtonSize = 'default' | 'small';
 
 export type Props = {
@@ -26,6 +26,7 @@ type StyleProps = {
 	isLoading?: boolean;
 	isFullWidth?: boolean;
 	noPad?: boolean;
+	secondary?: boolean;
 };
 
 const focus = (color: string) => {
@@ -42,6 +43,7 @@ const ButtonStyles = styled(ButtonBase, {
 			isDisabled = false,
 			isLoading = false,
 			isFullWidth = false,
+			secondary = false,
 			noPad,
 		}: StyleProps) => ({
 			display: 'flex',
@@ -50,30 +52,41 @@ const ButtonStyles = styled(ButtonBase, {
 			height: size === 'small' ? 30 : undefined,
 			width: isFullWidth ? '100%' : 'fit-content',
 			minWidth: 30,
-			backgroundColor:
-				btnType === 'default' ? theme.palette.secondary.main : theme.palette.background.paper,
+			backgroundColor: determineBackgroundColor(secondary, btnType, theme),
 			color: btnType === 'default' ? theme.palette.secondary.contrastText : undefined,
-			borderWidth: 2,
+			borderWidth: 1,
 			borderStyle: 'solid',
-			borderColor: theme.palette.secondary.main,
+			borderColor: secondary ? theme.palette.secondary.main : theme.palette.primary.main,
 			opacity: isDisabled || isLoading ? 0.5 : 1,
-			padding: noPad ? 0 : 10,
+			// padding: noPad ? 0 : 10,
+			paddingInlineEnd: noPad ? 0 : 18,
+			paddingInlineStart: noPad ? 0 : 18,
 			transition: `all .15s ${cubicTransition}`,
 			'&:focus': {
-				backgroundColor: focus(theme.palette.secondary.main),
-				borderColor: focus(theme.palette.secondary.main),
+				backgroundColor: secondary
+					? focus(theme.palette.secondary.main)
+					: focus(theme.palette.primary.main),
+				borderColor: secondary
+					? focus(theme.palette.secondary.main)
+					: focus(theme.palette.primary.main),
 				boxShadow: 3,
 				color: theme.palette.secondary.contrastText,
 			},
 		})
 );
 
+function determineBackgroundColor(secondary: boolean | undefined, btnType: ButtonType, theme: any) {
+	if (btnType === 'default') {
+		return secondary ? theme.palette.secondary.main : theme.palette.primary.main;
+	}
+	return theme.palette.background.paper;
+}
+
 const Button: FC<Props> = ({ children, onClick, sx, ...styleProps }) => {
-	const { size, btnType, isDisabled, isLoading, isFullWidth, noPad } = styleProps;
+	const { size, btnType, isDisabled, isLoading, isFullWidth, noPad, secondary } = styleProps;
 
 	return (
 		<ButtonStyles
-			sx={sx}
 			onClick={onClick}
 			disabled={isDisabled || isLoading}
 			size={size}
@@ -81,12 +94,14 @@ const Button: FC<Props> = ({ children, onClick, sx, ...styleProps }) => {
 			isDisabled={isDisabled}
 			isLoading={isLoading}
 			isFullWidth={isFullWidth}
-			noPad={noPad}
+			noPad={isLoading ? false : noPad}
+			secondary={secondary}
+			sx={{ ...sx, position: 'relative' }}
 		>
-			<Box marginX={1} />
 			{children || "Ain't nothing here"}
-			<Box marginX={1} />
-			{styleProps.isLoading && <CircularProgress color="inherit" size={20} />}
+			{isLoading && (
+				<CircularProgress color="inherit" size={18} sx={{ position: 'absolute', right: 2 }} />
+			)}
 		</ButtonStyles>
 	);
 };

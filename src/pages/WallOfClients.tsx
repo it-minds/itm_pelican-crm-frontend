@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import BlobInput from '../components/common/BlobInput';
+import BlobInputButton from '../components/common/BlobInput/BlobInputButton';
 
 import Button from '../components/common/Button';
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
@@ -21,7 +21,7 @@ import { dummySuppliers4 } from '../utils/dummyClasses';
 const WallOfClients = () => {
 	const { t } = useTranslation();
 	const [isLoading, setIsLoading] = useState(false);
-
+	const [active, setActive] = useState(false);
 	const testLoading = () => {
 		setIsLoading(true);
 		setTimeout(() => {
@@ -41,7 +41,7 @@ const WallOfClients = () => {
 				sx={{
 					...flexCenter,
 					width: '100%',
-					backgroundColor: '#51114290',
+					// backgroundColor: '#51114290',
 					height: '100px',
 					borderRadius: '10px',
 					paddingX: '1rem',
@@ -49,7 +49,11 @@ const WallOfClients = () => {
 					marginBottom: '2rem',
 				}}
 			>
-				<BlobInput></BlobInput>
+				<BlobInputButton
+					clearClick={() => setActive(false)}
+					active={active}
+					onClick={() => setActive(true)}
+				></BlobInputButton>
 			</Box>
 			<Box
 				sx={{
@@ -59,7 +63,13 @@ const WallOfClients = () => {
 					gap: 3,
 				}}
 			>
-				<Button onClick={testLoading} size="small" isFullWidth={false} isLoading={isLoading}>
+				<Button
+					onClick={testLoading}
+					size="small"
+					isFullWidth={false}
+					isLoading={isLoading}
+					secondary
+				>
 					<Typography>Testboy</Typography>
 				</Button>
 				<HorizontalDividedContainer>
