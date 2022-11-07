@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import BlobInput from '../components/common/BlobInput';
 
 import Button from '../components/common/Button';
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
@@ -35,6 +36,21 @@ const WallOfClients = () => {
 					{t('wallOfClients.pageTitle')}
 				</Typography>
 			</Underlined>
+			<Box
+				className="filter-container"
+				sx={{
+					...flexCenter,
+					width: '100%',
+					backgroundColor: '#51114290',
+					height: '100px',
+					borderRadius: '10px',
+					paddingX: '1rem',
+					paddingY: '2rem',
+					marginBottom: '2rem',
+				}}
+			>
+				<BlobInput></BlobInput>
+			</Box>
 			<Box
 				sx={{
 					...flexCol,
