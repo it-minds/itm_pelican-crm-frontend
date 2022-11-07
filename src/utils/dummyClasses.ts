@@ -6,8 +6,9 @@ export const contactDummy1: ContactPersonSummary[] = [
 	{
 		id: '1',
 		name: 'Din Mor',
-		email: 'dinmor@eretgodtmenneske.dk',
+		email: 'enstærkuafhængigkvinde@somikkeharbrugforenmand.dk',
 		phoneNum: '8008135',
+		initials: 'DM',
 	},
 ];
 
