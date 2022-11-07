@@ -13,6 +13,8 @@ import {
 } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 
+import { titleCase } from '../../utils/helperFunctions';
+
 type Props = {
 	title: string;
 	city: string;
@@ -36,7 +38,7 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 		} else {
 			setIconColor(theme.palette.primary.main);
 		}
-	}, [theme]);
+	}, [theme.palette]);
 
 	const urlToDisplay = (): JSX.Element => {
 		if (url && isLarge) {
@@ -139,11 +141,5 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 		</Grid>
 	);
 };
-
-// Uppercase generator
-function titleCase(word: string | undefined) {
-	if (!word) return '';
-	return word?.charAt(0).toUpperCase() + word?.slice(1);
-}
 
 export default ClientInfoSummary;
