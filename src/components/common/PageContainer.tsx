@@ -20,10 +20,10 @@ const StyledPageContainer = styled(Grid)<PageContainerProps>(({ theme }) => ({
 	alignContent: 'center',
 	flexDirection: 'column',
 	marginTop: '80px',
-	width: '90vw',
+	width: '95vw',
 	[theme.breakpoints.up('lg')]: {
-		width: theme.breakpoints.values.lg,
-		maxWidth: '90vw',
+		width: theme.breakpoints.values.xl,
+		maxWidth: '95vw',
 	},
 }));
 

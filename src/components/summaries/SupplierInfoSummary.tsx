@@ -97,8 +97,8 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 	}
 
 	function supplierLogos(suppliers: SupplierSummary[]) {
-		return suppliers.map(supplier => (
-			<Tooltip title={supplier.name}>
+		return suppliers.map((supplier, index) => (
+			<Tooltip title={supplier.name} key={index + supplier.name}>
 				<Box>
 					<ImageContainer imageHeight="35px" imageSource={!!supplier.logo ? supplier.logo : ''} />
 				</Box>
