@@ -32,8 +32,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 				);
 
 			case 1: {
-				fullSupplierSummary();
-				break;
+				return fullSupplierSummary();
 			}
 
 			case 2 | 3:
