@@ -4,7 +4,7 @@ import { Stack } from '@mui/system';
 import React, { FC, useEffect, useState } from 'react';
 
 import { flexRow } from '../../styles/generalStyles';
-import { titleCase } from './ClientInfoSummary';
+import { titleCase } from '../../utils/helperFunctions';
 
 type ClientClassificationSummaryProps = {
 	classification: 'top' | 'medium' | 'small';
