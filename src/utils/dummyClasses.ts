@@ -1,38 +1,56 @@
+import { ContactPersonSummary } from '../components/summaries/AccountManagerInfoSummary';
 import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
-export type ContactPersonSummary = {
-	id: string;
-	name: string;
-	email: string;
-	phoneNum: string;
-	initials: string;
-};
 
 export const contactDummy0: ContactPersonSummary[] = [];
 
 export const contactDummy1: ContactPersonSummary[] = [
 	{
 		id: '1',
-		name: 'Din Mor',
-		email: 'enstærkuafhængigkvinde@somikkeharbrugforenmand.dk',
-		phoneNum: '8008135',
-		initials: 'DM',
+		firstName: 'Din',
+		lastName: 'Mor',
+		email: 'dm@it-minds.dk',
+		phoneNum: '80081355',
 	},
 ];
 
 export const contactDummy2: ContactPersonSummary[] = [
 	{
 		id: '1',
-		name: 'Din Mor',
-		email: 'dinmor@eretgodtmenneske.dk',
+		firstName: 'Din',
+		lastName: 'Mor',
+		email: 'eret@godtmenneske.dk',
 		phoneNum: '8008135',
-		initials: 'DM',
 	},
 	{
 		id: '2',
-		name: 'Kontaktperson Kontaktpersonsen',
+		firstName: 'Kontaktperson',
+		lastName: 'Kontaktpersonsen',
 		email: 'kontaktperson@kontaktperson.dk',
 		phoneNum: '12345678',
-		initials: 'KK',
+	},
+];
+
+export const contactDummy3: ContactPersonSummary[] = [
+	{
+		id: '1',
+		firstName: 'Din',
+		lastName: 'Mor',
+		email: 'eret@godtmenneske.dk',
+		phoneNum: '8008135',
+	},
+	{
+		id: '2',
+		firstName: 'Min',
+		lastName: 'Far',
+		email: 'erstærkere@endin.dk',
+		phoneNum: '12345678',
+	},
+	{
+		id: '3',
+		firstName: 'Kontaktperson',
+		lastName: 'Kontaktpersonsen',
+		email: 'kontaktperson@kontaktperson.dk',
+		phoneNum: '87654321',
 	},
 ];
 

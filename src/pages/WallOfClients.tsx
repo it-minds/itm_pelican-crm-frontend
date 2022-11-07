@@ -13,13 +13,11 @@ import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 // eslint-disable
 import {
-	dummySuppliers0,
-	dummySuppliers1,
-	dummySuppliers3,
-	dummySuppliers4,
-	contactDummy0,
 	contactDummy1,
 	contactDummy2,
+	contactDummy3,
+	dummySuppliers1,
+	dummySuppliers4,
 } from '../utils/dummyClasses';
 /**
  * TODO: Dummy suppliers above^ - remove when real data is available
@@ -63,7 +61,7 @@ const WallOfClients = () => {
 						url="legoland.dk"
 					/>
 					<Box minWidth="20%" width="20%" maxWidth="20%" sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-						<SupplierInfoSummary suppliers={dummySuppliers4} />
+						<SupplierInfoSummary suppliers={dummySuppliers1} />
 					</Box>
 					<Box minWidth="15%">
 						<DealsStatusSummary dealStatus={'Active'} />
@@ -72,7 +70,7 @@ const WallOfClients = () => {
 						Div 4
 					</Box>
 					<Box width="20%" sx={flexCenter}>
-						<AccountManagerInfoSummary contactPersons={contactDummy0} />
+						<AccountManagerInfoSummary contactPersons={contactDummy3} />
 					</Box>
 				</HorizontalDividedContainer>
 			</Box>

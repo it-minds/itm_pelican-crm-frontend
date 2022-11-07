@@ -20,6 +20,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
 
+	// TODO: Is it better / possible to move outside of component (above)
 	const renderSupplierSummary = () => {
 		// Renders differently depending on the number of suppliers
 		if (!suppliers) return;
@@ -34,8 +35,8 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 			case 1: {
 				return fullSupplierSummary();
 			}
-
-			case 2 | 3:
+			case 2:
+			case 3:
 				return supplierLogos(suppliers);
 
 			default: // more than 3 suppliers
