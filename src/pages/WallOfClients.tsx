@@ -13,6 +13,7 @@ import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 // eslint-disable
 import {
+	contactDummy0,
 	contactDummy1,
 	contactDummy2,
 	contactDummy3,
@@ -71,7 +72,7 @@ const WallOfClients = () => {
 						Div 4
 					</Box>
 					<Box width="20%" sx={flexCenter}>
-						<AccountManagerInfoSummary contactPersons={contactDummy4} />
+						<AccountManagerInfoSummary contactPersons={contactDummy1} />
 					</Box>
 				</HorizontalDividedContainer>
 			</Box>

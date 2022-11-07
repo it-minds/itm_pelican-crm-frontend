@@ -32,9 +32,6 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 
 	// TODO: change #fff to the corresponding color variable, when theme has been refactored
 
-	// TODO: refactor switch statement to only contain one-liners.
-	// HTML should not be contained in switch statements - move to functions / components
-
 	const contactPersonRenderLogic = () => {
 		if (!contactPersons) {
 			return;
@@ -42,133 +39,156 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 
 		switch (contactPersons.length) {
 			case 0:
-				return (
-					<Typography noWrap>
-						{t('wallOfClients.clientListItemContent.accountManagers.noAccountManagers')}
-					</Typography>
-				);
+				return suppliersZero();
 			case 1:
-				return (
-					<Stack width="100%">
-						<Tooltip
-							title={
-								!isBelowMedium
-									? contactPersons[0].firstName + ' ' + contactPersons[0].lastName
-									: contactPersons[0].firstName +
-									  ' ' +
-									  contactPersons[0].lastName +
-									  ' | ' +
-									  contactPersons[0].email +
-									  ' | ' +
-									  contactPersons[0].phoneNum
-							}
-							placement="top-start"
+				return suppliersOne();
+			case 2:
+				return suppliersTwoToThree();
+			case 3:
+				return suppliersTwoToThree();
+			default:
+				return suppliersMoreThanThree();
+		}
+	};
+
+	const suppliersZero = () => {
+		return (
+			<Typography noWrap>
+				{t('wallOfClients.clientListItemContent.accountManagers.noAccountManagers')}
+			</Typography>
+		);
+	};
+
+	const suppliersOne = () => {
+		return (
+			<Stack width="100%">
+				<Tooltip
+					title={
+						!isBelowMedium
+							? contactPersons[0].firstName + ' ' + contactPersons[0].lastName
+							: contactPersons[0].firstName +
+							  ' ' +
+							  contactPersons[0].lastName +
+							  ' | ' +
+							  contactPersons[0].email +
+							  ' | ' +
+							  contactPersons[0].phoneNum
+					}
+					placement="top-start"
+				>
+					<Stack direction="row" gap={1} width="100%" alignItems="center">
+						<Avatar
+							sx={{
+								width: !isBelowMedium ? 24 : 32,
+								height: !isBelowMedium ? 24 : 32,
+								bgcolor: theme.palette.primary.main,
+							}}
 						>
-							<Stack direction="row" gap={1} width="100%">
-								<Avatar sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }}>
-									<Typography variant="subtitle2">
-										{contactPersons[0].firstName.charAt(0) + contactPersons[0].lastName.charAt(0)}
-									</Typography>
-								</Avatar>
-								<Typography noWrap>
-									{contactPersons[0].firstName} {contactPersons[0].lastName}
+							<Typography variant="subtitle2">
+								{contactPersons[0].firstName.charAt(0) + contactPersons[0].lastName.charAt(0)}
+							</Typography>
+						</Avatar>
+						<Typography noWrap>
+							{contactPersons[0].firstName} {contactPersons[0].lastName}
+						</Typography>
+					</Stack>
+				</Tooltip>
+				{!isBelowMedium && (
+					<Stack direction="row" gap={1} width="100%">
+						<Tooltip title={contactPersons[0].email}>
+							<Stack
+								display="flex"
+								flexDirection="row"
+								justifyContent="left"
+								alignItems="center"
+								gap={'3px'}
+								width="60%"
+								direction="row"
+							>
+								<EmailIcon sx={{ color: iconColor }} />
+								<Typography variant="subtitle3" noWrap>
+									{contactPersons[0].email}
 								</Typography>
 							</Stack>
 						</Tooltip>
-						{!isBelowMedium && (
-							<Stack direction="row" gap={1} width="100%">
-								<Tooltip title={contactPersons[0].email}>
-									<Stack
-										display="flex"
-										flexDirection="row"
-										justifyContent="left"
-										alignItems="center"
-										gap={'3px'}
-										width="60%"
-										direction="row"
-									>
-										<EmailIcon sx={{ color: iconColor }} />
-										<Typography variant="subtitle3" noWrap>
-											{contactPersons[0].email}
-										</Typography>
-									</Stack>
-								</Tooltip>
-								<Tooltip title={contactPersons[0].phoneNum}>
-									<Stack
-										display="flex"
-										flexDirection="row"
-										justifyContent="left"
-										alignItems="center"
-										gap={'3px'}
-										width="40%"
-										direction="row"
-									>
-										<LocalPhoneIcon sx={{ color: iconColor }} />
-										<Typography variant="subtitle3" noWrap>
-											{contactPersons[0].phoneNum}
-										</Typography>
-									</Stack>
-								</Tooltip>
+						<Tooltip title={contactPersons[0].phoneNum}>
+							<Stack
+								display="flex"
+								flexDirection="row"
+								justifyContent="left"
+								alignItems="center"
+								gap={'3px'}
+								width="40%"
+								direction="row"
+							>
+								<LocalPhoneIcon sx={{ color: iconColor }} />
+								<Typography variant="subtitle3" noWrap>
+									{contactPersons[0].phoneNum}
+								</Typography>
 							</Stack>
-						)}
+						</Tooltip>
 					</Stack>
-				);
-			case 2:
-			case 3:
-				return (
-					<Stack width="100%" direction="row" gap={'3px'}>
-						{contactPersons.map(contact => (
-							<Tooltip
-								title={
-									contact.firstName +
-									' ' +
-									contact.lastName +
-									' | ' +
-									contact.email +
-									' | ' +
-									contact.phoneNum
-								}
-								placement="top-start"
-							>
-								<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
-									<Typography variant="subtitle2">
-										{contact.firstName.charAt(0) + contact.lastName.charAt(0)}
-									</Typography>
-								</Avatar>
-							</Tooltip>
-						))}
-					</Stack>
-				);
-			default:
-				const slicedArray = contactPersons.slice(0, 2);
-				return (
-					<Stack width="100%" direction="row" gap={'3px'} alignItems="center">
-						{slicedArray.map(contact => (
-							<Tooltip
-								title={
-									contact.firstName +
-									' ' +
-									contact.lastName +
-									' | ' +
-									contact.email +
-									' | ' +
-									contact.phoneNum
-								}
-								placement="top-start"
-							>
-								<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
-									<Typography variant="subtitle2">
-										{contact.firstName.charAt(0) + contact.lastName.charAt(0)}
-									</Typography>
-								</Avatar>
-							</Tooltip>
-						))}
-						<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
-							+{contactPersons.length - 2}
-						</Typography>
-					</Stack>
-				);
-		}
+				)}
+			</Stack>
+		);
+	};
+
+	const suppliersTwoToThree = () => {
+		return (
+			<Stack width="100%" direction="row" gap={'3px'}>
+				{contactPersons.map(contact => (
+					<Tooltip
+						title={
+							contact.firstName +
+							' ' +
+							contact.lastName +
+							' | ' +
+							contact.email +
+							' | ' +
+							contact.phoneNum
+						}
+						placement="top-start"
+					>
+						<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
+							<Typography variant="subtitle2">
+								{contact.firstName.charAt(0) + contact.lastName.charAt(0)}
+							</Typography>
+						</Avatar>
+					</Tooltip>
+				))}
+			</Stack>
+		);
+	};
+
+	const suppliersMoreThanThree = () => {
+		const slicedArray = contactPersons.slice(0, 2);
+		return (
+			<Stack width="100%" direction="row" gap={'3px'} alignItems="center">
+				{slicedArray.map(contact => (
+					<Tooltip
+						title={
+							contact.firstName +
+							' ' +
+							contact.lastName +
+							' | ' +
+							contact.email +
+							' | ' +
+							contact.phoneNum
+						}
+						placement="top-start"
+					>
+						<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
+							<Typography variant="subtitle2">
+								{contact.firstName.charAt(0) + contact.lastName.charAt(0)}
+							</Typography>
+						</Avatar>
+					</Tooltip>
+				))}
+				<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
+					+{contactPersons.length - 2}
+				</Typography>
+			</Stack>
+		);
 	};
 
 	return (
