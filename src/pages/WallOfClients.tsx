@@ -7,13 +7,14 @@ import PopupFilterWrapper from '../components/common/filters/PopupFillterWrapper
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
+import AccountManagerInfoSummary from '../components/summaries/AccountManagerInfoSummary';
 import ClientClassificationSummary from '../components/summaries/ClientClassificationSummary';
 import ClientInfoSummary from '../components/summaries/ClientInfoSummary';
 import DealsStatusSummary from '../components/summaries/DealsStatusSummary';
 import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 // eslint-disable
-import { dummySuppliers4 } from '../utils/dummyClasses';
+import { contactDummy1, contactDummy4, dummySuppliers4 } from '../utils/dummyClasses';
 /**
  * TODO: Dummy suppliers above^ - remove when real data is available
  */
@@ -118,8 +119,8 @@ const WallOfClients = () => {
 					<Box minWidth="20%" maxWidth="20%" sx={flexCenter}>
 						<ClientClassificationSummary classification="small" />
 					</Box>
-					<Box width="15%" sx={flexCenter}>
-						Div 5
+					<Box width="20%" sx={flexCenter}>
+						<AccountManagerInfoSummary contactPersons={contactDummy4} />
 					</Box>
 					<Box width="15%" sx={flexCenter}>
 						Div 6

@@ -34,8 +34,9 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 			case 1: {
 				return fullSupplierSummary();
 			}
-
-			case 2 | 3:
+			case 2:
+				return supplierLogos(suppliers);
+			case 3:
 				return supplierLogos(suppliers);
 
 			default: // more than 3 suppliers
@@ -46,7 +47,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 					<>
 						{supplierLogos(arraySlice)}
 						<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
-							+{suppliers.length - 2}
+							{`+${suppliers.length - 2}`}
 						</Typography>
 					</>
 				);
