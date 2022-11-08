@@ -35,6 +35,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 				return fullSupplierSummary();
 			}
 			case 2:
+				return supplierLogos(suppliers);
 			case 3:
 				return supplierLogos(suppliers);
 
