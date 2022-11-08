@@ -6,7 +6,7 @@ import ClientInfoSummary from '../../summaries/ClientInfoSummary';
 import Button from '../Button';
 import ClearFilter from './ClearFilterButton';
 
-type BlobInputProps = {
+type PopupFilterWrapperProps = {
 	active?: boolean;
 	onClick: () => void;
 	onClearClick: () => void;
@@ -14,7 +14,7 @@ type BlobInputProps = {
 	title: string;
 } & ButtonProps;
 
-const PopupFilterWrapper: FC<BlobInputProps> = ({
+const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 	active,
 	onClearClick,
 	children,
