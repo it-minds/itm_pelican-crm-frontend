@@ -1,4 +1,4 @@
-import { Box, ButtonBase, CircularProgress } from '@mui/material';
+import { ButtonBase, ButtonProps, CircularProgress } from '@mui/material';
 import { styled } from '@mui/material';
 import { darken, SxProps } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
@@ -15,9 +15,9 @@ export type ButtonSize = 'default' | 'small';
 
 export type Props = {
 	children?: ReactNode;
-	onClick: () => void;
 	sx?: SxProps;
-} & StyleProps;
+} & StyleProps &
+	ButtonProps;
 
 type StyleProps = {
 	btnType?: ButtonType;
@@ -100,7 +100,7 @@ const Button: FC<Props> = ({ children, onClick, sx, ...styleProps }) => {
 		>
 			{children || "Ain't nothing here"}
 			{isLoading && (
-				<CircularProgress color="inherit" size={18} sx={{ position: 'absolute', right: 2 }} />
+				<CircularProgress color="inherit" size={16} sx={{ position: 'absolute', right: 1 }} />
 			)}
 		</ButtonStyles>
 	);
