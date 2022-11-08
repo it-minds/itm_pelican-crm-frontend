@@ -15,16 +15,20 @@ import React, { FC, useEffect, useState } from 'react';
 
 import { titleCase } from '../../utils/helperFunctions';
 
-type Props = {
+export type ClientSummary = {
 	title: string;
 	city: string;
 	address?: string;
 	url?: string;
-	width?: string;
-	sx?: SxProps;
 };
 
-const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
+type ClientSummaryProps = {
+	width?: string;
+	sx?: SxProps;
+	client: ClientSummary;
+};
+
+const ClientInfoSummary: FC<ClientSummaryProps> = ({ width, sx, client }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
@@ -39,6 +43,8 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 			setIconColor(theme.palette.primary.main);
 		}
 	}, [theme.palette]);
+
+	const { title, city, address, url } = client;
 
 	const urlToDisplay = (): JSX.Element => {
 		if (url && isLarge) {
