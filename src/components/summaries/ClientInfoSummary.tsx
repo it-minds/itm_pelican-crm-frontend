@@ -77,7 +77,14 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ width, sx, client }) => {
 	};
 
 	return (
-		<Grid width={width} container direction="column" paddingX="0.4rem" gap="2px">
+		<Grid
+			maxWidth={width}
+			minWidth={width}
+			container
+			direction="column"
+			paddingX="0.4rem"
+			gap="2px"
+		>
 			<Grid item width="100%">
 				<Tooltip
 					TransitionComponent={Fade}
