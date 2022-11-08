@@ -41,7 +41,7 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 				sx={{
 					pt: '2px',
 					justifyContent: 'space-between',
-					paddingInline: !active ? '8px' : '0px',
+					paddingInline: active ? 0 : '8px',
 					paddingInlineEnd: '8px',
 				}}
 				noPad
@@ -64,14 +64,7 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 				anchorEl={anchorEl}
 				onClose={() => setOpen(false)}
 			>
-				{children || (
-					<ClientInfoSummary
-						city="Aarhus"
-						title="Djurs Sommerland"
-						address="Holdkæftvej 1"
-						url="djurssommerland.dk/"
-					/>
-				)}
+				{children}
 			</Popover>
 		</>
 	);
