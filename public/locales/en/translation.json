@@ -39,8 +39,11 @@
 			"supplier": {
 				"noSupplier": "No supplier attached"
 			},
-			"knownContactPersons": "Known contact persons",
-			"multipleAccountManagers": "Multiple account managers"
+			"accountManagers": {
+				"noAccountManagers": "No account managers",
+				"multipleAccountManagers": "Multiple account managers"
+			},
+			"knownContactPersons": "Known contact persons"
 		}
 	},
 	"suppliers": {
