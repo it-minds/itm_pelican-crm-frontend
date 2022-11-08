@@ -164,7 +164,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 					</Tooltip>
 				))}
 				<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
-					{`+ ${contactPersons.length - 2}`}
+					{`+${contactPersons.length - 2}`}
 				</Typography>
 			</Stack>
 		);
