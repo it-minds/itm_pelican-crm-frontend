@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import BlobInputButton from '../components/common/BlobInput/BlobInputButton';
 
 import Button from '../components/common/Button';
+import PopupFilterWrapper from '../components/common/filters/PopupFillterWrapper';
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
@@ -49,11 +49,40 @@ const WallOfClients = () => {
 					marginBottom: '2rem',
 				}}
 			>
-				<BlobInputButton
-					clearClick={() => setActive(false)}
+				<PopupFilterWrapper
+					onClearClick={() => setActive(false)}
+					title={t('wallOfClients.locationFilterButtonDefault')}
 					active={active}
-					onClick={() => setActive(true)}
-				></BlobInputButton>
+					onClick={() => {
+						console.log('stop');
+						setActive(true);
+					}}
+				>
+					<HorizontalDividedContainer>
+						<ClientInfoSummary
+							width="25%"
+							title="Legoland A/S"
+							city="Billund"
+							address="Nordmarksvej 9, 7190 Billund, Denmark"
+							url="legoland.dk"
+						/>
+						<Box minWidth="15%" width="15%" maxWidth="15%" sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+							<SupplierInfoSummary suppliers={dummySuppliers4} />
+						</Box>
+						<Box minWidth="15%" sx={flexCenter}>
+							<DealsStatusSummary dealStatus={'Active'} />
+						</Box>
+						<Box minWidth="20%" sx={flexCenter}>
+							<ClientClassificationSummary classification="medium" />
+						</Box>
+						<Box width="15%" sx={flexCenter}>
+							Div 5
+						</Box>
+						<Box width="15%" sx={flexCenter}>
+							Div 6
+						</Box>
+					</HorizontalDividedContainer>
+				</PopupFilterWrapper>
 			</Box>
 			<Box
 				sx={{
