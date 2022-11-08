@@ -30,8 +30,8 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 		}
 	}, [theme]);
 
-	// TODO: change #fff to the corresponding color variable, when theme has been refactored
-	// TODO: Change 'dark' to enum instead of static string. Requires theme refactor.
+	// TODO: change #fff to the corresponding color variable, when theme has been refactored. PLCN 165
+	// TODO: Change 'dark' to enum instead of static string. Requires theme refactor. PLCN 166
 
 	const contactPersonRenderLogic = () => {
 		if (!contactPersons) {
