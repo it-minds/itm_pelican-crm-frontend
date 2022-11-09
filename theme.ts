@@ -17,11 +17,27 @@ declare module '@mui/material/styles' {
 		body3: React.CSSProperties;
 		body4: React.CSSProperties;
 		subtitle3: React.CSSProperties;
+		note: React.CSSProperties;
+		applicationName: React.CSSProperties;
+		body: React.CSSProperties;
+		pageHeader: React.CSSProperties;
+		searchInput: React.CSSProperties;
+		filterinput: React.CSSProperties;
+		companyHeader: React.CSSProperties;
+		subText: React.CSSProperties;
 	}
 	interface TypographyVariantsOptions {
 		body3?: React.CSSProperties;
 		body4?: React.CSSProperties;
 		subtitle3?: React.CSSProperties;
+		note?: React.CSSProperties;
+		applicationName?: React.CSSProperties;
+		body?: React.CSSProperties;
+		pageHeader?: React.CSSProperties;
+		searchInput?: React.CSSProperties;
+		filterinput?: React.CSSProperties;
+		companyHeader?: React.CSSProperties;
+		subText?: React.CSSProperties;
 	}
 }
 
@@ -30,6 +46,14 @@ declare module '@mui/material/Typography' {
 		body3: true;
 		body4: true;
 		subtitle3: true;
+		note: true;
+		applicationName: true;
+		body: true;
+		pageHeader: true;
+		searchInput: true;
+		filterinput: true;
+		companyHeader: true;
+		subText: true;
 	}
 }
 
@@ -48,6 +72,14 @@ export const mainTheme: ThemeOptions = createTheme({
 		body3: {},
 		body4: {},
 		subtitle3: {},
+		note: {},
+		applicationName: {},
+		body: {},
+		pageHeader: {},
+		searchInput: {},
+		filterinput: {},
+		companyHeader: {},
+		subText: {},
 	},
 	breakpoints: {
 		values: {
@@ -120,10 +152,10 @@ mainTheme.typography = {
 		fontSize: 14,
 		fontWeight: 200,
 	},
-	subtitle2: {
-		fontSize: 12,
-		fontWeight: 400,
-	},
+	// subtitle2: {
+	// 	fontSize: 12,
+	// 	fontWeight: 400,
+	// },
 	subtitle3: {
 		fontSize: 12,
 		fontWeight: 400,
@@ -132,6 +164,43 @@ mainTheme.typography = {
 	},
 	button: {
 		textTransform: 'none',
+	},
+	note: {
+		fontSize: 12,
+		fontWeight: 400,
+	},
+	applicationName: {
+		fontSize: 20,
+		fontWeight: 500,
+		letterSpacing: '0.05em',
+	},
+	body: {
+		fontSize: 16,
+		fontWeight: 400,
+	},
+	pageHeader: {
+		fontSize: 60,
+		fontWeight: 700,
+		// @ts-ignore
+		[mainTheme.breakpoints.down('md')]: {
+			fontSize: 40,
+		},
+	},
+	searchInput: {
+		fontSize: 14,
+		fontWeight: 200,
+	},
+	filterinput: {
+		fontSize: 14,
+		fontWeight: 100,
+	},
+	companyHeader: {
+		fontSize: 18,
+		fontWeight: 400,
+	},
+	subText: {
+		fontSize: 14,
+		fontWeight: 200,
 	},
 };
 

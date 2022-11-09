@@ -32,7 +32,7 @@ const WallOfClients = () => {
 	return (
 		<PageContainer>
 			<Underlined>
-				<Typography variant="h1" color="text.primary">
+				<Typography variant="pageHeader" color="text.primary">
 					{t('wallOfClients.pageTitle')}
 				</Typography>
 			</Underlined>
@@ -65,7 +65,7 @@ const WallOfClients = () => {
 						<ClientClassificationSummary classification="small" />
 					</Box>
 					<Box width="20%" sx={flexCenter}>
-						<AccountManagerInfoSummary contactPersons={contactDummy4} />
+						<AccountManagerInfoSummary contactPersons={contactDummy1} />
 					</Box>
 					<Box width="15%" sx={flexCenter}>
 						Div 6

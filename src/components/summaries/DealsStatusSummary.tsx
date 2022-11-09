@@ -25,6 +25,8 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 		}
 	}, [theme.palette]);
 
+	console.log(theme);
+
 	switch (dealStatus) {
 		case 'Active': {
 			return (
@@ -37,7 +39,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 							<Typography variant="body1" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.active')}
 							</Typography>
-							<Typography variant="subtitle2" noWrap>
+							<Typography variant="note" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
 									date: 'some date',
 								})}
@@ -74,7 +76,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 							<Typography variant="body1" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
 							</Typography>
-							<Typography variant="subtitle2" noWrap>
+							<Typography variant="note" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
 									date: 'some date',
 								})}

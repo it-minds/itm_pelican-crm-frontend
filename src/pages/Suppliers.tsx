@@ -13,7 +13,7 @@ const Suppliers = () => {
 	return (
 		<PageContainer>
 			<Underlined>
-				<Typography variant="h1">{t('suppliers.pageTitle')}</Typography>
+				<Typography variant="pageHeader">{t('suppliers.pageTitle')}</Typography>
 			</Underlined>
 			<Typography marginTop={2}>Skeleton for supplier cards:</Typography>
 			<SupplierCardsSkeleton numSkeletons={9} />

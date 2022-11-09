@@ -80,7 +80,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 							</Box>
 							<Box width="100%" mt="-3px">
 								<Typography
-									variant="body2"
+									variant="searchInput"
 									letterSpacing="-0.08em"
 									fontSize={13}
 									lineHeight={1.3}

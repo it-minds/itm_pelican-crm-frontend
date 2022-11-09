@@ -72,7 +72,7 @@ const NavigationBar = () => {
 							<Button component={NavLink} to="/" sx={classes.brand}>
 								<ImageContainer imageSource="/pelican512.png" imageHeight={32} />
 								<Underlined>
-									<Typography variant="h4" color="text.primary">
+									<Typography variant="applicationName" color="text.primary">
 										Pelican
 									</Typography>
 								</Underlined>
@@ -83,7 +83,7 @@ const NavigationBar = () => {
 										active={window.location.toString().includes(link.path)}
 										dynamic={true}
 									>
-										<Typography sx={classes.linkElem} variant="h6">
+										<Typography sx={classes.linkElem} variant="body">
 											{/* @ts-ignore */}
 											{t(`${link.name}`)}
 											{/* Giver fejl, men fungerer efter hensigten? */}

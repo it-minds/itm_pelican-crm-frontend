@@ -79,7 +79,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								bgcolor: theme.palette.primary.main,
 							}}
 						>
-							<Typography variant="subtitle2">
+							<Typography variant="note">
 								{`${contactPersons[0].firstName.charAt(0)} ${contactPersons[0].lastName.charAt(0)}`}
 							</Typography>
 						</Avatar>
@@ -101,7 +101,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								direction="row"
 							>
 								<EmailIcon sx={{ color: iconColor }} />
-								<Typography variant="subtitle3" noWrap>
+								<Typography variant="note" noWrap>
 									{contactPersons[0].email}
 								</Typography>
 							</Stack>
@@ -117,7 +117,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								direction="row"
 							>
 								<LocalPhoneIcon sx={{ color: iconColor }} />
-								<Typography variant="subtitle3" noWrap>
+								<Typography variant="note" noWrap>
 									{contactPersons[0].phoneNum}
 								</Typography>
 							</Stack>
@@ -137,7 +137,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 						placement="top-start"
 					>
 						<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
-							<Typography variant="subtitle2">
+							<Typography variant="note">
 								{`${contact.firstName.charAt(0)} ${contact.lastName.charAt(0)}`}
 							</Typography>
 						</Avatar>
@@ -157,7 +157,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 						placement="top-start"
 					>
 						<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
-							<Typography variant="subtitle2">
+							<Typography variant="note">
 								{`${contact.firstName.charAt(0)} ${contact.lastName.charAt(0)}`}
 							</Typography>
 						</Avatar>

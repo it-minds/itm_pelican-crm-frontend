@@ -13,7 +13,7 @@ const Contacts = () => {
 	return (
 		<PageContainer>
 			<Underlined>
-				<Typography variant="h1">{t('contacts.pageTitle')}</Typography>
+				<Typography variant="pageHeader">{t('contacts.pageTitle')}</Typography>
 			</Underlined>
 			<CompanyCardsSkeleton numSkeletons={6} />
 			<TypographyShowcase />
