@@ -23,15 +23,14 @@ export type ClientSummary = {
 };
 
 type ClientSummaryProps = {
-	width?: string;
 	sx?: SxProps;
 	client: ClientSummary;
 };
 
-const ClientInfoSummary: FC<ClientSummaryProps> = ({ width, sx, client }) => {
+const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
+	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [openTitleTooltip, setOpenTitleTooltip] = useState(false);
 	const [openAddressTooltip, setOpenAddressTooltip] = useState(false);
 	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
@@ -47,7 +46,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ width, sx, client }) => {
 	const { title, city, address, url } = client;
 
 	const urlToDisplay = (): JSX.Element => {
-		if (url && isLarge) {
+		if (url && isMedium) {
 			return (
 				<>
 					<WebIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />
@@ -77,14 +76,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ width, sx, client }) => {
 	};
 
 	return (
-		<Grid
-			maxWidth={width}
-			minWidth={width}
-			container
-			direction="column"
-			paddingX="0.4rem"
-			gap="2px"
-		>
+		<Grid container direction="column" width="100%" paddingX="0.4rem" gap="2px">
 			<Grid item width="100%">
 				<Tooltip
 					TransitionComponent={Fade}
@@ -120,7 +112,9 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ width, sx, client }) => {
 						onMouseEnter={() => setOpenAddressTooltip(true)}
 						onMouseLeave={() => setOpenAddressTooltip(false)}
 						display="flex"
-						sx={{ flexWrap: 'nowrap' }}
+						// sx={{ flexWrap: 'nowrap' }}
+						width="fit-content"
+						flexWrap="nowrap"
 						justifyContent="center"
 						alignItems="end"
 						gap="2px"
@@ -129,7 +123,11 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ width, sx, client }) => {
 							sx={{ color: iconColor, mb: '1px' }}
 							onTouchStart={handleAddressClick}
 						/>
-						{!isSmall && <Typography variant="subtitle3">{city || 'unknown'}</Typography>}
+						{!isSmall && (
+							<Typography variant="subtitle3" noWrap>
+								{city || 'unknown'}
+							</Typography>
+						)}
 					</Box>
 				</Tooltip>
 				<Tooltip
@@ -141,7 +139,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ width, sx, client }) => {
 				>
 					<Box
 						display="flex"
-						justifyContent="center"
+						justifyContent="flex-start"
 						alignItems="end"
 						gap="2px"
 						sx={{ cursor: 'pointer', flexWrap: 'nowrap' }}
