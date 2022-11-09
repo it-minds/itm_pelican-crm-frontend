@@ -98,7 +98,12 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 					</Typography>
 				</Tooltip>
 			</Grid>
-			<Grid sx={{ justifyContent: 'space-between', ml: '-1px' }} direction="row" container item>
+			<Grid
+				sx={{ justifyContent: 'flex-start', ml: '-1px', width: '100%' }}
+				direction="row"
+				container
+				item
+			>
 				<Tooltip
 					TransitionComponent={Fade}
 					TransitionProps={{ timeout: 200 }}
@@ -113,9 +118,9 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 						onMouseLeave={() => setOpenAddressTooltip(false)}
 						display="flex"
 						// sx={{ flexWrap: 'nowrap' }}
-						width="fit-content"
+						width={isMedium ? '50%' : '70%'}
 						flexWrap="nowrap"
-						justifyContent="center"
+						justifyContent="flex-start"
 						alignItems="end"
 						gap="2px"
 					>

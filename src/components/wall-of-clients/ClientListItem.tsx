@@ -46,7 +46,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 	};
 
 	return (
-		<HorizontalDividedContainer>
+		<HorizontalDividedContainer isDropdown>
 			<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
 				<ClientInfoSummary client={client} />
 			</Box>
