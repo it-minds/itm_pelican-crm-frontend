@@ -14,9 +14,6 @@ declare module '@mui/material/styles' {
 
 	// Typography override
 	interface TypographyVariants {
-		body3: React.CSSProperties;
-		body4: React.CSSProperties;
-		subtitle3: React.CSSProperties;
 		note: React.CSSProperties;
 		applicationName: React.CSSProperties;
 		body: React.CSSProperties;
@@ -27,9 +24,6 @@ declare module '@mui/material/styles' {
 		subText: React.CSSProperties;
 	}
 	interface TypographyVariantsOptions {
-		body3?: React.CSSProperties;
-		body4?: React.CSSProperties;
-		subtitle3?: React.CSSProperties;
 		note?: React.CSSProperties;
 		applicationName?: React.CSSProperties;
 		body?: React.CSSProperties;
@@ -43,9 +37,6 @@ declare module '@mui/material/styles' {
 
 declare module '@mui/material/Typography' {
 	interface TypographyPropsVariantOverrides {
-		body3: true;
-		body4: true;
-		subtitle3: true;
 		note: true;
 		applicationName: true;
 		body: true;
@@ -69,9 +60,7 @@ export const cubicTransition = 'cubic-bezier(0.4, 0, 0.2, 1) 0s';
 // Creating and overwriting default theme
 export const mainTheme: ThemeOptions = createTheme({
 	typography: {
-		body3: {},
-		body4: {},
-		subtitle3: {},
+		fontFamily: 'Poppins',
 		note: {},
 		applicationName: {},
 		body: {},
@@ -111,57 +100,6 @@ mainTheme.palette = {
 
 mainTheme.typography = {
 	...mainTheme.typography,
-	fontFamily: 'Poppins',
-	h1: {
-		fontSize: 60,
-		fontWeight: 700,
-		// @ts-ignore
-		[mainTheme.breakpoints.down('md')]: {
-			fontSize: 40,
-		},
-	},
-	h4: {
-		fontSize: 20,
-		fontWeight: 500,
-		letterSpacing: '0.05em',
-	},
-	h5: {
-		fontSize: 18,
-		fontWeight: 400,
-	},
-	h6: {
-		fontSize: 16,
-		fontWeight: 400,
-	},
-	body1: {
-		fontSize: 16,
-	},
-	body2: {
-		fontSize: 14,
-		fontWeight: 200,
-	},
-	body3: {
-		fontSize: 14,
-		fontWeight: 100,
-	},
-	body4: {
-		fontSize: 12,
-		letterSpacing: '0.05em',
-	},
-	subtitle1: {
-		fontSize: 14,
-		fontWeight: 200,
-	},
-	// subtitle2: {
-	// 	fontSize: 12,
-	// 	fontWeight: 400,
-	// },
-	subtitle3: {
-		fontSize: 12,
-		fontWeight: 400,
-		letterSpacing: '-0.08em',
-		opacity: 0.7,
-	},
 	button: {
 		textTransform: 'none',
 	},
