@@ -163,7 +163,7 @@ export const dummyListItem2: WallOfClientListItem = {
 		address: 'Nordmarksvej 9, 7190 Billund, Denmark',
 		url: 'legoland.dk',
 	},
-	contactPersons: contactDummy2,
+	contactPersons: contactDummy1,
 	suppliers: dummySuppliers3,
 	dealStatus: 'Active',
 };
