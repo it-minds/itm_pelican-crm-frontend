@@ -13,7 +13,7 @@ import DealsStatusSummary from '../components/summaries/DealsStatusSummary';
 import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 // eslint-disable
-import { contactDummy1, contactDummy4, dummySuppliers4 } from '../utils/dummyClasses';
+import { contactDummy1, dummySuppliers4 } from '../utils/dummyClasses';
 /**
  * TODO: Dummy suppliers above^ - remove when real data is available
  */
