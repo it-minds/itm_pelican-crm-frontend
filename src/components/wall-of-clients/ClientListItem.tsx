@@ -27,6 +27,14 @@ type ListItemWidth = {
 	maxWidth: string | number;
 };
 
+/**
+ * This component is used exclusively in the WallOfClients page and displays a client's information.
+ * Uses the `HorizontalDividedContainer` component and includes the following summaries:
+ * - `ClientInfoSummary`
+ * - `SupplierInfoSummary`
+ * - `AccountManagerInfoSummary`
+ * - `DealsStatusSummary`
+ */
 const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 	const { client, suppliers, contactPersons, dealStatus } = clientListItem;
 	const theme = useTheme();

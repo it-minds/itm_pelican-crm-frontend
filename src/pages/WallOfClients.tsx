@@ -17,7 +17,7 @@ const WallOfClients = () => {
 	const { t } = useTranslation();
 	const [isLoading, setIsLoading] = useState(false);
 
-	const testLoading = () => {
+	const testLoading = (): void => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
