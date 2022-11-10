@@ -105,6 +105,7 @@ mainTheme.typography = {
 		fontSize: 16,
 	},
 	body2: {
+		lineHeight: '1.2em',
 		fontSize: 14,
 		fontWeight: 200,
 	},
