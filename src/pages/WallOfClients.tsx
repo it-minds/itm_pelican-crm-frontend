@@ -32,7 +32,7 @@ const WallOfClients = () => {
 	return (
 		<PageContainer>
 			<Underlined>
-				<Typography variant="pageHeader" color="text.primary">
+				<Typography variant="h1" color="text.primary">
 					{t('wallOfClients.pageTitle')}
 				</Typography>
 			</Underlined>

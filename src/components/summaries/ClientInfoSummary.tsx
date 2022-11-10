@@ -87,7 +87,7 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 						onMouseLeave={() => setOpenTitleTooltip(false)}
 						onTouchStart={handleTitleClick}
 						noWrap
-						variant="companyHeader"
+						variant="largeBody"
 					>
 						{title}
 					</Typography>

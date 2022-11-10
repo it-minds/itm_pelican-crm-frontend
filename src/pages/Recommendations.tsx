@@ -12,7 +12,7 @@ const Recommendations = () => {
 	return (
 		<PageContainer>
 			<Underlined>
-				<Typography variant="pageHeader">{t('recommendations.pageTitle')}</Typography>
+				<Typography variant="h1">{t('recommendations.pageTitle')}</Typography>
 			</Underlined>
 			<CompanyCardsSkeleton numSkeletons={5} />
 		</PageContainer>

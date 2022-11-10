@@ -72,7 +72,7 @@ const NavigationBar = () => {
 							<Button component={NavLink} to="/" sx={classes.brand}>
 								<ImageContainer imageSource="/pelican512.png" imageHeight={32} />
 								<Underlined>
-									<Typography variant="applicationName" color="text.primary">
+									<Typography variant="h4" color="text.primary">
 										Pelican
 									</Typography>
 								</Underlined>
@@ -95,7 +95,7 @@ const NavigationBar = () => {
 						<Box sx={{ ...flexCenter, gap: 2 }}>
 							{' '}
 							<ButtonBase onClick={toggleTheme}>{themeToggle()}</ButtonBase>
-							<Typography variant="body1" sx={classes.linkElem}>
+							<Typography variant="body" sx={classes.linkElem}>
 								Salesman Name
 							</Typography>
 							<Avatar></Avatar>

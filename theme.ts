@@ -14,37 +14,31 @@ declare module '@mui/material/styles' {
 
 	// Typography override
 	interface TypographyVariants {
-		note: React.CSSProperties;
-		applicationName: React.CSSProperties;
 		body: React.CSSProperties;
-		pageHeader: React.CSSProperties;
-		searchInput: React.CSSProperties;
-		filterinput: React.CSSProperties;
-		companyHeader: React.CSSProperties;
+		largeBody: React.CSSProperties;
+		inputField: React.CSSProperties;
+		slimInputField: React.CSSProperties;
 		subText: React.CSSProperties;
+		note: React.CSSProperties;
 	}
 	interface TypographyVariantsOptions {
-		note?: React.CSSProperties;
-		applicationName?: React.CSSProperties;
 		body?: React.CSSProperties;
-		pageHeader?: React.CSSProperties;
-		searchInput?: React.CSSProperties;
-		filterinput?: React.CSSProperties;
-		companyHeader?: React.CSSProperties;
+		largeBody?: React.CSSProperties;
+		inputField?: React.CSSProperties;
+		slimInputField?: React.CSSProperties;
 		subText?: React.CSSProperties;
+		note?: React.CSSProperties;
 	}
 }
 
 declare module '@mui/material/Typography' {
 	interface TypographyPropsVariantOverrides {
-		note: true;
-		applicationName: true;
 		body: true;
-		pageHeader: true;
-		searchInput: true;
-		filterinput: true;
-		companyHeader: true;
+		largeBody: true;
+		inputField: true;
+		slimInputField: true;
 		subText: true;
+		note: true;
 	}
 }
 
@@ -62,12 +56,10 @@ export const mainTheme: ThemeOptions = createTheme({
 	typography: {
 		fontFamily: 'Poppins',
 		note: {},
-		applicationName: {},
+		largeBody: {},
 		body: {},
-		pageHeader: {},
-		searchInput: {},
-		filterinput: {},
-		companyHeader: {},
+		inputField: {},
+		slimInputField: {},
 		subText: {},
 	},
 	breakpoints: {
@@ -100,23 +92,7 @@ mainTheme.palette = {
 
 mainTheme.typography = {
 	...mainTheme.typography,
-	button: {
-		textTransform: 'none',
-	},
-	note: {
-		fontSize: 12,
-		fontWeight: 400,
-	},
-	applicationName: {
-		fontSize: 20,
-		fontWeight: 500,
-		letterSpacing: '0.05em',
-	},
-	body: {
-		fontSize: 16,
-		fontWeight: 400,
-	},
-	pageHeader: {
+	h1: {
 		fontSize: 60,
 		fontWeight: 700,
 		// @ts-ignore
@@ -124,21 +100,37 @@ mainTheme.typography = {
 			fontSize: 40,
 		},
 	},
-	searchInput: {
+	h4: {
+		fontSize: 20,
+		fontWeight: 500,
+		letterSpacing: '0.05em',
+	},
+	button: {
+		textTransform: 'none',
+	},
+	body: {
+		fontSize: 16,
+		fontWeight: 400,
+	},
+	largeBody: {
+		fontSize: 18,
+		fontWeight: 400,
+	},
+	inputField: {
 		fontSize: 14,
 		fontWeight: 200,
 	},
-	filterinput: {
+	slimInputField: {
 		fontSize: 14,
 		fontWeight: 100,
-	},
-	companyHeader: {
-		fontSize: 18,
-		fontWeight: 400,
 	},
 	subText: {
 		fontSize: 14,
 		fontWeight: 200,
+	},
+	note: {
+		fontSize: 12,
+		fontWeight: 400,
 	},
 };
 
