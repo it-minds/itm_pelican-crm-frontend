@@ -25,8 +25,6 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 		}
 	}, [theme.palette]);
 
-	console.log(theme);
-
 	switch (dealStatus) {
 		case 'Active': {
 			return (
