@@ -16,7 +16,7 @@
 		"pageTitle": "Wall of Clients",
 		"nameSearchBoxDefault": "Name",
 		"contactPersonSearchBoxDefault": "Contact person",
-		"officeFilterButtonDefault": "Office location",
+		"locationFilterButtonDefault": "Location",
 		"supplierFilterButtonDefault": "Supplier",
 		"segmentFilterButtonDefault": "Segment",
 		"accountManagerFilterButtonDefault": "Account Manager",
