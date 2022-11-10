@@ -2,7 +2,6 @@ import { Box, ButtonProps, Popover, Typography } from '@mui/material';
 import { AnimatePresence } from 'framer-motion';
 import React, { FC, useState } from 'react';
 
-import ClientInfoSummary from '../../summaries/ClientInfoSummary';
 import Button from '../Button';
 import ClearFilter from './ClearFilterButton';
 

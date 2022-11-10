@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '../components/common/Button';
-import PopupFilterWrapper from '../components/common/filters/PopupFillterWrapper';
+import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
 import HorizontalDividedContainer from '../components/common/HorizontalDividedContainer';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
@@ -55,7 +55,6 @@ const WallOfClients = () => {
 					title={t('wallOfClients.locationFilterButtonDefault')}
 					active={active}
 					onClick={() => {
-						console.log('stop');
 						setActive(true);
 					}}
 				>
