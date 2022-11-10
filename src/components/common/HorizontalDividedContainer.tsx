@@ -1,8 +1,9 @@
-import { Box, ButtonBase, Divider, IconButton, useTheme } from '@mui/material';
-import { Stack, SxProps } from '@mui/system';
-import React, { FC } from 'react';
-import { flexRow } from '../../styles/generalStyles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box, Divider, IconButton, useTheme } from '@mui/material';
+import { Stack, SxProps } from '@mui/system';
+import React, { FC, useState } from 'react';
+
+import { flexRow } from '../../styles/generalStyles';
 import Card from './Card';
 
 export type Props = {
@@ -16,6 +17,8 @@ const darkModeDivider = { backgroundColor: '#fff', opacity: '20%' };
 const HorizontalDividedContainer: FC<Props> = ({ sx, children, isDropdown }) => {
 	const theme = useTheme();
 	const isDarkMode = theme.palette.mode === 'dark';
+	const [isExpanded, setIsExpanded] = useState(false);
+
 	return (
 		<Card fullWidth sx={{ ...flexRow, alignItems: 'center', justifyContent: 'space-between' }}>
 			<Stack
@@ -38,7 +41,14 @@ const HorizontalDividedContainer: FC<Props> = ({ sx, children, isDropdown }) => 
 			</Stack>
 			{isDropdown && (
 				<Box width="5%" display="flex" justifyContent="flex-end" paddingRight={'5px'}>
-					<IconButton disableRipple>
+					<IconButton
+						disableRipple
+						sx={{
+							transition: 'all 0.3s ease-in-out',
+							transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+						}}
+						onClick={() => setIsExpanded(!isExpanded)}
+					>
 						<ExpandMoreIcon sx={{ color: '#fff' }} />
 					</IconButton>
 				</Box>

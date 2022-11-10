@@ -1,9 +1,8 @@
-import { ButtonBase, useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { FC } from 'react';
 
-import { flexCenter, flexRow } from '../../styles/generalStyles';
-import Button from '../common/Button';
+import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import AccountManagerInfoSummary, {
 	ContactPersonSummary,
@@ -59,9 +58,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 			<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 				<AccountManagerInfoSummary contactPersons={contactPersons} />
 			</Box>
-			{/* <Box {...fixedWidth(13, 8)} sx={{ ...flexRow, justifyContent: 'flex-end' }}>
-				<ButtonBase sx={{ padding: 2, borderRadius: '1050px' }}>V</ButtonBase>
-			</Box> */}
 		</HorizontalDividedContainer>
 	);
 };
