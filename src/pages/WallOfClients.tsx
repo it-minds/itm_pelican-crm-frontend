@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '../components/common/Button';
-import PopupFilterWrapper from '../components/common/filters/PopupFillterWrapper';
+import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
@@ -17,7 +17,7 @@ import { dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
 const WallOfClients = () => {
 	const { t } = useTranslation();
 	const [isLoading, setIsLoading] = useState(false);
-	const [isFilterOpen, setIsFilterOpen] = useState(false);
+	const [isFilterSet, setIsFilterSet] = useState(false);
 	const testLoading = (): void => {
 		setIsLoading(true);
 		setTimeout(() => {
@@ -46,12 +46,11 @@ const WallOfClients = () => {
 				}}
 			>
 				<PopupFilterWrapper
-					onClearClick={() => setIsFilterOpen(isFilterOpen)}
+					onClearClick={() => setIsFilterSet(false)}
 					title={t('wallOfClients.locationFilterButtonDefault')}
-					active={isFilterOpen}
+					active={isFilterSet}
 					onClick={() => {
-						console.log('stop');
-						setIsFilterOpen(true);
+						setIsFilterSet(true);
 					}}
 				>
 					<ClientListItem clientListItem={dummyListItem2} />
