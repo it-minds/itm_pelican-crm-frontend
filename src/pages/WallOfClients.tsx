@@ -7,7 +7,7 @@ import PopupFilterWrapper from '../components/common/filters/PopupFillterWrapper
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
-import { flexCol } from '../styles/generalStyles';
+import { flexCenter, flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
 /**
