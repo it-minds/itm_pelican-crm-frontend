@@ -13,6 +13,7 @@ import {
 	MenuItem,
 	Toolbar,
 	Typography,
+	useMediaQuery,
 	useTheme,
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
@@ -28,7 +29,12 @@ import Underlined from './Underlined';
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const [isDarkMode, setIsDarkMode] = useState(false);
+
 	const currentTheme = useTheme();
+	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+	const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+	const isMedium = useMediaQuery(currentTheme.breakpoints.up('md'));
+
 	// const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
 	const location = useLocation();
 
@@ -63,6 +69,21 @@ const NavigationBar = () => {
 		);
 	};
 
+	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorElNav(event.currentTarget);
+	};
+	const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorElUser(event.currentTarget);
+	};
+
+	const handleCloseNavMenu = () => {
+		setAnchorElNav(null);
+	};
+
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null);
+	};
+
 	return (
 		<AppHideOnScroll>
 			<AppBar color="transparent" elevation={0}>
@@ -74,14 +95,14 @@ const NavigationBar = () => {
 								aria-label="account of current user"
 								aria-controls="menu-appbar"
 								aria-haspopup="true"
-								// onClick={handleOpenNavMenu}
+								onClick={handleOpenNavMenu}
 								color="inherit"
 							>
 								<MenuIcon />
 							</IconButton>
 							<Menu
 								id="menu-appbar"
-								// anchorEl={anchorElNav}
+								anchorEl={anchorElNav}
 								anchorOrigin={{
 									vertical: 'bottom',
 									horizontal: 'left',
@@ -91,20 +112,26 @@ const NavigationBar = () => {
 									vertical: 'top',
 									horizontal: 'left',
 								}}
-								open={true}
-								// onClose={handleCloseNavMenu}
+								open={Boolean(anchorElNav)}
+								onClose={handleCloseNavMenu}
 								sx={{
-									display: { xs: 'block', md: 'none' },
+									display: isMedium ? 'none' : 'flex',
 								}}
 							>
 								{links.map(link => (
-									<MenuItem key={Math.random() * 2}>
+									<MenuItem
+										component={Link}
+										to={link.path}
+										key={Math.random() * 2}
+										onClick={handleCloseNavMenu}
+									>
+										{/* @ts-ignore */}
 										<Typography textAlign="center">{t(`${link.name}`)}</Typography>
 									</MenuItem>
 								))}
 							</Menu>
 						</Box>
-						<Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
+						<Box sx={{ display: isMedium ? 'flex' : 'none', gap: 2 }}>
 							<Button component={NavLink} to="/" sx={classes.brand}>
 								<ImageContainer imageSource="/pelican512.png" imageHeight={32} />
 								<Underlined>
@@ -122,7 +149,6 @@ const NavigationBar = () => {
 										<Typography sx={classes.linkElem} variant="body">
 											{/* @ts-ignore */}
 											{t(`${link.name}`)}
-											{/* Giver fejl, men fungerer efter hensigten? */}
 										</Typography>
 									</Underlined>
 								</ButtonBase>
