@@ -49,7 +49,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 		}
 		case 'Dialog': {
 			return (
-				<Stack direction="row" justifyContent="center" alignItems="center">
+				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
 						<ForumIcon fontSize="large" sx={{ color: iconColor }} />
 					</Box>
@@ -65,7 +65,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 		}
 		case 'Inactive': {
 			return (
-				<Stack direction="row" justifyContent="center" alignItems="center">
+				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
 						<AcUnitIcon fontSize="large" sx={{ color: iconColor }} />
 					</Box>

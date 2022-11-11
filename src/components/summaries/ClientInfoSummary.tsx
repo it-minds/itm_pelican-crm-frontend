@@ -15,19 +15,22 @@ import React, { FC, useEffect, useState } from 'react';
 
 import { titleCase } from '../../utils/helperFunctions';
 
-type Props = {
+export type ClientSummary = {
 	title: string;
 	city: string;
 	address?: string;
 	url?: string;
-	width?: string;
-	sx?: SxProps;
 };
 
-const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
+type ClientSummaryProps = {
+	sx?: SxProps;
+	client: ClientSummary;
+};
+
+const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
+	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [openTitleTooltip, setOpenTitleTooltip] = useState(false);
 	const [openAddressTooltip, setOpenAddressTooltip] = useState(false);
 	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
@@ -40,12 +43,14 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 		}
 	}, [theme.palette]);
 
+	const { title, city, address, url } = client;
+
 	const urlToDisplay = (): JSX.Element => {
-		if (url && isLarge) {
+		if (url && isMedium) {
 			return (
 				<>
 					<WebIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />
-					<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
+					<Typography variant="note" noWrap sx={{ opacity: 0.7, mt: '1px' }}>
 						{titleCase(url ? url : '')}
 					</Typography>
 				</>
@@ -71,8 +76,8 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 	};
 
 	return (
-		<Grid width={width} container direction="column" paddingX="0.4rem" gap="2px">
-			<Grid item width="100%">
+		<Grid container direction="column" width="100%" paddingX="0.4rem" gap="2px">
+			<Grid container item width="100%">
 				<Tooltip
 					TransitionComponent={Fade}
 					TransitionProps={{ timeout: 200 }}
@@ -93,7 +98,12 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 					</Typography>
 				</Tooltip>
 			</Grid>
-			<Grid sx={{ justifyContent: 'space-between', ml: '-1px' }} direction="row" container item>
+			<Grid
+				sx={{ justifyContent: 'flex-start', ml: '-1px', width: '100%' }}
+				direction="row"
+				container
+				item
+			>
 				<Tooltip
 					TransitionComponent={Fade}
 					TransitionProps={{ timeout: 200 }}
@@ -108,7 +118,9 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 						onMouseLeave={() => setOpenAddressTooltip(false)}
 						display="flex"
 						sx={{ flexWrap: 'nowrap' }}
-						justifyContent="center"
+						width={isMedium ? '50%' : '70%'}
+						flexWrap="nowrap"
+						justifyContent="flex-start"
 						alignItems="end"
 						gap="2px"
 					>
@@ -132,8 +144,9 @@ const ClientInfoSummary: FC<Props> = ({ title, city, url, width, address }) => {
 				>
 					<Box
 						display="flex"
-						justifyContent="center"
+						justifyContent="flex-start"
 						alignItems="end"
+						width={isMedium ? '50%' : '30%'}
 						gap="2px"
 						sx={{ cursor: 'pointer', flexWrap: 'nowrap' }}
 						onClick={() => window.open(`https://www.${url}`, '_blank')}

@@ -1,26 +1,35 @@
-import { Divider, useTheme } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box, Divider, IconButton, useTheme } from '@mui/material';
 import { Stack, SxProps } from '@mui/system';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
+import { flexRow } from '../../styles/generalStyles';
 import Card from './Card';
 
 export type Props = {
 	sx?: SxProps;
 	children?: JSX.Element | JSX.Element[];
+	isDropdown?: boolean;
 };
 
 const darkModeDivider = { backgroundColor: '#fff', opacity: '20%' };
 
-const HorizontalDividedContainer: FC<Props> = ({ sx, children }) => {
+/**
+ * A container that divides its content horizontally into x number columns with a divider inbetween.
+ */
+const HorizontalDividedContainer: FC<Props> = ({ sx, children, isDropdown }) => {
 	const theme = useTheme();
 	const isDarkMode = theme.palette.mode === 'dark';
+	const [isExpanded, setIsExpanded] = useState(false);
+
 	return (
-		<Card fullWidth>
+		<Card fullWidth sx={{ ...flexRow, alignItems: 'center', justifyContent: 'space-between' }}>
 			<Stack
-				width="100%"
-				gap=".5rem"
+				width={isDropdown ? '95%' : '100%'}
+				gap=".3rem"
 				direction="row"
 				alignItems={'center'}
+				justifyContent={'space-between'}
 				sx={sx}
 				divider={
 					<Divider
@@ -33,6 +42,20 @@ const HorizontalDividedContainer: FC<Props> = ({ sx, children }) => {
 			>
 				{children}
 			</Stack>
+			{isDropdown && (
+				<Box width="5%" display="flex" justifyContent="flex-end" paddingRight={'5px'}>
+					<IconButton
+						disableRipple
+						sx={{
+							transition: 'all 0.3s ease-in-out',
+							transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+						}}
+						onClick={() => setIsExpanded(!isExpanded)}
+					>
+						<ExpandMoreIcon sx={{ color: '#fff' }} />
+					</IconButton>
+				</Box>
+			)}
 		</Card>
 	);
 };
