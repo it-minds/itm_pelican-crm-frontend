@@ -46,7 +46,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 				return (
 					<>
 						{supplierLogos(arraySlice)}
-						<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
+						<Typography variant="body" fontWeight={600} sx={{ opacity: 0.7 }}>
 							{`+${suppliers.length - 2}`}
 						</Typography>
 					</>
@@ -74,13 +74,13 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 							mt="2px"
 						>
 							<Box width="100%" height="fit-content" maxHeight="22px">
-								<Typography variant="body1" noWrap>
+								<Typography variant="body" noWrap>
 									{suppliers[0].name}
 								</Typography>
 							</Box>
 							<Box width="100%" mt="-3px">
 								<Typography
-									variant="body2"
+									variant="inputField"
 									letterSpacing="-0.08em"
 									fontSize={13}
 									lineHeight={1.3}

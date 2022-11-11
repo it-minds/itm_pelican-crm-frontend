@@ -34,10 +34,10 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 					</Box>
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
-							<Typography variant="body1" noWrap>
+							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.active')}
 							</Typography>
-							<Typography variant="subtitle2" noWrap>
+							<Typography variant="note" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
 									date: 'some date',
 								})}
@@ -55,7 +55,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 					</Box>
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
-							<Typography variant="body1" noWrap>
+							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
 							</Typography>
 						</Stack>
@@ -71,10 +71,10 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 					</Box>
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
-							<Typography variant="body1" noWrap>
+							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
 							</Typography>
-							<Typography variant="subtitle2" noWrap>
+							<Typography variant="note" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
 									date: 'some date',
 								})}

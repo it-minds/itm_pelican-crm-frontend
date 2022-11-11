@@ -81,7 +81,7 @@ const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ cla
 				<Stack maxWidth={isMedium ? '30%' : '75%'} display="flex" alignItems="center">
 					{renderClassification()}
 				</Stack>
-				<Typography mt={'2px'} noWrap variant="body1" lineHeight={'1rem'}>
+				<Typography mt={'2px'} noWrap variant="body" lineHeight={'1rem'}>
 					{isMedium && titleCase(classification)} {isLarge && ' Client'}
 				</Typography>
 			</Box>

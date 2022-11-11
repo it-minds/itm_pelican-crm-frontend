@@ -79,7 +79,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								bgcolor: theme.palette.primary.main,
 							}}
 						>
-							<Typography variant="subtitle2">
+							<Typography variant="note" sx={{ opacity: 0.7 }}>
 								{`${contactPersons[0].firstName.charAt(0)} ${contactPersons[0].lastName.charAt(0)}`}
 							</Typography>
 						</Avatar>
@@ -101,7 +101,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								direction="row"
 							>
 								<EmailIcon sx={{ color: iconColor }} />
-								<Typography variant="subtitle3" noWrap>
+								<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
 									{contactPersons[0].email}
 								</Typography>
 							</Stack>
@@ -117,7 +117,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								direction="row"
 							>
 								<LocalPhoneIcon sx={{ color: iconColor }} />
-								<Typography variant="subtitle3" noWrap>
+								<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
 									{contactPersons[0].phoneNum}
 								</Typography>
 							</Stack>
@@ -137,7 +137,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 						placement="top-start"
 					>
 						<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
-							<Typography variant="subtitle2">
+							<Typography variant="note" sx={{ opacity: 0.7 }}>
 								{`${contact.firstName.charAt(0)} ${contact.lastName.charAt(0)}`}
 							</Typography>
 						</Avatar>
@@ -157,13 +157,13 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 						placement="top-start"
 					>
 						<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
-							<Typography variant="subtitle2">
+							<Typography variant="note" sx={{ opacity: 0.7 }}>
 								{`${contact.firstName.charAt(0)} ${contact.lastName.charAt(0)}`}
 							</Typography>
 						</Avatar>
 					</Tooltip>
 				))}
-				<Typography variant="body1" fontWeight={600} sx={{ opacity: 0.7 }}>
+				<Typography variant="body" fontWeight={600} sx={{ opacity: 0.7 }}>
 					{`+${contactPersons.length - 2}`}
 				</Typography>
 			</Stack>

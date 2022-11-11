@@ -14,7 +14,7 @@ import DealsStatusSummary from '../components/summaries/DealsStatusSummary';
 import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 // eslint-disable
-import { contactDummy4, dummySuppliers4 } from '../utils/dummyClasses';
+import { contactDummy1, dummySuppliers4 } from '../utils/dummyClasses';
 /**
  * TODO: Dummy suppliers above^ - remove when real data is available
  */
@@ -119,7 +119,7 @@ const WallOfClients = () => {
 						<ClientClassificationSummary classification="small" />
 					</Box>
 					<Box width="20%" sx={flexCenter}>
-						<AccountManagerInfoSummary contactPersons={contactDummy4} />
+						<AccountManagerInfoSummary contactPersons={contactDummy1} />
 					</Box>
 					<Box width="15%" sx={flexCenter}>
 						Div 6

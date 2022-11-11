@@ -14,22 +14,31 @@ declare module '@mui/material/styles' {
 
 	// Typography override
 	interface TypographyVariants {
-		body3: React.CSSProperties;
-		body4: React.CSSProperties;
-		subtitle3: React.CSSProperties;
+		body: React.CSSProperties;
+		largeBody: React.CSSProperties;
+		inputField: React.CSSProperties;
+		slimInputField: React.CSSProperties;
+		subText: React.CSSProperties;
+		note: React.CSSProperties;
 	}
 	interface TypographyVariantsOptions {
-		body3?: React.CSSProperties;
-		body4?: React.CSSProperties;
-		subtitle3?: React.CSSProperties;
+		body?: React.CSSProperties;
+		largeBody?: React.CSSProperties;
+		inputField?: React.CSSProperties;
+		slimInputField?: React.CSSProperties;
+		subText?: React.CSSProperties;
+		note?: React.CSSProperties;
 	}
 }
 
 declare module '@mui/material/Typography' {
 	interface TypographyPropsVariantOverrides {
-		body3: true;
-		body4: true;
-		subtitle3: true;
+		body: true;
+		largeBody: true;
+		inputField: true;
+		slimInputField: true;
+		subText: true;
+		note: true;
 	}
 }
 
@@ -45,9 +54,13 @@ export const cubicTransition = 'cubic-bezier(0.4, 0, 0.2, 1) 0s';
 // Creating and overwriting default theme
 export const mainTheme: ThemeOptions = createTheme({
 	typography: {
-		body3: {},
-		body4: {},
-		subtitle3: {},
+		fontFamily: 'Poppins',
+		note: {},
+		largeBody: {},
+		body: {},
+		inputField: {},
+		slimInputField: {},
+		subText: {},
 	},
 	breakpoints: {
 		values: {
@@ -79,7 +92,6 @@ mainTheme.palette = {
 
 mainTheme.typography = {
 	...mainTheme.typography,
-	fontFamily: 'Poppins',
 	h1: {
 		fontSize: 60,
 		fontWeight: 700,
@@ -93,46 +105,32 @@ mainTheme.typography = {
 		fontWeight: 500,
 		letterSpacing: '0.05em',
 	},
-	h5: {
+	button: {
+		textTransform: 'none',
+	},
+	body: {
+		fontSize: 16,
+		fontWeight: 400,
+	},
+	largeBody: {
 		fontSize: 18,
 		fontWeight: 400,
 	},
-	h6: {
-		fontSize: 16,
-		fontWeight: 400,
-	},
-	body1: {
-		fontSize: 16,
-	},
-	body2: {
-		lineHeight: '1.2em',
+	inputField: {
 		fontSize: 14,
 		fontWeight: 200,
 	},
-	body3: {
+	slimInputField: {
 		fontSize: 14,
 		fontWeight: 100,
 	},
-	body4: {
-		fontSize: 12,
-		letterSpacing: '0.05em',
-	},
-	subtitle1: {
+	subText: {
 		fontSize: 14,
 		fontWeight: 200,
 	},
-	subtitle2: {
+	note: {
 		fontSize: 12,
 		fontWeight: 400,
-	},
-	subtitle3: {
-		fontSize: 12,
-		fontWeight: 400,
-		letterSpacing: '-0.08em',
-		opacity: 0.7,
-	},
-	button: {
-		textTransform: 'none',
 	},
 };
 
