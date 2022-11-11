@@ -15,7 +15,7 @@ export type Props = {
 const darkModeDivider = { backgroundColor: '#fff', opacity: '20%' };
 
 /**
- * A container that divides its content horizontally into x number columns with a container inbetween.
+ * A container that divides its content horizontally into x number columns with a divider inbetween.
  */
 const HorizontalDividedContainer: FC<Props> = ({ sx, children, isDropdown }) => {
 	const theme = useTheme();

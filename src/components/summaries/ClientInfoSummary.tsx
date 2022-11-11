@@ -50,7 +50,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 			return (
 				<>
 					<WebIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />
-					<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
+					<Typography variant="note" noWrap sx={{ opacity: 0.7, mt: '1px' }}>
 						{titleCase(url ? url : '')}
 					</Typography>
 				</>
@@ -77,7 +77,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 
 	return (
 		<Grid container direction="column" width="100%" paddingX="0.4rem" gap="2px">
-			<Grid item width="100%">
+			<Grid container item width="100%">
 				<Tooltip
 					TransitionComponent={Fade}
 					TransitionProps={{ timeout: 200 }}
@@ -117,7 +117,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 						onMouseEnter={() => setOpenAddressTooltip(true)}
 						onMouseLeave={() => setOpenAddressTooltip(false)}
 						display="flex"
-						// sx={{ flexWrap: 'nowrap' }}
+						sx={{ flexWrap: 'nowrap' }}
 						width={isMedium ? '50%' : '70%'}
 						flexWrap="nowrap"
 						justifyContent="flex-start"
@@ -146,6 +146,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 						display="flex"
 						justifyContent="flex-start"
 						alignItems="end"
+						width={isMedium ? '50%' : '30%'}
 						gap="2px"
 						sx={{ cursor: 'pointer', flexWrap: 'nowrap' }}
 						onClick={() => window.open(`https://www.${url}`, '_blank')}
