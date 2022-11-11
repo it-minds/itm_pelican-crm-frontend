@@ -14,7 +14,7 @@ const NotFound404 = () => {
 				<Typography variant="h1">{t('notFound.pageTitle')}</Typography>
 			</Underlined>
 			<Typography>
-				<Typography variant="body1" sx={{ mt: 2 }}>
+				<Typography variant="body" sx={{ mt: 2 }}>
 					{t('notFound.paragraph')}
 				</Typography>
 			</Typography>

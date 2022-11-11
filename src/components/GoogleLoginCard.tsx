@@ -53,12 +53,12 @@ const GoogleLoginCard = () => {
 				<CardContent>
 					<Grid container justifyContent="center">
 						<Underlined>
-							<Typography variant="h5">{t('landingPage.pageTitle')}</Typography>
+							<Typography variant="largeBody">{t('landingPage.pageTitle')}</Typography>
 						</Underlined>
-						<Typography variant="subtitle1" pt={3} pb={3}>
+						<Typography variant="subText" pt={3} pb={3}>
 							{t('landingPage.pageSubtitle')}
 						</Typography>
-						<Typography variant="subtitle2" pt={3}>
+						<Typography variant="note" pt={3}>
 							{t('landingPage.paragraph')}
 						</Typography>
 					</Grid>

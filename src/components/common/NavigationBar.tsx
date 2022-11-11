@@ -83,7 +83,7 @@ const NavigationBar = () => {
 										active={window.location.toString().includes(link.path)}
 										dynamic={true}
 									>
-										<Typography sx={classes.linkElem} variant="h6">
+										<Typography sx={classes.linkElem} variant="body">
 											{/* @ts-ignore */}
 											{t(`${link.name}`)}
 											{/* Giver fejl, men fungerer efter hensigten? */}
@@ -95,7 +95,7 @@ const NavigationBar = () => {
 						<Box sx={{ ...flexCenter, gap: 2 }}>
 							{' '}
 							<ButtonBase onClick={toggleTheme}>{themeToggle()}</ButtonBase>
-							<Typography variant="body1" sx={classes.linkElem}>
+							<Typography variant="body" sx={classes.linkElem}>
 								Salesman Name
 							</Typography>
 							<Avatar></Avatar>
