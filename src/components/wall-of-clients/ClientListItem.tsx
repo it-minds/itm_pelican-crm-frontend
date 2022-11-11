@@ -42,8 +42,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 
 	const fixedWidth = (largeWidth: number | string, smallWidth: number | string) => {
-		// return `clamp(${width}%, ${width}%, ${width}%)`;
-
 		const listItemWidth: ListItemWidth = {
 			minWidth: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
 			width: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
