@@ -87,7 +87,7 @@ const NavigationBar = () => {
 	return (
 		<AppHideOnScroll>
 			<AppBar color="transparent" elevation={0}>
-				<Toolbar>
+				<Toolbar sx={{ paddingX: '24px', paddingY: '8px' }}>
 					<Grid container sx={{ justifyContent: 'space-between' }}>
 						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
 							<IconButton
@@ -122,7 +122,7 @@ const NavigationBar = () => {
 									<MenuItem
 										component={Link}
 										to={link.path}
-										key={Math.random() * 2}
+										key={link.name + link.path}
 										onClick={handleCloseNavMenu}
 									>
 										{/* @ts-ignore */}

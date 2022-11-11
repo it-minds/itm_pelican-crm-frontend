@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -18,6 +18,8 @@ const WallOfClients = () => {
 	const { t } = useTranslation();
 	const [isLoading, setIsLoading] = useState(false);
 	const [isFilterSet, setIsFilterSet] = useState(false);
+	const theme = useTheme();
+	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const testLoading = (): void => {
 		setIsLoading(true);
 		setTimeout(() => {
@@ -27,17 +29,18 @@ const WallOfClients = () => {
 
 	return (
 		<PageContainer>
-			<Underlined>
-				<Typography variant="h1" color="text.primary">
-					{t('wallOfClients.pageTitle')}
-				</Typography>
-			</Underlined>
+			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'}>
+				<Underlined>
+					<Typography variant="h1" color="text.primary">
+						{t('wallOfClients.pageTitle')}
+					</Typography>
+				</Underlined>
+			</Box>
 			<Box
 				aria-label="filter-container"
 				sx={{
 					...flexCenter,
 					width: '100%',
-					// backgroundColor: '#51114290',
 					height: '100px',
 					borderRadius: '10px',
 					paddingX: '1rem',
