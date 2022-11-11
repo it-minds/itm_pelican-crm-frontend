@@ -17,7 +17,7 @@ const GoogleLoginButton = () => {
 			<Button variant="contained" onClick={handleGoogleSignInClick} sx={{ width: 125, height: 50 }}>
 				<Grid container justifyContent="flex-start" gap="10px">
 					<GoogleIcon />
-					<Typography variant="body1">{t('landingPage.loginButtonText')}</Typography>
+					<Typography variant="body">{t('landingPage.loginButtonText')}</Typography>
 				</Grid>
 			</Button>
 		</div>

@@ -45,7 +45,7 @@ const Card: FC<Props> = props => {
 						alignItems: 'center',
 					}}
 				>
-					<Typography variant="body1">Nothing in card</Typography>
+					<Typography variant="body">Nothing in card</Typography>
 				</Box>
 			)}
 		</BaseCard>
