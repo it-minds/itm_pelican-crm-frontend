@@ -3,10 +3,10 @@ import * as types from './graphql';
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
 const documents = {
-    "\n\tquery GetLocations {\n\t\tlocations {\n\t\t\tid\n\t\t\tname\n\t\t\tdescription\n\t\t\tphoto\n\t\t}\n\t}\n": types.GetLocationsDocument,
+    "\n\tquery GetSuppliers {\n\t\tsuppliers {\n\t\t\tid\n\t\t}\n\t}\n": types.GetSuppliersDocument,
 };
 
-export function graphql(source: "\n\tquery GetLocations {\n\t\tlocations {\n\t\t\tid\n\t\t\tname\n\t\t\tdescription\n\t\t\tphoto\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetLocations {\n\t\tlocations {\n\t\t\tid\n\t\t\tname\n\t\t\tdescription\n\t\t\tphoto\n\t\t}\n\t}\n"];
+export function graphql(source: "\n\tquery GetSuppliers {\n\t\tsuppliers {\n\t\t\tid\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetSuppliers {\n\t\tsuppliers {\n\t\t\tid\n\t\t}\n\t}\n"];
 
 export function graphql(source: string): unknown;
 export function graphql(source: string) {
