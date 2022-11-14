@@ -1,3 +1,4 @@
+import { Menu as MenuIcon } from '@mui/icons-material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {
@@ -7,15 +8,19 @@ import {
 	Button,
 	ButtonBase,
 	Grid,
+	IconButton,
+	Menu,
+	MenuItem,
 	Toolbar,
 	Typography,
+	useMediaQuery,
 	useTheme,
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
-import { flexCenter, flexRow } from '../../styles/generalStyles';
+import { flexCenter } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from './HideOnScroll';
 import ImageContainer from './ImageContainer';
@@ -24,7 +29,11 @@ import Underlined from './Underlined';
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const [isDarkMode, setIsDarkMode] = useState(false);
+
 	const currentTheme = useTheme();
+	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+	const isMedium = useMediaQuery(currentTheme.breakpoints.up('md'));
+
 	// const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
 	const location = useLocation();
 
@@ -49,10 +58,6 @@ const NavigationBar = () => {
 			name: 'navbar.suppliersLink',
 			path: '/suppliers',
 		},
-		{
-			name: 'navbar.recommendationsLink',
-			path: '/recommendations',
-		},
 	];
 
 	const themeToggle = () => {
@@ -63,12 +68,62 @@ const NavigationBar = () => {
 		);
 	};
 
+	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorElNav(event.currentTarget);
+	};
+
+	const handleCloseNavMenu = () => {
+		setAnchorElNav(null);
+	};
+
 	return (
 		<AppHideOnScroll>
 			<AppBar color="transparent" elevation={0}>
-				<Toolbar>
+				<Toolbar sx={{ paddingX: '24px', paddingY: '8px' }}>
 					<Grid container sx={{ justifyContent: 'space-between' }}>
-						<Box sx={{ ...flexRow, gap: 2 }}>
+						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+							<IconButton
+								size="large"
+								aria-label="account of current user"
+								aria-controls="menu-appbar"
+								aria-haspopup="true"
+								onClick={handleOpenNavMenu}
+								color="inherit"
+							>
+								<MenuIcon />
+							</IconButton>
+							<Menu
+								id="menu-appbar"
+								anchorEl={anchorElNav}
+								anchorOrigin={{
+									vertical: 'bottom',
+									horizontal: 'left',
+								}}
+								keepMounted
+								transformOrigin={{
+									vertical: 'top',
+									horizontal: 'left',
+								}}
+								open={Boolean(anchorElNav)}
+								onClose={handleCloseNavMenu}
+								sx={{
+									display: isMedium ? 'none' : 'flex',
+								}}
+							>
+								{links.map(link => (
+									<MenuItem
+										component={Link}
+										to={link.path}
+										key={link.name + link.path}
+										onClick={handleCloseNavMenu}
+									>
+										{/* @ts-ignore */}
+										<Typography textAlign="center">{t(`${link.name}`)}</Typography>
+									</MenuItem>
+								))}
+							</Menu>
+						</Box>
+						<Box sx={{ display: isMedium ? 'flex' : 'none', gap: 2 }}>
 							<Button component={NavLink} to="/" sx={classes.brand}>
 								<ImageContainer imageSource="/pelican512.png" imageHeight={32} />
 								<Underlined>
@@ -86,7 +141,6 @@ const NavigationBar = () => {
 										<Typography sx={classes.linkElem} variant="body">
 											{/* @ts-ignore */}
 											{t(`${link.name}`)}
-											{/* Giver fejl, men fungerer efter hensigten? */}
 										</Typography>
 									</Underlined>
 								</ButtonBase>
@@ -95,10 +149,7 @@ const NavigationBar = () => {
 						<Box sx={{ ...flexCenter, gap: 2 }}>
 							{' '}
 							<ButtonBase onClick={toggleTheme}>{themeToggle()}</ButtonBase>
-							<Typography variant="body" sx={classes.linkElem}>
-								Salesman Name
-							</Typography>
-							<Avatar></Avatar>
+							<Avatar>MD</Avatar>
 						</Box>
 					</Grid>
 				</Toolbar>
