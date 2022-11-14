@@ -20,7 +20,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
-import { flexCenter, flexRow } from '../../styles/generalStyles';
+import { flexCenter } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from './HideOnScroll';
 import ImageContainer from './ImageContainer';
@@ -32,7 +32,6 @@ const NavigationBar = () => {
 
 	const currentTheme = useTheme();
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-	const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 	const isMedium = useMediaQuery(currentTheme.breakpoints.up('md'));
 
 	// const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
@@ -72,16 +71,9 @@ const NavigationBar = () => {
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorElNav(event.currentTarget);
 	};
-	const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-		setAnchorElUser(event.currentTarget);
-	};
 
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
-	};
-
-	const handleCloseUserMenu = () => {
-		setAnchorElUser(null);
 	};
 
 	return (
