@@ -4,9 +4,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import PageContainer from '../components/common/PageContainer';
-import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
-import TypographyShowcase from '../components/TypographyShowcase';
+import { GetLocationsQuery } from '../gql/graphql';
 
 const GET_LOCATIONS = gql`
 	query GetLocations {
@@ -20,12 +19,12 @@ const GET_LOCATIONS = gql`
 `;
 
 function DisplayLocations() {
-	const { loading, error, data } = useQuery(GET_LOCATIONS);
+	const { loading, error, data } = useQuery<GetLocationsQuery>(GET_LOCATIONS);
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 
-	return data.locations.map(({ id, name, description, photo }) => (
+	return data?.locations.map(({ id, name, description, photo }) => (
 		<div key={id}>
 			<h3>{name}</h3>
 			<img width="400" height="250" alt="location-reference" src={`${photo}`} />
