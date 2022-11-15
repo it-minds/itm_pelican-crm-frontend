@@ -1,7 +1,7 @@
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { Avatar, Box, Stack, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export type ContactPersonSummary = {
@@ -20,17 +20,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 	const theme = useTheme();
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
-	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
 
-	useEffect(() => {
-		if (theme.palette.mode === 'dark') {
-			setIconColor('#fff');
-		} else {
-			setIconColor(theme.palette.primary.main);
-		}
-	}, [theme]);
-
-	// TODO: change #fff to the corresponding color variable, when theme has been refactored. PLCN 165
 	// TODO: Change 'dark' to enum instead of static string. Requires theme refactor. PLCN 166
 
 	const contactPersonRenderLogic = () => {
@@ -100,7 +90,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								width="60%"
 								direction="row"
 							>
-								<EmailIcon sx={{ color: iconColor }} />
+								<EmailIcon />
 								<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
 									{contactPersons[0].email}
 								</Typography>
@@ -116,7 +106,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								width="40%"
 								direction="row"
 							>
-								<LocalPhoneIcon sx={{ color: iconColor }} />
+								<LocalPhoneIcon />
 								<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
 									{contactPersons[0].phoneNum}
 								</Typography>

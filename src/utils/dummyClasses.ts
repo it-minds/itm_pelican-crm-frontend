@@ -1,5 +1,18 @@
 import { ContactPersonSummary } from '../components/summaries/AccountManagerInfoSummary';
 import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
+import { WallOfClientListItem } from '../components/wall-of-clients/ClientListItem';
+
+// export const dummyListItem1: ClientListItem = {
+// 	client: {
+// 		title: 'Legoland A/S',
+// 		city: 'Billund',
+// 		address: 'Nordmarksvej 9, 7190 Billund, Denmark',
+// 		url: 'legoland.dk',
+// 	},
+// 	contactPersons: contactDummy2,
+// 	suppliers: dummySuppliers3,
+// 	dealStatus: 'Active',
+// };
 
 export const contactDummy0: ContactPersonSummary[] = [];
 
@@ -143,3 +156,28 @@ export const dummySuppliers4: SupplierSummary[] = [
 		location: 'Copenhagen',
 	},
 ];
+export const dummyListItem2: WallOfClientListItem = {
+	client: {
+		title: 'Legoland A/S',
+		city: 'Billund',
+		address: 'Nordmarksvej 9, 7190 Billund, Denmark',
+		url: 'legoland.dk',
+	},
+	contactPersons: contactDummy1,
+	suppliers: dummySuppliers3,
+	dealStatus: 'Active',
+};
+
+export const dummyListItem3: WallOfClientListItem = {
+	client: {
+		title: 'Djurs Sommerland',
+		city: 'Randers',
+		address: 'Nordmarksvej 9, 7190 Billund, Denmark',
+		url: 'djurs.dk',
+	},
+	contactPersons: contactDummy3,
+	suppliers: dummySuppliers3,
+	dealStatus: 'Inactive',
+};
+
+// 3 more different dummyListItems

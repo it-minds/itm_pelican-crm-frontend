@@ -2,7 +2,7 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import ForumIcon from '@mui/icons-material/Forum';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { flexCenter } from '../../styles/generalStyles';
@@ -14,23 +14,14 @@ type DealStatusProps = {
 const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
-	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
 	const { t } = useTranslation();
-
-	useEffect(() => {
-		if (theme.palette.mode === 'dark') {
-			setIconColor('#fff');
-		} else {
-			setIconColor(theme.palette.primary.main);
-		}
-	}, [theme.palette]);
 
 	switch (dealStatus) {
 		case 'Active': {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
-						<HistoryEduIcon fontSize="large" sx={{ color: iconColor }} />
+						<HistoryEduIcon fontSize="large" />
 					</Box>
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
@@ -49,9 +40,9 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 		}
 		case 'Dialog': {
 			return (
-				<Stack direction="row" justifyContent="center" alignItems="center">
+				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
-						<ForumIcon fontSize="large" sx={{ color: iconColor }} />
+						<ForumIcon fontSize="large" />
 					</Box>
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
@@ -65,9 +56,9 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 		}
 		case 'Inactive': {
 			return (
-				<Stack direction="row" justifyContent="center" alignItems="center">
+				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
-						<AcUnitIcon fontSize="large" sx={{ color: iconColor }} />
+						<AcUnitIcon fontSize="large" />
 					</Box>
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
