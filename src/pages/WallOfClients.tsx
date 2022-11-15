@@ -5,11 +5,12 @@ import { useTranslation } from 'react-i18next';
 import Button from '../components/common/Button';
 import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
 import PageContainer from '../components/common/PageContainer';
+import PrimaryFilter from '../components/common/PrimaryFilter';
 import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
-import { flexCenter, flexCol } from '../styles/generalStyles';
+import { flexCenter, flexCol, flexRow } from '../styles/generalStyles';
 // eslint-disable
-import { dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
+import { dummyListItem2, dummyListItem3, dummyCompanyNames } from '../utils/dummyClasses';
 /**
  * TODO: Dummy suppliers above^ - remove when real data is available
  */
@@ -39,15 +40,19 @@ const WallOfClients = () => {
 			<Box
 				aria-label="filter-container"
 				sx={{
-					...flexCenter,
+					...flexRow,
 					width: '100%',
 					height: '100px',
 					borderRadius: '10px',
-					paddingX: '1rem',
 					paddingY: '2rem',
 					marginBottom: '2rem',
+					gap: '3rem',
 				}}
 			>
+				<Box aria-label="primary-container" sx={{ ...flexCol, width: '30%', gap: 2 }}>
+					<PrimaryFilter options={dummyCompanyNames} label="Company Name" />
+					<PrimaryFilter options={dummyCompanyNames} label="Company Name" />
+				</Box>
 				<PopupFilterWrapper
 					onClearClick={() => setIsFilterSet(false)}
 					title={t('wallOfClients.locationFilterButtonDefault')}
