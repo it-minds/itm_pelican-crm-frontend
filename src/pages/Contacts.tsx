@@ -5,18 +5,24 @@ import { useTranslation } from 'react-i18next';
 
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
-import { GetSuppliersQuery } from '../gql/graphql';
+import { GetDudesQuery } from '../gql/graphql';
 
-const GET_SUPPLIERS = gql`
-	query GetSuppliers {
+const GET_DUDES = gql`
+	query GetDudes {
 		suppliers {
 			id
+		}
+		accountManagers {
+			nodes {
+				firstName
+				lastName
+			}
 		}
 	}
 `;
 
 const DisplaySuppliers = () => {
-	const { loading, error, data } = useQuery<GetSuppliersQuery>(GET_SUPPLIERS);
+	const { loading, error, data } = useQuery<GetDudesQuery>(GET_DUDES);
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
@@ -26,9 +32,17 @@ const DisplaySuppliers = () => {
 			{data?.suppliers.map(supplier => (
 				<div>This supplier is called: {supplier.id}</div>
 			))}
+			{data?.accountManagers &&
+				data?.accountManagers?.nodes?.map(manager => (
+					<div>
+						This AM is called: {manager.firstName} {manager.lastName}
+					</div>
+				))}
 		</>
 	);
 };
+
+// TODO: Remove above test-query when actual queries are made
 
 const Contacts = () => {
 	const { t } = useTranslation();

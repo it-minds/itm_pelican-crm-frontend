@@ -500,10 +500,10 @@ export type SupplierInput = {
   websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
-export type GetSuppliersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetDudesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSuppliersQuery = { __typename?: 'Query', suppliers: Array<{ __typename?: 'Supplier', id: any }> };
+export type GetDudesQuery = { __typename?: 'Query', suppliers: Array<{ __typename?: 'Supplier', id: any }>, accountManagers?: { __typename?: 'AccountManagersConnection', nodes?: Array<{ __typename?: 'AccountManager', firstName: string, lastName: string }> | null } | null };
 
 
-export const GetSuppliersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSuppliers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"suppliers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetSuppliersQuery, GetSuppliersQueryVariables>;
+export const GetDudesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDudes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"suppliers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"accountManagers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]}}]} as unknown as DocumentNode<GetDudesQuery, GetDudesQueryVariables>;
