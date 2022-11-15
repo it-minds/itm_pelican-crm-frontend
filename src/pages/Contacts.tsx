@@ -21,7 +21,7 @@ const GET_DUDES = gql`
 	}
 `;
 
-const DisplaySuppliers = () => {
+const DisplayDudes = () => {
 	const { loading, error, data } = useQuery<GetDudesQuery>(GET_DUDES);
 
 	if (loading) return <p>Loading...</p>;
@@ -52,7 +52,7 @@ const Contacts = () => {
 			<Underlined>
 				<Typography variant="h1">{t('contacts.pageTitle')}</Typography>
 			</Underlined>
-			<DisplaySuppliers />
+			<DisplayDudes />
 			{/* <CompanyCardsSkeleton numSkeletons={6} />
 			<TypographyShowcase /> */}
 		</PageContainer>
