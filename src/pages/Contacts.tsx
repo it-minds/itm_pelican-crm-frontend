@@ -53,8 +53,6 @@ const Contacts = () => {
 				<Typography variant="h1">{t('contacts.pageTitle')}</Typography>
 			</Underlined>
 			<DisplayDudes />
-			{/* <CompanyCardsSkeleton numSkeletons={6} />
-			<TypographyShowcase /> */}
 		</PageContainer>
 	);
 };
