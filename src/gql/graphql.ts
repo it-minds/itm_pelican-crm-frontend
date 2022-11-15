@@ -14,8 +14,6 @@ export type Scalars = {
   Float: number;
   /** The `DateTime` scalar represents an ISO-8601 compliant date time type. */
   DateTime: any;
-  /** The built-in `Decimal` scalar type. */
-  Decimal: any;
   /** The `Long` scalar type represents non-fractional signed whole 64-bit numeric values. Long can represent values between -(2^63) and 2^63 - 1. */
   Long: any;
   UUID: any;
@@ -53,36 +51,6 @@ export type AccountManagerDeal = {
   lastUpdatedAt?: Maybe<Scalars['Long']>;
 };
 
-export type AccountManagerDealInput = {
-  accountManager: AccountManagerInput;
-  accountManagerId: Scalars['UUID'];
-  createdAt: Scalars['Long'];
-  deal: DealInput;
-  dealId: Scalars['UUID'];
-  hubSpotAccountManagerId: Scalars['String'];
-  hubSpotDealId: Scalars['String'];
-  id: Scalars['UUID'];
-  isActive: Scalars['Boolean'];
-  lastUpdatedAt?: InputMaybe<Scalars['Long']>;
-};
-
-export type AccountManagerInput = {
-  accountManagerDeals: Array<AccountManagerDealInput>;
-  createdAt: Scalars['Long'];
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  hubSpotId: Scalars['String'];
-  hubSpotUserId: Scalars['Long'];
-  id: Scalars['UUID'];
-  lastName: Scalars['String'];
-  lastUpdatedAt?: InputMaybe<Scalars['Long']>;
-  linkedInUrl?: InputMaybe<Scalars['String']>;
-  phoneNumber?: InputMaybe<Scalars['String']>;
-  pictureUrl?: InputMaybe<Scalars['String']>;
-  supplier: SupplierInput;
-  supplierId: Scalars['UUID'];
-};
-
 /** A connection to a list of items. */
 export type AccountManagersConnection = {
   __typename?: 'AccountManagersConnection';
@@ -105,7 +73,6 @@ export type AccountManagersEdge = {
 
 export type Client = {
   __typename?: 'Client';
-  classification?: Maybe<Scalars['String']>;
   clientContacts: Array<ClientContact>;
   createdAt: Scalars['Long'];
   deals: Array<Deal>;
@@ -115,7 +82,6 @@ export type Client = {
   name: Scalars['String'];
   officeLocation?: Maybe<Scalars['String']>;
   pictureUrl?: Maybe<Scalars['String']>;
-  segment?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
 };
 
@@ -131,34 +97,6 @@ export type ClientContact = {
   id: Scalars['UUID'];
   isActive: Scalars['Boolean'];
   lastUpdatedAt?: Maybe<Scalars['Long']>;
-};
-
-export type ClientContactInput = {
-  client: ClientInput;
-  clientId: Scalars['UUID'];
-  contact: ContactInput;
-  contactId: Scalars['UUID'];
-  createdAt: Scalars['Long'];
-  hubSpotClientId: Scalars['String'];
-  hubSpotContactId: Scalars['String'];
-  id: Scalars['UUID'];
-  isActive: Scalars['Boolean'];
-  lastUpdatedAt?: InputMaybe<Scalars['Long']>;
-};
-
-export type ClientInput = {
-  classification?: InputMaybe<Scalars['String']>;
-  clientContacts: Array<ClientContactInput>;
-  createdAt: Scalars['Long'];
-  deals: Array<DealInput>;
-  hubSpotId: Scalars['String'];
-  id: Scalars['UUID'];
-  lastUpdatedAt?: InputMaybe<Scalars['Long']>;
-  name: Scalars['String'];
-  officeLocation?: InputMaybe<Scalars['String']>;
-  pictureUrl?: InputMaybe<Scalars['String']>;
-  segment?: InputMaybe<Scalars['String']>;
-  website?: InputMaybe<Scalars['String']>;
 };
 
 /** A connection to a list of items. */
@@ -198,22 +136,6 @@ export type Contact = {
   phoneNumber?: Maybe<Scalars['String']>;
 };
 
-export type ContactInput = {
-  clientContacts: Array<ClientContactInput>;
-  createdAt: Scalars['Long'];
-  dealContacts: Array<DealContactInput>;
-  email?: InputMaybe<Scalars['String']>;
-  firstname?: InputMaybe<Scalars['String']>;
-  hubSpotId: Scalars['String'];
-  hubSpotOwnerId: Scalars['String'];
-  id: Scalars['UUID'];
-  jobTitle?: InputMaybe<Scalars['String']>;
-  lastUpdatedAt?: InputMaybe<Scalars['Long']>;
-  lastname?: InputMaybe<Scalars['String']>;
-  linkedInUrl?: InputMaybe<Scalars['String']>;
-  phoneNumber?: InputMaybe<Scalars['String']>;
-};
-
 /** A connection to a list of items. */
 export type ContactsConnection = {
   __typename?: 'ContactsConnection';
@@ -240,30 +162,13 @@ export type Deal = {
   client?: Maybe<Client>;
   clientId?: Maybe<Scalars['UUID']>;
   createdAt: Scalars['Long'];
-  currencyCode?: Maybe<Scalars['String']>;
   dealContacts: Array<DealContact>;
   dealStatus?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['DateTime']>;
-  fillOutAssociations: Deal;
   hubSpotId: Scalars['String'];
   hubSpotOwnerId: Scalars['String'];
   id: Scalars['UUID'];
   lastUpdatedAt?: Maybe<Scalars['Long']>;
-  revenue?: Maybe<Scalars['Decimal']>;
-  updateProperty: Deal;
-};
-
-
-export type DealFillOutAssociationsArgs = {
-  accountManager?: InputMaybe<AccountManagerInput>;
-  client?: InputMaybe<ClientInput>;
-  contacts?: InputMaybe<Array<ContactInput>>;
-};
-
-
-export type DealUpdatePropertyArgs = {
-  propertyName: Scalars['String'];
-  propertyValue: Scalars['String'];
 };
 
 export type DealContact = {
@@ -278,35 +183,6 @@ export type DealContact = {
   id: Scalars['UUID'];
   isActive: Scalars['Boolean'];
   lastUpdatedAt?: Maybe<Scalars['Long']>;
-};
-
-export type DealContactInput = {
-  contact: ContactInput;
-  contactId: Scalars['UUID'];
-  createdAt: Scalars['Long'];
-  deal: DealInput;
-  dealId: Scalars['UUID'];
-  hubSpotContactId: Scalars['String'];
-  hubSpotDealId: Scalars['String'];
-  id: Scalars['UUID'];
-  isActive: Scalars['Boolean'];
-  lastUpdatedAt?: InputMaybe<Scalars['Long']>;
-};
-
-export type DealInput = {
-  accountManagerDeals: Array<AccountManagerDealInput>;
-  client?: InputMaybe<ClientInput>;
-  clientId?: InputMaybe<Scalars['UUID']>;
-  createdAt: Scalars['Long'];
-  currencyCode?: InputMaybe<Scalars['String']>;
-  dealContacts: Array<DealContactInput>;
-  dealStatus?: InputMaybe<Scalars['String']>;
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  hubSpotId: Scalars['String'];
-  hubSpotOwnerId: Scalars['String'];
-  id: Scalars['UUID'];
-  lastUpdatedAt?: InputMaybe<Scalars['Long']>;
-  revenue?: InputMaybe<Scalars['Decimal']>;
 };
 
 /** A connection to a list of items. */
@@ -336,15 +212,6 @@ export type Location = {
   id: Scalars['UUID'];
   lastUpdatedAt?: Maybe<Scalars['Long']>;
   supplier: Supplier;
-  supplierId: Scalars['UUID'];
-};
-
-export type LocationInput = {
-  cityName: Scalars['String'];
-  createdAt: Scalars['Long'];
-  id: Scalars['UUID'];
-  lastUpdatedAt?: InputMaybe<Scalars['Long']>;
-  supplier: SupplierInput;
   supplierId: Scalars['UUID'];
 };
 
@@ -482,22 +349,6 @@ export type Supplier = {
   pictureUrl?: Maybe<Scalars['String']>;
   refreshToken: Scalars['String'];
   websiteUrl?: Maybe<Scalars['String']>;
-};
-
-export type SupplierInput = {
-  accountManagers: Array<AccountManagerInput>;
-  createdAt: Scalars['Long'];
-  email?: InputMaybe<Scalars['String']>;
-  hubSpotId: Scalars['Long'];
-  id: Scalars['UUID'];
-  lastUpdatedAt?: InputMaybe<Scalars['Long']>;
-  linkedInUrl?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  officeLocations: Array<LocationInput>;
-  phoneNumber?: InputMaybe<Scalars['String']>;
-  pictureUrl?: InputMaybe<Scalars['String']>;
-  refreshToken: Scalars['String'];
-  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 export type GetDudesQueryVariables = Exact<{ [key: string]: never; }>;
