@@ -11,7 +11,7 @@ import {
 	useMediaQuery,
 	useTheme,
 } from '@mui/material';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { titleCase } from '../../utils/helperFunctions';
 
@@ -33,15 +33,6 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [openTitleTooltip, setOpenTitleTooltip] = useState(false);
 	const [openAddressTooltip, setOpenAddressTooltip] = useState(false);
-	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
-
-	useEffect(() => {
-		if (theme.palette.mode === 'dark') {
-			setIconColor('#fff');
-		} else {
-			setIconColor(theme.palette.primary.main);
-		}
-	}, [theme.palette]);
 
 	const { title, city, address, url } = client;
 
@@ -49,14 +40,14 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 		if (url && isMedium) {
 			return (
 				<>
-					<WebIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />
+					<WebIcon fontSize="small" />
 					<Typography variant="note" noWrap sx={{ opacity: 0.7, mt: '1px' }}>
 						{titleCase(url ? url : '')}
 					</Typography>
 				</>
 			);
 		} else {
-			return <LanguageIcon fontSize="small" sx={{ color: iconColor, mb: '1px' }} />;
+			return <LanguageIcon fontSize="small" sx={{ mb: '1px' }} />;
 		}
 	};
 
@@ -124,10 +115,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 						alignItems="end"
 						gap="2px"
 					>
-						<LocationCityIcon
-							sx={{ color: iconColor, mb: '1px' }}
-							onTouchStart={handleAddressClick}
-						/>
+						<LocationCityIcon sx={{ mb: '1px' }} onTouchStart={handleAddressClick} />
 						{!isSmall && (
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
 								{city || 'unknown'}

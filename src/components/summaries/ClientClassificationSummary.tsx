@@ -1,7 +1,7 @@
 import { Star } from '@mui/icons-material';
 import { Box, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 
 import { flexRow } from '../../styles/generalStyles';
 import { titleCase } from '../../utils/helperFunctions';
@@ -14,21 +14,11 @@ const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ cla
 	const theme = useTheme();
 	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
-	const [iconColor, setIconColor] = useState(theme.palette.primary.main);
-
-	useEffect(() => {
-		if (theme.palette.mode === 'dark') {
-			setIconColor('#fff');
-		} else {
-			setIconColor(theme.palette.primary.main);
-		}
-	}, [theme.palette]);
 
 	const iconContainerStyle = {
 		...flexRow,
 		justifyContent: 'center',
 		alignItems: 'center',
-		color: iconColor,
 	};
 
 	const tooltipText = (): string => {

@@ -139,6 +139,7 @@ export const darkTheme: ThemeOptions = createTheme(mainTheme);
 
 darkTheme.palette = {
 	...darkTheme.palette,
+
 	mode: 'dark',
 	background: {
 		default: darkBackground,
@@ -146,6 +147,17 @@ darkTheme.palette = {
 	},
 	text: {
 		primary: '#fff',
+	},
+};
+
+darkTheme.components = {
+	...darkTheme.components,
+	MuiSvgIcon: {
+		styleOverrides: {
+			root: {
+				color: '#fff',
+			},
+		},
 	},
 };
 
@@ -160,5 +172,15 @@ lightTheme.palette = {
 	},
 	text: {
 		primary: '#000',
+	},
+};
+lightTheme.components = {
+	...lightTheme.components,
+	MuiSvgIcon: {
+		styleOverrides: {
+			root: {
+				color: '#0E83C6',
+			},
+		},
 	},
 };
