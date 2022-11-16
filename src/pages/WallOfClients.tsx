@@ -1,14 +1,13 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Button from '../components/common/Button';
 import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
 import PrimaryFilter from '../components/common/filters/PrimaryFilter';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
-import { flexCol, flexRow } from '../styles/generalStyles';
+import { flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyCompanyNames, dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
 /**
@@ -17,16 +16,20 @@ import { dummyCompanyNames, dummyListItem2, dummyListItem3 } from '../utils/dumm
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
-	const [isLoading, setIsLoading] = useState(false);
 	const [isFilterSet, setIsFilterSet] = useState(false);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
-	const testLoading = (): void => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 1200);
+	const [filterTest, setFilterTest] = useState<string | string[]>(['']);
+
+	const handleFilterChange = (newValue: string | string[] | null) => {
+		setFilterTest(newValue ? newValue : '');
 	};
+
+	useEffect(() => {
+		if (filterTest.length > 0) {
+			console.log('filterTest', filterTest);
+		}
+	}, [filterTest]);
 
 	return (
 		<PageContainer>
@@ -56,7 +59,13 @@ const WallOfClients = () => {
 					sx={{ ...flexCol, width: isMedium ? '40%' : '80%', gap: 2 }}
 				>
 					<PrimaryFilter options={dummyCompanyNames} label="Company Name" />
-					<PrimaryFilter options={dummyCompanyNames} label="Contact Person" hasSuggestions />
+					<PrimaryFilter
+						options={dummyCompanyNames}
+						label="Contact Person"
+						hasSuggestions
+						multiple
+						onValueChange={handleFilterChange}
+					/>
 				</Box>
 				<PopupFilterWrapper
 					onClearClick={() => setIsFilterSet(false)}
@@ -77,15 +86,6 @@ const WallOfClients = () => {
 					gap: 3,
 				}}
 			>
-				{/* <Button
-					onClick={testLoading}
-					size="small"
-					isFullWidth={false}
-					isLoading={isLoading}
-					secondary
-				>
-					<Typography>Testboy</Typography>
-				</Button> */}
 				<ClientListItem clientListItem={dummyListItem2} />
 				<ClientListItem clientListItem={dummyListItem3} />
 			</Box>
