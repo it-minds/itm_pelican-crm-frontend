@@ -127,7 +127,7 @@ export type Contact = {
   email?: Maybe<Scalars['String']>;
   firstname?: Maybe<Scalars['String']>;
   hubSpotId: Scalars['String'];
-  hubSpotOwnerId: Scalars['String'];
+  hubSpotOwnerId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   jobTitle?: Maybe<Scalars['String']>;
   lastUpdatedAt?: Maybe<Scalars['Long']>;
@@ -166,7 +166,7 @@ export type Deal = {
   dealStatus?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['DateTime']>;
   hubSpotId: Scalars['String'];
-  hubSpotOwnerId: Scalars['String'];
+  hubSpotOwnerId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   lastUpdatedAt?: Maybe<Scalars['Long']>;
 };

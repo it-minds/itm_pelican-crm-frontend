@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,20 +6,7 @@ import { useTranslation } from 'react-i18next';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import { GetDudesQuery } from '../gql/graphql';
-
-const GET_DUDES = gql`
-	query GetDudes {
-		suppliers {
-			id
-		}
-		accountManagers {
-			nodes {
-				firstName
-				lastName
-			}
-		}
-	}
-`;
+import { GET_DUDES } from '../utils/queries/contactsQueries';
 
 const DisplayDudes = () => {
 	const { loading, error, data } = useQuery<GetDudesQuery>(GET_DUDES);
