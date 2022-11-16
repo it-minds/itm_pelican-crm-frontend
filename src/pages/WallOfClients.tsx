@@ -66,6 +66,36 @@ const WallOfClients = () => {
 					>
 						<ClientListItem clientListItem={dummyListItem2} />
 					</PopupFilterWrapper>
+					<PopupFilterWrapper
+						onClearClick={() => setIsFilterSet(false)}
+						title={t('wallOfClients.locationFilterButtonDefault')}
+						active={isFilterSet}
+						onClick={() => {
+							setIsFilterSet(true);
+						}}
+					>
+						<ClientListItem clientListItem={dummyListItem2} />
+					</PopupFilterWrapper>
+					<PopupFilterWrapper
+						onClearClick={() => setIsFilterSet(false)}
+						title={t('wallOfClients.locationFilterButtonDefault')}
+						active={isFilterSet}
+						onClick={() => {
+							setIsFilterSet(true);
+						}}
+					>
+						<ClientListItem clientListItem={dummyListItem2} />
+					</PopupFilterWrapper>
+					<PopupFilterWrapper
+						onClearClick={() => setIsFilterSet(false)}
+						title={t('wallOfClients.locationFilterButtonDefault')}
+						active={false}
+						onClick={() => {
+							setIsFilterSet(true);
+						}}
+					>
+						<ClientListItem clientListItem={dummyListItem2} />
+					</PopupFilterWrapper>
 				</SecondaryFilterContainer>
 			</FilterContainer>
 			<Box
