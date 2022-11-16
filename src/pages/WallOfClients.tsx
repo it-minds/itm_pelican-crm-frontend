@@ -56,7 +56,7 @@ const WallOfClients = () => {
 					sx={{ ...flexCol, width: isMedium ? '40%' : '80%', gap: 2 }}
 				>
 					<PrimaryFilter options={dummyCompanyNames} label="Company Name" />
-					<PrimaryFilter options={dummyCompanyNames} label="Company Name" />
+					<PrimaryFilter options={dummyCompanyNames} label="Contact Person" hasSuggestions />
 				</Box>
 				<PopupFilterWrapper
 					onClearClick={() => setIsFilterSet(false)}
