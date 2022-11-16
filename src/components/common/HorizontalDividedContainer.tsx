@@ -52,7 +52,7 @@ const HorizontalDividedContainer: FC<Props> = ({ sx, children, isDropdown }) => 
 						}}
 						onClick={() => setIsExpanded(!isExpanded)}
 					>
-						<ExpandMoreIcon sx={{ color: '#fff' }} />
+						<ExpandMoreIcon />
 					</IconButton>
 				</Box>
 			)}
