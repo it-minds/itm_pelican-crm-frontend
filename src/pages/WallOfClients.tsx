@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +11,7 @@ import ClientListItem from '../components/wall-of-clients/ClientListItem';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
+import { GET_CLIENTS } from '../utils/queries/wallOfClientsQueries';
 /**
  * TODO: Dummy suppliers above^ - remove when real data is available
  */
@@ -26,6 +28,9 @@ const WallOfClients = () => {
 			setIsLoading(false);
 		}, 1200);
 	};
+	const { loading, error, data } = useQuery(GET_CLIENTS);
+
+	console.log(data);
 
 	return (
 		<PageContainer>
