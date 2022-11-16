@@ -8,6 +8,7 @@ import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper'
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
+import { GetClientsQuery } from '../gql/graphql';
 import { flexCenter, flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
@@ -28,7 +29,7 @@ const WallOfClients = () => {
 			setIsLoading(false);
 		}, 1200);
 	};
-	const { loading, error, data } = useQuery(GET_CLIENTS);
+	const { loading, error, data } = useQuery<GetClientsQuery>(GET_CLIENTS);
 
 	console.log(data);
 
