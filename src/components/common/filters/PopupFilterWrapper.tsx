@@ -43,16 +43,16 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 				onClick={event => handleClick(event)}
 				sx={{
 					height: 'fit-content',
-					pt: '2px',
-					pb: '2px',
+					py: '2px',
 					justifyContent: 'space-between',
-					paddingInline: active ? '0px' : '12px',
-					paddingInlineEnd: '12px',
+					paddingInline: active ? '0px' : '18px',
+					paddingInlineEnd: '18px',
+					borderWidth: '1px',
 				}}
 			>
 				<AnimatePresence>{active && <ClearFilter onClick={onClearFilter} />}</AnimatePresence>
 				<Box>
-					<Typography ml="6px" mt="1px" variant="body2">
+					<Typography ml={active ? '10px' : 0} variant="body">
 						{title}
 					</Typography>
 				</Box>

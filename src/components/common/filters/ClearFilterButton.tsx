@@ -10,8 +10,8 @@ const ClearFilter: FC<ButtonBaseProps> = ({ children, ...rest }) => {
 			animate={{ opacity: 1, width: 30 }}
 			exit={{ opacity: 0, width: 0 }}
 		>
-			<ButtonBase sx={{ borderRadius: '25px' }} {...rest}>
-				<CloseIcon fontSize="small" />
+			<ButtonBase sx={{ marginTop: '1px', borderRadius: '25px' }} {...rest}>
+				<CloseIcon fontSize="medium" />
 			</ButtonBase>
 		</motion.div>
 	);
