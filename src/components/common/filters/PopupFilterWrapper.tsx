@@ -43,8 +43,7 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 				onClick={event => handleClick(event)}
 				sx={{
 					height: 'fit-content',
-					pt: '2px',
-					pb: '2px',
+					py: '2px',
 					justifyContent: 'space-between',
 					paddingInline: active ? '0px' : '12px',
 					paddingInlineEnd: '12px',

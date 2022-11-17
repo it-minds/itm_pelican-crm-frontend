@@ -1,6 +1,6 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
@@ -38,7 +38,7 @@ type ListItemWidth = {
 const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 	const { client, suppliers, contactPersons, dealStatus } = clientListItem;
 	const theme = useTheme();
-
+	const [isExpanded, setIsExpanded] = useState(false);
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 
 	const fixedWidth = (largeWidth: number | string, smallWidth: number | string) => {
@@ -51,7 +51,11 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 	};
 
 	return (
-		<HorizontalDividedContainer isDropdown>
+		<HorizontalDividedContainer
+			isExpandable
+			isExpanded={isExpanded}
+			onExpand={() => setIsExpanded(!isExpanded)}
+		>
 			<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
 				<ClientInfoSummary client={client} />
 			</Box>

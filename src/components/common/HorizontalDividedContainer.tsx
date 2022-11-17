@@ -9,7 +9,9 @@ import Card from './Card';
 export type Props = {
 	sx?: SxProps;
 	children?: JSX.Element | JSX.Element[];
-	isDropdown?: boolean;
+	isExpandable?: boolean;
+	isExpanded?: boolean;
+	onExpand?: () => void;
 };
 
 const darkModeDivider = { backgroundColor: '#fff', opacity: '20%' };
@@ -17,15 +19,20 @@ const darkModeDivider = { backgroundColor: '#fff', opacity: '20%' };
 /**
  * A container that divides its content horizontally into x number columns with a divider inbetween.
  */
-const HorizontalDividedContainer: FC<Props> = ({ sx, children, isDropdown }) => {
+const HorizontalDividedContainer: FC<Props> = ({
+	sx,
+	children,
+	isExpanded,
+	isExpandable,
+	onExpand,
+}) => {
 	const theme = useTheme();
 	const isDarkMode = theme.palette.mode === 'dark';
-	const [isExpanded, setIsExpanded] = useState(false);
 
 	return (
 		<Card fullWidth sx={{ ...flexRow, alignItems: 'center', justifyContent: 'space-between' }}>
 			<Stack
-				width={isDropdown ? '95%' : '100%'}
+				width={isExpandable ? '95%' : '100%'}
 				gap=".3rem"
 				direction="row"
 				alignItems={'center'}
@@ -42,7 +49,7 @@ const HorizontalDividedContainer: FC<Props> = ({ sx, children, isDropdown }) => 
 			>
 				{children}
 			</Stack>
-			{isDropdown && (
+			{isExpandable && (
 				<Box width="5%" display="flex" justifyContent="flex-end" paddingRight={'5px'}>
 					<IconButton
 						disableRipple
@@ -50,7 +57,7 @@ const HorizontalDividedContainer: FC<Props> = ({ sx, children, isDropdown }) => 
 							transition: 'all 0.3s ease-in-out',
 							transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
 						}}
-						onClick={() => setIsExpanded(!isExpanded)}
+						onClick={onExpand}
 					>
 						<ExpandMoreRoundedIcon sx={{ color: '#fff' }} />
 					</IconButton>
