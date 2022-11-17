@@ -26,7 +26,7 @@ const WallOfClients = () => {
 
 	return (
 		<PageContainer>
-			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'} mt="2rem">
+			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'}>
 				<Underlined>
 					<Typography variant="h1" color="text.primary">
 						{t('wallOfClients.pageTitle')}

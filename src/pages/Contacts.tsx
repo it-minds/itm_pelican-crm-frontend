@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import { Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import BackgroundContainer from '../components/common/BackgroundContainer';
 
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';

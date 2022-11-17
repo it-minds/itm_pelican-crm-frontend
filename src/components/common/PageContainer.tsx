@@ -2,13 +2,27 @@ import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
 
+import background from '../../assets/CVI5thElement.png';
+
 export type PageContainerProps = {
 	children: ReactNode;
 };
 
 const PageContainer: FC<PageContainerProps> = ({ children }) => {
 	return (
-		<Grid container justifyContent="center" paddingBottom={10}>
+		<Grid
+			container
+			justifyContent="center"
+			paddingBottom={10}
+			paddingTop={10}
+			height="100vh"
+			style={{
+				backgroundImage: `url(${background})`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+			}}
+		>
 			<StyledPageContainer>{children}</StyledPageContainer>
 		</Grid>
 	);
