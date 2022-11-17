@@ -1,7 +1,10 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import FilterContainer from '../components/common/filters/containers/FilterContainer';
+import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
+import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
 import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
 import PrimaryFilter from '../components/common/filters/PrimaryFilter';
 import PageContainer from '../components/common/PageContainer';
@@ -26,31 +29,16 @@ const WallOfClients = () => {
 
 	return (
 		<PageContainer>
-			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'} mt="2rem">
+			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'}>
 				<Underlined>
 					<Typography variant="h1" color="text.primary">
 						{t('wallOfClients.pageTitle')}
 					</Typography>
 				</Underlined>
 			</Box>
-			<Box
-				aria-label="filter-container"
-				sx={{
-					display: 'flex',
-					flexDirection: isMedium ? 'row' : 'column',
-					justifyContent: isMedium ? 'flex-start' : 'center',
-					alignItems: isMedium ? 'flex-start' : 'center',
-					width: '100%',
-					paddingY: '2rem',
-					marginBottom: '2rem',
-					gap: '3rem',
-					mt: isMedium ? '3rem' : '1rem',
-				}}
-			>
-				<Box
-					aria-label="primary-container"
-					sx={{ ...flexCol, width: isMedium ? '40%' : '80%', gap: 2 }}
-				>
+
+			<FilterContainer>
+				<PrimaryFilterWrapper>
 					<PrimaryFilter options={dummyCompanyNames} label="Company Name" />
 					<PrimaryFilter
 						options={dummyCompanyNames}
@@ -59,18 +47,48 @@ const WallOfClients = () => {
 						multiple
 						onValueChange={handleFilterChange}
 					/>
-				</Box>
-				<PopupFilterWrapper
-					onClearClick={() => setIsFilterSet(false)}
-					title={t('wallOfClients.locationFilterButtonDefault')}
-					active={isFilterSet}
-					onClick={() => {
-						setIsFilterSet(true);
-					}}
-				>
-					<ClientListItem clientListItem={dummyListItem2} />
-				</PopupFilterWrapper>
-			</Box>
+				</PrimaryFilterWrapper>
+				<SecondaryFilterContainer>
+					<PopupFilterWrapper
+						onClearClick={() => setIsFilterSet(false)}
+						title={t('wallOfClients.locationFilterButtonDefault')}
+						active={isFilterSet}
+						onClick={() => {
+							setIsFilterSet(true);
+						}}
+					>
+						<ClientListItem clientListItem={dummyListItem2} />
+					</PopupFilterWrapper>
+					<PopupFilterWrapper
+						onClearClick={() => setIsFilterSet(false)}
+						title={t('wallOfClients.locationFilterButtonDefault')}
+						active={isFilterSet}
+						onClick={() => {
+							setIsFilterSet(true);
+						}}
+					>
+						<ClientListItem clientListItem={dummyListItem2} />
+					</PopupFilterWrapper>
+					<PopupFilterWrapper
+						onClearClick={() => setIsFilterSet(false)}
+						title={t('wallOfClients.locationFilterButtonDefault')}
+						active={isFilterSet}
+						onClick={() => setIsFilterSet(true)}
+					>
+						<ClientListItem clientListItem={dummyListItem2} />
+					</PopupFilterWrapper>
+					<PopupFilterWrapper
+						onClearClick={() => setIsFilterSet(false)}
+						title={t('wallOfClients.locationFilterButtonDefault')}
+						active={false}
+						onClick={() => {
+							setIsFilterSet(true);
+						}}
+					>
+						<ClientListItem clientListItem={dummyListItem2} />
+					</PopupFilterWrapper>
+				</SecondaryFilterContainer>
+			</FilterContainer>
 			<Box
 				sx={{
 					...flexCol,
