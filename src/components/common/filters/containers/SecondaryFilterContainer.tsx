@@ -12,6 +12,7 @@ const SecondaryFilterContainer: FC<JSX.IntrinsicElements['div']> = ({ children }
 			justifyContent="flex-start"
 			gap={2}
 			flexWrap="wrap"
+			aria-label="secondary-filter-container"
 		>
 			{children}
 		</Box>
