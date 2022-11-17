@@ -1,4 +1,4 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import {
 	Box,
 	Button,
@@ -76,7 +76,7 @@ const GoogleLoginCard = () => {
 						aria-expanded={isExpanded}
 						aria-label="Show more"
 					>
-						<ExpandMoreIcon />
+						<ExpandMoreRoundedIcon />
 					</ExpandMore>
 				</CardActions>
 				<Collapse in={isExpanded} timeout="auto" unmountOnExit>

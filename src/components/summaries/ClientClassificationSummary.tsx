@@ -1,4 +1,4 @@
-import { Star } from '@mui/icons-material';
+import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import { Box, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, { FC } from 'react';
@@ -31,25 +31,25 @@ const ClientClassificationSummary: FC<ClientClassificationSummaryProps> = ({ cla
 				return (
 					<>
 						<Box sx={iconContainerStyle}>
-							<Star />
+							<StarRateRoundedIcon />
 						</Box>
 						<Box sx={iconContainerStyle}>
-							<Star />
-							<Star />
+							<StarRateRoundedIcon />
+							<StarRateRoundedIcon />
 						</Box>
 					</>
 				);
 			case 'medium':
 				return (
 					<Box sx={iconContainerStyle}>
-						<Star />
-						<Star />
+						<StarRateRoundedIcon />
+						<StarRateRoundedIcon />
 					</Box>
 				);
 			case 'small':
 				return (
 					<Box sx={iconContainerStyle}>
-						<Star />
+						<StarRateRoundedIcon />
 					</Box>
 				);
 			default:
