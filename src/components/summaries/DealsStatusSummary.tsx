@@ -1,6 +1,6 @@
-import AcUnitIcon from '@mui/icons-material/AcUnit';
-import ForumIcon from '@mui/icons-material/Forum';
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import AcUnitRoundedIcon from '@mui/icons-material/AcUnitRounded';
+import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
+import HistoryEduRoundedIcon from '@mui/icons-material/HistoryEduRounded';
 import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +21,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
-						<HistoryEduIcon fontSize="large" />
+						<HistoryEduRoundedIcon fontSize="large" />
 					</Box>
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
@@ -42,7 +42,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
-						<ForumIcon fontSize="large" />
+						<ForumRoundedIcon fontSize="large" />
 					</Box>
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
@@ -58,7 +58,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
-						<AcUnitIcon fontSize="large" />
+						<AcUnitRoundedIcon fontSize="large" />
 					</Box>
 					{isSmall && (
 						<Stack width="70%" sx={{ ml: 1 }}>
