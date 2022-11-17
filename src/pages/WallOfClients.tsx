@@ -23,8 +23,8 @@ const WallOfClients = () => {
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 
-	const handleFilterChange = () => {
-		// handleFilterChange once data is available
+	const handleFilterChange = (newValue: string | string[] | null) => {
+		// handleFilterChange once real data is available
 	};
 
 	return (
