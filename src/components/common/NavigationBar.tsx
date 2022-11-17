@@ -1,6 +1,6 @@
-import { Menu as MenuIcon } from '@mui/icons-material';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
+import Brightness7RoundedIcon from '@mui/icons-material/Brightness7Rounded';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import {
 	AppBar,
 	Avatar,
@@ -62,9 +62,9 @@ const NavigationBar = () => {
 
 	const themeToggle = () => {
 		return isDarkMode ? (
-			<Brightness4Icon sx={{ color: '#fff' }} />
+			<Brightness4RoundedIcon sx={{ color: '#fff' }} />
 		) : (
-			<Brightness7Icon sx={{ color: '#707070' }} />
+			<Brightness7RoundedIcon sx={{ color: '#707070' }} />
 		);
 	};
 
@@ -90,7 +90,7 @@ const NavigationBar = () => {
 								onClick={handleOpenNavMenu}
 								color="inherit"
 							>
-								<MenuIcon />
+								<MenuRoundedIcon />
 							</IconButton>
 							<Menu
 								id="menu-appbar"
