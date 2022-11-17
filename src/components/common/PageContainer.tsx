@@ -18,8 +18,8 @@ const PageContainer: FC<PageContainerProps> = ({ children }) => {
 			style={{
 				backgroundImage: `url(${background})`,
 				backgroundRepeat: 'no-repeat',
-				backgroundSize: theme.breakpoints.values.md,
-				backgroundPosition: 'bottom -200px left',
+				backgroundSize: theme.breakpoints.values.lg,
+				backgroundPosition: 'bottom -350px left 200px',
 				backgroundAttachment: 'fixed',
 			}}
 		>
