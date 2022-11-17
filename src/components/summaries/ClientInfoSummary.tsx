@@ -1,6 +1,6 @@
-import LanguageIcon from '@mui/icons-material/Language';
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import WebIcon from '@mui/icons-material/Web';
+import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
+import LocationCityRoundedIcon from '@mui/icons-material/LocationCityRounded';
+import WebRoundedIcon from '@mui/icons-material/WebRounded';
 import {
 	Box,
 	Fade,
@@ -40,14 +40,14 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 		if (url && isMedium) {
 			return (
 				<>
-					<WebIcon fontSize="small" />
+					<WebRoundedIcon fontSize="small" />
 					<Typography variant="note" noWrap sx={{ opacity: 0.7, mt: '1px' }}>
 						{titleCase(url ? url : '')}
 					</Typography>
 				</>
 			);
 		} else {
-			return <LanguageIcon fontSize="small" sx={{ mb: '1px' }} />;
+			return <LanguageRoundedIcon fontSize="small" sx={{ mb: '1px' }} />;
 		}
 	};
 
@@ -115,7 +115,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 						alignItems="end"
 						gap="2px"
 					>
-						<LocationCityIcon sx={{ mb: '1px' }} onTouchStart={handleAddressClick} />
+						<LocationCityRoundedIcon sx={{ mb: '1px' }} onTouchStart={handleAddressClick} />
 						{!isSmall && (
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
 								{city || 'unknown'}

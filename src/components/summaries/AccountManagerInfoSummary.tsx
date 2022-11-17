@@ -1,5 +1,5 @@
-import EmailIcon from '@mui/icons-material/Email';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
 import { Avatar, Box, Stack, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -90,7 +90,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								width="60%"
 								direction="row"
 							>
-								<EmailIcon />
+								<EmailRoundedIcon />
 								<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
 									{contactPersons[0].email}
 								</Typography>
@@ -106,7 +106,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 								width="40%"
 								direction="row"
 							>
-								<LocalPhoneIcon />
+								<LocalPhoneRoundedIcon />
 								<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
 									{contactPersons[0].phoneNum}
 								</Typography>
