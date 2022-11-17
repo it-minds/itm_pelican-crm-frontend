@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
 
@@ -9,6 +9,8 @@ export type PageContainerProps = {
 };
 
 const PageContainer: FC<PageContainerProps> = ({ children }) => {
+	const theme = useTheme();
+
 	return (
 		<Grid
 			container
@@ -16,8 +18,8 @@ const PageContainer: FC<PageContainerProps> = ({ children }) => {
 			style={{
 				backgroundImage: `url(${background})`,
 				backgroundRepeat: 'no-repeat',
-				backgroundSize: '80%',
-				backgroundPosition: '',
+				backgroundSize: theme.breakpoints.values.md,
+				backgroundPosition: 'bottom -200px left',
 				backgroundAttachment: 'fixed',
 			}}
 		>
@@ -25,6 +27,8 @@ const PageContainer: FC<PageContainerProps> = ({ children }) => {
 		</Grid>
 	);
 };
+
+// TODO: Maybe remove background image on mobile (when viewwidth is below small). Awaiting response from PM.
 
 const StyledPageContainer = styled(Grid)<PageContainerProps>(({ theme }) => ({
 	alignContent: 'center',
