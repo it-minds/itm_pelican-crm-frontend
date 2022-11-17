@@ -19,17 +19,10 @@ const WallOfClients = () => {
 	const [isFilterSet, setIsFilterSet] = useState(false);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
-	const [filterTest, setFilterTest] = useState<string | string[]>(['']);
 
 	const handleFilterChange = (newValue: string | string[] | null) => {
-		setFilterTest(newValue ? newValue : '');
+		// handleFilterChange once real data is available
 	};
-
-	useEffect(() => {
-		if (filterTest.length > 0) {
-			console.log('filterTest', filterTest);
-		}
-	}, [filterTest]);
 
 	return (
 		<PageContainer>
