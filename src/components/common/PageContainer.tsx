@@ -3,6 +3,7 @@ import { styled } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
 
 import background from '../../assets/CVI5thElement.png';
+import BackgroundContainer from './BackgroundContainer';
 
 export type PageContainerProps = {
 	children: ReactNode;
@@ -15,12 +16,12 @@ const PageContainer: FC<PageContainerProps> = ({ children }) => {
 			justifyContent="center"
 			paddingBottom={10}
 			paddingTop={10}
-			height="100vh"
 			style={{
 				backgroundImage: `url(${background})`,
 				backgroundRepeat: 'no-repeat',
-				backgroundSize: 'cover',
-				backgroundPosition: 'center',
+				backgroundSize: '50%',
+				backgroundPosition: 'left top',
+				backgroundAttachment: 'fixed',
 			}}
 		>
 			<StyledPageContainer>{children}</StyledPageContainer>
@@ -29,7 +30,6 @@ const PageContainer: FC<PageContainerProps> = ({ children }) => {
 };
 
 const StyledPageContainer = styled(Grid)<PageContainerProps>(({ theme }) => ({
-	backgroundColor: 'background.default',
 	pt: '4rem',
 	alignContent: 'center',
 	flexDirection: 'column',
