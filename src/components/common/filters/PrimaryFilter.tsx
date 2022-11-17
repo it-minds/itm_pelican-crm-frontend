@@ -10,7 +10,6 @@ type PrimaryFilterProps = {
 	freeSolo?: boolean;
 	//* if the options received are objects, the below prop should be used vvv
 	//* getOptionLabel: (option: CompanyInfo) => option.name, <-- something similar to this
-	getOptionLabel?: (option: string) => string;
 } & TextFieldProps;
 
 const DROPDOWN_PLACEHOLDER = 'Type to search...';
@@ -36,6 +35,7 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 
 	useEffect(() => {
 		if (!hasSuggestions) return;
+
 		if (inputValue.length > 0) {
 			const newOptions = new Set(options);
 			setFilteredOptions(newOptions);
@@ -48,6 +48,8 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			if (inputValue.length > 0) {
+				console.log('inputValue', inputValue);
+
 				onValueChange && onValueChange(inputValue);
 			} else return;
 		}, 350);
@@ -58,10 +60,23 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 
 	const handleSelection = (newValue: string | string[] | null) => {
 		// TODO: Try to achieve the same functionality in a less hacky way
-		if (newValue?.includes(DROPDOWN_PLACEHOLDER)) return;
+		if (newValue?.includes(DROPDOWN_PLACEHOLDER) || !hasSuggestions) return;
+		console.log('newValue', newValue);
 
 		setValue(newValue);
 		onValueChange && onValueChange(newValue);
+	};
+
+	const getOptionsLabel = (option: string | string[] | null): string => {
+		if (typeof option === 'string') return option;
+
+		if (multiple) {
+			console.log('option', option);
+
+			const optionArr = option as string[];
+			return optionArr.join(', ');
+		}
+		return '';
 	};
 
 	return (
@@ -77,6 +92,7 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 			}}
 			onClose={() => setIsOpen(false)}
 			fullWidth={fullWidth}
+			getOptionLabel={getOptionsLabel}
 			open={hasSuggestions ? isOpen : false}
 			inputValue={inputValue}
 			onInputChange={(event, newInputValue) => setInputValue(newInputValue)}
