@@ -1,5 +1,5 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
@@ -22,17 +22,10 @@ const WallOfClients = () => {
 	const [isFilterSet, setIsFilterSet] = useState(false);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
-	const [filterTest, setFilterTest] = useState<string | string[]>(['']);
 
-	const handleFilterChange = (newValue: string | string[] | null) => {
-		setFilterTest(newValue ? newValue : '');
+	const handleFilterChange = () => {
+		// handleFilterChange once data is available
 	};
-
-	useEffect(() => {
-		if (filterTest.length > 0) {
-			console.log('filterTest', filterTest);
-		}
-	}, [filterTest]);
 
 	return (
 		<PageContainer>
@@ -80,9 +73,7 @@ const WallOfClients = () => {
 						onClearClick={() => setIsFilterSet(false)}
 						title={t('wallOfClients.locationFilterButtonDefault')}
 						active={isFilterSet}
-						onClick={() => {
-							setIsFilterSet(true);
-						}}
+						onClick={() => setIsFilterSet(true)}
 					>
 						<ClientListItem clientListItem={dummyListItem2} />
 					</PopupFilterWrapper>
