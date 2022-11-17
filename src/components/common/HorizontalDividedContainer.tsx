@@ -1,4 +1,4 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import { Box, Divider, IconButton, useTheme } from '@mui/material';
 import { Stack, SxProps } from '@mui/system';
 import React, { FC, useState } from 'react';
@@ -52,7 +52,7 @@ const HorizontalDividedContainer: FC<Props> = ({ sx, children, isDropdown }) => 
 						}}
 						onClick={() => setIsExpanded(!isExpanded)}
 					>
-						<ExpandMoreIcon />
+						<ExpandMoreRoundedIcon sx={{ color: '#fff' }} />
 					</IconButton>
 				</Box>
 			)}

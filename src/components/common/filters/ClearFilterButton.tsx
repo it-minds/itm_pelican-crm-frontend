@@ -1,4 +1,4 @@
-import CloseIcon from '@mui/icons-material/Close';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { ButtonBase, ButtonBaseProps } from '@mui/material';
 import { motion } from 'framer-motion';
 import React, { FC } from 'react';
@@ -10,8 +10,8 @@ const ClearFilter: FC<ButtonBaseProps> = ({ children, ...rest }) => {
 			animate={{ opacity: 1, width: 30 }}
 			exit={{ opacity: 0, width: 0 }}
 		>
-			<ButtonBase sx={{ marginTop: '1px', borderRadius: '25px' }} {...rest}>
-				<CloseIcon fontSize="medium" />
+			<ButtonBase sx={{ borderRadius: '25px' }} {...rest}>
+				<CloseRoundedIcon fontSize="small" />
 			</ButtonBase>
 		</motion.div>
 	);
