@@ -121,12 +121,16 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 	const suppliersTwoToThree = () => {
 		return (
 			<Stack width="100%" direction="row" gap={'3px'}>
-				{contactPersons.map(contact => (
+				{contactPersons.map((contact, index) => (
 					<Tooltip
+						key={contact.id}
 						title={`${contact.firstName} ${contact.lastName} | ${contact.email} | ${contact.phoneNum}`}
 						placement="top-start"
 					>
-						<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
+						<Avatar
+							key={contact.id}
+							sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}
+						>
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
 								{`${contact.firstName.charAt(0)} ${contact.lastName.charAt(0)}`}
 							</Typography>

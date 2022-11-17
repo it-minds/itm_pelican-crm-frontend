@@ -10,6 +10,7 @@ type PrimaryFilterProps = {
 	freeSolo?: boolean;
 	//* if the options received are objects, the below prop should be used vvv
 	//* getOptionLabel: (option: CompanyInfo) => option.name, <-- something similar to this
+	getOptionLabel?: (option: string) => string;
 } & TextFieldProps;
 
 const DROPDOWN_PLACEHOLDER = 'Type to search...';
@@ -56,12 +57,16 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 	}, [inputValue, onValueChange]);
 
 	const handleSelection = (newValue: string | string[] | null) => {
+		// TODO: Try to achieve the same functionality in a less hacky way
+		if (newValue?.includes(DROPDOWN_PLACEHOLDER)) return;
+
 		setValue(newValue);
 		onValueChange && onValueChange(newValue);
 	};
 
 	return (
 		<Autocomplete
+			options={Array.from(filteredOptions)}
 			disablePortal
 			value={multiple ? (value as string[]) : value}
 			freeSolo={freeSolo}
@@ -76,7 +81,6 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 			inputValue={inputValue}
 			onInputChange={(event, newInputValue) => setInputValue(newInputValue)}
 			onChange={(event, newValue) => handleSelection(newValue)}
-			options={Array.from(filteredOptions)}
 			renderInput={params => <TextField {...params} label={label} />}
 		/>
 	);
