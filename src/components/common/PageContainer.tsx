@@ -29,7 +29,6 @@ const PageContainer: FC<PageContainerProps> = ({ children }) => {
 };
 
 // TODO: Maybe remove background image on mobile (when viewwidth is below small). Awaiting response from PM.
-// TODO: Reupload background image so the glare effect isn't cut off early. Awaiting final choice of background figure.
 
 const StyledPageContainer = styled(Grid)<PageContainerProps>(({ theme }) => ({
 	alignContent: 'center',
