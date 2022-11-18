@@ -3,6 +3,7 @@ import { styled } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
 
 import background from '../../assets/twoday-5th-element-square-dark-orange.png';
+// If load times are too long, consider scaling down background picture (500 kB)
 
 export type PageContainerProps = {
 	children: ReactNode;
