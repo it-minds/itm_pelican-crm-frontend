@@ -57,9 +57,10 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 			display="flex"
 			flexDirection="column"
 			alignItems="flex-end"
+			paddingBottom={isExpanded ? '.5rem' : '0'}
 			sx={{
 				backgroundColor: 'background.paper',
-				borderRadius: '1rem 1rem 0 0 ',
+				borderRadius: isExpanded ? '1rem 1rem 0 0' : '1rem',
 			}}
 		>
 			<HorizontalDividedContainer
@@ -97,8 +98,8 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 						cardStyles={{
 							border: 'none',
 							boxShadow: 'none',
-							borderRadius: '0',
-							borderLeft: '1px solid white',
+							borderRadius: isExpanded ? '0' : '',
+							borderLeft: '2px solid #626262',
 						}}
 					>
 						<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
@@ -122,7 +123,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 							border: 'none',
 							boxShadow: 'none',
 							borderRadius: '0',
-							borderLeft: '1px solid white',
+							borderLeft: '2px solid #626262',
 						}}
 					>
 						<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>

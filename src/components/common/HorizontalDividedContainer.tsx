@@ -39,8 +39,8 @@ const HorizontalDividedContainer: FC<Props> = ({
 				alignItems: 'center',
 				justifyContent: 'space-between',
 				borderBottom: isExpanded ? '0' : '',
-				borderBottomLeftRadius: isExpanded ? '0' : '',
-				borderBottomRightRadius: isExpanded ? '0' : '',
+				borderBottomLeftRadius: isExpanded ? '0' : 6,
+				borderBottomRightRadius: isExpanded ? '0' : 6,
 				boxShadow: isExpanded ? '0' : '',
 				...cardStyles,
 			}}
