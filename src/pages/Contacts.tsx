@@ -2,7 +2,6 @@ import { gql, useQuery } from '@apollo/client';
 import { Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import BackgroundContainer from '../components/common/BackgroundContainer';
 
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
@@ -10,9 +9,6 @@ import { GetDudesQuery } from '../gql/graphql';
 
 const GET_DUDES = gql`
 	query GetDudes {
-		suppliers {
-			id
-		}
 		accountManagers {
 			nodes {
 				firstName
@@ -30,9 +26,6 @@ const DisplayDudes = () => {
 
 	return (
 		<>
-			{data?.suppliers.map(supplier => (
-				<div>This supplier is called: {supplier.id}</div>
-			))}
 			{data?.accountManagers &&
 				data?.accountManagers?.nodes?.map(manager => (
 					<div>
