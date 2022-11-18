@@ -45,7 +45,7 @@ declare module '@mui/material/Typography' {
 // Colors
 const primaryColor = '#0E83C6';
 const secondaryColor = '#DD0C6A';
-const darkBackground = '#303030';
+const darkBackground = '#00173a';
 const darkPaper = '#424242';
 
 // Animations
