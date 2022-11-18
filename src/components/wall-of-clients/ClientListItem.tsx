@@ -39,6 +39,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 	const { client, suppliers, contactPersons, dealStatus } = clientListItem;
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
+	const [isDoubleExpanded, setIsDoubleExpanded] = useState(false);
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 
 	const fixedWidth = (largeWidth: number | string, smallWidth: number | string) => {
@@ -51,24 +52,98 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 	};
 
 	return (
-		<HorizontalDividedContainer
-			isExpandable
-			isExpanded={isExpanded}
-			onExpand={() => setIsExpanded(!isExpanded)}
+		<Box
+			width="100%"
+			display="flex"
+			flexDirection="column"
+			alignItems="flex-end"
+			sx={{
+				backgroundColor: 'background.paper',
+				borderRadius: '1rem 1rem 0 0 ',
+			}}
 		>
-			<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
-				<ClientInfoSummary client={client} />
-			</Box>
-			<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-				<SupplierInfoSummary suppliers={suppliers} />
-			</Box>
-			<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-				<DealsStatusSummary dealStatus={dealStatus} />
-			</Box>
-			<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-				<AccountManagerInfoSummary contactPersons={contactPersons} />
-			</Box>
-		</HorizontalDividedContainer>
+			<HorizontalDividedContainer
+				isExpandable
+				isExpanded={isExpanded}
+				onExpand={() => setIsExpanded(!isExpanded)}
+			>
+				<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
+					<ClientInfoSummary client={client} />
+				</Box>
+				<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+					<SupplierInfoSummary suppliers={suppliers} />
+				</Box>
+				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
+					<DealsStatusSummary dealStatus={dealStatus} />
+				</Box>
+				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+					<AccountManagerInfoSummary contactPersons={contactPersons} />
+				</Box>
+			</HorizontalDividedContainer>
+			{/* <AnimatePresence> */}
+			{isExpanded && (
+				// <motion.div
+				// 	transition={{
+				// 		y: { duration: 0.5 },
+				// 		default: { ease: 'linear' },
+				// 	}}
+				// 	initial={{ width: '100%' }}
+				// >
+				<Box pl="16px" minWidth="100%" display="flex" flexDirection="column" gap="2">
+					<HorizontalDividedContainer
+						isExpandable
+						onExpand={() => setIsDoubleExpanded(!isDoubleExpanded)}
+						isExpanded={isDoubleExpanded}
+						cardStyles={{
+							border: 'none',
+							boxShadow: 'none',
+							borderRadius: '0',
+							borderLeft: '1px solid white',
+						}}
+					>
+						<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
+							<ClientInfoSummary client={client} />
+						</Box>
+						<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+							<SupplierInfoSummary suppliers={suppliers} />
+						</Box>
+						<Box {...fixedWidth(20, 6)} sx={flexCenter}>
+							<DealsStatusSummary dealStatus={dealStatus} />
+						</Box>
+						<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+							<AccountManagerInfoSummary contactPersons={contactPersons} />
+						</Box>
+					</HorizontalDividedContainer>
+					<HorizontalDividedContainer
+						isExpandable
+						onExpand={() => setIsDoubleExpanded(!isDoubleExpanded)}
+						isExpanded={isDoubleExpanded}
+						cardStyles={{
+							border: 'none',
+							boxShadow: 'none',
+							borderRadius: '0',
+							borderLeft: '1px solid white',
+						}}
+					>
+						<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
+							<ClientInfoSummary client={client} />
+						</Box>
+						<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+							<SupplierInfoSummary suppliers={suppliers} />
+						</Box>
+						<Box {...fixedWidth(20, 6)} sx={flexCenter}>
+							<DealsStatusSummary dealStatus={dealStatus} />
+						</Box>
+						<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+							<AccountManagerInfoSummary contactPersons={contactPersons} />
+						</Box>
+					</HorizontalDividedContainer>
+				</Box>
+
+				// </motion.div>
+			)}
+			{/* </AnimatePresence> */}
+		</Box>
 	);
 };
 

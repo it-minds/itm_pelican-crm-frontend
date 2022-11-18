@@ -1,7 +1,7 @@
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import { Box, Divider, IconButton, useTheme } from '@mui/material';
 import { Stack, SxProps } from '@mui/system';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 
 import { flexRow } from '../../styles/generalStyles';
 import Card from './Card';
@@ -12,6 +12,7 @@ export type Props = {
 	isExpandable?: boolean;
 	isExpanded?: boolean;
 	onExpand?: () => void;
+	cardStyles?: SxProps;
 };
 
 const darkModeDivider = { backgroundColor: '#fff', opacity: '20%' };
@@ -25,12 +26,25 @@ const HorizontalDividedContainer: FC<Props> = ({
 	isExpanded,
 	isExpandable,
 	onExpand,
+	cardStyles,
 }) => {
 	const theme = useTheme();
 	const isDarkMode = theme.palette.mode === 'dark';
 
 	return (
-		<Card fullWidth sx={{ ...flexRow, alignItems: 'center', justifyContent: 'space-between' }}>
+		<Card
+			fullWidth
+			sx={{
+				...flexRow,
+				alignItems: 'center',
+				justifyContent: 'space-between',
+				borderBottom: isExpanded ? '0' : '',
+				borderBottomLeftRadius: isExpanded ? '0' : '',
+				borderBottomRightRadius: isExpanded ? '0' : '',
+				boxShadow: isExpanded ? '0' : '',
+				...cardStyles,
+			}}
+		>
 			<Stack
 				width={isExpandable ? '95%' : '100%'}
 				gap=".3rem"
