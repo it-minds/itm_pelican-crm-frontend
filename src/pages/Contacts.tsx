@@ -9,9 +9,6 @@ import { GetDudesQuery } from '../gql/graphql';
 
 const GET_DUDES = gql`
 	query GetDudes {
-		suppliers {
-			id
-		}
 		accountManagers {
 			nodes {
 				firstName
@@ -29,9 +26,6 @@ const DisplayDudes = () => {
 
 	return (
 		<>
-			{data?.suppliers.map(supplier => (
-				<div>This supplier is called: {supplier.id}</div>
-			))}
 			{data?.accountManagers &&
 				data?.accountManagers?.nodes?.map(manager => (
 					<div>

@@ -1,5 +1,5 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
@@ -26,7 +26,7 @@ const WallOfClients = () => {
 
 	return (
 		<PageContainer>
-			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'} mt="2rem">
+			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'}>
 				<Underlined>
 					<Typography variant="h1" color="text.primary">
 						{t('wallOfClients.pageTitle')}
