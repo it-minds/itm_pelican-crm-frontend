@@ -51,6 +51,7 @@ const HorizontalDividedContainer: FC<Props> = ({
 				direction="row"
 				alignItems={'center'}
 				justifyContent={'space-between'}
+				height="100%"
 				sx={sx}
 				divider={
 					<Divider
