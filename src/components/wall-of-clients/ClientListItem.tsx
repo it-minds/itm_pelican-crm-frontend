@@ -1,7 +1,7 @@
 import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import AccountManagerInfoSummary, {
@@ -119,6 +119,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 			sx={{
 				backgroundColor: 'background.paper',
 				borderRadius: isExpanded ? '1rem 1rem 0 0' : '1rem',
+				transitions: 'all .3s ease-in-out',
 			}}
 		>
 			<HorizontalDividedContainer
@@ -141,74 +142,28 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 			</HorizontalDividedContainer>
 			<AnimatePresence>
 				{isExpanded && (
-					<motion.div
-						initial={{ y: -20, opacity: 0, width: '100%', height: '100%' }}
-						animate={{ y: 0, opacity: 1, height: '100%' }}
-						exit={{ y: -10, opacity: 0, height: '0%' }}
-					>
-						<Stack pl="10px" width="100%" gap="2" sx={{ transition: 'all 0.3s ease-in-out' }}>
-							<Stack gap="3px" direction="row" alignItems="center">
-								<Box
-									sx={{
-										...nestingLineStyle,
-										height: nestedLineHeight && `${nestedLineHeight - 10}px`,
-									}}
-									onClick={() => setIsExpanded(false)}
-								/>
-								<Stack width="100%" ref={nestedList}>
-									{/* <Stack gap="3px" width="100%">
-							<HorizontalDividedContainer
-							isExpandable
-							onExpand={() => setIsDoubleExpanded(!isDoubleExpanded)}
-							isExpanded={isDoubleExpanded}
-							cardStyles={{
-									border: 'none',
-									boxShadow: 'none',
-									borderRadius: isExpanded ? '0' : '',
-								}}
-							>
-							<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
-									<ClientInfoSummary client={client} />
-								</Box>
-								<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-									<SupplierInfoSummary suppliers={suppliers} />
-								</Box>
-								<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-									<DealsStatusSummary dealStatus={dealStatus} />
-								</Box>
-								<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-									<AccountManagerInfoSummary contactPersons={contactPersons} />
-									</Box>
-							</HorizontalDividedContainer> */}
-									{clientList}
+					<MotionConfig transition={{ duration: 0.15 }}>
+						<motion.div
+							initial={{ y: -20, opacity: 0, width: '100%', height: '100%' }}
+							animate={{ y: 0, opacity: 1, height: '100%' }}
+							exit={{ y: -15, height: '0%', opacity: '10%' }}
+						>
+							<Stack pl="10px" width="100%" gap="2">
+								<Stack gap="3px" direction="row" alignItems="center">
+									<Box
+										sx={{
+											...nestingLineStyle,
+											height: nestedLineHeight && `${nestedLineHeight - 10}px`,
+										}}
+										onClick={() => setIsExpanded(false)}
+									/>
+									<Stack width="100%" ref={nestedList}>
+										{clientList}
+									</Stack>
 								</Stack>
 							</Stack>
-							{/* <HorizontalDividedContainer
-						isExpandable
-						onExpand={() => setIsDoubleExpanded(!isDoubleExpanded)}
-						isExpanded={isDoubleExpanded}
-						cardStyles={{
-							border: 'none',
-							boxShadow: 'none',
-							borderRadius: '0',
-							borderLeft: '2px solid #626262',
-						}}
-					>
-						<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
-							<ClientInfoSummary client={client} />
-						</Box>
-						<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-							<SupplierInfoSummary suppliers={suppliers} />
-							</Box>
-							<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-							<DealsStatusSummary dealStatus={dealStatus} />
-							</Box>
-							<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-							<AccountManagerInfoSummary contactPersons={contactPersons} />
-							</Box>
-						</HorizontalDividedContainer> */}
-						</Stack>
-					</motion.div>
+						</motion.div>
+					</MotionConfig>
 				)}
 			</AnimatePresence>
 		</Box>
