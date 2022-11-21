@@ -10,6 +10,7 @@ import AccountManagerInfoSummary, {
 import ClientInfoSummary, { ClientSummary } from '../summaries/ClientInfoSummary';
 import DealsStatusSummary from '../summaries/DealsStatusSummary';
 import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';
+import NestingIndicator from '../common/NestingIndicator';
 
 export type WallOfClientListItem = {
 	client: ClientSummary;
@@ -28,7 +29,7 @@ type ListItemWidth = {
 };
 
 export const nestingLineStyle = {
-	backgroundColor: '#626262',
+	backgroundColor: '#2d3f5b',
 	width: '13px',
 	border: '5px solid',
 	borderColor: 'background.paper',
@@ -150,12 +151,17 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 						>
 							<Stack pl="10px" width="100%" gap="2">
 								<Stack gap="3px" direction="row" alignItems="center">
-									<Box
+									{/* <Box
 										sx={{
 											...nestingLineStyle,
 											height: nestedLineHeight && `${nestedLineHeight - 10}px`,
 										}}
 										onClick={() => setIsExpanded(false)}
+									/> */}
+									<NestingIndicator
+										onClick={() => setIsExpanded(false)}
+										height={nestedLineHeight}
+										ref={nestedList}
 									/>
 									<Stack width="100%" ref={nestedList}>
 										{clientList}
