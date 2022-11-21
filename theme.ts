@@ -44,9 +44,9 @@ declare module '@mui/material/Typography' {
 
 // Colors
 const primaryColor = '#0E83C6';
-const secondaryColor = '#DD0C6A';
+const secondaryColor = '#ff3242';
 const darkBackground = '#00173a';
-const darkPaper = '#424242';
+const darkPaper = '#00173aea';
 
 // Animations
 export const cubicTransition = 'cubic-bezier(0.4, 0, 0.2, 1) 0s';
@@ -155,7 +155,7 @@ darkTheme.components = {
 	MuiSvgIcon: {
 		styleOverrides: {
 			root: {
-				color: '#fff',
+				color: '#ff3242',
 			},
 		},
 	},
