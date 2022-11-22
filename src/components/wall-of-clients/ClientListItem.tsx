@@ -28,17 +28,6 @@ type ListItemWidth = {
 	maxWidth: string | number;
 };
 
-export const nestingLineStyle = {
-	backgroundColor: '#2d3f5b',
-	width: '13px',
-	border: '5px solid',
-	borderColor: 'background.paper',
-	'&:hover': {
-		backgroundColor: 'white',
-		cursor: 'pointer',
-	},
-};
-
 /**
  * This component is used exclusively in the WallOfClients page and displays a client's information.
  * Uses the `HorizontalDividedContainer` component and includes the following summaries:
@@ -60,15 +49,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 		setNestedLineHeight(nestedList.current?.clientHeight);
 	}, [isExpanded, isDoubleExpanded]);
 
-	const fixedWidth = (largeWidth: number | string, smallWidth: number | string) => {
-		const listItemWidth: ListItemWidth = {
-			minWidth: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
-			width: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
-			maxWidth: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
-		};
-		return listItemWidth;
-	};
-
 	const clientListArray = [
 		clientListItem,
 		clientListItem,
@@ -89,7 +69,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 				cardStyles={{
 					border: 'none',
 					boxShadow: 'none',
-					borderRadius: isExpanded ? '0' : '',
+					borderRadius: 6,
 					height: '100%',
 				}}
 			>
@@ -119,14 +99,18 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 			paddingBottom={isExpanded ? '.5rem' : '0'}
 			sx={{
 				backgroundColor: 'background.paper',
-				borderRadius: isExpanded ? '1rem 1rem 0 0' : '1rem',
-				transitions: 'all .3s ease-in-out',
+				borderRadius: 2,
+				border: isExpanded ? '1px solid' : 'none',
+				borderColor: theme.palette.primary.main + '30',
 			}}
 		>
 			<HorizontalDividedContainer
 				isExpandable
 				isExpanded={isExpanded}
 				onExpand={() => setIsExpanded(!isExpanded)}
+				cardStyles={{
+					border: isExpanded ? theme.palette.primary.main + '30' : '',
+				}}
 			>
 				<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
 					<ClientInfoSummary client={client} />
@@ -151,13 +135,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 						>
 							<Stack pl="10px" width="100%" gap="2">
 								<Stack gap="3px" direction="row" alignItems="center">
-									{/* <Box
-										sx={{
-											...nestingLineStyle,
-											height: nestedLineHeight && `${nestedLineHeight - 10}px`,
-										}}
-										onClick={() => setIsExpanded(false)}
-									/> */}
 									<NestingIndicator
 										onClick={() => setIsExpanded(false)}
 										height={nestedLineHeight}
@@ -174,6 +151,15 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 			</AnimatePresence>
 		</Box>
 	);
+
+	function fixedWidth(largeWidth: number | string, smallWidth: number | string) {
+		const listItemWidth: ListItemWidth = {
+			minWidth: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
+			width: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
+			maxWidth: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
+		};
+		return listItemWidth;
+	}
 };
 
 export default ClientListItem;
