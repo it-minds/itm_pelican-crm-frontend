@@ -79,7 +79,7 @@ function determineBackgroundColor(secondary: boolean | undefined, btnType: Butto
 	if (btnType === 'default') {
 		return secondary ? theme.palette.secondary.main : theme.palette.primary.main;
 	}
-	return theme.palette.background.paper;
+	return 'transparent';
 }
 
 const Button: FC<Props> = ({ children, onClick, sx, ...styleProps }) => {

@@ -109,6 +109,7 @@ mainTheme.typography = {
 		textTransform: 'none',
 	},
 	body: {
+		fontFamily: 'Poppins',
 		fontSize: 16,
 		fontWeight: 400,
 	},

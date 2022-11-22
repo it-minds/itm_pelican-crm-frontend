@@ -35,6 +35,7 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 
 	useEffect(() => {
 		if (!hasSuggestions) return;
+
 		if (inputValue.length > 0) {
 			const newOptions = new Set(options);
 			setFilteredOptions(newOptions);
@@ -47,6 +48,7 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			if (inputValue.length > 0) {
+
 				onValueChange && onValueChange(inputValue);
 			} else return;
 		}, 350);
@@ -56,12 +58,27 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 	}, [inputValue, onValueChange]);
 
 	const handleSelection = (newValue: string | string[] | null) => {
+		// TODO: Try to achieve the same functionality in a less hacky way
+		if (newValue?.includes(DROPDOWN_PLACEHOLDER) || !hasSuggestions) return;
+
 		setValue(newValue);
 		onValueChange && onValueChange(newValue);
 	};
 
+	const getOptionsLabel = (option: string | string[] | null): string => {
+		if (typeof option === 'string') return option;
+
+		if (multiple) {
+
+			const optionArr = option as string[];
+			return optionArr.join(', ');
+		}
+		return '';
+	};
+
 	return (
 		<Autocomplete
+			options={Array.from(filteredOptions)}
 			disablePortal
 			value={multiple ? (value as string[]) : value}
 			freeSolo={freeSolo}
@@ -72,11 +89,11 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 			}}
 			onClose={() => setIsOpen(false)}
 			fullWidth={fullWidth}
+			getOptionLabel={getOptionsLabel}
 			open={hasSuggestions ? isOpen : false}
 			inputValue={inputValue}
 			onInputChange={(event, newInputValue) => setInputValue(newInputValue)}
 			onChange={(event, newValue) => handleSelection(newValue)}
-			options={Array.from(filteredOptions)}
 			renderInput={params => <TextField {...params} label={label} />}
 		/>
 	);
