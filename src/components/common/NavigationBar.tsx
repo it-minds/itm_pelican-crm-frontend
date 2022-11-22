@@ -5,7 +5,6 @@ import {
 	AppBar,
 	Avatar,
 	Box,
-	Button,
 	ButtonBase,
 	Grid,
 	IconButton,
@@ -16,12 +15,14 @@ import {
 	useMediaQuery,
 	useTheme,
 } from '@mui/material';
+import { Button as MuiButton } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import { flexCenter } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
+import Button from './Button';
 import AppHideOnScroll from './HideOnScroll';
 import ImageContainer from './ImageContainer';
 import Underlined from './Underlined';
@@ -29,12 +30,11 @@ import Underlined from './Underlined';
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const [isDarkMode, setIsDarkMode] = useState(false);
-
+	const [activeLink, setActiveLink] = useState(window.location.toString());
 	const currentTheme = useTheme();
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 	const isMedium = useMediaQuery(currentTheme.breakpoints.up('md'));
 
-	// const isMobile = useMediaQuery(currentTheme.breakpoints.down('md'));
 	const location = useLocation();
 
 	const { t } = useTranslation();
@@ -43,7 +43,9 @@ const NavigationBar = () => {
 		if (currentTheme.palette.mode === 'dark') {
 			setIsDarkMode(true);
 		} else setIsDarkMode(false);
-	}, [theme, location, currentTheme]);
+
+		setActiveLink(window.location.toString());
+	}, [theme, location, currentTheme, activeLink]);
 
 	const links = [
 		{
@@ -76,11 +78,60 @@ const NavigationBar = () => {
 		setAnchorElNav(null);
 	};
 
+	const renderLinks = () => {
+		return links.map(link => (
+			<ButtonBase disableRipple component={Link} to={link.path} key={link.name}>
+				{activeLink.includes(link.path) && (
+					<Button
+						btnType="outlined"
+						disableRipple
+						sx={{
+							display: 'flex',
+							flexWrap: 'nowrap',
+							borderColor: '#a9b0bb',
+							backgroundColor: '#1b273a',
+							'&:focus': {
+								backgroundColor: '#1b273a',
+								borderColor: '#a9b0bb',
+							},
+						}}
+					>
+						<Typography sx={classes.linkElem} variant="body">
+							{/* @ts-ignore */}
+							{t(`${link.name}`)}
+						</Typography>
+					</Button>
+				)}
+				{activeLink.includes(link.path) || (
+					<Button
+						btnType="outlined"
+						disableRipple
+						sx={{
+							display: 'flex',
+							flexWrap: 'nowrap',
+							borderColor: 'transparent',
+							backgroundColor: 'transparent',
+							'&:focus': {
+								backgroundColor: 'transparent',
+								borderColor: 'transparent',
+							},
+						}}
+					>
+						<Typography sx={classes.linkElem} variant="body">
+							{/* @ts-ignore */}
+							{t(`${link.name}`)}
+						</Typography>
+					</Button>
+				)}
+			</ButtonBase>
+		));
+	};
+
 	return (
 		<AppHideOnScroll>
 			<AppBar color="transparent" elevation={0}>
-				<Toolbar sx={{ paddingX: '24px', paddingY: '8px' }}>
-					<Grid container sx={{ justifyContent: 'space-between' }}>
+				<Toolbar sx={{ paddingY: '8px', width: '100vw' }}>
+					<Grid container sx={{ justifyContent: 'space-between', paddingX: isMedium ? '14px' : 0 }}>
 						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
 							<IconButton
 								size="large"
@@ -117,34 +168,33 @@ const NavigationBar = () => {
 										key={link.name + link.path}
 										onClick={handleCloseNavMenu}
 									>
-										{/* @ts-ignore */}
-										<Typography textAlign="center">{t(`${link.name}`)}</Typography>
+										<ButtonBase disableRipple>
+											{/* @ts-ignore */}
+											<Typography textAlign="center">{t(`${link.name}`)}</Typography>
+										</ButtonBase>
 									</MenuItem>
 								))}
 							</Menu>
 						</Box>
 						<Box sx={{ display: isMedium ? 'flex' : 'none', gap: 2 }}>
-							<Button component={NavLink} to="/" sx={classes.brand}>
+							<MuiButton component={NavLink} to="/" sx={classes.brand}>
 								<ImageContainer imageSource="/pelican512.png" imageHeight={32} />
 								<Underlined>
 									<Typography variant="h4" color="text.primary">
 										Pelican
 									</Typography>
 								</Underlined>
-							</Button>
-							{links.map(link => (
-								<ButtonBase component={Link} to={link.path} key={link.name} disableRipple>
-									<Underlined
-										active={window.location.toString().includes(link.path)}
-										dynamic={true}
-									>
-										<Typography sx={classes.linkElem} variant="body">
-											{/* @ts-ignore */}
-											{t(`${link.name}`)}
-										</Typography>
-									</Underlined>
-								</ButtonBase>
-							))}
+							</MuiButton>
+						</Box>
+						<Box
+							sx={{ display: isMedium ? 'flex' : 'none' }}
+							display="flex"
+							justifyContent="center"
+							width="50%"
+							gap="10px"
+							alignItems="center"
+						>
+							{renderLinks()}
 						</Box>
 						<Box sx={{ ...flexCenter, gap: 2 }}>
 							{' '}

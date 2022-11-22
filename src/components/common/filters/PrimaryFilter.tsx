@@ -48,7 +48,6 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			if (inputValue.length > 0) {
-
 				onValueChange && onValueChange(inputValue);
 			} else return;
 		}, 350);
@@ -69,7 +68,6 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 		if (typeof option === 'string') return option;
 
 		if (multiple) {
-
 			const optionArr = option as string[];
 			return optionArr.join(', ');
 		}
