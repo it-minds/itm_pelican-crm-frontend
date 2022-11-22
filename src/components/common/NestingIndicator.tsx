@@ -7,8 +7,8 @@ type NestingIndicatorProps = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 /**
- * This component needs to know the height of the nested elements in order to have the correct height.
- * This is done by passing
+ * This component needs to be passed the height of the nested elements in order to 	have the correct height. For now, it is only passed a useRef to the nested elements. This is not necessary, however.
+ *
  */
 const NestingIndicator: FC<NestingIndicatorProps> = ({ ref, height, onClick }) => {
 	const [heightState, setHeightState] = useState(0);
@@ -44,24 +44,14 @@ const NestingIndicator: FC<NestingIndicatorProps> = ({ ref, height, onClick }) =
 		>
 			<Box
 				sx={{
-					...nestingIndicatorStyle,
+					width: '3px',
 					height: heightState && `${heightState - 10}px`,
-
-					backgroundColor: isHovering ? '#ffffff59' : '#2d3f5b',
+					backgroundColor: isHovering ? '#ffffff79' : '#ffffff35',
 				}}
 				onClick={onClick}
 			/>
 		</Box>
 	);
-};
-
-export const nestingIndicatorStyle = {
-	backgroundColor: '#2d3f5b',
-	width: '3px',
-	borderColor: 'background.paper',
-	'&:hover': {
-		cursor: 'pointer',
-	},
 };
 
 export default NestingIndicator;
