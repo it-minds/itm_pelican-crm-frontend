@@ -1,16 +1,17 @@
 import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { FC, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
+import React, { FC, useEffect, useRef, useState } from 'react';
+
 import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
+import NestingIndicator from '../common/NestingIndicator';
 import AccountManagerInfoSummary, {
 	ContactPersonSummary,
 } from '../summaries/AccountManagerInfoSummary';
 import ClientInfoSummary, { ClientSummary } from '../summaries/ClientInfoSummary';
 import DealsStatusSummary from '../summaries/DealsStatusSummary';
 import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';
-import NestingIndicator from '../common/NestingIndicator';
 
 export type WallOfClientListItem = {
 	client: ClientSummary;
@@ -138,7 +139,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 									<NestingIndicator
 										onClick={() => setIsExpanded(false)}
 										height={nestedLineHeight}
-										ref={nestedList}
 									/>
 									<Stack width="100%" ref={nestedList}>
 										{clientList}
