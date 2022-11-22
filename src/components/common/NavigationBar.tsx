@@ -27,6 +27,8 @@ import AppHideOnScroll from './HideOnScroll';
 import ImageContainer from './ImageContainer';
 import Underlined from './Underlined';
 
+// TODO: Fix the spacing between navbar links
+
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const [isDarkMode, setIsDarkMode] = useState(false);
