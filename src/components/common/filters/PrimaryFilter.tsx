@@ -48,7 +48,6 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			if (inputValue.length > 0) {
-				console.log('inputValue', inputValue);
 
 				onValueChange && onValueChange(inputValue);
 			} else return;
@@ -61,7 +60,6 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 	const handleSelection = (newValue: string | string[] | null) => {
 		// TODO: Try to achieve the same functionality in a less hacky way
 		if (newValue?.includes(DROPDOWN_PLACEHOLDER) || !hasSuggestions) return;
-		console.log('newValue', newValue);
 
 		setValue(newValue);
 		onValueChange && onValueChange(newValue);
@@ -71,7 +69,6 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 		if (typeof option === 'string') return option;
 
 		if (multiple) {
-			console.log('option', option);
 
 			const optionArr = option as string[];
 			return optionArr.join(', ');
