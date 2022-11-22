@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import { flexRow } from '../../styles/generalStyles';
 import Card from './Card';
 
-export type Props = {
+export type HorizontalDividedContainerProps = {
 	sx?: SxProps;
 	children?: JSX.Element | JSX.Element[];
 	isExpandable?: boolean;
@@ -20,7 +20,7 @@ const darkModeDivider = { backgroundColor: '#fff', opacity: '20%' };
 /**
  * A container that divides its content horizontally into x number columns with a divider inbetween.
  */
-const HorizontalDividedContainer: FC<Props> = ({
+const HorizontalDividedContainer: FC<HorizontalDividedContainerProps> = ({
 	sx,
 	children,
 	isExpanded,
@@ -39,9 +39,11 @@ const HorizontalDividedContainer: FC<Props> = ({
 				alignItems: 'center',
 				justifyContent: 'space-between',
 				borderBottom: isExpanded ? '0' : '',
-				borderBottomLeftRadius: isExpanded ? '0' : 6,
-				borderBottomRightRadius: isExpanded ? '0' : 6,
+				// borderBottomLeftRadius: 6,
+				// borderBottomRightRadius: 2,
+				borderRadius: 2,
 				boxShadow: isExpanded ? '0' : '',
+				backgroundColor: 'transparent',
 				...cardStyles,
 			}}
 		>
