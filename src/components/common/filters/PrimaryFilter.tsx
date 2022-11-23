@@ -56,7 +56,7 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 			} else {
 				onValueChange && onValueChange(inputValue);
 			}
-		}, 350);
+		}, 500);
 		return () => {
 			clearTimeout(timeout);
 		};

@@ -48,7 +48,11 @@ const WallOfClients = () => {
 	};
 
 	const handleContactFilterChange = (newValue: string | string[] | null) => {
-		if (Array.isArray(newValue) || !newValue) return;
+		if (Array.isArray(newValue)) return;
+		if (!newValue) {
+			setContactFilterContent('');
+			return;
+		}
 
 		setContactFilterContent(newValue);
 	};
