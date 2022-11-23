@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
@@ -11,7 +11,7 @@ import PrimaryFilter from '../components/common/filters/PrimaryFilter';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
-import { GetFilteredClientsQuery } from '../gql/graphql';
+import { GetFilteredClientsQuery, GetFilteredClientsQueryVariables } from '../gql/graphql';
 import { flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyCompanyNames, dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
@@ -25,11 +25,43 @@ const WallOfClients = () => {
 	const [isFilterSet, setIsFilterSet] = useState(false);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
+	const [clientFilterContent, setClientFilterContent] = useState('');
+	const [contactFilterContent, setContactFilterContent] = useState('');
+	const { loading, error, data, refetch } = useQuery<GetFilteredClientsQuery>(
+		GET_FILTERED_CLIENTS,
+		{
+			variables: {
+				currentClientSearch: clientFilterContent,
+				currentContactSearch: contactFilterContent,
+			},
+		}
+	);
 
-	const handleFilterChange = (newValue: string | string[] | null) => {
-		// handleFilterChange once real data is available
+	const handleClientFilterChange = (newValue: string | string[] | null) => {
+		if (Array.isArray(newValue)) return;
+		if (!newValue) {
+			setClientFilterContent('');
+			return;
+		}
+
+		setClientFilterContent(newValue);
 	};
-	const { loading, error, data } = useQuery<GetFilteredClientsQuery>(GET_FILTERED_CLIENTS);
+
+	const handleContactFilterChange = (newValue: string | string[] | null) => {
+		if (Array.isArray(newValue) || !newValue) return;
+
+		setContactFilterContent(newValue);
+	};
+
+	useEffect(() => {
+		const vars: GetFilteredClientsQueryVariables = {
+			currentClientSearch: clientFilterContent,
+			currentContactSearch: contactFilterContent,
+		};
+		console.log(vars);
+
+		refetch(vars);
+	}, [clientFilterContent, contactFilterContent, refetch]);
 
 	console.log(data);
 
@@ -45,13 +77,15 @@ const WallOfClients = () => {
 
 			<FilterContainer>
 				<PrimaryFilterWrapper>
-					<PrimaryFilter options={dummyCompanyNames} label="Company Name" />
+					<PrimaryFilter
+						options={dummyCompanyNames}
+						label="Company Name"
+						onValueChange={handleClientFilterChange}
+					/>
 					<PrimaryFilter
 						options={dummyCompanyNames}
 						label="Contact Person"
-						hasSuggestions
-						multiple
-						onValueChange={handleFilterChange}
+						onValueChange={handleContactFilterChange}
 					/>
 				</PrimaryFilterWrapper>
 				<SecondaryFilterContainer>
