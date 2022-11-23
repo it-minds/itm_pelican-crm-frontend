@@ -1,21 +1,8 @@
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import {
-	AppBar,
-	Box,
-	ButtonBase,
-	Grid,
-	IconButton,
-	Menu,
-	MenuItem,
-	Toolbar,
-	Typography,
-	useMediaQuery,
-	useTheme,
-} from '@mui/material';
+import { AppBar, Box, Grid, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Button as MuiButton } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import { flexCenter } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';

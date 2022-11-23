@@ -1,6 +1,8 @@
 import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
 import Brightness7RoundedIcon from '@mui/icons-material/Brightness7Rounded';
-import { ButtonBase, ButtonProps, Menu, MenuItem, Typography } from '@mui/material';
+import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
+import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
+import { ButtonProps, Grid, Menu, MenuItem, MenuItemProps, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
 
 import Button from '../common/Button';
@@ -12,6 +14,25 @@ type NavDropdownProps = {
 	themeToggle: () => void;
 	isDarkMode?: boolean;
 } & ButtonProps;
+
+const ICON_SIZE = '24px';
+
+const NavMenuItem: FC<{ onClick?: () => void } & MenuItemProps> = ({ children, onClick }) => (
+	<MenuItem
+		component={Grid}
+		width="145px"
+		disableRipple
+		onClick={() => onClick && onClick()}
+		sx={{
+			display: 'flex',
+			justifyContent: 'space-between',
+			paddingX: '15px',
+			paddingY: '8px',
+		}}
+	>
+		{children}
+	</MenuItem>
+);
 
 const NavDropdown: FC<NavDropdownProps> = ({
 	open,
@@ -26,9 +47,9 @@ const NavDropdown: FC<NavDropdownProps> = ({
 
 	const themeIcon = () => {
 		return isDarkMode ? (
-			<Brightness4RoundedIcon sx={{ color: '#fff', fontSize: '32px' }} />
+			<Brightness4RoundedIcon sx={{ fontSize: ICON_SIZE }} />
 		) : (
-			<Brightness7RoundedIcon sx={{ color: '#707070', fontSize: '32px' }} />
+			<Brightness7RoundedIcon sx={{ fontSize: ICON_SIZE }} />
 		);
 	};
 
@@ -38,12 +59,14 @@ const NavDropdown: FC<NavDropdownProps> = ({
 	};
 
 	return (
-		<Button onClick={event => handleClick(event)} disableRipple sx={{ maxHeight: '2em' }}>
-			<Typography variant="body">{name || 'Mr. Boss'}</Typography>
+		<>
+			<Button onClick={event => handleClick(event)} disableRipple sx={{ maxHeight: '2em' }}>
+				<Typography variant="body">{name || 'Mr. Boss'}</Typography>
+			</Button>
 			<Menu
 				anchorOrigin={{
 					vertical: 'bottom',
-					horizontal: 'right',
+					horizontal: 'left',
 				}}
 				keepMounted
 				transformOrigin={{
@@ -54,19 +77,20 @@ const NavDropdown: FC<NavDropdownProps> = ({
 				anchorEl={anchorEl}
 				onClose={onClose}
 			>
-				<MenuItem>
-					<Typography variant="body" mr={'9px'}>
-						Login
-					</Typography>
-				</MenuItem>
-				<MenuItem component={ButtonBase} disableRipple onClick={() => themeToggle}>
-					<Typography variant="body" mr={'9px'}>
-						Theme
-					</Typography>
+				<NavMenuItem onClick={() => alert("You can't login my dude :(")}>
+					<Typography variant="body">Login</Typography>
+					<LoginRoundedIcon sx={{ fontSize: ICON_SIZE }} />
+				</NavMenuItem>
+				<NavMenuItem onClick={themeToggle}>
+					<Typography variant="body">Theme</Typography>
 					{themeIcon()}
-				</MenuItem>
+				</NavMenuItem>
+				<NavMenuItem onClick={themeToggle}>
+					<Typography variant="body">Language</Typography>
+					<TranslateRoundedIcon sx={{ fontSize: ICON_SIZE }} />
+				</NavMenuItem>
 			</Menu>
-		</Button>
+		</>
 	);
 };
 

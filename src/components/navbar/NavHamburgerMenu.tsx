@@ -1,20 +1,19 @@
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import {
 	Box,
-	Button,
 	ButtonBase,
-	Typography,
 	IconButton,
 	Menu,
 	MenuItem,
-	useTheme,
+	Typography,
 	useMediaQuery,
+	useTheme,
 } from '@mui/material';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-
 import React, { FC } from 'react';
-import { NavLinkElement } from './NavLinks';
-import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+
+import { NavLinkElement } from './NavLinks';
 
 type NavHamburgerMenuProps = {
 	anchorElement: HTMLElement | null;
@@ -31,7 +30,6 @@ const NavHamburgerMenu: FC<NavHamburgerMenuProps> = ({
 	onClose,
 	onOpen,
 }) => {
-	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const { t } = useTranslation();
