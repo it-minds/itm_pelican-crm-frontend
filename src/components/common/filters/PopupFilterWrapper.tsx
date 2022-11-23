@@ -19,6 +19,7 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 	children,
 	onClick,
 	title,
+	...rest
 }) => {
 	const [open, setOpen] = useState(false);
 	const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -37,19 +38,21 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 	return (
 		<>
 			<Button
-				sx={{
-					pt: '2px',
-					justifyContent: 'space-between',
-					paddingInline: active ? 0 : '8px',
-					paddingInlineEnd: '8px',
-				}}
 				noPad
 				btnType={active ? 'default' : 'outlined'}
 				onClick={event => handleClick(event)}
+				sx={{
+					height: 'fit-content',
+					py: '2px',
+					justifyContent: 'space-between',
+					paddingInline: active ? '0px' : '18px',
+					paddingInlineEnd: '18px',
+					borderWidth: '1px',
+				}}
 			>
 				<AnimatePresence>{active && <ClearFilter onClick={onClearFilter} />}</AnimatePresence>
 				<Box>
-					<Typography mt="1px" variant="body2">
+					<Typography ml={active ? '10px' : 0} variant="body">
 						{title}
 					</Typography>
 				</Box>

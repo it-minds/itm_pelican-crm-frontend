@@ -3,33 +3,33 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Button from '../components/common/Button';
+import FilterContainer from '../components/common/filters/containers/FilterContainer';
+import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
+import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
 import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
+import PrimaryFilter from '../components/common/filters/PrimaryFilter';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
-import { GetClientsQuery } from '../gql/graphql';
-import { flexCenter, flexCol } from '../styles/generalStyles';
+import { GetFilteredClientsQuery } from '../gql/graphql';
+import { flexCol } from '../styles/generalStyles';
 // eslint-disable
-import { dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
-import { GET_CLIENTS } from '../utils/queries/wallOfClientsQueries';
+import { dummyCompanyNames, dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
+import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
 /**
  * TODO: Dummy suppliers above^ - remove when real data is available
  */
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
-	const [isLoading, setIsLoading] = useState(false);
 	const [isFilterSet, setIsFilterSet] = useState(false);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
-	const testLoading = (): void => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 1200);
+
+	const handleFilterChange = (newValue: string | string[] | null) => {
+		// handleFilterChange once real data is available
 	};
-	const { loading, error, data } = useQuery<GetClientsQuery>(GET_CLIENTS);
+	const { loading, error, data } = useQuery<GetFilteredClientsQuery>(GET_FILTERED_CLIENTS);
 
 	console.log(data);
 
@@ -42,29 +42,31 @@ const WallOfClients = () => {
 					</Typography>
 				</Underlined>
 			</Box>
-			<Box
-				aria-label="filter-container"
-				sx={{
-					...flexCenter,
-					width: '100%',
-					height: '100px',
-					borderRadius: '10px',
-					paddingX: '1rem',
-					paddingY: '2rem',
-					marginBottom: '2rem',
-				}}
-			>
-				<PopupFilterWrapper
-					onClearClick={() => setIsFilterSet(false)}
-					title={t('wallOfClients.locationFilterButtonDefault')}
-					active={isFilterSet}
-					onClick={() => {
-						setIsFilterSet(true);
-					}}
-				>
-					<ClientListItem clientListItem={dummyListItem2} />
-				</PopupFilterWrapper>
-			</Box>
+
+			<FilterContainer>
+				<PrimaryFilterWrapper>
+					<PrimaryFilter options={dummyCompanyNames} label="Company Name" />
+					<PrimaryFilter
+						options={dummyCompanyNames}
+						label="Contact Person"
+						hasSuggestions
+						multiple
+						onValueChange={handleFilterChange}
+					/>
+				</PrimaryFilterWrapper>
+				<SecondaryFilterContainer>
+					<PopupFilterWrapper
+						onClearClick={() => setIsFilterSet(false)}
+						title={t('wallOfClients.locationFilterButtonDefault')}
+						active={isFilterSet}
+						onClick={() => {
+							setIsFilterSet(true);
+						}}
+					>
+						<ClientListItem clientListItem={dummyListItem2} />
+					</PopupFilterWrapper>
+				</SecondaryFilterContainer>
+			</FilterContainer>
 			<Box
 				sx={{
 					...flexCol,
@@ -73,18 +75,6 @@ const WallOfClients = () => {
 					gap: 3,
 				}}
 			>
-				<Button
-					onClick={testLoading}
-					size="small"
-					isFullWidth={false}
-					isLoading={isLoading}
-					secondary
-				>
-					<Typography>Testboy</Typography>
-				</Button>
-				{data?.clients?.nodes?.map(client => (
-					<ClientListItem key={client.id} clientListItem={dummyListItem2} />
-				))}
 				<ClientListItem clientListItem={dummyListItem2} />
 				<ClientListItem clientListItem={dummyListItem3} />
 			</Box>

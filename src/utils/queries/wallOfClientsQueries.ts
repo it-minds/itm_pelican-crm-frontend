@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const GET_CLIENTS = gql`
-	query getRelevantClients($currentClientSearch: String, $currentContactSearch: String) {
+export const GET_FILTERED_CLIENTS = gql`
+	query getFilteredClients($currentClientSearch: String, $currentContactSearch: String) {
 		clients(
 			where: {
 				and: [
