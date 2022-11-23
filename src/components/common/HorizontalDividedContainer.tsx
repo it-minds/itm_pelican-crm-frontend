@@ -39,8 +39,6 @@ const HorizontalDividedContainer: FC<HorizontalDividedContainerProps> = ({
 				alignItems: 'center',
 				justifyContent: 'space-between',
 				borderBottom: isExpanded ? '0' : '',
-				// borderBottomLeftRadius: 6,
-				// borderBottomRightRadius: 2,
 				borderRadius: 2,
 				boxShadow: isExpanded ? '0' : '',
 				backgroundColor: 'transparent',

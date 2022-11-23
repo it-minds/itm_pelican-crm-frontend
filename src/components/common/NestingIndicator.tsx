@@ -37,7 +37,6 @@ const NestingIndicator: FC<NestingIndicatorProps> = ({ height, onClick }) => {
 					height: heightState && `${heightState - 10}px`,
 					backgroundColor: isHovering ? '#ffffff79' : '#ffffff35',
 				}}
-				onClick={onClick}
 			/>
 		</Box>
 	);
