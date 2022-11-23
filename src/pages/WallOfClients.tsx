@@ -82,6 +82,9 @@ const WallOfClients = () => {
 				>
 					<Typography>Testboy</Typography>
 				</Button>
+				{data?.clients?.nodes?.map(client => (
+					<ClientListItem key={client.id} clientListItem={dummyListItem2} />
+				))}
 				<ClientListItem clientListItem={dummyListItem2} />
 				<ClientListItem clientListItem={dummyListItem3} />
 			</Box>

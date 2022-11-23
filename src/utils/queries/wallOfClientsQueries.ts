@@ -1,65 +1,61 @@
 import { gql } from '@apollo/client';
 
 export const GET_CLIENTS = gql`
-	query GetClients {
-		clients {
+	query getRelevantClients($currentClientSearch: String, $currentContactSearch: String) {
+		clients(
+			where: {
+				and: [
+					{ name: { contains: $currentClientSearch } }
+					{
+						clientContacts: {
+							some: { and: { contact: { firstname: { contains: $currentContactSearch } } } }
+						}
+					}
+				]
+			}
+		) {
+			totalCount
 			nodes {
+				id
+				name
+				officeLocation
+				website
 				clientContacts {
 					contact {
+						id
 						firstname
 						lastname
+						email
+						phoneNumber
+						dealContacts {
+							deal {
+								id
+								dealStatus
+								startDate
+								endDate
+								accountManagerDeals {
+									accountManager {
+										id
+										firstName
+										lastName
+										email
+										phoneNumber
+										pictureUrl
+										supplier {
+											id
+											name
+											pictureUrl
+											officeLocations {
+												cityName
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}
 		}
 	}
 `;
-
-// TODO: Remove above test query in favor for the one below
-// export const GET_CLIENTS = gql`
-// 	query GetClients {
-// 		clients {
-// 			nodes {
-// 				id
-// 				name
-// 				officeLocation
-// 				pictureUrl
-// 				website
-// 				deals {
-// 					id
-// 					dealStatus
-// 					endDate
-// 					lastUpdatedAt
-// 					createdAt
-// 					dealContacts {
-// 						id
-// 						contact {
-// 							firstname
-// 							lastname
-// 							phoneNumber
-// 							email
-// 							jobTitle
-// 							linkedInUrl
-// 							isActive
-// 						}
-// 					}
-// 					accountManagerDeals {
-// 						accountManager {
-// 							firstName
-// 							lastName
-// 							id
-// 							email
-// 							phoneNumber
-// 							supplier {
-// 								name
-// 								officeLocations {
-// 									cityName
-// 								}
-// 							}
-// 						}
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// `;

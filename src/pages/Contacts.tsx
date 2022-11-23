@@ -16,9 +16,6 @@ const DisplayDudes = () => {
 
 	return (
 		<>
-			{data?.suppliers.map(supplier => (
-				<div>This supplier is called: {supplier.id}</div>
-			))}
 			{data?.accountManagers &&
 				data?.accountManagers?.nodes?.map(manager => (
 					<div>
