@@ -21,7 +21,23 @@ import { flexCenter } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from '../common/HideOnScroll';
 import NavDropdown from './NavDropdown';
+import NavHamburgerMenu from './NavHamburgerMenu';
 import NavLinks, { NavLinkElement } from './NavLinks';
+
+const links: NavLinkElement[] = [
+	{
+		name: 'navbar.clientsLink',
+		path: '/clients',
+	},
+	{
+		name: 'navbar.contactsLink',
+		path: '/contacts',
+	},
+	{
+		name: 'navbar.suppliersLink',
+		path: '/suppliers',
+	},
+];
 
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
@@ -39,28 +55,11 @@ const NavigationBar = () => {
 		if (currentTheme.palette.mode === 'dark') {
 			setIsDarkMode(true);
 		} else setIsDarkMode(false);
-
-		setActiveLink(window.location.toString());
-	}, [theme, location, currentTheme]);
+	}, [theme, currentTheme]);
 
 	useEffect(() => {
 		setActiveLink(window.location.toString());
-	}, [activeLink]);
-
-	const links: NavLinkElement[] = [
-		{
-			name: 'navbar.clientsLink',
-			path: '/clients',
-		},
-		{
-			name: 'navbar.contactsLink',
-			path: '/contacts',
-		},
-		{
-			name: 'navbar.suppliersLink',
-			path: '/suppliers',
-		},
-	];
+	}, [activeLink, location]);
 
 	return (
 		<AppHideOnScroll>
@@ -75,49 +74,13 @@ const NavigationBar = () => {
 					disableGutters
 				>
 					<Grid container sx={{ justifyContent: 'space-between' }}>
-						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-							<IconButton
-								size="large"
-								aria-controls="menu-appbar"
-								aria-haspopup="true"
-								onClick={event => setAnchorElNav(event.currentTarget)}
-								color="inherit"
-							>
-								<MenuRoundedIcon />
-							</IconButton>
-							<Menu
-								id="menu-appbar"
-								anchorEl={anchorElNav}
-								anchorOrigin={{
-									vertical: 'bottom',
-									horizontal: 'left',
-								}}
-								keepMounted
-								transformOrigin={{
-									vertical: 'top',
-									horizontal: 'left',
-								}}
-								open={Boolean(anchorElNav)}
-								onClose={() => setAnchorElNav(null)}
-								sx={{
-									display: isMedium ? 'none' : 'flex',
-								}}
-							>
-								{links.map(link => (
-									<MenuItem
-										component={Link}
-										to={link.path}
-										key={link.name + link.path}
-										onClick={() => setAnchorElNav(null)}
-									>
-										<ButtonBase disableRipple>
-											{/* @ts-ignore */}
-											<Typography textAlign="center">{t(`${link.name}`)}</Typography>
-										</ButtonBase>
-									</MenuItem>
-								))}
-							</Menu>
-						</Box>
+						<NavHamburgerMenu
+							links={links}
+							open={Boolean(anchorElNav)}
+							onOpen={setAnchorElNav}
+							onClose={() => setAnchorElNav(null)}
+							anchorElement={anchorElNav}
+						/>
 						<Box sx={{ display: isMedium ? 'flex' : 'none', gap: 2 }}>
 							<MuiButton component={NavLink} to="/" sx={classes.brand}>
 								<Typography variant="h4" color="text.primary" fontWeight="600" letterSpacing={0.2}>
