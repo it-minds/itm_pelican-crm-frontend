@@ -1,9 +1,6 @@
-import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
-import Brightness7RoundedIcon from '@mui/icons-material/Brightness7Rounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import {
 	AppBar,
-	Avatar,
 	Box,
 	ButtonBase,
 	Grid,
@@ -22,10 +19,9 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import { flexCenter } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
-import Button from './Button';
-import AppHideOnScroll from './HideOnScroll';
-import ImageContainer from './ImageContainer';
-import Underlined from './Underlined';
+import Button from '../common/Button';
+import AppHideOnScroll from '../common/HideOnScroll';
+import NavDropdown from './NavDropdown';
 
 // TODO: Fix the spacing between navbar links
 
@@ -34,6 +30,7 @@ const NavigationBar = () => {
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	const [activeLink, setActiveLink] = useState(window.location.toString());
 	const currentTheme = useTheme();
+	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 	const isMedium = useMediaQuery(currentTheme.breakpoints.up('md'));
 
@@ -47,7 +44,11 @@ const NavigationBar = () => {
 		} else setIsDarkMode(false);
 
 		setActiveLink(window.location.toString());
-	}, [theme, location, currentTheme, activeLink]);
+	}, [theme, location, currentTheme]);
+
+	useEffect(() => {
+		setActiveLink(window.location.toString());
+	}, [activeLink]);
 
 	const links = [
 		{
@@ -64,14 +65,6 @@ const NavigationBar = () => {
 		},
 	];
 
-	const themeToggle = () => {
-		return isDarkMode ? (
-			<Brightness4RoundedIcon sx={{ color: '#fff' }} />
-		) : (
-			<Brightness7RoundedIcon sx={{ color: '#707070' }} />
-		);
-	};
-
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorElNav(event.currentTarget);
 	};
@@ -81,49 +74,55 @@ const NavigationBar = () => {
 	};
 
 	const renderLinks = () => {
+		const width = { md: '100px', lg: '120px' };
+
 		return links.map(link => (
 			<ButtonBase disableRipple component={Link} to={link.path} key={link.name}>
 				{activeLink.includes(link.path) && (
-					<Button
-						btnType="outlined"
-						disableRipple
-						sx={{
-							display: 'flex',
-							flexWrap: 'nowrap',
-							borderColor: '#a9b0bb',
-							backgroundColor: '#1b273a',
-							'&:focus': {
-								backgroundColor: '#1b273a',
+					<Box width={width} display="flex" justifyContent="center">
+						<Button
+							btnType="outlined"
+							disableRipple
+							sx={{
+								display: 'flex',
+								flexWrap: 'nowrap',
 								borderColor: '#a9b0bb',
-							},
-						}}
-					>
-						<Typography sx={classes.linkElem} variant="body">
-							{/* @ts-ignore */}
-							{t(`${link.name}`)}
-						</Typography>
-					</Button>
+								backgroundColor: '#1b273a',
+								'&:focus': {
+									backgroundColor: '#1b273a',
+									borderColor: '#a9b0bb',
+								},
+							}}
+						>
+							<Typography sx={classes.linkElem} variant="body">
+								{/* @ts-ignore */}
+								{t(`${link.name}`)}
+							</Typography>
+						</Button>
+					</Box>
 				)}
 				{activeLink.includes(link.path) || (
-					<Button
-						btnType="outlined"
-						disableRipple
-						sx={{
-							display: 'flex',
-							flexWrap: 'nowrap',
-							borderColor: 'transparent',
-							backgroundColor: 'transparent',
-							'&:focus': {
-								backgroundColor: 'transparent',
+					<Box width={width} display="flex" justifyContent="center">
+						<Button
+							btnType="outlined"
+							disableRipple
+							sx={{
+								display: 'flex',
+								flexWrap: 'nowrap',
 								borderColor: 'transparent',
-							},
-						}}
-					>
-						<Typography sx={classes.linkElem} variant="body">
-							{/* @ts-ignore */}
-							{t(`${link.name}`)}
-						</Typography>
-					</Button>
+								backgroundColor: 'transparent',
+								'&:focus': {
+									backgroundColor: 'transparent',
+									borderColor: 'transparent',
+								},
+							}}
+						>
+							<Typography sx={classes.linkElem} variant="body">
+								{/* @ts-ignore */}
+								{t(`${link.name}`)}
+							</Typography>
+						</Button>
+					</Box>
 				)}
 			</ButtonBase>
 		));
@@ -132,12 +131,19 @@ const NavigationBar = () => {
 	return (
 		<AppHideOnScroll>
 			<AppBar color="transparent" elevation={0}>
-				<Toolbar sx={{ paddingY: '8px', width: '100vw' }}>
-					<Grid container sx={{ justifyContent: 'space-between', paddingX: isMedium ? '14px' : 0 }}>
+				<Toolbar
+					sx={{
+						paddingX: isMedium ? '40px' : '20px',
+						paddingY: '8px',
+						width: '100vw',
+						maxWidth: '100vw',
+					}}
+					disableGutters
+				>
+					<Grid container sx={{ justifyContent: 'space-between' }}>
 						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
 							<IconButton
 								size="large"
-								aria-label="account of current user"
 								aria-controls="menu-appbar"
 								aria-haspopup="true"
 								onClick={handleOpenNavMenu}
@@ -180,12 +186,9 @@ const NavigationBar = () => {
 						</Box>
 						<Box sx={{ display: isMedium ? 'flex' : 'none', gap: 2 }}>
 							<MuiButton component={NavLink} to="/" sx={classes.brand}>
-								<ImageContainer imageSource="/pelican512.png" imageHeight={32} />
-								<Underlined>
-									<Typography variant="h4" color="text.primary">
-										Pelican
-									</Typography>
-								</Underlined>
+								<Typography variant="h4" color="text.primary" fontWeight="600" letterSpacing={0.2}>
+									Pelican
+								</Typography>
 							</MuiButton>
 						</Box>
 						<Box
@@ -199,9 +202,13 @@ const NavigationBar = () => {
 							{renderLinks()}
 						</Box>
 						<Box sx={{ ...flexCenter, gap: 2 }}>
-							{' '}
-							<ButtonBase onClick={toggleTheme}>{themeToggle()}</ButtonBase>
-							<Avatar>MD</Avatar>
+							<NavDropdown
+								open={dropdownOpen}
+								isDarkMode={isDarkMode}
+								themeToggle={toggleTheme}
+								onClose={() => setDropdownOpen(false)}
+								onClick={() => setDropdownOpen(!dropdownOpen)}
+							/>
 						</Box>
 					</Grid>
 				</Toolbar>
@@ -216,6 +223,7 @@ const classes = {
 		alignItems: 'center',
 		textDecoration: 'none',
 		gap: 1,
+		padding: 0,
 	},
 	brandUnderlined: {
 		marginLeft: 2,
