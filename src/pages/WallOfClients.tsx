@@ -37,6 +37,9 @@ const WallOfClients = () => {
 		}
 	);
 
+	console.log(data);
+	// TODO: Without clog, data is not used, and will not be considered during codegen. Delete above clog when page components have been refactored to utilize data.
+
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
 		if (!newValue) {
@@ -62,12 +65,9 @@ const WallOfClients = () => {
 			currentClientSearch: clientFilterContent,
 			currentContactSearch: contactFilterContent,
 		};
-		console.log(vars);
 
 		refetch(vars);
 	}, [clientFilterContent, contactFilterContent, refetch]);
-
-	console.log(data);
 
 	return (
 		<PageContainer>
