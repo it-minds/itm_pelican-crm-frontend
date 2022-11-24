@@ -1,10 +1,8 @@
 import { AppBar, Box, Grid, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Button as MuiButton } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
 
-import { flexCenter } from '../../styles/generalStyles';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from '../common/HideOnScroll';
 import NavDropdown from './NavDropdown';
