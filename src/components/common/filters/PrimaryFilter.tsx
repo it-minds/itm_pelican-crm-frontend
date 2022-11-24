@@ -43,14 +43,20 @@ const PrimaryFilter: FC<PrimaryFilterProps> = ({
 			setFilteredOptions(new Set([DROPDOWN_PLACEHOLDER]));
 		}
 	}, [inputValue, options, hasSuggestions]);
+	// TODO: Consider refactoring filter with suggestions (useEffect above)
+	// Also needs to communicate with parent through onValueChange
+	// Chips should only be selected if entry is valid (is in dropdown)
+	// Created Jira issue (PLCN 212)
 
 	// useEffect with debounce to prevent excessive rerenders when typing
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			if (inputValue.length > 0) {
 				onValueChange && onValueChange(inputValue);
-			} else return;
-		}, 350);
+			} else {
+				onValueChange && onValueChange(inputValue);
+			}
+		}, 500);
 		return () => {
 			clearTimeout(timeout);
 		};
