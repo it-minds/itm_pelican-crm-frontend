@@ -6,9 +6,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
-import AccountManagerInfoSummary, {
-	ContactPersonSummary,
-} from '../summaries/AccountManagerInfoSummary';
+import AccountManagerInfoSummary, { ContactPersonSummary } from '../summaries/PersonInfoSummary';
 import ClientInfoSummary, { ClientSummary } from '../summaries/ClientInfoSummary';
 import DealsStatusSummary from '../summaries/DealsStatusSummary';
 import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';

@@ -1,4 +1,4 @@
-import { ContactPersonSummary } from '../components/summaries/AccountManagerInfoSummary';
+import { ContactPersonSummary } from '../components/summaries/PersonInfoSummary';
 import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
 import { WallOfClientListItem } from '../components/wall-of-clients/ClientListItem';
 
