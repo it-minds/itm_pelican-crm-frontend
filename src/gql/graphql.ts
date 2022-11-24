@@ -110,6 +110,7 @@ export type AccountManagersConnection = {
   nodes?: Maybe<Array<AccountManager>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -204,6 +205,7 @@ export type ClientsConnection = {
   nodes?: Maybe<Array<Client>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -345,6 +347,7 @@ export type ContactsConnection = {
   nodes?: Maybe<Array<Contact>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -370,6 +373,7 @@ export type Deal = {
   id: Scalars['UUID'];
   lastContactDate?: Maybe<Scalars['DateTime']>;
   lastUpdatedAt?: Maybe<Scalars['Long']>;
+  startDate?: Maybe<Scalars['DateTime']>;
 };
 
 export type DealContact = {
@@ -416,6 +420,7 @@ export type DealFilterInput = {
   lastContactDate?: InputMaybe<ComparableNullableOfDateTimeOperationFilterInput>;
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   or?: InputMaybe<Array<DealFilterInput>>;
+  startDate?: InputMaybe<ComparableNullableOfDateTimeOperationFilterInput>;
 };
 
 export type DealSortInput = {
@@ -429,6 +434,7 @@ export type DealSortInput = {
   id?: InputMaybe<SortEnumType>;
   lastContactDate?: InputMaybe<SortEnumType>;
   lastUpdatedAt?: InputMaybe<SortEnumType>;
+  startDate?: InputMaybe<SortEnumType>;
 };
 
 /** A connection to a list of items. */
@@ -440,6 +446,7 @@ export type DealsConnection = {
   nodes?: Maybe<Array<Deal>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -532,6 +539,7 @@ export type LocationsConnection = {
   nodes?: Maybe<Array<Location>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -740,6 +748,7 @@ export type SuppliersConnection = {
   nodes?: Maybe<Array<Supplier>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -756,5 +765,14 @@ export type GetDudesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetDudesQuery = { __typename?: 'Query', accountManagers?: { __typename?: 'AccountManagersConnection', nodes?: Array<{ __typename?: 'AccountManager', firstName: string, lastName: string }> | null } | null };
 
+export type GetFilteredClientsQueryVariables = Exact<{
+  currentClientSearch?: InputMaybe<Scalars['String']>;
+  currentContactSearch?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetFilteredClientsQuery = { __typename?: 'Query', clients?: { __typename?: 'ClientsConnection', totalCount: number, nodes?: Array<{ __typename?: 'Client', id: any, name: string, officeLocation?: string | null, website?: string | null, clientContacts: Array<{ __typename?: 'ClientContact', contact: { __typename?: 'Contact', id: any, firstname?: string | null, lastname?: string | null, email?: string | null, phoneNumber?: string | null, dealContacts: Array<{ __typename?: 'DealContact', deal: { __typename?: 'Deal', id: any, dealStatus?: string | null, startDate?: any | null, endDate?: any | null, accountManagerDeals: Array<{ __typename?: 'AccountManagerDeal', accountManager: { __typename?: 'AccountManager', id: any, firstName: string, lastName: string, email: string, phoneNumber?: string | null, pictureUrl?: string | null, supplier: { __typename?: 'Supplier', id: any, name?: string | null, pictureUrl?: string | null, officeLocations: Array<{ __typename?: 'Location', cityName: string }> } } }> } }> } }> }> | null } | null };
+
 
 export const GetDudesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDudes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accountManagers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]}}]} as unknown as DocumentNode<GetDudesQuery, GetDudesQueryVariables>;
+export const GetFilteredClientsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFilteredClients"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"currentClientSearch"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"currentContactSearch"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clients"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"and"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contains"},"value":{"kind":"Variable","name":{"kind":"Name","value":"currentClientSearch"}}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"clientContacts"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"some"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"and"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contact"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"firstname"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contains"},"value":{"kind":"Variable","name":{"kind":"Name","value":"currentContactSearch"}}}]}}]}}]}}]}}]}}]}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}},{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"officeLocation"}},{"kind":"Field","name":{"kind":"Name","value":"website"}},{"kind":"Field","name":{"kind":"Name","value":"clientContacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phoneNumber"}},{"kind":"Field","name":{"kind":"Name","value":"dealContacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"dealStatus"}},{"kind":"Field","name":{"kind":"Name","value":"startDate"}},{"kind":"Field","name":{"kind":"Name","value":"endDate"}},{"kind":"Field","name":{"kind":"Name","value":"accountManagerDeals"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accountManager"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phoneNumber"}},{"kind":"Field","name":{"kind":"Name","value":"pictureUrl"}},{"kind":"Field","name":{"kind":"Name","value":"supplier"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"pictureUrl"}},{"kind":"Field","name":{"kind":"Name","value":"officeLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cityName"}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetFilteredClientsQuery, GetFilteredClientsQueryVariables>;
