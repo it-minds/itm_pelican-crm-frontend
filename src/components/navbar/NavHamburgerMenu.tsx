@@ -36,7 +36,7 @@ const NavHamburgerMenu: FC<NavHamburgerMenuProps> = ({
 
 	return (
 		<>
-			<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+			<Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' }, width: '25%' }}>
 				<IconButton
 					size="large"
 					aria-controls="menu-appbar"

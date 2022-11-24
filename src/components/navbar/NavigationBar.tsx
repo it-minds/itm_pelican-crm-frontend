@@ -34,7 +34,6 @@ const NavigationBar = () => {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 	const isMedium = useMediaQuery(currentTheme.breakpoints.up('md'));
-	const { t } = useTranslation();
 
 	const location = useLocation();
 
@@ -60,7 +59,7 @@ const NavigationBar = () => {
 					}}
 					disableGutters
 				>
-					<Grid container sx={{ justifyContent: 'space-between' }}>
+					<Grid container sx={{ justifyContent: 'space-between', width: '100%' }}>
 						<NavHamburgerMenu
 							links={links}
 							open={Boolean(anchorElNav)}
@@ -68,7 +67,7 @@ const NavigationBar = () => {
 							onClose={() => setAnchorElNav(null)}
 							anchorElement={anchorElNav}
 						/>
-						<Box sx={{ display: isMedium ? 'flex' : 'none', gap: 2 }}>
+						<Box sx={{ display: 'flex', gap: 2 }}>
 							<MuiButton component={NavLink} to="/" sx={classes.brand}>
 								<Typography variant="h4" color="text.primary" fontWeight="600" letterSpacing={0.2}>
 									Pelican
@@ -79,14 +78,19 @@ const NavigationBar = () => {
 							sx={{ display: isMedium ? 'flex' : 'none' }}
 							display="flex"
 							justifyContent="center"
-							width="50%"
 							gap="10px"
 							alignItems="center"
 						>
 							<NavLinks links={links} activeLink={activeLink} />
 						</Box>
-						<Box sx={{ ...flexCenter, gap: 2 }}>
+						<Box
+							display="flex"
+							justifyContent="flex-end"
+							alignItems="center"
+							width={!isMedium ? '25%' : 'fit-content'}
+						>
 							<NavDropdown
+								isMedium={isMedium}
 								open={dropdownOpen}
 								isDarkMode={isDarkMode}
 								themeToggle={toggleTheme}

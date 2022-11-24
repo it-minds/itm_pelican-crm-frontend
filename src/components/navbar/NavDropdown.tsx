@@ -13,6 +13,7 @@ type NavDropdownProps = {
 	name?: string;
 	themeToggle: () => void;
 	isDarkMode?: boolean;
+	isMedium?: boolean;
 } & ButtonProps;
 
 const ICON_SIZE = '24px';
@@ -42,6 +43,7 @@ const NavDropdown: FC<NavDropdownProps> = ({
 	name,
 	themeToggle,
 	isDarkMode,
+	isMedium,
 }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -60,8 +62,15 @@ const NavDropdown: FC<NavDropdownProps> = ({
 
 	return (
 		<>
-			<Button onClick={event => handleClick(event)} disableRipple sx={{ maxHeight: '2em' }}>
-				<Typography variant="body">{name || 'Mr. Boss'}</Typography>
+			<Button
+				onClick={event => handleClick(event)}
+				disableRipple
+				sx={{ maxHeight: '2em', padding: isMedium ? '' : '0 5px' }}
+				noPad={!isMedium}
+			>
+				<Typography noWrap variant="body">
+					{name || 'Mr. Boss'}
+				</Typography>
 			</Button>
 			<Menu
 				anchorOrigin={{
