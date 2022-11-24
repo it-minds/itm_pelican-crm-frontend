@@ -6,16 +6,17 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
-import AccountManagerInfoSummary, { ContactPersonSummary } from '../summaries/PersonInfoSummary';
+import PersonInfoSummary, { PersonSummary } from '../summaries/PersonInfoSummary';
 import ClientInfoSummary, { ClientSummary } from '../summaries/ClientInfoSummary';
 import DealsStatusSummary from '../summaries/DealsStatusSummary';
 import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';
+import NestedContactPerson from './NestedContactPerson';
 
 export type WallOfClientListItem = {
 	client: ClientSummary;
 	suppliers: SupplierSummary[];
-	contactPersons: ContactPersonSummary[];
-	dealStatus: 'Active' | 'Dialog' | 'Inactive';
+	contactPersons: PersonSummary[];
+	deal: { dealStatus: 'Active' | 'Dialog' | 'Inactive' };
 };
 
 type ClientListItemProps = {
@@ -36,7 +37,8 @@ type ListItemWidth = {
  * - `DealsStatusSummary`
  */
 const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
-	const { client, suppliers, contactPersons, dealStatus } = clientListItem;
+	const { client, suppliers, contactPersons, deal } = clientListItem;
+	const { dealStatus } = deal;
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [isDoubleExpanded, setIsDoubleExpanded] = useState(false);
@@ -48,43 +50,20 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 		setNestedLineHeight(nestedList.current?.clientHeight);
 	}, [isExpanded, isDoubleExpanded]);
 
-	const clientListArray = [
-		clientListItem,
-		clientListItem,
-		clientListItem,
-		clientListItem,
-		clientListItem,
+	const testContactArray = [
+		contactPersons[0],
+		contactPersons[0],
+		contactPersons[0],
+		contactPersons[0],
 	];
 
-	const clientList = clientListArray.map(clientListItem => {
-		const { client, suppliers, contactPersons, dealStatus } = clientListItem;
-
+	const clientList = testContactArray.map(contactPerson => {
 		return (
-			<HorizontalDividedContainer
-				isExpandable
-				onExpand={() => setIsDoubleExpanded(!isDoubleExpanded)}
-				isExpanded={isDoubleExpanded}
-				key={client.title + Math.random()}
-				cardStyles={{
-					border: 'none',
-					boxShadow: 'none',
-					borderRadius: 6,
-					height: '100%',
-				}}
-			>
-				<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
-					<ClientInfoSummary client={client} />
-				</Box>
-				<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					<SupplierInfoSummary suppliers={suppliers} />
-				</Box>
-				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					<DealsStatusSummary dealStatus={dealStatus} />
-				</Box>
-				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					<AccountManagerInfoSummary contactPersons={contactPersons} />
-				</Box>
-			</HorizontalDividedContainer>
+			<NestedContactPerson
+				key={contactPerson.id + Math.random()}
+				contactPerson={contactPerson}
+				clientName={client.title}
+			/>
 		);
 	});
 
@@ -121,7 +100,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 					<DealsStatusSummary dealStatus={dealStatus} />
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					<AccountManagerInfoSummary contactPersons={contactPersons} />
+					<PersonInfoSummary person={contactPersons} />
 				</Box>
 			</HorizontalDividedContainer>
 			<AnimatePresence>

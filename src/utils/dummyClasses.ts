@@ -1,4 +1,4 @@
-import { ContactPersonSummary } from '../components/summaries/PersonInfoSummary';
+import { PersonSummary } from '../components/summaries/PersonInfoSummary';
 import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
 import { WallOfClientListItem } from '../components/wall-of-clients/ClientListItem';
 
@@ -14,9 +14,9 @@ import { WallOfClientListItem } from '../components/wall-of-clients/ClientListIt
 // 	dealStatus: 'Active',
 // };
 
-export const contactDummy0: ContactPersonSummary[] = [];
+export const contactDummy0: PersonSummary[] = [];
 
-export const contactDummy1: ContactPersonSummary[] = [
+export const contactDummy1: PersonSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -26,7 +26,7 @@ export const contactDummy1: ContactPersonSummary[] = [
 	},
 ];
 
-export const contactDummy2: ContactPersonSummary[] = [
+export const contactDummy2: PersonSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -43,7 +43,7 @@ export const contactDummy2: ContactPersonSummary[] = [
 	},
 ];
 
-export const contactDummy3: ContactPersonSummary[] = [
+export const contactDummy3: PersonSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -67,7 +67,7 @@ export const contactDummy3: ContactPersonSummary[] = [
 	},
 ];
 
-export const contactDummy4: ContactPersonSummary[] = [
+export const contactDummy4: PersonSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',

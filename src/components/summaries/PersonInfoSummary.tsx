@@ -4,7 +4,7 @@ import { Avatar, Box, Stack, Tooltip, Typography, useMediaQuery, useTheme } from
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export type ContactPersonSummary = {
+export type PersonSummary = {
 	id: string;
 	firstName: string;
 	lastName: string;
@@ -13,10 +13,10 @@ export type ContactPersonSummary = {
 };
 
 type AccountManagerInfoSummaryProps = {
-	contactPersons: ContactPersonSummary[];
+	person: PersonSummary[];
 };
 
-const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contactPersons }) => {
+const PersonInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ person: contactPersons }) => {
 	const theme = useTheme();
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
@@ -178,4 +178,4 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contact
 	);
 };
 
-export default AccountManagerInfoSummary;
+export default PersonInfoSummary;
