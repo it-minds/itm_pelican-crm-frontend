@@ -7,17 +7,17 @@ import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
 import AccountManagerInfoSummary, {
-	ContactPersonSummary,
+	AccountManagerSummary,
 } from '../summaries/AccountManagerInfoSummary';
 import ClientInfoSummary, { ClientSummary } from '../summaries/ClientInfoSummary';
-import DealsStatusSummary from '../summaries/DealsStatusSummary';
+import DealsStatusSummary, { DealStatus } from '../summaries/DealsStatusSummary';
 import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';
 
 export type WallOfClientListItem = {
 	client: ClientSummary;
 	suppliers: SupplierSummary[];
-	contactPersons: ContactPersonSummary[];
-	dealStatus: 'Active' | 'Dialog' | 'Inactive';
+	contactPersons: AccountManagerSummary[];
+	deal: DealStatus[];
 };
 
 type ClientListItemProps = {
@@ -38,7 +38,7 @@ type ListItemWidth = {
  * - `DealsStatusSummary`
  */
 const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
-	const { client, suppliers, contactPersons, dealStatus } = clientListItem;
+	const { client, suppliers, contactPersons, deal } = clientListItem;
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [isDoubleExpanded, setIsDoubleExpanded] = useState(false);
@@ -59,7 +59,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 	];
 
 	const clientList = clientListArray.map(clientListItem => {
-		const { client, suppliers, contactPersons, dealStatus } = clientListItem;
+		const { client, suppliers, contactPersons, deal } = clientListItem;
 
 		return (
 			<HorizontalDividedContainer
@@ -81,7 +81,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 					<SupplierInfoSummary suppliers={suppliers} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					<DealsStatusSummary dealStatus={dealStatus} />
+					<DealsStatusSummary deal={deal} />
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 					<AccountManagerInfoSummary contactPersons={contactPersons} />
@@ -89,6 +89,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 			</HorizontalDividedContainer>
 		);
 	});
+	// TODO: Search array of deals for prioritized status (active > dialog > inactive) and return only the highest priority
 
 	return (
 		<Box
@@ -120,7 +121,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 					<SupplierInfoSummary suppliers={suppliers} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					<DealsStatusSummary dealStatus={dealStatus} />
+					<DealsStatusSummary deal={deal} />
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 					<AccountManagerInfoSummary contactPersons={contactPersons} />

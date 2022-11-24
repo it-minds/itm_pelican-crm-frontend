@@ -7,14 +7,24 @@ import { useTranslation } from 'react-i18next';
 
 import { flexCenter } from '../../styles/generalStyles';
 
-type DealStatusProps = {
+export type DealStatus = {
+	id: string;
 	dealStatus: 'Active' | 'Dialog' | 'Inactive';
+	startDate?: string;
+	endDate?: string;
 };
 
-const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
+type DealStatusProps = {
+	deal: DealStatus;
+};
+
+const DealsStatusSummary: FC<DealStatusProps> = ({ deal }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
 	const { t } = useTranslation();
+	const { id, dealStatus, startDate, endDate } = deal;
+
+	// TODO: Find a use for startDate or remove it from query. Ask PM / PO for use cases.
 
 	switch (dealStatus) {
 		case 'Active': {
@@ -30,7 +40,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 							</Typography>
 							<Typography variant="note" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
-									date: 'some date',
+									date: endDate,
 								})}
 							</Typography>
 						</Stack>
@@ -67,7 +77,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 							</Typography>
 							<Typography variant="note" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
-									date: 'some date',
+									date: endDate,
 								})}
 							</Typography>
 						</Stack>

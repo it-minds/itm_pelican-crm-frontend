@@ -1,4 +1,4 @@
-import { ContactPersonSummary } from '../components/summaries/AccountManagerInfoSummary';
+import { AccountManagerSummary } from '../components/summaries/AccountManagerInfoSummary';
 import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
 import { WallOfClientListItem } from '../components/wall-of-clients/ClientListItem';
 
@@ -14,9 +14,9 @@ import { WallOfClientListItem } from '../components/wall-of-clients/ClientListIt
 // 	dealStatus: 'Active',
 // };
 
-export const contactDummy0: ContactPersonSummary[] = [];
+export const contactDummy0: AccountManagerSummary[] = [];
 
-export const contactDummy1: ContactPersonSummary[] = [
+export const contactDummy1: AccountManagerSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -26,7 +26,7 @@ export const contactDummy1: ContactPersonSummary[] = [
 	},
 ];
 
-export const contactDummy2: ContactPersonSummary[] = [
+export const contactDummy2: AccountManagerSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -43,7 +43,7 @@ export const contactDummy2: ContactPersonSummary[] = [
 	},
 ];
 
-export const contactDummy3: ContactPersonSummary[] = [
+export const contactDummy3: AccountManagerSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -67,7 +67,7 @@ export const contactDummy3: ContactPersonSummary[] = [
 	},
 ];
 
-export const contactDummy4: ContactPersonSummary[] = [
+export const contactDummy4: AccountManagerSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -163,9 +163,50 @@ export const dummyListItem2: WallOfClientListItem = {
 		address: 'Nordmarksvej 9, 7190 Billund, Denmark',
 		url: 'legoland.dk',
 	},
-	contactPersons: contactDummy1,
-	suppliers: dummySuppliers3,
-	dealStatus: 'Active',
+	contactPersons: [
+		{
+			id: '1',
+			firstName: 'Din',
+			lastName: 'Mor',
+			email: 'eret@godtmenneske.dk',
+			phoneNum: '8008135',
+		},
+		{
+			id: '2',
+			firstName: 'Kontaktperson',
+			lastName: 'Kontaktpersonsen',
+			email: 'kontaktperson@kontaktperson.dk',
+			phoneNum: '12345678',
+		},
+	],
+	suppliers: [
+		{
+			id: '1',
+			name: 'IT-Minds',
+			logo: 'https://sursen.it-minds.dk/images/logo.svg',
+			location: 'Copenhagen',
+		},
+		{
+			id: '2',
+			name: 'Kapacity',
+			logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/z7cgtl0o2hizipgezq5a',
+			location: 'Copenhagen',
+		},
+		{
+			id: '1',
+			name: 'IT-Minds',
+			logo: 'https://sursen.it-minds.dk/images/logo.svg',
+			location: 'Copenhagen',
+		},
+	],
+	deal: [
+		{
+			id: '1',
+			dealStatus: 'Active',
+			startDate: '2022-05-19T00:00:00.000Z',
+			endDate: '2022-12-30T00:00:00.000Z',
+		},
+	],
 };
 
 export const dummyListItem3: WallOfClientListItem = {
@@ -177,7 +218,14 @@ export const dummyListItem3: WallOfClientListItem = {
 	},
 	contactPersons: contactDummy3,
 	suppliers: dummySuppliers3,
-	dealStatus: 'Inactive',
+	deal: [
+		{
+			id: '1',
+			dealStatus: 'Active',
+			startDate: '2022-05-19T00:00:00.000Z',
+			endDate: '2022-12-30T00:00:00.000Z',
+		},
+	],
 };
 
 export const dummyCompanyNames: string[] = [

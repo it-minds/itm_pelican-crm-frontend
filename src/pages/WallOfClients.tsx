@@ -113,6 +113,9 @@ const WallOfClients = () => {
 					gap: 3,
 				}}
 			>
+				{/* {data?.clients?.nodes?.map(client => (
+					<ClientListItem clientListItem={wallOfClientsDataTransform(client)} />
+				))} */}
 				<ClientListItem clientListItem={dummyListItem2} />
 				<ClientListItem clientListItem={dummyListItem3} />
 			</Box>

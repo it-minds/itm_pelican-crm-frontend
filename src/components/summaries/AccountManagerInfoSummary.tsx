@@ -4,7 +4,7 @@ import { Avatar, Box, Stack, Tooltip, Typography, useMediaQuery, useTheme } from
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export type ContactPersonSummary = {
+export type AccountManagerSummary = {
 	id: string;
 	firstName: string;
 	lastName: string;
@@ -13,7 +13,7 @@ export type ContactPersonSummary = {
 };
 
 type AccountManagerInfoSummaryProps = {
-	contactPersons: ContactPersonSummary[];
+	contactPersons: AccountManagerSummary[];
 };
 
 const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ contactPersons }) => {
