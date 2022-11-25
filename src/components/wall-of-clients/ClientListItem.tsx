@@ -173,3 +173,8 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 };
 
 export default ClientListItem;
+
+/**
+ * TODO: Make data transformation from query data to object-arrays of fragment types
+ * TODO: Refactor all summaries to take in fragment types from GQL
+ */
