@@ -16,9 +16,8 @@ import { flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyCompanyNames, dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
-/**
- * TODO: Dummy suppliers above^ - remove when real data is available
- */
+
+// TODO: Dummy suppliers above^ - remove when real data is available
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -39,6 +38,10 @@ const WallOfClients = () => {
 
 	console.log(data?.clients);
 	// TODO: Without clog, data is not used, and will not be considered during codegen. Delete above clog when page components have been refactored to utilize data.
+	// TODO: Make data transformation here indsted of the clog, to utilize data
+	// TODO: Make data transformation from query data to object-arrays of fragment types (basically just an array of all the clients from the query)
+	// TODO: transformed array is used to generate ClientListItems via map
+	// TODO: ClientListItems can be returned from this function, but should probably be separated (SRP)
 
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
