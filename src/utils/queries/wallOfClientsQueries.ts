@@ -16,15 +16,19 @@ export const GET_FILTERED_CLIENTS = gql`
 		) {
 			totalCount
 			nodes {
-				id
-				name
-				officeLocation
-				website
-				clientContacts {
-					contact {
-						...FRAGMENT_CONTACT
-					}
-				}
+				...FRAGMENT_CLIENT
+			}
+		}
+	}
+
+	fragment FRAGMENT_CLIENT on Client {
+		id
+		name
+		officeLocation
+		website
+		clientContacts {
+			contact {
+				...FRAGMENT_CONTACT
 			}
 		}
 	}
@@ -71,3 +75,18 @@ export const GET_FILTERED_CLIENTS = gql`
 		}
 	}
 `;
+
+/**
+ * Fragments are created to create specific types for use when
+ * passing data down through nested components. These components
+ * are receiving an object of the specified type. For example:
+ * 		ClientListItem (a render of a specific client) receives
+ * 		a Fragment_ClientFragment-object, that contains all the
+ * 		data for a specific client, which also includes the other
+ * 		fragments.
+ * 		The nested item of ClientListItem then receives a
+ * 		Fragment_ContactFragment-object, which basically is all
+ * 		the data for all the contacts for a specific client. It
+ * 		is assumed that every component is rendered from the parent
+ * 		so this data can be passed on.
+ */
