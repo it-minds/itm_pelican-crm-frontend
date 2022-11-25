@@ -3,7 +3,15 @@ import { Box } from '@mui/system';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
+import { Fragment_ClientFragment } from '../../gql/graphql';
 import { flexCenter } from '../../styles/generalStyles';
+import {
+	FetchedAccountManager,
+	FetchedClient,
+	FetchedContact,
+	FetchedDeal,
+	FetchedSupplier,
+} from '../../utils/queryTypes';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
 import AccountManagerInfoSummary, {
@@ -14,14 +22,15 @@ import DealsStatusSummary, { DealStatus } from '../summaries/DealsStatusSummary'
 import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';
 
 export type WallOfClientListItem = {
-	client: ClientSummary;
-	suppliers: SupplierSummary[];
-	contactPersons: AccountManagerSummary[];
-	deal: DealStatus[];
+	client: FetchedClient;
+	suppliers: FetchedSupplier[];
+	contactPersons: FetchedContact[];
+	deal: FetchedDeal[];
 };
+// TODO: WallOfClientsListItem-type might be obsolete after creation of fragments
 
 type ClientListItemProps = {
-	clientListItem: WallOfClientListItem;
+	clientListItem: Fragment_ClientFragment;
 };
 type ListItemWidth = {
 	minWidth: string | number;
@@ -38,7 +47,7 @@ type ListItemWidth = {
  * - `DealsStatusSummary`
  */
 const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
-	const { client, suppliers, contactPersons, deal } = clientListItem;
+	// const { client, suppliers, contactPersons, deal } = clientListItem;
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [isDoubleExpanded, setIsDoubleExpanded] = useState(false);

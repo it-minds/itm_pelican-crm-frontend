@@ -8,7 +8,7 @@ export const GET_FILTERED_CLIENTS = gql`
 					{ name: { contains: $currentClientSearch } }
 					{
 						clientContacts: {
-							some: { and: { contact: { firstname: { contains: $currentContactSearch } } } }
+							some: { and: { contact: { firstName: { contains: $currentContactSearch } } } }
 						}
 					}
 				]
@@ -35,8 +35,8 @@ export const GET_FILTERED_CLIENTS = gql`
 
 	fragment FRAGMENT_CONTACT on Contact {
 		id
-		firstname
-		lastname
+		firstName
+		lastName
 		email
 		phoneNumber
 		dealContacts {
@@ -66,12 +66,16 @@ export const GET_FILTERED_CLIENTS = gql`
 		phoneNumber
 		pictureUrl
 		supplier {
-			id
-			name
-			pictureUrl
-			officeLocations {
-				cityName
-			}
+			...FRAGMENT_SUPPLIER
+		}
+	}
+
+	fragment FRAGMENT_SUPPLIER on Supplier {
+		id
+		name
+		pictureUrl
+		officeLocations {
+			cityName
 		}
 	}
 `;

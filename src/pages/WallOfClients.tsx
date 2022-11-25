@@ -10,7 +10,7 @@ import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper'
 import PrimaryFilter from '../components/common/filters/PrimaryFilter';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
-import ClientListItem from '../components/wall-of-clients/ClientListItem';
+import ClientListItem, { WallOfClientListItem } from '../components/wall-of-clients/ClientListItem';
 import { GetFilteredClientsQuery, GetFilteredClientsQueryVariables } from '../gql/graphql';
 import { flexCol } from '../styles/generalStyles';
 // eslint-disable
@@ -37,7 +37,7 @@ const WallOfClients = () => {
 		}
 	);
 
-	console.log(data);
+	console.log(data?.clients);
 	// TODO: Without clog, data is not used, and will not be considered during codegen. Delete above clog when page components have been refactored to utilize data.
 
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
@@ -113,9 +113,9 @@ const WallOfClients = () => {
 					gap: 3,
 				}}
 			>
-				{/* {data?.clients?.nodes?.map(client => (
-					<ClientListItem clientListItem={wallOfClientsDataTransform(client)} />
-				))} */}
+				{data?.clients?.nodes?.map(client => (
+					<ClientListItem clientListItem={client} />
+				))}
 				<ClientListItem clientListItem={dummyListItem2} />
 				<ClientListItem clientListItem={dummyListItem3} />
 			</Box>

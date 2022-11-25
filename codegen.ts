@@ -11,3 +11,5 @@ const config: CodegenConfig = {
 	},
 };
 export default config;
+
+// TODO: Properly setup config file (maybe as .yaml). See code from Franz in DM's.
