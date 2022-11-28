@@ -3,8 +3,8 @@ import { Box } from '@mui/system';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
-import { Fragment_ClientFragment } from '../../gql/graphql';
 import { flexCenter } from '../../styles/generalStyles';
+import { FRAGMENT_CLIENTFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import {
 	FetchedAccountManager,
 	FetchedClient,
@@ -30,7 +30,7 @@ export type WallOfClientListItem = {
 // TODO: WallOfClientsListItem-type might be obsolete after creation of fragments
 
 type ClientListItemProps = {
-	clientListItem: Fragment_ClientFragment;
+	client: FRAGMENT_CLIENTFragment;
 };
 type ListItemWidth = {
 	minWidth: string | number;
@@ -46,7 +46,7 @@ type ListItemWidth = {
  * - `AccountManagerInfoSummary`
  * - `DealsStatusSummary`
  */
-const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
+const ClientListItem: FC<ClientListItemProps> = ({ client }) => {
 	// const { client, suppliers, contactPersons, deal } = clientListItem;
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -59,45 +59,45 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 		setNestedLineHeight(nestedList.current?.clientHeight);
 	}, [isExpanded, isDoubleExpanded]);
 
-	const clientListArray = [
-		clientListItem,
-		clientListItem,
-		clientListItem,
-		clientListItem,
-		clientListItem,
-	];
+	// const clientListArray = [
+	// 	clientListItem,
+	// 	clientListItem,
+	// 	clientListItem,
+	// 	clientListItem,
+	// 	clientListItem,
+	// ];
 
-	const clientList = clientListArray.map(clientListItem => {
-		const { client, suppliers, contactPersons, deal } = clientListItem;
+	// const clientList = clientListArray.map(clientListItem => {
+	// 	const { client, suppliers, contactPersons, deal } = clientListItem;
 
-		return (
-			<HorizontalDividedContainer
-				isExpandable
-				onExpand={() => setIsDoubleExpanded(!isDoubleExpanded)}
-				isExpanded={isDoubleExpanded}
-				key={client.title + Math.random()}
-				cardStyles={{
-					border: 'none',
-					boxShadow: 'none',
-					borderRadius: 6,
-					height: '100%',
-				}}
-			>
-				<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
-					<ClientInfoSummary client={client} />
-				</Box>
-				<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					<SupplierInfoSummary suppliers={suppliers} />
-				</Box>
-				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					<DealsStatusSummary deal={deal} />
-				</Box>
-				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					<AccountManagerInfoSummary contactPersons={contactPersons} />
-				</Box>
-			</HorizontalDividedContainer>
-		);
-	});
+	// 	return (
+	// 		<HorizontalDividedContainer
+	// 			isExpandable
+	// 			onExpand={() => setIsDoubleExpanded(!isDoubleExpanded)}
+	// 			isExpanded={isDoubleExpanded}
+	// 			key={client.title + Math.random()}
+	// 			cardStyles={{
+	// 				border: 'none',
+	// 				boxShadow: 'none',
+	// 				borderRadius: 6,
+	// 				height: '100%',
+	// 			}}
+	// 		>
+	// 			<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
+	// 				<ClientInfoSummary client={client} />
+	// 			</Box>
+	// 			<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+	// 				<SupplierInfoSummary suppliers={suppliers} />
+	// 			</Box>
+	// 			<Box {...fixedWidth(20, 6)} sx={flexCenter}>
+	// 				<DealsStatusSummary deal={deal} />
+	// 			</Box>
+	// 			<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+	// 				<AccountManagerInfoSummary contactPersons={contactPersons} />
+	// 			</Box>
+	// 		</HorizontalDividedContainer>
+	// 	);
+	// });
 	// TODO: Search array of deals for prioritized status (active > dialog > inactive) and return only the highest priority
 
 	return (

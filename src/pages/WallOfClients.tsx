@@ -9,12 +9,16 @@ import SecondaryFilterContainer from '../components/common/filters/containers/Se
 import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
 import PrimaryFilter from '../components/common/filters/PrimaryFilter';
 import PageContainer from '../components/common/PageContainer';
+import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
 import Underlined from '../components/common/Underlined';
-import ClientListItem, { WallOfClientListItem } from '../components/wall-of-clients/ClientListItem';
-import { GetFilteredClientsQuery, GetFilteredClientsQueryVariables } from '../gql/graphql';
+import ClientListItem from '../components/wall-of-clients/ClientListItem';
 import { flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyCompanyNames, dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
+import {
+	getFilteredClientsQuery,
+	getFilteredClientsQueryVariables,
+} from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
 
 // TODO: Dummy suppliers above^ - remove when real data is available
@@ -26,7 +30,7 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
-	const { loading, error, data, refetch } = useQuery<GetFilteredClientsQuery>(
+	const { loading, error, data, refetch } = useQuery<getFilteredClientsQuery>(
 		GET_FILTERED_CLIENTS,
 		{
 			variables: {
@@ -64,11 +68,10 @@ const WallOfClients = () => {
 	};
 
 	useEffect(() => {
-		const vars: GetFilteredClientsQueryVariables = {
+		const vars: getFilteredClientsQueryVariables = {
 			currentClientSearch: clientFilterContent,
 			currentContactSearch: contactFilterContent,
 		};
-
 		refetch(vars);
 	}, [clientFilterContent, contactFilterContent, refetch]);
 
@@ -81,7 +84,6 @@ const WallOfClients = () => {
 					</Typography>
 				</Underlined>
 			</Box>
-
 			<FilterContainer>
 				<PrimaryFilterWrapper>
 					<PrimaryFilter
@@ -104,24 +106,33 @@ const WallOfClients = () => {
 							setIsFilterSet(true);
 						}}
 					>
-						<ClientListItem clientListItem={dummyListItem2} />
+						<Typography>Yoyo, what's going on!</Typography>
 					</PopupFilterWrapper>
 				</SecondaryFilterContainer>
 			</FilterContainer>
-			<Box
-				sx={{
-					...flexCol,
-					alignItems: 'center',
-					my: 2,
-					gap: 3,
-				}}
-			>
-				{data?.clients?.nodes?.map(client => (
-					<ClientListItem clientListItem={client} />
-				))}
-				<ClientListItem clientListItem={dummyListItem2} />
-				<ClientListItem clientListItem={dummyListItem3} />
-			</Box>
+			{loading && <CompanyCardsSkeleton numSkeletons={5} />}
+			{error && (
+				<>
+					<Typography>
+						Whoopsie-doo, looks like we are gonna punish some interns ¯\_(ツ)_/¯.
+					</Typography>
+					<Typography>An error occured when fetching data.</Typography>
+				</>
+			)}
+			{data && (
+				<Box
+					sx={{
+						...flexCol,
+						alignItems: 'center',
+						my: 2,
+						gap: 3,
+					}}
+				>
+					{data?.clients?.nodes?.map(client => (
+						<ClientListItem clientListItem={client} />
+					))}
+				</Box>
+			)}
 		</PageContainer>
 	);
 };
