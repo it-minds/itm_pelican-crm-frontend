@@ -129,7 +129,7 @@ const WallOfClients = () => {
 					}}
 				>
 					{data?.clients?.nodes?.map(client => (
-						<ClientListItem clientListItem={client} />
+						<ClientListItem client={client} />
 					))}
 				</Box>
 			)}
