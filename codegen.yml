@@ -1,0 +1,21 @@
+schema: https://pelican-linux-web-app.azurewebsites.net/graphql/
+documents: 'src/**/*.{ts,tsx}'
+config: # The following configuration will adjust output to the defaults of Apollo-Codegen, and should be compatible with most use-cases.
+  preResolveTypes: true # Simplifies the generated types
+  namingConvention: keep # Keeps naming as-is
+  avoidOptionals: # Avoids optionals on the level of the field
+    field: true
+    nonOptionalTypename: true # Forces `__typename` on all selection sets
+  skipTypeNameForRoot: true # Don't generate __typename for root types
+generates:
+  ./src/__generated__/globalTypes.ts:
+    plugins:
+      - typescript
+  ./src/:
+    preset: near-operation-file
+    presetConfig:
+      extension: '.graphql.ts'
+      baseTypesPath: './__generated__/globalTypes.ts'
+      folder: __generated__
+    plugins:
+      - typescript-operations
