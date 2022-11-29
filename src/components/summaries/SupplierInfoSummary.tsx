@@ -54,7 +54,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 					<Box width="30%">
 						<ImageContainer
 							imageHeight="40px"
-							imageSource={suppliers[0].logo ? suppliers[0].logo : ''}
+							imageSource={suppliers[0].pictureUrl ? suppliers[0].pictureUrl : ''}
 						/>
 					</Box>
 					{!isBelowMedium && (
@@ -80,7 +80,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 									sx={{ opacity: '0.6' }}
 									noWrap
 								>
-									{suppliers[0].location}
+									{suppliers[0].officeLocations[0].cityName}
 								</Typography>
 							</Box>
 						</Box>
@@ -92,9 +92,12 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 
 	function supplierLogos(suppliers: FRAGMENT_SUPPLIERFragment[]) {
 		return suppliers.map((supplier, index) => (
-			<Tooltip title={supplier.name} key={index + supplier.name}>
+			<Tooltip title={supplier.name} key={index}>
 				<Box>
-					<ImageContainer imageHeight="35px" imageSource={!!supplier.logo ? supplier.logo : ''} />
+					<ImageContainer
+						imageHeight="35px"
+						imageSource={!!supplier.pictureUrl ? supplier.pictureUrl : ''}
+					/>
 				</Box>
 			</Tooltip>
 		));
