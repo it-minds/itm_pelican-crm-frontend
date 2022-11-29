@@ -40,7 +40,6 @@ const WallOfClients = () => {
 		}
 	);
 
-	console.log(data?.clients);
 	// TODO: Without clog, data is not used, and will not be considered during codegen. Delete above clog when page components have been refactored to utilize data.
 	// TODO: Make data transformation here indsted of the clog, to utilize data
 	// TODO: Make data transformation from query data to object-arrays of fragment types (basically just an array of all the clients from the query)
@@ -129,7 +128,7 @@ const WallOfClients = () => {
 					}}
 				>
 					{data?.clients?.nodes?.map(client => (
-						<ClientListItem client={client} />
+						<ClientListItem clientInput={client} />
 					))}
 				</Box>
 			)}

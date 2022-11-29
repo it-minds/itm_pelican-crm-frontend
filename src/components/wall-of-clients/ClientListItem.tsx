@@ -1,10 +1,16 @@
-import { Stack, useMediaQuery, useTheme } from '@mui/material';
+import { Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
 import { flexCenter } from '../../styles/generalStyles';
-import { FRAGMENT_CLIENTFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
+import {
+	FRAGMENT_ACCOUNT_MANAGERFragment,
+	FRAGMENT_CLIENTFragment,
+	FRAGMENT_CONTACTFragment,
+	FRAGMENT_DEALFragment,
+	FRAGMENT_SUPPLIERFragment,
+} from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import {
 	FetchedAccountManager,
 	FetchedClient,
@@ -30,7 +36,7 @@ export type WallOfClientListItem = {
 // TODO: WallOfClientsListItem-type might be obsolete after creation of fragments
 
 type ClientListItemProps = {
-	client: FRAGMENT_CLIENTFragment;
+	clientInput: FRAGMENT_CLIENTFragment;
 };
 type ListItemWidth = {
 	minWidth: string | number;
@@ -46,7 +52,7 @@ type ListItemWidth = {
  * - `AccountManagerInfoSummary`
  * - `DealsStatusSummary`
  */
-const ClientListItem: FC<ClientListItemProps> = ({ client }) => {
+const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	// const { client, suppliers, contactPersons, deal } = clientListItem;
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -58,6 +64,24 @@ const ClientListItem: FC<ClientListItemProps> = ({ client }) => {
 	useEffect(() => {
 		setNestedLineHeight(nestedList.current?.clientHeight);
 	}, [isExpanded, isDoubleExpanded]);
+
+	// Input generation
+	const contactsInput = clientInput.clientContacts.flatMap(clientContact => clientContact.contact);
+	const dealsInput = contactsInput.flatMap(contact =>
+		contact.dealContacts.flatMap(dealContact => dealContact.deal)
+	);
+	const accountManagersInput = dealsInput.flatMap(deal =>
+		deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
+	);
+	const suppliersInput = accountManagersInput.map(accountManager => accountManager.supplier);
+
+	// TODO: Refactor input generation into utility function?
+
+	// console.log(clientInput);
+	console.log(contactsInput);
+	// console.log(dealsInput);
+	// console.log(accountManagersInput);
+	// console.log(suppliersInput);
 
 	// const clientListArray = [
 	// 	clientListItem,
@@ -124,16 +148,16 @@ const ClientListItem: FC<ClientListItemProps> = ({ client }) => {
 				}}
 			>
 				<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
-					<ClientInfoSummary client={client} />
+					{/* <ClientInfoSummary client={clientInput} /> */}
 				</Box>
 				<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					<SupplierInfoSummary suppliers={suppliers} />
+					{/* <SupplierInfoSummary suppliers={suppliers} /> */}
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					<DealsStatusSummary deal={deal} />
+					{/* <DealsStatusSummary deal={deal} /> */}
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					<AccountManagerInfoSummary contactPersons={contactPersons} />
+					{/* <AccountManagerInfoSummary contactPersons={contactPersons} /> */}
 				</Box>
 			</HorizontalDividedContainer>
 			<AnimatePresence>
@@ -151,7 +175,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ client }) => {
 										height={nestedLineHeight}
 									/>
 									<Stack width="100%" ref={nestedList}>
-										{clientList}
+										<Typography>Nested items here</Typography>
 									</Stack>
 								</Stack>
 							</Stack>
