@@ -60,24 +60,65 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const nestedList = useRef<HTMLDivElement>(null);
 	const [nestedLineHeight, setNestedLineHeight] = useState(nestedList.current?.clientHeight);
+	const [contactsState, setContactState] = useState<FRAGMENT_CONTACTFragment[]>([]);
+	const [dealsState, setDealsState] = useState<FRAGMENT_DEALFragment[]>([]);
+	const [accountManagersState, setAccountManagersState] = useState<
+		FRAGMENT_ACCOUNT_MANAGERFragment[]
+	>([]);
+	const [suppliersState, setSuppliersState] = useState<FRAGMENT_SUPPLIERFragment[]>([]);
 
 	useEffect(() => {
 		setNestedLineHeight(nestedList.current?.clientHeight);
 	}, [isExpanded, isDoubleExpanded]);
 
+	useEffect(() => {
+		setContactState(clientInput.clientContacts.flatMap(clientContact => clientContact.contact));
+	}, [clientInput]);
+
+	useEffect(() => {
+		setDealsState(
+			contactsState.flatMap(contact =>
+				contact.dealContacts.flatMap(dealContact => dealContact.deal)
+			)
+		);
+	}, [contactsState]);
+
+	useEffect(() => {
+		setAccountManagersState(
+			dealsState.flatMap(deal =>
+				deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
+			)
+		);
+	}, [dealsState]);
+
+	useEffect(() => {
+		setSuppliersState(accountManagersState.flatMap(accountManager => accountManager.supplier));
+	}, [accountManagersState]);
+
+	// Clogs for testing
+	useEffect(() => {
+		console.log(contactsState);
+		console.log(dealsState);
+		console.log(accountManagersState);
+		console.log(suppliersState);
+	}, [accountManagersState, contactsState, dealsState, suppliersState]);
+
+	// TODO: Remove test clogs
+
 	// Input generation
-	const contactsInput: FRAGMENT_CONTACTFragment[] = clientInput.clientContacts.flatMap(
-		clientContact => clientContact.contact
-	);
-	const dealsInput: FRAGMENT_DEALFragment[] = contactsInput.flatMap(contact =>
-		contact.dealContacts.flatMap(dealContact => dealContact.deal)
-	);
-	const accountManagersInput: FRAGMENT_ACCOUNT_MANAGERFragment[] = dealsInput.flatMap(deal =>
-		deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
-	);
-	const suppliersInput: FRAGMENT_SUPPLIERFragment[] = accountManagersInput.map(
-		accountManager => accountManager.supplier
-	);
+	// const contactsInput: FRAGMENT_CONTACTFragment[] = clientInput.clientContacts.flatMap(
+	// 	clientContact => clientContact.contact
+	// );
+
+	// const dealsInput: FRAGMENT_DEALFragment[] = contactsInput.flatMap(contact =>
+	// 	contact.dealContacts.flatMap(dealContact => dealContact.deal)
+	// );
+	// const accountManagersInput: FRAGMENT_ACCOUNT_MANAGERFragment[] = dealsInput.flatMap(deal =>
+	// 	deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
+	// );
+	// const suppliersInput: FRAGMENT_SUPPLIERFragment[] = accountManagersInput.flatMap(
+	// 	accountManager => accountManager.supplier
+	// );
 
 	// TODO: Refactor input generation into utility function?
 
@@ -85,12 +126,12 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	// console.log(contactsInput);
 	// console.log(dealsInput);
 	// console.log(accountManagersInput);
-	console.log(suppliersInput);
+	// console.log(suppliersInput);
 
-	const contactsSet = new Set(contactsInput);
-	const dealsSet = new Set(dealsInput);
-	const accountManagerSet = new Set(accountManagersInput);
-	const suppliersSet = new Set(suppliersInput);
+	// const contactsSet = new Set(contactsInput);
+	// const dealsSet = new Set(dealsInput);
+	// const accountManagerSet = new Set(accountManagersInput);
+	// const suppliersSet = new Set(suppliersInput);
 
 	// console.log(contactsSet);
 	// console.log(dealsInput);
