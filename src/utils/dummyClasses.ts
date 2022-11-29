@@ -90,10 +90,10 @@ export const contactDummy4: PersonSummary[] = [
 		phoneNum: '87654321',
 	},
 	{
-		id: '3',
-		firstName: 'Kontaktperson',
-		lastName: 'Kontaktpersonsen',
-		email: 'kontaktperson@kontaktperson.dk',
+		id: '4',
+		firstName: 'Scrooge',
+		lastName: 'McDuck',
+		email: 'scrooge@mcduck.com',
 		phoneNum: '87654321',
 	},
 ];
@@ -163,9 +163,9 @@ export const dummyListItem2: WallOfClientListItem = {
 		address: 'Nordmarksvej 9, 7190 Billund, Denmark',
 		url: 'legoland.dk',
 	},
-	contactPersons: contactDummy1,
+	contactPersons: contactDummy3,
 	suppliers: dummySuppliers3,
-	dealStatus: 'Active',
+	deal: { dealStatus: 'Dialog' },
 };
 
 export const dummyListItem3: WallOfClientListItem = {
@@ -177,7 +177,7 @@ export const dummyListItem3: WallOfClientListItem = {
 	},
 	contactPersons: contactDummy3,
 	suppliers: dummySuppliers3,
-	dealStatus: 'Inactive',
+	deal: { dealStatus: 'Active' },
 };
 
 export const dummyCompanyNames: string[] = [

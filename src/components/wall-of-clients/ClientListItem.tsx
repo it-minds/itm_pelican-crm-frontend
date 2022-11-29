@@ -1,32 +1,41 @@
 import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
-import PersonInfoSummary, { PersonSummary } from '../summaries/PersonInfoSummary';
 import ClientInfoSummary, { ClientSummary } from '../summaries/ClientInfoSummary';
 import DealsStatusSummary from '../summaries/DealsStatusSummary';
+import PersonInfoSummary, { PersonSummary } from '../summaries/PersonInfoSummary';
 import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';
 import NestedContactPerson from './NestedContactPerson';
+
+export type TestDeal = {
+	dealStatus: 'Active' | 'Dialog' | 'Inactive';
+};
 
 export type WallOfClientListItem = {
 	client: ClientSummary;
 	suppliers: SupplierSummary[];
 	contactPersons: PersonSummary[];
-	deal: { dealStatus: 'Active' | 'Dialog' | 'Inactive' };
+	deal: TestDeal;
 };
 
 type ClientListItemProps = {
 	clientListItem: WallOfClientListItem;
+	children?: React.ReactNode;
 };
 type ListItemWidth = {
 	minWidth: string | number;
 	width: string | number;
 	maxWidth: string | number;
 };
+
+type PersonTestSummary = {
+	isExpanded: boolean;
+} & PersonSummary;
 
 /**
  * This component is used exclusively in the WallOfClients page and displays a client's information.
@@ -36,36 +45,67 @@ type ListItemWidth = {
  * - `AccountManagerInfoSummary`
  * - `DealsStatusSummary`
  */
-const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
+const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) => {
 	const { client, suppliers, contactPersons, deal } = clientListItem;
 	const { dealStatus } = deal;
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
-	const [isDoubleExpanded, setIsDoubleExpanded] = useState(false);
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const nestedList = useRef<HTMLDivElement>(null);
-	const [nestedLineHeight, setNestedLineHeight] = useState(nestedList.current?.clientHeight);
+	const [numberOfElements, setNumberOfElements] = useState(0);
+	const [nestedLineHeight, setNestedLineHeight] = useState(0);
+	const [contactPersonsState, setContactPersonsState] = useState(
+		contactPersons as PersonTestSummary[]
+	);
+
+	const NESTED_ELEMENTS_HEIGHT = 68;
 
 	useEffect(() => {
-		setNestedLineHeight(nestedList.current?.clientHeight);
-	}, [isExpanded, isDoubleExpanded]);
+		setNumberOfElements(contactPersons.length);
+	}, [contactPersons.length]);
 
-	const testContactArray = [
-		contactPersons[0],
-		contactPersons[0],
-		contactPersons[0],
-		contactPersons[0],
-	];
-
-	const clientList = testContactArray.map(contactPerson => {
-		return (
-			<NestedContactPerson
-				key={contactPerson.id + Math.random()}
-				contactPerson={contactPerson}
-				clientName={client.title}
-			/>
+	useEffect(() => {
+		setNestedLineHeight(
+			nestedList.current
+				? nestedList.current.clientHeight
+				: NESTED_ELEMENTS_HEIGHT * numberOfElements
 		);
-	});
+	}, [numberOfElements, contactPersonsState]);
+
+	const handleNestedExpansion = (id: string) => {
+		let isExpansion = false;
+		const newList = contactPersonsState.map(contact => {
+			if (contact.id === id) {
+				contact.isExpanded = !contact.isExpanded;
+				isExpansion = contact.isExpanded;
+				console.log('contact.isExpanded 1', contact.id, contact.isExpanded);
+			}
+			console.log('contact.isExpanded 2', contact.id, contact.isExpanded);
+
+			return contact;
+		});
+		setNumberOfElements(prev => (isExpansion ? prev + 1 : prev - 1));
+		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
+
+		setContactPersonsState(newList);
+	};
+
+	const clientList = () => {
+		return contactPersonsState.map(contactPerson => {
+			return (
+				<NestedContactPerson
+					id={contactPerson.id}
+					deal={deal}
+					key={contactPerson.id + Math.random()}
+					contactPerson={contactPerson}
+					clientName={client.title}
+					isExpanded={contactPerson.isExpanded}
+					onExpand={id => handleNestedExpansion(id)}
+					onCollapse={id => {}}
+				/>
+			);
+		});
+	};
 
 	return (
 		<Box
@@ -118,7 +158,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem }) => {
 										height={nestedLineHeight}
 									/>
 									<Stack width="100%" ref={nestedList}>
-										{clientList}
+										{clientList()}
 									</Stack>
 								</Stack>
 							</Stack>
