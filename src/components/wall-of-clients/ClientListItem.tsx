@@ -14,6 +14,7 @@ import {
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
 import ClientInfoSummary from '../summaries/ClientInfoSummary';
+import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 
 type ClientListItemProps = {
 	clientInput: FRAGMENT_CLIENTFragment;
@@ -199,7 +200,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 					<ClientInfoSummary client={clientInput} />
 				</Box>
 				<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					{/* <SupplierInfoSummary suppliers={suppliers} /> */}
+					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
 					{/* <DealsStatusSummary deal={deal} /> */}
@@ -225,9 +226,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 									<Stack width="100%" ref={nestedList}>
 										<Typography>Nested items here</Typography>
 									</Stack>
-									{clientInput.clientContacts.map(item => (
-										<bla bla={item.contact}></bla>
-									))}
 								</Stack>
 							</Stack>
 						</motion.div>

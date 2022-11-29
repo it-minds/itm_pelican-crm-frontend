@@ -2,17 +2,11 @@ import { Box, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { FRAGMENT_SUPPLIERFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import ImageContainer from '../common/ImageContainer';
 
-export type SupplierSummary = {
-	location: string;
-	name: string;
-	id?: string;
-	logo?: string;
-};
-
 type SupplierInfoSummaryProps = {
-	suppliers: SupplierSummary[];
+	suppliers: FRAGMENT_SUPPLIERFragment[];
 };
 
 const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
@@ -38,9 +32,8 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 				return supplierLogos(suppliers);
 			case 3:
 				return supplierLogos(suppliers);
-
 			default: // more than 3 suppliers
-				const arraySlice: SupplierSummary[] = suppliers.slice(0, 2);
+				const arraySlice: FRAGMENT_SUPPLIERFragment[] = suppliers.slice(0, 2);
 
 				// return the first two suppliers and a +x more indication
 				return (
@@ -97,7 +90,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 		);
 	}
 
-	function supplierLogos(suppliers: SupplierSummary[]) {
+	function supplierLogos(suppliers: FRAGMENT_SUPPLIERFragment[]) {
 		return suppliers.map((supplier, index) => (
 			<Tooltip title={supplier.name} key={index + supplier.name}>
 				<Box>
