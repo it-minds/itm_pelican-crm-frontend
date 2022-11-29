@@ -6,7 +6,7 @@
 		"numberOfHitsText": "Found {{hits}} results"
 	},
 	"navbar": {
-		"clientsLink": "Wall of Clients",
+		"clientsLink": "Clients",
 		"suppliersLink": "Suppliers",
 		"segmentsLink": "Segments",
 		"contactsLink": "Contacts",

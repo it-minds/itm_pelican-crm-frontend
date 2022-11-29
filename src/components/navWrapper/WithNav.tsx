@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import NavigationBar from '../common/NavigationBar';
+import NavigationBar from '../navbar/NavigationBar';
 
 const WithNav = () => {
 	return (

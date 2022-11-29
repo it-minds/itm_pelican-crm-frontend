@@ -6,7 +6,8 @@ type NestingIndicatorProps = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 /**
- * This component needs to be passed the height of the nested elements in order to 	have the correct height. The height can be both static or dynamic in that it will expand/shrink as the content changes.
+ * This component needs to be passed the height of the nested elements in order to 	have the correct height. The height can be both static or dynamic.
+ *
  */
 const NestingIndicator: FC<NestingIndicatorProps> = ({ height, onClick }) => {
 	const [heightState, setHeightState] = useState(height || 0);
