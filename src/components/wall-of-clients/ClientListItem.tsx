@@ -66,19 +66,33 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	}, [isExpanded, isDoubleExpanded]);
 
 	// Input generation
-	const contactsInput = clientInput.clientContacts.flatMap(clientContact => clientContact.contact);
-	const dealsInput = contactsInput.flatMap(contact =>
+	const contactsInput: FRAGMENT_CONTACTFragment[] = clientInput.clientContacts.flatMap(
+		clientContact => clientContact.contact
+	);
+	const dealsInput: FRAGMENT_DEALFragment[] = contactsInput.flatMap(contact =>
 		contact.dealContacts.flatMap(dealContact => dealContact.deal)
 	);
-	const accountManagersInput = dealsInput.flatMap(deal =>
+	const accountManagersInput: FRAGMENT_ACCOUNT_MANAGERFragment[] = dealsInput.flatMap(deal =>
 		deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
 	);
-	const suppliersInput = accountManagersInput.map(accountManager => accountManager.supplier);
+	const suppliersInput: FRAGMENT_SUPPLIERFragment[] = accountManagersInput.map(
+		accountManager => accountManager.supplier
+	);
 
 	// TODO: Refactor input generation into utility function?
 
 	// console.log(clientInput);
-	console.log(contactsInput);
+	// console.log(contactsInput);
+	// console.log(dealsInput);
+	// console.log(accountManagersInput);
+	console.log(suppliersInput);
+
+	const contactsSet = new Set(contactsInput);
+	const dealsSet = new Set(dealsInput);
+	const accountManagerSet = new Set(accountManagersInput);
+	const suppliersSet = new Set(suppliersInput);
+
+	// console.log(contactsSet);
 	// console.log(dealsInput);
 	// console.log(accountManagersInput);
 	// console.log(suppliersInput);
