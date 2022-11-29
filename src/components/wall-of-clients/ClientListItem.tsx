@@ -13,6 +13,7 @@ import {
 } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
+import AccountManagerInfoSummary from '../summaries/AccountManagerInfoSummary';
 import ClientInfoSummary from '../summaries/ClientInfoSummary';
 import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 
@@ -206,7 +207,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 					{/* <DealsStatusSummary deal={deal} /> */}
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					{/* <AccountManagerInfoSummary contactPersons={contactPersons} /> */}
+					<AccountManagerInfoSummary accountManagers={accountManagersState} />
 				</Box>
 			</HorizontalDividedContainer>
 			<AnimatePresence>

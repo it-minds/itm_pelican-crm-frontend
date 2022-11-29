@@ -30,7 +30,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 			}
 			case 2:
 				return supplierLogos(suppliers);
-			default: // more than 3 suppliers
+			default: // more than 2 suppliers
 				const arraySlice: FRAGMENT_SUPPLIERFragment[] = suppliers.slice(0, 2);
 
 				// return the first two suppliers and a +x more indication
