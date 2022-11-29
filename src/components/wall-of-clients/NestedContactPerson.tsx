@@ -33,17 +33,11 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	const [lineHeight, setLineHeight] = useState(nestedContacts.current?.clientHeight || 68);
 	const contactArray = [contactPerson];
 
-	const handleExpansionState = () => {
-		console.log('handleExpansionState called with id', id);
-
-		onExpand(id);
-	};
-
 	return (
 		<Box>
 			<HorizontalDividedContainer
 				isExpandable
-				onExpand={handleExpansionState}
+				onExpand={() => onExpand(id)}
 				isExpanded={isExpanded}
 				key={contactPerson.id + Math.random()}
 				cardStyles={{

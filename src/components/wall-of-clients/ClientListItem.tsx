@@ -78,12 +78,10 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 			if (contact.id === id) {
 				contact.isExpanded = !contact.isExpanded;
 				isExpansion = contact.isExpanded;
-				console.log('contact.isExpanded 1', contact.id, contact.isExpanded);
 			}
-			console.log('contact.isExpanded 2', contact.id, contact.isExpanded);
-
 			return contact;
 		});
+
 		setNumberOfElements(prev => (isExpansion ? prev + 1 : prev - 1));
 		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
 

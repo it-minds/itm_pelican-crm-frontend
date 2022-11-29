@@ -14,8 +14,6 @@ const NestingIndicator: FC<NestingIndicatorProps> = ({ height, onClick }) => {
 	const [isHovering, setIsHovering] = useState(false);
 
 	useEffect(() => {
-		console.log('height changed');
-
 		height && setHeightState(height);
 	}, [height]);
 	return (
@@ -37,6 +35,7 @@ const NestingIndicator: FC<NestingIndicatorProps> = ({ height, onClick }) => {
 					// height: `${height ? height - 10 : heightState - 10}px`,
 					height: `${heightState - 10}px`,
 					backgroundColor: isHovering ? '#ffffff79' : '#ffffff35',
+					transition: 'all 0.15s ease-in-out',
 				}}
 			/>
 		</Box>
