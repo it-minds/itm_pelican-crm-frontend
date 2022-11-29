@@ -11,29 +11,9 @@ import {
 	FRAGMENT_DEALFragment,
 	FRAGMENT_SUPPLIERFragment,
 } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
-import {
-	FetchedAccountManager,
-	FetchedClient,
-	FetchedContact,
-	FetchedDeal,
-	FetchedSupplier,
-} from '../../utils/queryTypes';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
-import AccountManagerInfoSummary, {
-	AccountManagerSummary,
-} from '../summaries/AccountManagerInfoSummary';
-import ClientInfoSummary, { ClientSummary } from '../summaries/ClientInfoSummary';
-import DealsStatusSummary, { DealStatus } from '../summaries/DealsStatusSummary';
-import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';
-
-export type WallOfClientListItem = {
-	client: FetchedClient;
-	suppliers: FetchedSupplier[];
-	contactPersons: FetchedContact[];
-	deal: FetchedDeal[];
-};
-// TODO: WallOfClientsListItem-type might be obsolete after creation of fragments
+import ClientInfoSummary from '../summaries/ClientInfoSummary';
 
 type ClientListItemProps = {
 	clientInput: FRAGMENT_CLIENTFragment;
@@ -67,6 +47,8 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	>([]);
 	const [suppliersState, setSuppliersState] = useState<FRAGMENT_SUPPLIERFragment[]>([]);
 
+	// TODO: Change naming of states?
+
 	useEffect(() => {
 		setNestedLineHeight(nestedList.current?.clientHeight);
 	}, [isExpanded, isDoubleExpanded]);
@@ -98,11 +80,19 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	// Clogs for testing
 	useEffect(() => {
 		console.log(contactsState);
-		console.log(dealsState);
-		console.log(accountManagersState);
-		console.log(suppliersState);
-	}, [accountManagersState, contactsState, dealsState, suppliersState]);
+	}, [contactsState]);
 
+	useEffect(() => {
+		console.log(dealsState);
+	}, [dealsState]);
+
+	useEffect(() => {
+		console.log(accountManagersState);
+	}, [accountManagersState]);
+
+	useEffect(() => {
+		console.log(suppliersState);
+	}, [suppliersState]);
 	// TODO: Remove test clogs
 
 	// Input generation
@@ -120,7 +110,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	// 	accountManager => accountManager.supplier
 	// );
 
-	// TODO: Refactor input generation into utility function?
+	// TODO: Remove duplicate data generation
 
 	// console.log(clientInput);
 	// console.log(contactsInput);
@@ -177,6 +167,9 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	// 		</HorizontalDividedContainer>
 	// 	);
 	// });
+
+	// TODO: Remove above template liste items and rendering
+
 	// TODO: Search array of deals for prioritized status (active > dialog > inactive) and return only the highest priority
 
 	return (
@@ -203,7 +196,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 				}}
 			>
 				<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
-					{/* <ClientInfoSummary client={clientInput} /> */}
+					<ClientInfoSummary client={clientInput} />
 				</Box>
 				<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 					{/* <SupplierInfoSummary suppliers={suppliers} /> */}
@@ -232,6 +225,9 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 									<Stack width="100%" ref={nestedList}>
 										<Typography>Nested items here</Typography>
 									</Stack>
+									{clientInput.clientContacts.map(item => (
+										<bla bla={item.contact}></bla>
+									))}
 								</Stack>
 							</Stack>
 						</motion.div>

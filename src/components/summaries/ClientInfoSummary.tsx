@@ -11,20 +11,14 @@ import {
 	useMediaQuery,
 	useTheme,
 } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { titleCase } from '../../utils/helperFunctions';
-
-export type ClientSummary = {
-	title: string;
-	city: string;
-	address?: string;
-	url?: string;
-};
+import { FRAGMENT_CLIENTFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 
 type ClientSummaryProps = {
 	sx?: SxProps;
-	client: ClientSummary;
+	client: FRAGMENT_CLIENTFragment;
 };
 
 const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
@@ -33,16 +27,29 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [openTitleTooltip, setOpenTitleTooltip] = useState(false);
 	const [openAddressTooltip, setOpenAddressTooltip] = useState(false);
+	const [clientName, setClientName] = useState<string | null>('');
+	const [clientAddress, setClientAddress] = useState<string | null>('');
+	const [clientUrl, setClientUrl] = useState<string | null>('');
 
-	const { title, city, address, url } = client;
+	useEffect(() => {
+		setClientName(client.name);
+	}, [client]);
+
+	useEffect(() => {
+		setClientAddress(client.officeLocation);
+	}, [client]);
+
+	useEffect(() => {
+		setClientUrl(client.website);
+	}, [client]);
 
 	const urlToDisplay = (): JSX.Element => {
-		if (url && isMedium) {
+		if (clientUrl && isMedium) {
 			return (
 				<>
 					<WebRoundedIcon fontSize="small" />
 					<Typography variant="note" noWrap sx={{ opacity: 0.7, mt: '1px' }}>
-						{titleCase(url ? url : '')}
+						{titleCase(clientUrl ? clientUrl : '')}
 					</Typography>
 				</>
 			);
@@ -75,7 +82,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 					enterDelay={500}
 					leaveDelay={200}
 					open={openTitleTooltip}
-					title={isSmall ? title : ''}
+					title={isSmall ? clientName : ''}
 					placement="top-start"
 				>
 					<Typography
@@ -85,7 +92,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 						noWrap
 						variant="largeBody"
 					>
-						{title}
+						{clientName}
 					</Typography>
 				</Tooltip>
 			</Grid>
@@ -101,7 +108,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 					enterDelay={500}
 					leaveDelay={200}
 					open={openAddressTooltip}
-					title={address || ''}
+					title={clientAddress || ''}
 					placement="bottom-start"
 				>
 					<Box
@@ -118,7 +125,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 						<LocationCityRoundedIcon sx={{ mb: '1px' }} onTouchStart={handleAddressClick} />
 						{!isSmall && (
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
-								{city || 'unknown'}
+								{clientAddress || 'unknown'}
 							</Typography>
 						)}
 					</Box>
@@ -128,7 +135,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 					TransitionProps={{ timeout: 200 }}
 					enterDelay={500}
 					leaveDelay={200}
-					title={titleCase(url)}
+					title={titleCase(clientUrl)}
 				>
 					<Box
 						display="flex"
@@ -137,7 +144,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 						width={isMedium ? '50%' : '30%'}
 						gap="2px"
 						sx={{ cursor: 'pointer', flexWrap: 'nowrap' }}
-						onClick={() => window.open(`https://www.${url}`, '_blank')}
+						onClick={() => window.open(`https://www.${clientUrl}`, '_blank')}
 					>
 						{urlToDisplay()}
 					</Box>

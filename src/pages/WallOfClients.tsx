@@ -14,7 +14,7 @@ import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
 import { flexCol } from '../styles/generalStyles';
 // eslint-disable
-import { dummyCompanyNames, dummyListItem2, dummyListItem3 } from '../utils/dummyClasses';
+import { dummyCompanyNames } from '../utils/dummyClasses';
 import {
 	getFilteredClientsQuery,
 	getFilteredClientsQueryVariables,
