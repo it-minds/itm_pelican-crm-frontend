@@ -12,9 +12,6 @@ type NestingIndicatorProps = {
 const NestingIndicator: FC<NestingIndicatorProps> = ({ height, onClick }) => {
 	const [isHovering, setIsHovering] = useState(false);
 
-	// useEffect(() => {
-	// 	height && setHeightState(height);
-	// }, [height]);
 	return (
 		<Box
 			sx={{

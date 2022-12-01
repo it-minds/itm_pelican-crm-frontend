@@ -12,6 +12,8 @@ import PersonInfoSummary, { PersonSummary } from '../summaries/PersonInfoSummary
 import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';
 import NestedContactPerson from './NestedContactPerson';
 
+const NESTED_ELEMENTS_HEIGHT = 68;
+
 export type TestDeal = {
 	dealStatus: 'Active' | 'Dialog' | 'Inactive';
 };
@@ -52,12 +54,12 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 	const [isExpanded, setIsExpanded] = useState(false);
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const [numberOfElements, setNumberOfElements] = useState(contactPersons.length);
-	const [nestedLineHeight, setNestedLineHeight] = useState(0);
+	const [nestedLineHeight, setNestedLineHeight] = useState(
+		numberOfElements * NESTED_ELEMENTS_HEIGHT
+	);
 	const [contactPersonsState, setContactPersonsState] = useState(
 		contactPersons as PersonTestSummary[]
 	);
-
-	const NESTED_ELEMENTS_HEIGHT = 68;
 
 	const handleNestedExpansion = (id: string) => {
 		let expanding = false;
@@ -92,11 +94,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 		));
 	};
 
-	const handleExpansion = () => {
-		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
-		setIsExpanded(!isExpanded);
-	};
-
 	return (
 		<Box
 			width="100%"
@@ -115,7 +112,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 			<HorizontalDividedContainer
 				isExpandable
 				isExpanded={isExpanded}
-				onExpand={() => handleExpansion()}
+				onExpand={() => setIsExpanded(!isExpanded)}
 				cardStyles={{
 					border: isExpanded ? theme.palette.primary.main + '30' : '',
 				}}
