@@ -6,19 +6,18 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { flexCenter } from '../../styles/generalStyles';
+import { extractMostRelevantDeal } from '../../utils/extractMostRelevantDeal';
 import { FRAGMENT_DEALFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 
 type DealStatusProps = {
 	deals: FRAGMENT_DEALFragment[];
+	containsAdditionalInfo: boolean;
 };
 
-const DealsStatusSummary: FC<DealStatusProps> = ({ deals }) => {
+const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
 	const { t } = useTranslation();
-	// const { id, dealStatus, startDate, endDate } = deal;
-
-	// TODO: Find a use for startDate or remove it from query. Ask PM / PO for use cases.
 
 	// TODO: Create selection of most relevant deal and display it
 	// TODO: Most relevant is active > dialog > inactive
@@ -26,7 +25,9 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals }) => {
 	// TODO: Most relevant dialog is least time from last contact
 	// TODO: Most relevant inactive is least time from end date > least time from last contact
 
-	switch (dealStatus) {
+	const deal: FRAGMENT_DEALFragment | undefined = extractMostRelevantDeal(deals);
+
+	switch (deal?.dealStatus) {
 		case 'Active': {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
@@ -38,11 +39,13 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals }) => {
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.active')}
 							</Typography>
-							<Typography variant="note" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
-									date: endDate,
-								})}
-							</Typography>
+							{containsAdditionalInfo && (
+								<Typography variant="note" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
+										date: deal.endDate,
+									})}
+								</Typography>
+							)}
 						</Stack>
 					)}
 				</Stack>
@@ -86,7 +89,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals }) => {
 			);
 		}
 		default: {
-			return <Typography>Nothing to show</Typography>;
+			return <Typography>No deals to show</Typography>;
 		}
 	}
 };

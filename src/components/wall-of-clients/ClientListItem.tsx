@@ -205,7 +205,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					{/* <DealsStatusSummary deals={deal} /> */}
+					<DealsStatusSummary deals={deal} containsAdditionalInfo={false} />
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 					<AccountManagerInfoSummary accountManagers={accountManagersState} />
