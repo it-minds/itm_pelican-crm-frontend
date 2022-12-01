@@ -1,7 +1,7 @@
 import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
@@ -89,7 +89,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 				clientName={client.title}
 				isExpanded={contactPerson.isExpanded}
 				onExpand={id => handleNestedExpansion(id)}
-				onCollapse={id => {}}
 			/>
 		));
 	};

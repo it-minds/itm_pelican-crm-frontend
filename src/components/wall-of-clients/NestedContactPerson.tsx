@@ -16,7 +16,6 @@ type NestedContactPersonProps = {
 	clientName: string;
 	deal: TestDeal;
 	onExpand: (id: string) => void;
-	onCollapse: (id: string) => void;
 	isExpanded: boolean;
 };
 // TODO: Doesn't work yet because parent rerenders when child is expanded
@@ -25,12 +24,11 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	clientName,
 	deal,
 	onExpand,
-	onCollapse,
 	isExpanded,
 	id,
 }) => {
 	const nestedContacts = useRef<HTMLDivElement>(null);
-	const [lineHeight, setLineHeight] = useState(nestedContacts.current?.clientHeight || 68);
+	const [lineHeight] = useState(nestedContacts.current?.clientHeight || 68);
 	const contactArray = [contactPerson];
 
 	return (
