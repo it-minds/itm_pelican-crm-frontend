@@ -51,8 +51,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	>([]);
 	const [suppliersState, setSuppliersState] = useState<FRAGMENT_SUPPLIERFragment[]>([]);
 
-	// TODO: Change naming of states?
-
 	useEffect(() => {
 		setNestedLineHeight(nestedList.current?.clientHeight);
 	}, [isExpanded, isDoubleExpanded]);
@@ -101,87 +99,11 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	// 	console.log(accountManagersState);
 	// }, [accountManagersState]);
 
-	useEffect(() => {
-		console.log(suppliersState);
-	}, [suppliersState]);
+	// useEffect(() => {
+	// 	console.log(suppliersState);
+	// }, [suppliersState]);
+
 	// TODO: Remove test clogs
-
-	// Input generation
-	// const contactsInput: FRAGMENT_CONTACTFragment[] = clientInput.clientContacts.flatMap(
-	// 	clientContact => clientContact.contact
-	// );
-
-	// const dealsInput: FRAGMENT_DEALFragment[] = contactsInput.flatMap(contact =>
-	// 	contact.dealContacts.flatMap(dealContact => dealContact.deal)
-	// );
-	// const accountManagersInput: FRAGMENT_ACCOUNT_MANAGERFragment[] = dealsInput.flatMap(deal =>
-	// 	deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
-	// );
-	// const suppliersInput: FRAGMENT_SUPPLIERFragment[] = accountManagersInput.flatMap(
-	// 	accountManager => accountManager.supplier
-	// );
-
-	// TODO: Remove duplicate data generation
-
-	// console.log(clientInput);
-	// console.log(contactsInput);
-	// console.log(dealsInput);
-	// console.log(accountManagersInput);
-	// console.log(suppliersInput);
-
-	// const contactsSet = new Set(contactsInput);
-	// const dealsSet = new Set(dealsInput);
-	// const accountManagerSet = new Set(accountManagersInput);
-	// const suppliersSet = new Set(suppliersInput);
-
-	// console.log(contactsSet);
-	// console.log(dealsInput);
-	// console.log(accountManagersInput);
-	// console.log(suppliersInput);
-
-	// const clientListArray = [
-	// 	clientListItem,
-	// 	clientListItem,
-	// 	clientListItem,
-	// 	clientListItem,
-	// 	clientListItem,
-	// ];
-
-	// const clientList = clientListArray.map(clientListItem => {
-	// 	const { client, suppliers, contactPersons, deal } = clientListItem;
-
-	// 	return (
-	// 		<HorizontalDividedContainer
-	// 			isExpandable
-	// 			onExpand={() => setIsDoubleExpanded(!isDoubleExpanded)}
-	// 			isExpanded={isDoubleExpanded}
-	// 			key={client.title + Math.random()}
-	// 			cardStyles={{
-	// 				border: 'none',
-	// 				boxShadow: 'none',
-	// 				borderRadius: 6,
-	// 				height: '100%',
-	// 			}}
-	// 		>
-	// 			<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
-	// 				<ClientInfoSummary client={client} />
-	// 			</Box>
-	// 			<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-	// 				<SupplierInfoSummary suppliers={suppliers} />
-	// 			</Box>
-	// 			<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-	// 				<DealsStatusSummary deal={deal} />
-	// 			</Box>
-	// 			<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-	// 				<AccountManagerInfoSummary contactPersons={contactPersons} />
-	// 			</Box>
-	// 		</HorizontalDividedContainer>
-	// 	);
-	// });
-
-	// TODO: Remove above template liste items and rendering
-
-	// TODO: Search array of deals for prioritized status (active > dialog > inactive) and return only the highest priority
 
 	return (
 		<Box
@@ -213,7 +135,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					<DealsStatusSummary deals={dealsState} containsAdditionalInfo={false} />
+					<DealsStatusSummary deals={dealsState} containsAdditionalInfo={true} />
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 					<AccountManagerInfoSummary accountManagers={accountManagersState} />

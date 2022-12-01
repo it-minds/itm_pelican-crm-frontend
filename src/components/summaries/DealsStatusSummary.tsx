@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { flexCenter } from '../../styles/generalStyles';
 import { extractMostRelevantDeal } from '../../utils/extractMostRelevantDeal';
 import { FRAGMENT_DEALFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
+import { unixTimestampConverter } from '../../utils/unixTimestampConverter';
 
 type DealStatusProps = {
 	deals: FRAGMENT_DEALFragment[];
@@ -38,7 +39,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 							{containsAdditionalInfo && (
 								<Typography variant="note" noWrap>
 									{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
-										date: deal.endDate,
+										date: unixTimestampConverter(deal.endDate),
 									})}
 								</Typography>
 							)}
