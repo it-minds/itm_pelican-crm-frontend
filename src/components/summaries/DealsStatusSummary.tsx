@@ -12,10 +12,10 @@ import { unixTimestampConverter } from '../../utils/unixTimestampConverter';
 
 type DealStatusProps = {
 	deals: FRAGMENT_DEALFragment[];
-	containsAdditionalInfo: boolean;
+	containsAdditionalInfo?: boolean;
 };
 
-const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo }) => {
+const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo = true }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
 	const { t } = useTranslation();
@@ -59,13 +59,19 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
 							</Typography>
-							{containsAdditionalInfo && <Typography>Last contact: some date</Typography>}
+							{containsAdditionalInfo && (
+								<Typography variant="note">
+									{t('wallOfClients.clientListItemContent.dealStatus.dialogLastContact', {
+										date: unixTimestampConverter(deal.lastContactDate),
+									})}
+								</Typography>
+							)}
 						</Stack>
 					)}
 				</Stack>
 			);
 		}
-		case 'Inactive': {
+		case 'InActive': {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
@@ -79,7 +85,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 							{containsAdditionalInfo && (
 								<Typography variant="note" noWrap>
 									{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
-										date: deal.endDate,
+										date: unixTimestampConverter(deal.endDate),
 									})}
 								</Typography>
 							)}
@@ -89,7 +95,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 			);
 		}
 		default: {
-			return <Typography>No deals to show</Typography>;
+			return <Typography>{t('wallOfClients.clientListItemContent.dealStatus.noDeals')}</Typography>;
 		}
 	}
 };

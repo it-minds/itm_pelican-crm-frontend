@@ -29,7 +29,9 @@
 				"inactive": "Inactive",
 				"inactiveSinceDate": "Since: {{date}}",
 				"dialog": "Dialog",
-				"multipleActive": "Multiple active"
+				"dialogLastContact": "Last contact: {{date}}",
+				"multipleActive": "Multiple active",
+				"noDeals": "No deals to show"
 			},
 			"customerSize": {
 				"small": "Small client",

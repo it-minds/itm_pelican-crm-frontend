@@ -86,25 +86,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 		);
 	}, [accountManagersState]);
 
-	// Clogs for testing
-	// useEffect(() => {
-	// 	console.log(contactsState);
-	// }, [contactsState]);
-
-	// useEffect(() => {
-	// 	console.log(dealsState);
-	// }, [dealsState]);
-
-	// useEffect(() => {
-	// 	console.log(accountManagersState);
-	// }, [accountManagersState]);
-
-	// useEffect(() => {
-	// 	console.log(suppliersState);
-	// }, [suppliersState]);
-
-	// TODO: Remove test clogs
-
 	return (
 		<Box
 			width="100%"
@@ -135,7 +116,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					<DealsStatusSummary deals={dealsState} containsAdditionalInfo={true} />
+					<DealsStatusSummary deals={dealsState} />
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 					<AccountManagerInfoSummary accountManagers={accountManagersState} />
@@ -178,8 +159,3 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 };
 
 export default ClientListItem;
-
-/**
- * TODO: Make data transformation from query data to object-arrays of fragment types (arrays of contacts, deals and suppliers fo rendering summaries - not clients as this component is for a specific client)
- * TODO: Refactor all summaries to take in fragment types from GQL
- */
