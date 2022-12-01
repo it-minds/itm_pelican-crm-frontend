@@ -51,28 +51,13 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
-	const nestedList = useRef<HTMLDivElement>(null);
-	const [numberOfElements, setNumberOfElements] = useState(0);
+	const [numberOfElements, setNumberOfElements] = useState(contactPersons.length);
 	const [nestedLineHeight, setNestedLineHeight] = useState(0);
 	const [contactPersonsState, setContactPersonsState] = useState(
 		contactPersons as PersonTestSummary[]
 	);
 
 	const NESTED_ELEMENTS_HEIGHT = 68;
-
-	useEffect(() => {
-		setNumberOfElements(contactPersons.length);
-		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	useEffect(() => {
-		console.log('number of elements', numberOfElements);
-
-		// setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [numberOfElements, contactPersonsState]);
 
 	const handleNestedExpansion = (id: string) => {
 		let expanding = false;
@@ -83,7 +68,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 			}
 			return contact;
 		});
-		console.log('numberOfElements', numberOfElements);
 
 		setNumberOfElements(prev => (expanding ? prev + 1 : prev - 1));
 		setNestedLineHeight(
@@ -94,20 +78,18 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 	};
 
 	const clientList = () => {
-		return contactPersonsState.map(contactPerson => {
-			return (
-				<NestedContactPerson
-					id={contactPerson.id}
-					deal={deal}
-					key={contactPerson.id + Math.random()}
-					contactPerson={contactPerson}
-					clientName={client.title}
-					isExpanded={contactPerson.isExpanded}
-					onExpand={id => handleNestedExpansion(id)}
-					onCollapse={id => {}}
-				/>
-			);
-		});
+		return contactPersonsState.map(contactPerson => (
+			<NestedContactPerson
+				id={contactPerson.id}
+				deal={deal}
+				key={contactPerson.id + Math.random()}
+				contactPerson={contactPerson}
+				clientName={client.title}
+				isExpanded={contactPerson.isExpanded}
+				onExpand={id => handleNestedExpansion(id)}
+				onCollapse={id => {}}
+			/>
+		));
 	};
 
 	const handleExpansion = () => {
@@ -165,9 +147,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 										onClick={() => setIsExpanded(false)}
 										height={nestedLineHeight}
 									/>
-									<Stack width="100%" ref={nestedList}>
-										{clientList()}
-									</Stack>
+									<Stack width="100%">{clientList()}</Stack>
 								</Stack>
 							</Stack>
 						</motion.div>

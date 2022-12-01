@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 
 type NestingIndicatorProps = {
-	height?: number;
+	height: number;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 /**
@@ -10,12 +10,11 @@ type NestingIndicatorProps = {
  *
  */
 const NestingIndicator: FC<NestingIndicatorProps> = ({ height, onClick }) => {
-	const [heightState, setHeightState] = useState(height || 0);
 	const [isHovering, setIsHovering] = useState(false);
 
-	useEffect(() => {
-		height && setHeightState(height);
-	}, [height]);
+	// useEffect(() => {
+	// 	height && setHeightState(height);
+	// }, [height]);
 	return (
 		<Box
 			sx={{
@@ -32,8 +31,7 @@ const NestingIndicator: FC<NestingIndicatorProps> = ({ height, onClick }) => {
 			<Box
 				sx={{
 					width: '3px',
-					// height: `${height ? height - 10 : heightState - 10}px`,
-					height: `${heightState - 10}px`,
+					height: `${height ? height - 10 : 0}px`,
 					backgroundColor: isHovering ? '#ffffff79' : '#ffffff35',
 					transition: 'all 0.15s ease-in-out',
 				}}
