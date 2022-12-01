@@ -65,9 +65,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 							mt="2px"
 						>
 							<Box width="100%" height="fit-content" maxHeight="22px">
-								<Typography variant="body" noWrap>
-									{suppliers[0].name}
-								</Typography>
+								<Typography noWrap>{suppliers[0].name}</Typography>
 							</Box>
 							<Box width="100%" mt="-3px">
 								<Typography
