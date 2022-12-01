@@ -77,21 +77,24 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	}, [dealsState]);
 
 	useEffect(() => {
-		setSuppliersState(accountManagersState.flatMap(accountManager => accountManager.supplier));
+		const tempSet = new Set(
+			accountManagersState.flatMap(accountManager => accountManager.supplier)
+		);
+		setSuppliersState(Array.from(tempSet));
 	}, [accountManagersState]);
 
 	// Clogs for testing
-	useEffect(() => {
-		console.log(contactsState);
-	}, [contactsState]);
+	// useEffect(() => {
+	// 	console.log(contactsState);
+	// }, [contactsState]);
 
-	useEffect(() => {
-		console.log(dealsState);
-	}, [dealsState]);
+	// useEffect(() => {
+	// 	console.log(dealsState);
+	// }, [dealsState]);
 
-	useEffect(() => {
-		console.log(accountManagersState);
-	}, [accountManagersState]);
+	// useEffect(() => {
+	// 	console.log(accountManagersState);
+	// }, [accountManagersState]);
 
 	useEffect(() => {
 		console.log(suppliersState);
@@ -205,7 +208,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					<DealsStatusSummary deals={deal} containsAdditionalInfo={false} />
+					<DealsStatusSummary deals={dealsState} containsAdditionalInfo={false} />
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 					<AccountManagerInfoSummary accountManagers={accountManagersState} />

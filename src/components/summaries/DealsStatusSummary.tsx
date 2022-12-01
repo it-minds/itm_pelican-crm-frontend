@@ -19,11 +19,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
 	const { t } = useTranslation();
 
-	// TODO: Create selection of most relevant deal and display it
-	// TODO: Most relevant is active > dialog > inactive
-	// TODO: Most relevant active is latest end date > least time from last contact
-	// TODO: Most relevant dialog is least time from last contact
-	// TODO: Most relevant inactive is least time from end date > least time from last contact
+	// TODO: Update translation text for DealsStatusSummary
 
 	const deal: FRAGMENT_DEALFragment | undefined = extractMostRelevantDeal(deals);
 
@@ -62,6 +58,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
 							</Typography>
+							{containsAdditionalInfo && <Typography>Last contact: some date</Typography>}
 						</Stack>
 					)}
 				</Stack>
@@ -78,11 +75,13 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
 							</Typography>
-							<Typography variant="note" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
-									date: endDate,
-								})}
-							</Typography>
+							{containsAdditionalInfo && (
+								<Typography variant="note" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
+										date: deal.endDate,
+									})}
+								</Typography>
+							)}
 						</Stack>
 					)}
 				</Stack>
