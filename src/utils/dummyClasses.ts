@@ -1,4 +1,4 @@
-import { ContactPersonSummary } from '../components/summaries/AccountManagerInfoSummary';
+import { PersonSummary } from '../components/summaries/PersonInfoSummary';
 import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
 import { WallOfClientListItem } from '../components/wall-of-clients/ClientListItem';
 
@@ -14,9 +14,9 @@ import { WallOfClientListItem } from '../components/wall-of-clients/ClientListIt
 // 	dealStatus: 'Active',
 // };
 
-export const contactDummy0: ContactPersonSummary[] = [];
+export const contactDummy0: PersonSummary[] = [];
 
-export const contactDummy1: ContactPersonSummary[] = [
+export const contactDummy1: PersonSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -26,7 +26,7 @@ export const contactDummy1: ContactPersonSummary[] = [
 	},
 ];
 
-export const contactDummy2: ContactPersonSummary[] = [
+export const contactDummy2: PersonSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -43,7 +43,7 @@ export const contactDummy2: ContactPersonSummary[] = [
 	},
 ];
 
-export const contactDummy3: ContactPersonSummary[] = [
+export const contactDummy3: PersonSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -67,7 +67,7 @@ export const contactDummy3: ContactPersonSummary[] = [
 	},
 ];
 
-export const contactDummy4: ContactPersonSummary[] = [
+export const contactDummy4: PersonSummary[] = [
 	{
 		id: '1',
 		firstName: 'Din',
@@ -90,10 +90,10 @@ export const contactDummy4: ContactPersonSummary[] = [
 		phoneNum: '87654321',
 	},
 	{
-		id: '3',
-		firstName: 'Kontaktperson',
-		lastName: 'Kontaktpersonsen',
-		email: 'kontaktperson@kontaktperson.dk',
+		id: '4',
+		firstName: 'Scrooge',
+		lastName: 'McDuck',
+		email: 'scrooge@mcduck.com',
 		phoneNum: '87654321',
 	},
 ];
@@ -163,9 +163,9 @@ export const dummyListItem2: WallOfClientListItem = {
 		address: 'Nordmarksvej 9, 7190 Billund, Denmark',
 		url: 'legoland.dk',
 	},
-	contactPersons: contactDummy1,
+	contactPersons: contactDummy3,
 	suppliers: dummySuppliers3,
-	dealStatus: 'Active',
+	deal: { dealStatus: 'Dialog' },
 };
 
 export const dummyListItem3: WallOfClientListItem = {
@@ -177,7 +177,7 @@ export const dummyListItem3: WallOfClientListItem = {
 	},
 	contactPersons: contactDummy3,
 	suppliers: dummySuppliers3,
-	dealStatus: 'Inactive',
+	deal: { dealStatus: 'Active' },
 };
 
 export const dummyCompanyNames: string[] = [
