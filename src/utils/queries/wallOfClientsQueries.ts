@@ -51,6 +51,7 @@ export const GET_FILTERED_CLIENTS = gql`
 		dealStatus
 		startDate
 		endDate
+		lastContactDate
 		accountManagerDeals {
 			accountManager {
 				...FRAGMENT_ACCOUNT_MANAGER

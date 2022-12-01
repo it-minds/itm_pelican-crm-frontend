@@ -6,25 +6,25 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { flexCenter } from '../../styles/generalStyles';
-
-export type DealStatus = {
-	id: string;
-	dealStatus: 'Active' | 'Dialog' | 'Inactive';
-	startDate?: string;
-	endDate?: string;
-};
+import { FRAGMENT_DEALFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 
 type DealStatusProps = {
-	deal: DealStatus;
+	deals: FRAGMENT_DEALFragment[];
 };
 
-const DealsStatusSummary: FC<DealStatusProps> = ({ deal }) => {
+const DealsStatusSummary: FC<DealStatusProps> = ({ deals }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
 	const { t } = useTranslation();
-	const { id, dealStatus, startDate, endDate } = deal;
+	// const { id, dealStatus, startDate, endDate } = deal;
 
 	// TODO: Find a use for startDate or remove it from query. Ask PM / PO for use cases.
+
+	// TODO: Create selection of most relevant deal and display it
+	// TODO: Most relevant is active > dialog > inactive
+	// TODO: Most relevant active is latest end date > least time from last contact
+	// TODO: Most relevant dialog is least time from last contact
+	// TODO: Most relevant inactive is least time from end date > least time from last contact
 
 	switch (dealStatus) {
 		case 'Active': {

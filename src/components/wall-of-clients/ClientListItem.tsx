@@ -15,6 +15,7 @@ import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
 import AccountManagerInfoSummary from '../summaries/AccountManagerInfoSummary';
 import ClientInfoSummary from '../summaries/ClientInfoSummary';
+import DealsStatusSummary from '../summaries/DealsStatusSummary';
 import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 
 type ClientListItemProps = {
@@ -204,7 +205,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					{/* <DealsStatusSummary deal={deal} /> */}
+					{/* <DealsStatusSummary deals={deal} /> */}
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
 					<AccountManagerInfoSummary accountManagers={accountManagersState} />
