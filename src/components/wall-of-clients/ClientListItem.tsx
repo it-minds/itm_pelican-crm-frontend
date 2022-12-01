@@ -1,4 +1,4 @@
-import { Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import React, { FC, useEffect, useState } from 'react';

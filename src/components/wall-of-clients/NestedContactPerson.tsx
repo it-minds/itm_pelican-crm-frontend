@@ -2,10 +2,8 @@ import { Box, Stack, Typography } from '@mui/material';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
-import { contactDummy1, contactDummy4, dummySuppliers1 } from '../../utils/dummyClasses';
 import {
 	FRAGMENT_ACCOUNT_MANAGERFragment,
-	FRAGMENT_CONTACTFragment,
 	FRAGMENT_DEALFragment,
 	FRAGMENT_SUPPLIERFragment,
 } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
