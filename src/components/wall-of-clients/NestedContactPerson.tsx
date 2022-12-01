@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 
 import { contactDummy1, contactDummy4, dummySuppliers1 } from '../../utils/dummyClasses';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';

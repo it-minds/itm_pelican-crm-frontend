@@ -1,7 +1,7 @@
 import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
-import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
 import { flexCenter } from '../../styles/generalStyles';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
@@ -62,28 +62,33 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 
 	useEffect(() => {
 		setNumberOfElements(contactPersons.length);
-	}, [contactPersons.length]);
+		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
-		setNestedLineHeight(
-			nestedList.current
-				? nestedList.current.clientHeight
-				: NESTED_ELEMENTS_HEIGHT * numberOfElements
-		);
+		console.log('number of elements', numberOfElements);
+
+		// setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [numberOfElements, contactPersonsState]);
 
 	const handleNestedExpansion = (id: string) => {
-		let isExpansion = false;
+		let expanding = false;
 		const newList = contactPersonsState.map(contact => {
 			if (contact.id === id) {
 				contact.isExpanded = !contact.isExpanded;
-				isExpansion = contact.isExpanded;
+				expanding = contact.isExpanded;
 			}
 			return contact;
 		});
+		console.log('numberOfElements', numberOfElements);
 
-		setNumberOfElements(prev => (isExpansion ? prev + 1 : prev - 1));
-		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
+		setNumberOfElements(prev => (expanding ? prev + 1 : prev - 1));
+		setNestedLineHeight(
+			NESTED_ELEMENTS_HEIGHT * (expanding ? numberOfElements + 1 : numberOfElements - 1)
+		);
 
 		setContactPersonsState(newList);
 	};
@@ -105,6 +110,11 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 		});
 	};
 
+	const handleExpansion = () => {
+		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
+		setIsExpanded(!isExpanded);
+	};
+
 	return (
 		<Box
 			width="100%"
@@ -123,7 +133,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 			<HorizontalDividedContainer
 				isExpandable
 				isExpanded={isExpanded}
-				onExpand={() => setIsExpanded(!isExpanded)}
+				onExpand={() => handleExpansion()}
 				cardStyles={{
 					border: isExpanded ? theme.palette.primary.main + '30' : '',
 				}}
