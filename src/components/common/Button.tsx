@@ -1,4 +1,4 @@
-import { ButtonBase, ButtonProps, CircularProgress } from '@mui/material';
+import { ButtonBase, ButtonProps, CircularProgress, Theme } from '@mui/material';
 import { styled } from '@mui/material';
 import { darken, SxProps } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
@@ -49,6 +49,7 @@ const ButtonStyles = styled(ButtonBase, {
 			display: 'flex',
 			justifyContent: 'center',
 			borderRadius: 200,
+			flexWrap: 'nowrap',
 			height: size === 'small' ? 30 : undefined,
 			width: isFullWidth ? '100%' : 'fit-content',
 			minWidth: 30,
@@ -63,9 +64,7 @@ const ButtonStyles = styled(ButtonBase, {
 			paddingInlineStart: noPad ? 0 : 18,
 			transition: `all .15s ${cubicTransition}`,
 			'&:focus': {
-				backgroundColor: secondary
-					? focus(theme.palette.secondary.main)
-					: focus(theme.palette.primary.main),
+				backgroundColor: focusBackground(secondary, btnType, theme),
 				borderColor: secondary
 					? focus(theme.palette.secondary.main)
 					: focus(theme.palette.primary.main),
@@ -75,14 +74,24 @@ const ButtonStyles = styled(ButtonBase, {
 		})
 );
 
-function determineBackgroundColor(secondary: boolean | undefined, btnType: ButtonType, theme: any) {
+function focusBackground(isSecondary: boolean, btnType: ButtonType, theme: Theme) {
+	if (btnType === 'outlined') return 'transparent';
+
+	return isSecondary ? focus(theme.palette.secondary.main) : focus(theme.palette.primary.main);
+}
+
+function determineBackgroundColor(
+	secondary: boolean | undefined,
+	btnType: ButtonType,
+	theme: Theme
+) {
 	if (btnType === 'default') {
 		return secondary ? theme.palette.secondary.main : theme.palette.primary.main;
 	}
 	return 'transparent';
 }
 
-const Button: FC<Props> = ({ children, onClick, sx, ...styleProps }) => {
+const Button: FC<Props> = ({ children, onClick, sx, disableRipple = false, ...styleProps }) => {
 	const { size, btnType, isDisabled, isLoading, isFullWidth, noPad, secondary } = styleProps;
 
 	return (
@@ -90,13 +99,14 @@ const Button: FC<Props> = ({ children, onClick, sx, ...styleProps }) => {
 			onClick={onClick}
 			disabled={isDisabled || isLoading}
 			size={size}
+			disableRipple={disableRipple}
 			btnType={btnType}
 			isDisabled={isDisabled}
 			isLoading={isLoading}
 			isFullWidth={isFullWidth}
 			noPad={isLoading ? false : noPad}
 			secondary={secondary}
-			sx={{ ...sx, position: 'relative' }}
+			sx={{ ...sx }}
 		>
 			{children || "Ain't nothing here"}
 			{isLoading && (

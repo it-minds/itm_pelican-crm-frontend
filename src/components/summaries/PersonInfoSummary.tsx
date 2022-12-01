@@ -5,12 +5,13 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FRAGMENT_ACCOUNT_MANAGERFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
+import { PersonSummary } from '../wall-of-clients/ClientListItem';
 
-type AccountManagerInfoSummaryProps = {
-	accountManagers: FRAGMENT_ACCOUNT_MANAGERFragment[];
+type PersonInfoSummaryInfoSummaryProps = {
+	persons: FRAGMENT_ACCOUNT_MANAGERFragment[] | PersonSummary[];
 };
 
-const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ accountManagers }) => {
+const PersonInfoSummary: FC<PersonInfoSummaryInfoSummaryProps> = ({ persons }) => {
 	const theme = useTheme();
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
@@ -18,11 +19,11 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ account
 	// TODO: Change 'dark' to enum instead of static string. Requires theme refactor. PLCN 166
 
 	const contactPersonRenderLogic = () => {
-		if (!accountManagers) {
+		if (!persons) {
 			return;
 		}
 
-		switch (accountManagers.length) {
+		switch (persons.length) {
 			case 0:
 				return suppliersZero();
 			case 1:
@@ -50,8 +51,8 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ account
 				<Tooltip
 					title={
 						!isBelowMedium
-							? `${accountManagers[0].firstName} ${accountManagers[0].lastName}`
-							: `${accountManagers[0].firstName} ${accountManagers[0].lastName} | ${accountManagers[0].email} | ${accountManagers[0].phoneNumber}`
+							? `${persons[0].firstName} ${persons[0].lastName}`
+							: `${persons[0].firstName} ${persons[0].lastName} | ${persons[0].email} | ${persons[0].phoneNumber}`
 					}
 					placement="top-start"
 				>
@@ -64,19 +65,15 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ account
 							}}
 						>
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
-								{`${accountManagers[0].firstName.charAt(0)} ${accountManagers[0].lastName.charAt(
-									0
-								)}`}
+								{`${persons[0].firstName.charAt(0)} ${persons[0].lastName.charAt(0)}`}
 							</Typography>
 						</Avatar>
-						<Typography noWrap>
-							{`${accountManagers[0].firstName} ${accountManagers[0].lastName}`}
-						</Typography>
+						<Typography noWrap>{`${persons[0].firstName} ${persons[0].lastName}`}</Typography>
 					</Stack>
 				</Tooltip>
 				{!isBelowMedium && (
 					<Stack direction="row" gap={1} width="100%">
-						<Tooltip title={accountManagers[0].email}>
+						<Tooltip title={persons[0].email}>
 							<Stack
 								display="flex"
 								flexDirection="row"
@@ -88,11 +85,11 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ account
 							>
 								<EmailRoundedIcon />
 								<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
-									{accountManagers[0].email}
+									{persons[0].email}
 								</Typography>
 							</Stack>
 						</Tooltip>
-						<Tooltip title={accountManagers[0].phoneNumber}>
+						<Tooltip title={persons[0].phoneNumber}>
 							<Stack
 								display="flex"
 								flexDirection="row"
@@ -104,7 +101,7 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ account
 							>
 								<LocalPhoneRoundedIcon />
 								<Typography variant="note" noWrap sx={{ opacity: 0.7 }}>
-									{accountManagers[0].phoneNumber}
+									{persons[0].phoneNumber}
 								</Typography>
 							</Stack>
 						</Tooltip>
@@ -117,18 +114,18 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ account
 	const suppliersTwoToThree = () => {
 		return (
 			<Stack width="100%" direction="row" gap={'3px'}>
-				{accountManagers.map((accountManager, index) => (
+				{persons.map((person, index) => (
 					<Tooltip
-						key={accountManager.id}
-						title={`${accountManager.firstName} ${accountManager.lastName} | ${accountManager.email} | ${accountManager.phoneNumber}`}
+						key={person.id}
+						title={`${person.firstName} ${person.lastName} | ${person.email} | ${person.phoneNumber}`}
 						placement="top-start"
 					>
 						<Avatar
-							key={accountManager.id}
+							key={person.id}
 							sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}
 						>
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
-								{`${accountManager.firstName.charAt(0)} ${accountManager.lastName.charAt(0)}`}
+								{`${person.firstName.charAt(0)} ${person.lastName.charAt(0)}`}
 							</Typography>
 						</Avatar>
 					</Tooltip>
@@ -138,23 +135,23 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ account
 	};
 
 	const suppliersMoreThanThree = () => {
-		const slicedArray = accountManagers.slice(0, 2);
+		const slicedArray = persons.slice(0, 2);
 		return (
 			<Stack width="100%" direction="row" gap={'3px'} alignItems="center">
-				{slicedArray.map(accountManager => (
+				{slicedArray.map(person => (
 					<Tooltip
-						title={`${accountManager.firstName} ${accountManager.lastName} | ${accountManager.email} | ${accountManager.phoneNumber}`}
+						title={`${person.firstName} ${person.lastName} | ${person.email} | ${person.phoneNumber}`}
 						placement="top-start"
 					>
 						<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
-								{`${accountManager.firstName.charAt(0)} ${accountManager.lastName.charAt(0)}`}
+								{`${person.firstName.charAt(0)} ${person.lastName.charAt(0)}`}
 							</Typography>
 						</Avatar>
 					</Tooltip>
 				))}
 				<Typography variant="body" fontWeight={600} sx={{ opacity: 0.7 }}>
-					{`+${accountManagers.length - 2}`}
+					{`+${persons.length - 2}`}
 				</Typography>
 			</Stack>
 		);
@@ -174,4 +171,4 @@ const AccountManagerInfoSummary: FC<AccountManagerInfoSummaryProps> = ({ account
 	);
 };
 
-export default AccountManagerInfoSummary;
+export default PersonInfoSummary;

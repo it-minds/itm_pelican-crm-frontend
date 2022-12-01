@@ -6,14 +6,14 @@
 		"numberOfHitsText": "Found {{hits}} results"
 	},
 	"navbar": {
-		"clientsLink": "Wall of Clients",
+		"clientsLink": "Clients",
 		"suppliersLink": "Suppliers",
 		"segmentsLink": "Segments",
 		"contactsLink": "Contacts",
 		"recommendationsLink": "Recommendations"
 	},
 	"wallOfClients": {
-		"pageTitle": "Wall of Clients",
+		"pageTitle": "Clients",
 		"nameSearchBoxDefault": "Name",
 		"contactPersonSearchBoxDefault": "Contact person",
 		"locationFilterButtonDefault": "Location",
