@@ -11,6 +11,7 @@ import {
 	FRAGMENT_DEALFragment,
 	FRAGMENT_SUPPLIERFragment,
 } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
+import { removeArrayDuplicates } from '../../utils/removeArrayDuplicates';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
 import AccountManagerInfoSummary from '../summaries/AccountManagerInfoSummary';
@@ -56,31 +57,35 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 		setNestedLineHeight(nestedList.current?.clientHeight);
 	}, [isExpanded, isDoubleExpanded]);
 
+	// No removal of duplicates as complete contact data must be passed down to nested components
 	useEffect(() => {
 		setContactState(clientInput.clientContacts.flatMap(clientContact => clientContact.contact));
 	}, [clientInput]);
 
 	useEffect(() => {
 		setDealsState(
-			contactsState.flatMap(contact =>
-				contact.dealContacts.flatMap(dealContact => dealContact.deal)
+			removeArrayDuplicates(
+				contactsState.flatMap(contact =>
+					contact.dealContacts.flatMap(dealContact => dealContact.deal)
+				)
 			)
 		);
 	}, [contactsState]);
 
 	useEffect(() => {
 		setAccountManagersState(
-			dealsState.flatMap(deal =>
-				deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
+			removeArrayDuplicates(
+				dealsState.flatMap(deal =>
+					deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
+				)
 			)
 		);
 	}, [dealsState]);
 
 	useEffect(() => {
-		const tempSet = new Set(
-			accountManagersState.flatMap(accountManager => accountManager.supplier)
+		setSuppliersState(
+			removeArrayDuplicates(accountManagersState.flatMap(accountManager => accountManager.supplier))
 		);
-		setSuppliersState(Array.from(tempSet));
 	}, [accountManagersState]);
 
 	// Clogs for testing
