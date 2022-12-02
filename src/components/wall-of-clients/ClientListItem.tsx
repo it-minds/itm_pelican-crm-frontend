@@ -62,7 +62,9 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 
 	// No removal of duplicates as complete contact data must be passed down to nested components
 	useEffect(() => {
-		setContactsState(clientInput.clientContacts.flatMap(clientContact => clientContact.contact));
+		const contacts = clientInput?.clientContacts?.flatMap(clientContact => clientContact?.contact);
+		setContactsState(contacts && (contacts as PersonSummary[]));
+		setNumberOfElements(clientInput.clientContacts.length);
 	}, [clientInput.clientContacts]);
 
 	useEffect(() => {
@@ -121,6 +123,11 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 		setContactsState(newList);
 	};
 
+	const handleExpansion = () => {
+		setIsExpanded(prev => !prev);
+		setNestedLineHeight(numberOfElements * NESTED_ELEMENTS_HEIGHT);
+	};
+
 	return (
 		<Box
 			width="100%"
@@ -139,7 +146,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 			<HorizontalDividedContainer
 				isExpandable
 				isExpanded={isExpanded}
-				onExpand={() => setIsExpanded(!isExpanded)}
+				onExpand={() => handleExpansion()}
 				cardStyles={{
 					border: isExpanded ? theme.palette.primary.main + '30' : '',
 				}}
