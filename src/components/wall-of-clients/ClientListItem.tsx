@@ -63,7 +63,19 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	// No removal of duplicates as complete contact data must be passed down to nested components
 	useEffect(() => {
 		const contacts = clientInput?.clientContacts?.flatMap(clientContact => clientContact?.contact);
-		setContactsState(contacts && (contacts as PersonSummary[]));
+
+		if (!contacts) {
+			setContactsState([]);
+			return;
+		}
+
+		// mapping GQL type to our custom type
+		const personSummaryContacts: PersonSummary[] = contacts.map(contact => ({
+			...contact,
+			isExpanded: false,
+		}));
+
+		setContactsState(personSummaryContacts);
 		setNumberOfElements(clientInput.clientContacts.length);
 	}, [clientInput.clientContacts]);
 
