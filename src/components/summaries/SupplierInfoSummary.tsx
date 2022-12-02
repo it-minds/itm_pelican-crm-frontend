@@ -76,7 +76,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 									sx={{ opacity: '0.6' }}
 									noWrap
 								>
-									{suppliers[0].officeLocations[0].cityName}
+									{suppliers[0].officeLocations[0]?.cityName}
 								</Typography>
 							</Box>
 						</Box>
