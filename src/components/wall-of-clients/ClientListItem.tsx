@@ -45,7 +45,6 @@ export type PersonSummary = {
  * - `DealsStatusSummary`
  */
 const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
-	// const { client, suppliers, contactPersons, deal } = clientListItem;
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));

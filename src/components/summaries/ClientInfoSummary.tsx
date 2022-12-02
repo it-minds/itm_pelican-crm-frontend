@@ -49,7 +49,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 				<>
 					<WebRoundedIcon fontSize="small" />
 					<Typography variant="note" noWrap sx={{ opacity: 0.7, mt: '1px' }}>
-						{titleCase(clientUrl ? clientUrl : '')}
+						{titleCase(clientUrl || '')}
 					</Typography>
 				</>
 			);
