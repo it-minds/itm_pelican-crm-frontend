@@ -1,43 +1,40 @@
 import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { flexCenter } from '../../styles/generalStyles';
+import {
+	FRAGMENT_ACCOUNT_MANAGERFragment,
+	FRAGMENT_CLIENTFragment,
+	FRAGMENT_CONTACTFragment,
+	FRAGMENT_DEALFragment,
+	FRAGMENT_SUPPLIERFragment,
+} from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
+import { removeArrayDuplicates } from '../../utils/removeArrayDuplicates';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
-import ClientInfoSummary, { ClientSummary } from '../summaries/ClientInfoSummary';
+import ClientInfoSummary from '../summaries/ClientInfoSummary';
 import DealsStatusSummary from '../summaries/DealsStatusSummary';
-import PersonInfoSummary, { PersonSummary } from '../summaries/PersonInfoSummary';
-import SupplierInfoSummary, { SupplierSummary } from '../summaries/SupplierInfoSummary';
+import PersonInfoSummary from '../summaries/PersonInfoSummary';
+import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 import NestedContactPerson from './NestedContactPerson';
 
 const NESTED_ELEMENTS_HEIGHT = 68;
 
-export type TestDeal = {
-	dealStatus: 'Active' | 'Dialog' | 'Inactive';
-};
-
-export type WallOfClientListItem = {
-	client: ClientSummary;
-	suppliers: SupplierSummary[];
-	contactPersons: PersonSummary[];
-	deal: TestDeal;
-};
-
 type ClientListItemProps = {
-	clientListItem: WallOfClientListItem;
-	children?: React.ReactNode;
+	clientInput: FRAGMENT_CLIENTFragment;
 };
+
 type ListItemWidth = {
 	minWidth: string | number;
 	width: string | number;
 	maxWidth: string | number;
 };
 
-type PersonTestSummary = {
+export type PersonSummary = {
 	isExpanded: boolean;
-} & PersonSummary;
+} & FRAGMENT_CONTACTFragment;
 
 /**
  * This component is used exclusively in the WallOfClients page and displays a client's information.
@@ -47,50 +44,99 @@ type PersonTestSummary = {
  * - `AccountManagerInfoSummary`
  * - `DealsStatusSummary`
  */
-const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) => {
-	const { client, suppliers, contactPersons, deal } = clientListItem;
-	const { dealStatus } = deal;
+const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
-	const [numberOfElements, setNumberOfElements] = useState(contactPersons.length);
+	const [contactsState, setContactsState] = useState<PersonSummary[]>([]);
+	const [dealsState, setDealsState] = useState<FRAGMENT_DEALFragment[]>([]);
+	const [accountManagersState, setAccountManagersState] = useState<
+		FRAGMENT_ACCOUNT_MANAGERFragment[]
+	>([]);
+	const [suppliersState, setSuppliersState] = useState<FRAGMENT_SUPPLIERFragment[]>([]);
+	const [numberOfElements, setNumberOfElements] = useState(contactsState.length);
 	const [nestedLineHeight, setNestedLineHeight] = useState(
 		numberOfElements * NESTED_ELEMENTS_HEIGHT
 	);
-	const [contactPersonsState, setContactPersonsState] = useState(
-		contactPersons as PersonTestSummary[]
-	);
+
+	// No removal of duplicates as complete contact data must be passed down to nested components
+	useEffect(() => {
+		const contacts = clientInput?.clientContacts?.flatMap(clientContact => clientContact?.contact);
+
+		if (!contacts) {
+			setContactsState([]);
+			return;
+		}
+
+		// mapping GQL type to our custom type
+		const personSummaryContacts: PersonSummary[] = contacts.map(contact => ({
+			...contact,
+			isExpanded: false,
+		}));
+
+		setContactsState(personSummaryContacts);
+		setNumberOfElements(clientInput.clientContacts.length);
+	}, [clientInput.clientContacts]);
+
+	useEffect(() => {
+		setDealsState(
+			removeArrayDuplicates(
+				contactsState.flatMap(contact =>
+					contact.dealContacts.flatMap(dealContact => dealContact.deal)
+				)
+			)
+		);
+	}, [contactsState]);
+
+	useEffect(() => {
+		setAccountManagersState(
+			removeArrayDuplicates(
+				dealsState.flatMap(deal =>
+					deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
+				)
+			)
+		);
+	}, [dealsState]);
+
+	useEffect(() => {
+		setSuppliersState(
+			removeArrayDuplicates(accountManagersState.flatMap(accountManager => accountManager.supplier))
+		);
+	}, [accountManagersState]);
+
+	const clientList = () => {
+		return contactsState.map(contactPerson => (
+			<NestedContactPerson
+				key={contactPerson.id}
+				contact={contactPerson}
+				id={contactPerson.id}
+				clientName={clientInput.name}
+				isExpanded={contactPerson.isExpanded}
+				onExpand={id => handleNestedExpansion(id)}
+			/>
+		));
+	};
 
 	const handleNestedExpansion = (id: string) => {
 		let expanding = false;
-		const newList = contactPersonsState.map(contact => {
+		const newList = contactsState.map(contact => {
 			if (contact.id === id) {
 				contact.isExpanded = !contact.isExpanded;
 				expanding = contact.isExpanded;
 			}
 			return contact;
 		});
-
 		setNumberOfElements(prev => (expanding ? prev + 1 : prev - 1));
 		setNestedLineHeight(
 			NESTED_ELEMENTS_HEIGHT * (expanding ? numberOfElements + 1 : numberOfElements - 1)
 		);
 
-		setContactPersonsState(newList);
+		setContactsState(newList);
 	};
 
-	const clientList = () => {
-		return contactPersonsState.map(contactPerson => (
-			<NestedContactPerson
-				id={contactPerson.id}
-				deal={deal}
-				key={contactPerson.id + Math.random()}
-				contactPerson={contactPerson}
-				clientName={client.title}
-				isExpanded={contactPerson.isExpanded}
-				onExpand={id => handleNestedExpansion(id)}
-			/>
-		));
+	const handleExpansion = () => {
+		setIsExpanded(prev => !prev);
+		setNestedLineHeight(numberOfElements * NESTED_ELEMENTS_HEIGHT);
 	};
 
 	return (
@@ -111,22 +157,22 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientListItem, children }) =
 			<HorizontalDividedContainer
 				isExpandable
 				isExpanded={isExpanded}
-				onExpand={() => setIsExpanded(!isExpanded)}
+				onExpand={() => handleExpansion()}
 				cardStyles={{
 					border: isExpanded ? theme.palette.primary.main + '30' : '',
 				}}
 			>
 				<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
-					<ClientInfoSummary client={client} />
+					<ClientInfoSummary client={clientInput} />
 				</Box>
 				<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					<SupplierInfoSummary suppliers={suppliers} />
+					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
-					<DealsStatusSummary dealStatus={dealStatus} />
+					<DealsStatusSummary deals={dealsState} />
 				</Box>
 				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
-					<PersonInfoSummary person={contactPersons} />
+					<PersonInfoSummary persons={accountManagersState} />
 				</Box>
 			</HorizontalDividedContainer>
 			<AnimatePresence>

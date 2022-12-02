@@ -1,18 +1,5 @@
-import { PersonSummary } from '../components/summaries/PersonInfoSummary';
-import { SupplierSummary } from '../components/summaries/SupplierInfoSummary';
-import { WallOfClientListItem } from '../components/wall-of-clients/ClientListItem';
-
-// export const dummyListItem1: ClientListItem = {
-// 	client: {
-// 		title: 'Legoland A/S',
-// 		city: 'Billund',
-// 		address: 'Nordmarksvej 9, 7190 Billund, Denmark',
-// 		url: 'legoland.dk',
-// 	},
-// 	contactPersons: contactDummy2,
-// 	suppliers: dummySuppliers3,
-// 	dealStatus: 'Active',
-// };
+import PersonSummary from '../components/summaries/PersonInfoSummary';
+import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
 
 export const contactDummy0: PersonSummary[] = [];
 
@@ -98,9 +85,9 @@ export const contactDummy4: PersonSummary[] = [
 	},
 ];
 
-export const dummySuppliers0: SupplierSummary[] = [];
+export const dummySuppliers0: SupplierInfoSummary.SupplierSummary[] = [];
 
-export const dummySuppliers1: SupplierSummary[] = [
+export const dummySuppliers1: SupplierInfoSummary.SupplierSummary[] = [
 	{
 		id: '1',
 		name: 'IT-Minds',
@@ -109,7 +96,7 @@ export const dummySuppliers1: SupplierSummary[] = [
 	},
 ];
 
-export const dummySuppliers3: SupplierSummary[] = [
+export const dummySuppliers3: SupplierInfoSummary.SupplierSummary[] = [
 	{
 		id: '1',
 		name: 'IT-Minds',
@@ -130,7 +117,7 @@ export const dummySuppliers3: SupplierSummary[] = [
 	},
 ];
 
-export const dummySuppliers4: SupplierSummary[] = [
+export const dummySuppliers4: SupplierInfoSummary.SupplierSummary[] = [
 	{
 		id: '1',
 		name: 'IT-Minds',

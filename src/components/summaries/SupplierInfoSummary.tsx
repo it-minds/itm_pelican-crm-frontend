@@ -2,17 +2,11 @@ import { Box, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { FRAGMENT_SUPPLIERFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import ImageContainer from '../common/ImageContainer';
 
-export type SupplierSummary = {
-	location: string;
-	name: string;
-	id?: string;
-	logo?: string;
-};
-
 type SupplierInfoSummaryProps = {
-	suppliers: SupplierSummary[];
+	suppliers: FRAGMENT_SUPPLIERFragment[];
 };
 
 const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
@@ -36,11 +30,8 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 			}
 			case 2:
 				return supplierLogos(suppliers);
-			case 3:
-				return supplierLogos(suppliers);
-
-			default: // more than 3 suppliers
-				const arraySlice: SupplierSummary[] = suppliers.slice(0, 2);
+			default: // more than 2 suppliers
+				const arraySlice: FRAGMENT_SUPPLIERFragment[] = suppliers.slice(0, 2);
 
 				// return the first two suppliers and a +x more indication
 				return (
@@ -61,7 +52,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 					<Box width="30%">
 						<ImageContainer
 							imageHeight="40px"
-							imageSource={suppliers[0].logo ? suppliers[0].logo : ''}
+							imageSource={suppliers[0].pictureUrl ? suppliers[0].pictureUrl : ''}
 						/>
 					</Box>
 					{!isBelowMedium && (
@@ -74,9 +65,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 							mt="2px"
 						>
 							<Box width="100%" height="fit-content" maxHeight="22px">
-								<Typography variant="body" noWrap>
-									{suppliers[0].name}
-								</Typography>
+								<Typography noWrap>{suppliers[0].name}</Typography>
 							</Box>
 							<Box width="100%" mt="-3px">
 								<Typography
@@ -87,7 +76,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 									sx={{ opacity: '0.6' }}
 									noWrap
 								>
-									{suppliers[0].location}
+									{suppliers[0].officeLocations[0]?.cityName}
 								</Typography>
 							</Box>
 						</Box>
@@ -97,11 +86,14 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 		);
 	}
 
-	function supplierLogos(suppliers: SupplierSummary[]) {
+	function supplierLogos(suppliers: FRAGMENT_SUPPLIERFragment[]) {
 		return suppliers.map((supplier, index) => (
-			<Tooltip title={supplier.name} key={index + supplier.name}>
+			<Tooltip title={supplier.name} key={index}>
 				<Box>
-					<ImageContainer imageHeight="35px" imageSource={!!supplier.logo ? supplier.logo : ''} />
+					<ImageContainer
+						imageHeight="35px"
+						imageSource={!!supplier.pictureUrl ? supplier.pictureUrl : ''}
+					/>
 				</Box>
 			</Tooltip>
 		));

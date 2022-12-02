@@ -1,35 +1,76 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
-import { contactDummy1, contactDummy4, dummySuppliers1 } from '../../utils/dummyClasses';
+import {
+	FRAGMENT_ACCOUNT_MANAGERFragment,
+	FRAGMENT_DEALFragment,
+	FRAGMENT_SUPPLIERFragment,
+} from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
+import { removeArrayDuplicates } from '../../utils/removeArrayDuplicates';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import NestingIndicator from '../common/NestingIndicator';
 import DealsStatusSummary from '../summaries/DealsStatusSummary';
-import PersonInfoSummary, { PersonSummary } from '../summaries/PersonInfoSummary';
+import PersonInfoSummary from '../summaries/PersonInfoSummary';
 import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
-import { TestDeal } from './ClientListItem';
+import { PersonSummary } from './ClientListItem';
+
+// type NestedContactPersonProps = {
+// 	id: string;
+// 	contactPerson: PersonSummary;
+// 	clientName: string;
+// 	deal: TestDeal;
+// 	onExpand: (id: string) => void;
+// 	isExpanded: boolean;
+// };
 
 type NestedContactPersonProps = {
-	id: string;
-	contactPerson: PersonSummary;
-	clientName: string;
-	deal: TestDeal;
-	onExpand: (id: string) => void;
 	isExpanded: boolean;
+	contact: PersonSummary;
+	clientName: string;
+	id: any;
+	onExpand: (id: string) => void;
 };
 // TODO: Doesn't work yet because parent rerenders when child is expanded
 const NestedContactPerson: FC<NestedContactPersonProps> = ({
-	contactPerson,
+	contact,
 	clientName,
-	deal,
+	id,
 	onExpand,
 	isExpanded,
-	id,
 }) => {
 	const nestedContacts = useRef<HTMLDivElement>(null);
 	const [lineHeight] = useState(nestedContacts.current?.clientHeight || 68);
-	const contactArray = [contactPerson];
+	const contactArray = [contact];
+	const [dealsState, setDealsState] = useState<FRAGMENT_DEALFragment[]>([]);
+	const [accountManagersState, setAccountManagersState] = useState<
+		FRAGMENT_ACCOUNT_MANAGERFragment[]
+	>([]);
+	const [suppliersState, setSuppliersState] = useState<FRAGMENT_SUPPLIERFragment[]>([]);
+
+	useEffect(() => {
+		setDealsState(
+			removeArrayDuplicates(contact.dealContacts.flatMap(dealContact => dealContact.deal))
+		);
+	}, [contact]);
+
+	useEffect(() => {
+		setAccountManagersState(
+			removeArrayDuplicates(
+				dealsState.flatMap(deal =>
+					deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
+				)
+			)
+		);
+	}, [dealsState]);
+
+	useEffect(() => {
+		setSuppliersState(
+			removeArrayDuplicates(accountManagersState.flatMap(accountManager => accountManager.supplier))
+		);
+	}, [accountManagersState]);
+
+	// TODO: We need the same data transformation as used in ClientListItem
 
 	return (
 		<Box>
@@ -37,7 +78,7 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 				isExpandable
 				onExpand={() => onExpand(id)}
 				isExpanded={isExpanded}
-				key={contactPerson.id + Math.random()}
+				key={contact.id + Math.random()}
 				cardStyles={{
 					border: 'none',
 					boxShadow: 'none',
@@ -46,7 +87,7 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 				}}
 			>
 				<Box width="24%">
-					<PersonInfoSummary person={contactArray} />
+					<PersonInfoSummary persons={contactArray} />
 				</Box>
 				<Box aria-label="company-name" width="19%" display="flex" justifyContent="center">
 					<Typography variant="h6" noWrap>
@@ -54,13 +95,13 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 					</Typography>
 				</Box>
 				<Box width="14%" display="flex" justifyContent="center">
-					<DealsStatusSummary dealStatus={deal.dealStatus} />
+					<DealsStatusSummary deals={dealsState} />
 				</Box>
 				<Box width="19%">
-					<SupplierInfoSummary suppliers={dummySuppliers1} />
+					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
 				<Box width="19%">
-					<PersonInfoSummary person={contactDummy1} />
+					<PersonInfoSummary persons={accountManagersState} />
 				</Box>
 			</HorizontalDividedContainer>
 			<AnimatePresence>
@@ -75,7 +116,8 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 								<Stack gap="3px" direction="row" alignItems="center">
 									<NestingIndicator onClick={() => onExpand(id)} height={lineHeight} />
 									<Stack width="100%" ref={nestedContacts}>
-										{testNest()}
+										<Typography>Yoyo, whaddup?</Typography>
+										{/* {testNest()} */}
 									</Stack>
 								</Stack>
 							</Stack>
@@ -85,38 +127,6 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 			</AnimatePresence>
 		</Box>
 	);
-
-	function testNest() {
-		return (
-			<HorizontalDividedContainer
-				key={contactPerson.id + Math.random()}
-				cardStyles={{
-					border: 'none',
-					boxShadow: 'none',
-					borderRadius: 6,
-					height: '100%',
-				}}
-			>
-				<Box width="24%">
-					<PersonInfoSummary person={contactArray} />
-				</Box>
-				<Box aria-label="company-name" width="19%" display="flex" justifyContent="center">
-					<Typography variant="h6" noWrap>
-						{clientName}
-					</Typography>
-				</Box>
-				<Box width="14%" display="flex" justifyContent="center">
-					<DealsStatusSummary dealStatus={deal.dealStatus} />
-				</Box>
-				<Box width="19%">
-					<SupplierInfoSummary suppliers={dummySuppliers1} />
-				</Box>
-				<Box width="19%">
-					<PersonInfoSummary person={contactDummy4} />
-				</Box>
-			</HorizontalDividedContainer>
-		);
-	}
 };
 
 export default NestedContactPerson;

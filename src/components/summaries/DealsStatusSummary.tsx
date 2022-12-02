@@ -6,17 +6,25 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { flexCenter } from '../../styles/generalStyles';
+import { extractMostRelevantDeal } from '../../utils/extractMostRelevantDeal';
+import { FRAGMENT_DEALFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
+import { unixTimestampConverter } from '../../utils/unixTimestampConverter';
 
 type DealStatusProps = {
-	dealStatus: 'Active' | 'Dialog' | 'Inactive';
+	deals: FRAGMENT_DEALFragment[];
+	containsAdditionalInfo?: boolean;
 };
 
-const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
+const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo = true }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
 	const { t } = useTranslation();
 
-	switch (dealStatus) {
+	// TODO: Update translation text for DealsStatusSummary
+
+	const deal: FRAGMENT_DEALFragment | undefined = extractMostRelevantDeal(deals);
+
+	switch (deal?.dealStatus) {
 		case 'Active': {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
@@ -28,11 +36,13 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.active')}
 							</Typography>
-							<Typography variant="note" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
-									date: 'some date',
-								})}
-							</Typography>
+							{containsAdditionalInfo && (
+								<Typography variant="note" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
+										date: unixTimestampConverter(deal.endDate),
+									})}
+								</Typography>
+							)}
 						</Stack>
 					)}
 				</Stack>
@@ -49,12 +59,19 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
 							</Typography>
+							{containsAdditionalInfo && (
+								<Typography variant="note">
+									{t('wallOfClients.clientListItemContent.dealStatus.dialogLastContact', {
+										date: unixTimestampConverter(deal.lastContactDate),
+									})}
+								</Typography>
+							)}
 						</Stack>
 					)}
 				</Stack>
 			);
 		}
-		case 'Inactive': {
+		case 'InActive': {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 					<Box width="30%" sx={flexCenter}>
@@ -65,18 +82,24 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ dealStatus }) => {
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
 							</Typography>
-							<Typography variant="note" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
-									date: 'some date',
-								})}
-							</Typography>
+							{containsAdditionalInfo && (
+								<Typography variant="note" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
+										date: unixTimestampConverter(deal.endDate),
+									})}
+								</Typography>
+							)}
 						</Stack>
 					)}
 				</Stack>
 			);
 		}
 		default: {
-			return <Typography>Nothing to show</Typography>;
+			return (
+				<Typography noWrap>
+					{t('wallOfClients.clientListItemContent.dealStatus.noDeals')}
+				</Typography>
+			);
 		}
 	}
 };
