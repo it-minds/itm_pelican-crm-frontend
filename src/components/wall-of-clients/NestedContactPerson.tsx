@@ -14,6 +14,7 @@ import DealsStatusSummary from '../summaries/DealsStatusSummary';
 import PersonInfoSummary from '../summaries/PersonInfoSummary';
 import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 import { PersonSummary } from './ClientListItem';
+import NestedContactPersonDeal from './NestedContactPersonDeal';
 
 // type NestedContactPersonProps = {
 // 	id: string;
@@ -24,14 +25,15 @@ import { PersonSummary } from './ClientListItem';
 // 	isExpanded: boolean;
 // };
 
+const NESTED_ELEMENTS_HEIGHT = 68;
+
 type NestedContactPersonProps = {
 	isExpanded: boolean;
 	contact: PersonSummary;
 	clientName: string;
 	id: any;
-	onExpand: (id: string) => void;
+	onExpand: (id: string, elements: number) => void;
 };
-// TODO: Doesn't work yet because parent rerenders when child is expanded
 const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	contact,
 	clientName,
@@ -40,7 +42,8 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	isExpanded,
 }) => {
 	const nestedContacts = useRef<HTMLDivElement>(null);
-	const [lineHeight] = useState(nestedContacts.current?.clientHeight || 68);
+	const [numberOfElements, setNumberOfElements] = useState(1);
+	const [lineHeight, setLineHeight] = useState(nestedContacts.current?.clientHeight || 68);
 	const contactArray = [contact];
 	const [dealsState, setDealsState] = useState<FRAGMENT_DEALFragment[]>([]);
 	const [accountManagersState, setAccountManagersState] = useState<
@@ -55,6 +58,12 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	}, [contact]);
 
 	useEffect(() => {
+		setSuppliersState(
+			removeArrayDuplicates(accountManagersState.flatMap(accountManager => accountManager.supplier))
+		);
+	}, [accountManagersState]);
+
+	useEffect(() => {
 		setAccountManagersState(
 			removeArrayDuplicates(
 				dealsState.flatMap(deal =>
@@ -62,23 +71,28 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 				)
 			)
 		);
+		setNumberOfElements(dealsState.length);
 	}, [dealsState]);
 
-	useEffect(() => {
-		setSuppliersState(
-			removeArrayDuplicates(accountManagersState.flatMap(accountManager => accountManager.supplier))
-		);
-	}, [accountManagersState]);
+	const renderContactDeals = () => {
+		return dealsState.map(deal => (
+			<NestedContactPersonDeal height={NESTED_ELEMENTS_HEIGHT} key={deal.id} deal={deal} />
+		));
+	};
 
-	// TODO: We need the same data transformation as used in ClientListItem
+	const handleExpansion = () => {
+		console.log('handleExpansion', 'dealState', dealsState, 'numberOfElements', numberOfElements);
+		setLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
+		onExpand(id, dealsState.length);
+	};
 
 	return (
 		<Box>
 			<HorizontalDividedContainer
 				isExpandable
-				onExpand={() => onExpand(id)}
+				onExpand={() => handleExpansion()}
 				isExpanded={isExpanded}
-				key={contact.id + Math.random()}
+				key={contact.id}
 				cardStyles={{
 					border: 'none',
 					boxShadow: 'none',
@@ -114,10 +128,12 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 						>
 							<Stack pl="10px" width="100%" gap="2">
 								<Stack gap="3px" direction="row" alignItems="center">
-									<NestingIndicator onClick={() => onExpand(id)} height={lineHeight} />
+									<NestingIndicator
+										onClick={() => onExpand(id, dealsState.length)}
+										height={lineHeight}
+									/>
 									<Stack width="100%" ref={nestedContacts}>
-										<Typography>Yoyo, whaddup?</Typography>
-										{/* {testNest()} */}
+										{renderContactDeals()}
 									</Stack>
 								</Stack>
 							</Stack>

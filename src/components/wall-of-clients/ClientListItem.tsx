@@ -38,6 +38,7 @@ export type PersonSummary = {
 
 /**
  * This component is used exclusively in the WallOfClients page and displays a client's information.
+ * It is expandable to display additional information about the contact persons at the client.
  * Uses the `HorizontalDividedContainer` component and includes the following summaries:
  * - `ClientInfoSummary`
  * - `SupplierInfoSummary`
@@ -60,52 +61,18 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 		numberOfElements * NESTED_ELEMENTS_HEIGHT
 	);
 
-	// No removal of duplicates as complete contact data must be passed down to nested components
 	useEffect(() => {
-		const contacts = clientInput?.clientContacts?.flatMap(clientContact => clientContact?.contact);
-
-		if (!contacts) {
-			setContactsState([]);
-			return;
-		}
-
-		// mapping GQL type to our custom type
-		const personSummaryContacts: PersonSummary[] = contacts.map(contact => ({
-			...contact,
-			isExpanded: false,
-		}));
-
-		setContactsState(personSummaryContacts);
-		setNumberOfElements(clientInput.clientContacts.length);
-	}, [clientInput.clientContacts]);
+		setRelevantStates();
+		mapContacts();
+		// disabled eslint as this should only run once
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
-		setDealsState(
-			removeArrayDuplicates(
-				contactsState.flatMap(contact =>
-					contact.dealContacts.flatMap(dealContact => dealContact.deal)
-				)
-			)
-		);
-	}, [contactsState]);
+		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
+	}, [numberOfElements]);
 
-	useEffect(() => {
-		setAccountManagersState(
-			removeArrayDuplicates(
-				dealsState.flatMap(deal =>
-					deal.accountManagerDeals.flatMap(accountManagerDeal => accountManagerDeal.accountManager)
-				)
-			)
-		);
-	}, [dealsState]);
-
-	useEffect(() => {
-		setSuppliersState(
-			removeArrayDuplicates(accountManagersState.flatMap(accountManager => accountManager.supplier))
-		);
-	}, [accountManagersState]);
-
-	const clientList = () => {
+	const renderNestedContacts = () => {
 		return contactsState.map(contactPerson => (
 			<NestedContactPerson
 				key={contactPerson.id}
@@ -113,13 +80,14 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 				id={contactPerson.id}
 				clientName={clientInput.name}
 				isExpanded={contactPerson.isExpanded}
-				onExpand={id => handleNestedExpansion(id)}
+				onExpand={(id, elements) => handleNestedExpansion(id, elements)}
 			/>
 		));
 	};
 
-	const handleNestedExpansion = (id: string) => {
+	const handleNestedExpansion = (id: string, elements: number) => {
 		let expanding = false;
+
 		const newList = contactsState.map(contact => {
 			if (contact.id === id) {
 				contact.isExpanded = !contact.isExpanded;
@@ -127,17 +95,23 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 			}
 			return contact;
 		});
-		setNumberOfElements(prev => (expanding ? prev + 1 : prev - 1));
-		setNestedLineHeight(
-			NESTED_ELEMENTS_HEIGHT * (expanding ? numberOfElements + 1 : numberOfElements - 1)
-		);
+		console.log('elements: ', elements);
+
+		setNumberOfElements(prev => (expanding ? prev + elements : prev - elements));
 
 		setContactsState(newList);
 	};
 
 	const handleExpansion = () => {
-		setIsExpanded(prev => !prev);
-		setNestedLineHeight(numberOfElements * NESTED_ELEMENTS_HEIGHT);
+		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * contactsState.length);
+		setIsExpanded(true);
+	};
+
+	const handleCollapse = () => {
+		contactsState.forEach(contact => (contact.isExpanded = false));
+		setNestedLineHeight(0);
+		setNumberOfElements(contactsState.length);
+		setIsExpanded(false);
 	};
 
 	return (
@@ -158,7 +132,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 			<HorizontalDividedContainer
 				isExpandable
 				isExpanded={isExpanded}
-				onExpand={() => handleExpansion()}
+				onExpand={() => (isExpanded ? handleCollapse() : handleExpansion())}
 				cardStyles={{
 					border: isExpanded ? theme.palette.primary.main + '30' : '',
 				}}
@@ -190,7 +164,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 										onClick={() => setIsExpanded(false)}
 										height={nestedLineHeight}
 									/>
-									<Stack width="100%">{clientList()}</Stack>
+									<Stack width="100%">{renderNestedContacts()}</Stack>
 								</Stack>
 							</Stack>
 						</motion.div>
@@ -207,6 +181,45 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 			maxWidth: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
 		};
 		return listItemWidth;
+	}
+
+	function mapContacts() {
+		const contacts = clientInput?.clientContacts?.flatMap(clientContact => clientContact?.contact);
+
+		if (!contacts) {
+			setContactsState([]);
+			return;
+		}
+
+		// mapping GQL type to our custom type
+		const personSummaryContacts: PersonSummary[] = contacts.map(contact => ({
+			...contact,
+			isExpanded: false,
+		}));
+
+		setContactsState(personSummaryContacts);
+		setNumberOfElements(personSummaryContacts.length);
+	}
+
+	/** Set states based on the data passed down from Wall of Clients  */
+	function setRelevantStates() {
+		const suppliers = accountManagersState.flatMap(accountManager => accountManager.supplier);
+
+		const accountManagers = dealsState
+			.flatMap(deal => deal.accountManagerDeals)
+			.flatMap(accountManagerDeal => accountManagerDeal.accountManager);
+
+		const deals = contactsState
+			.flatMap(contact => contact.dealContacts)
+			.flatMap(dealContact => dealContact.deal);
+
+		const uniqueSuppliers = removeArrayDuplicates(suppliers);
+		const uniqueAccountManagers = removeArrayDuplicates(accountManagers);
+		const uniqueDeals = removeArrayDuplicates(deals);
+
+		setSuppliersState(uniqueSuppliers);
+		setAccountManagersState(uniqueAccountManagers);
+		setDealsState(uniqueDeals);
 	}
 };
 
