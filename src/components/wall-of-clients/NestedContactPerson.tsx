@@ -16,30 +16,21 @@ import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 import { PersonSummary } from './ClientListItem';
 import NestedContactPersonDeal from './NestedContactPersonDeal';
 
-// type NestedContactPersonProps = {
-// 	id: string;
-// 	contactPerson: PersonSummary;
-// 	clientName: string;
-// 	deal: TestDeal;
-// 	onExpand: (id: string) => void;
-// 	isExpanded: boolean;
-// };
-
 const NESTED_ELEMENTS_HEIGHT = 68;
 
 type NestedContactPersonProps = {
-	isExpanded: boolean;
 	contact: PersonSummary;
 	clientName: string;
 	id: any;
+	isExpanded: boolean;
 	onExpand: (id: string, elements: number) => void;
 };
 const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	contact,
 	clientName,
 	id,
-	onExpand,
 	isExpanded,
+	onExpand,
 }) => {
 	const nestedContacts = useRef<HTMLDivElement>(null);
 	const [numberOfElements, setNumberOfElements] = useState(1);

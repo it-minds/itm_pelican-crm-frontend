@@ -46,10 +46,8 @@ export type PersonSummary = {
  * - `DealsStatusSummary`
  */
 const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
-	// const { client, suppliers, contactPersons, deal } = clientListItem;
 	const theme = useTheme();
 	const [isExpanded, setIsExpanded] = useState(false);
-	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const [contactsState, setContactsState] = useState<PersonSummary[]>([]);
 	const [dealsState, setDealsState] = useState<FRAGMENT_DEALFragment[]>([]);
 	const [accountManagersState, setAccountManagersState] = useState<
@@ -57,16 +55,28 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 	>([]);
 	const [suppliersState, setSuppliersState] = useState<FRAGMENT_SUPPLIERFragment[]>([]);
 	const [numberOfElements, setNumberOfElements] = useState(contactsState.length);
-	const [nestedLineHeight, setNestedLineHeight] = useState(
-		numberOfElements * NESTED_ELEMENTS_HEIGHT
-	);
+	const [nestedLineHeight, setNestedLineHeight] = useState(0);
+	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 
 	useEffect(() => {
-		setRelevantStates();
 		mapContacts();
-		// disabled eslint as this should only run once
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [clientInput.clientContacts]);
+
+	useEffect(() => {
+		mapDeals();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [contactsState]);
+
+	useEffect(() => {
+		mapAccountManagers();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dealsState]);
+
+	useEffect(() => {
+		mapSuppliers();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [accountManagersState]);
 
 	useEffect(() => {
 		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
@@ -95,21 +105,14 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 			}
 			return contact;
 		});
-		console.log('elements: ', elements);
 
 		setNumberOfElements(prev => (expanding ? prev + elements : prev - elements));
-
 		setContactsState(newList);
 	};
 
-	const handleExpansion = () => {
-		setNestedLineHeight(NESTED_ELEMENTS_HEIGHT * contactsState.length);
-		setIsExpanded(true);
-	};
-
 	const handleCollapse = () => {
+		// sets all nested elements to collapsed and sets related states to default
 		contactsState.forEach(contact => (contact.isExpanded = false));
-		setNestedLineHeight(0);
 		setNumberOfElements(contactsState.length);
 		setIsExpanded(false);
 	};
@@ -132,7 +135,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 			<HorizontalDividedContainer
 				isExpandable
 				isExpanded={isExpanded}
-				onExpand={() => (isExpanded ? handleCollapse() : handleExpansion())}
+				onExpand={() => (isExpanded ? handleCollapse() : setIsExpanded(true))}
 				cardStyles={{
 					border: isExpanded ? theme.palette.primary.main + '30' : '',
 				}}
@@ -160,10 +163,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 						>
 							<Stack pl="10px" width="100%" gap="2">
 								<Stack gap="3px" direction="row" alignItems="center">
-									<NestingIndicator
-										onClick={() => setIsExpanded(false)}
-										height={nestedLineHeight}
-									/>
+									<NestingIndicator onClick={() => handleCollapse()} height={nestedLineHeight} />
 									<Stack width="100%">{renderNestedContacts()}</Stack>
 								</Stack>
 							</Stack>
@@ -183,6 +183,9 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 		return listItemWidth;
 	}
 
+	//* --------- MAPPERS --------- *//
+
+	/** Mapping GQL type to our custom type and setting number of elements */
 	function mapContacts() {
 		const contacts = clientInput?.clientContacts?.flatMap(clientContact => clientContact?.contact);
 
@@ -191,7 +194,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 			return;
 		}
 
-		// mapping GQL type to our custom type
 		const personSummaryContacts: PersonSummary[] = contacts.map(contact => ({
 			...contact,
 			isExpanded: false,
@@ -201,24 +203,27 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 		setNumberOfElements(personSummaryContacts.length);
 	}
 
-	/** Set states based on the data passed down from Wall of Clients  */
-	function setRelevantStates() {
+	function mapSuppliers() {
 		const suppliers = accountManagersState.flatMap(accountManager => accountManager.supplier);
+		const uniqueSuppliers = removeArrayDuplicates(suppliers);
+		setSuppliersState(uniqueSuppliers);
+	}
 
+	function mapAccountManagers() {
 		const accountManagers = dealsState
 			.flatMap(deal => deal.accountManagerDeals)
 			.flatMap(accountManagerDeal => accountManagerDeal.accountManager);
 
+		const uniqueAccountManagers = removeArrayDuplicates(accountManagers);
+		setAccountManagersState(uniqueAccountManagers);
+	}
+
+	function mapDeals() {
 		const deals = contactsState
 			.flatMap(contact => contact.dealContacts)
 			.flatMap(dealContact => dealContact.deal);
 
-		const uniqueSuppliers = removeArrayDuplicates(suppliers);
-		const uniqueAccountManagers = removeArrayDuplicates(accountManagers);
 		const uniqueDeals = removeArrayDuplicates(deals);
-
-		setSuppliersState(uniqueSuppliers);
-		setAccountManagersState(uniqueAccountManagers);
 		setDealsState(uniqueDeals);
 	}
 };
