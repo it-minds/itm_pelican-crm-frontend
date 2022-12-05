@@ -77,13 +77,15 @@ export const mainTheme: ThemeOptions = createTheme({
 				body: {
 					scrollbarColor: '#6b6b6b #2b2b2b',
 					'&::-webkit-scrollbar, & *::-webkit-scrollbar': {
-						backgroundColor: '#2b2b2b',
+						backgroundColor: '#2b2b2b00', //transparent - color doesn't matter
+						width: '10px',
 					},
 					'&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
 						borderRadius: 8,
 						backgroundColor: '#6b6b6b',
 						minHeight: 24,
-						border: '3px solid #2b2b2b',
+						boxSizing: 'borderBox',
+						border: '3px solid transparent',
 					},
 					'&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
 						backgroundColor: '#959595',
