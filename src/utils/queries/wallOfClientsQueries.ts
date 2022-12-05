@@ -75,9 +75,7 @@ export const GET_FILTERED_CLIENTS = gql`
 		id
 		name
 		pictureUrl
-		officeLocations {
-			cityName
-		}
+		officeLocation
 	}
 `;
 
