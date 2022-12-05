@@ -6,13 +6,13 @@ export function titleCase(word: string | null) {
 
 export function fixedWidth(
 	largeWidth: number | string,
-	smallWidth: number | string,
-	isBelowMedium: boolean = false
+	smallWidth: number | string = 20,
+	isBelowBreakpoint: boolean = false
 ) {
 	const listItemWidth = {
-		minWidth: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
-		width: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
-		maxWidth: isBelowMedium ? `${smallWidth}%` : `${largeWidth}%`,
+		minWidth: isBelowBreakpoint ? `${smallWidth}%` : `${largeWidth}%`,
+		width: isBelowBreakpoint ? `${smallWidth}%` : `${largeWidth}%`,
+		maxWidth: isBelowBreakpoint ? `${smallWidth}%` : `${largeWidth}%`,
 	};
 	return listItemWidth;
 }

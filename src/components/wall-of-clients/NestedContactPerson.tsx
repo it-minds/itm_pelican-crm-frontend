@@ -79,7 +79,7 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	};
 
 	return (
-		<Box>
+		<Box width="100%" display="flex" flexDirection="column">
 			<HorizontalDividedContainer
 				isExpandable
 				onExpand={() => handleExpansion()}
@@ -95,24 +95,19 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 				<Box {...fixedWidth(20, 28, isBelowMedium)}>
 					<PersonInfoSummary persons={contactArray} />
 				</Box>
-				<Box
-					aria-label="company-name"
-					{...fixedWidth(14, 19, isBelowMedium)}
-					display="flex"
-					justifyContent="center"
-				>
+				<Box aria-label="company-name" {...fixedWidth(15)} display="flex" justifyContent="center">
 					<Typography variant="h6" noWrap>
 						{clientName}
 					</Typography>
 				</Box>
-				<Box {...fixedWidth(18, 18, isBelowMedium)} display="flex" justifyContent="center">
+				<Box {...fixedWidth(17)} display="flex" justifyContent="center">
 					<DealsStatusSummary deals={dealsState} />
 				</Box>
-				<Box {...fixedWidth(18, 20, isBelowMedium)}>
+				<Box {...fixedWidth(17)}>
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
-				<Box sx={{ display: isBelowMedium ? 'hidden' : 'flex' }} width="19%">
-					{isBelowMedium && <PersonInfoSummary persons={accountManagersState} />}
+				<Box {...fixedWidth(17)}>
+					<PersonInfoSummary persons={accountManagersState} />
 				</Box>
 			</HorizontalDividedContainer>
 			<AnimatePresence>
@@ -123,8 +118,13 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 							animate={{ y: 0, opacity: 1, height: '100%' }}
 							exit={{ y: -15, height: '0%', opacity: '10%' }}
 						>
-							<Stack pl="6px" width="100%" gap="2">
-								<Stack gap="3px" direction="row" alignItems="center">
+							<Stack pl="3px" width="100%" gap="2">
+								<Stack
+									direction="row"
+									alignItems="center"
+									justifyContent="space-between"
+									maxWidth="100%"
+								>
 									<NestingIndicator
 										onClick={() => onExpand(id, dealsState.length)}
 										height={lineHeight}

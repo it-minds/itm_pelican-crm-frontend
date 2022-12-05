@@ -27,6 +27,7 @@ const NestedContactPersonDeal: FC<NestedContactPersonDealProps> = ({ deal, heigh
 				boxShadow: 'none',
 				borderRadius: 6,
 				height: '100%',
+				maxWidth: '92.5%',
 				minHeight: `${height || 68}px`,
 			}}
 		>
