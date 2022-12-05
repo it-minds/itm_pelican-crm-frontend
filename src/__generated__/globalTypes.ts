@@ -479,64 +479,6 @@ export type ListFilterInputTypeOfDealFilterInput = {
   some?: InputMaybe<DealFilterInput>;
 };
 
-export type ListFilterInputTypeOfLocationFilterInput = {
-  all?: InputMaybe<LocationFilterInput>;
-  any?: InputMaybe<Scalars['Boolean']>;
-  none?: InputMaybe<LocationFilterInput>;
-  some?: InputMaybe<LocationFilterInput>;
-};
-
-export type Location = {
-  __typename?: 'Location';
-  cityName: Scalars['String'];
-  createdAt: Scalars['Long'];
-  id: Scalars['UUID'];
-  lastUpdatedAt: Maybe<Scalars['Long']>;
-  supplier: Supplier;
-  supplierId: Scalars['UUID'];
-};
-
-export type LocationFilterInput = {
-  and?: InputMaybe<Array<LocationFilterInput>>;
-  cityName?: InputMaybe<StringOperationFilterInput>;
-  createdAt?: InputMaybe<ComparableInt64OperationFilterInput>;
-  id?: InputMaybe<ComparableGuidOperationFilterInput>;
-  lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
-  or?: InputMaybe<Array<LocationFilterInput>>;
-  supplier?: InputMaybe<SupplierFilterInput>;
-  supplierId?: InputMaybe<ComparableGuidOperationFilterInput>;
-};
-
-export type LocationSortInput = {
-  cityName?: InputMaybe<SortEnumType>;
-  createdAt?: InputMaybe<SortEnumType>;
-  id?: InputMaybe<SortEnumType>;
-  lastUpdatedAt?: InputMaybe<SortEnumType>;
-  supplier?: InputMaybe<SupplierSortInput>;
-  supplierId?: InputMaybe<SortEnumType>;
-};
-
-/** A connection to a list of items. */
-export type LocationsConnection = {
-  __typename?: 'LocationsConnection';
-  /** A list of edges. */
-  edges: Maybe<Array<LocationsEdge>>;
-  /** A flattened list of the nodes. */
-  nodes: Maybe<Array<Location>>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  totalCount: Scalars['Int'];
-};
-
-/** An edge in a connection. */
-export type LocationsEdge = {
-  __typename?: 'LocationsEdge';
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String'];
-  /** The item at the end of the edge. */
-  node: Location;
-};
-
 /** Information about pagination in a connection. */
 export type PageInfo = {
   __typename?: 'PageInfo';
@@ -560,8 +502,6 @@ export type Query = {
   contacts: Maybe<ContactsConnection>;
   deal: Deal;
   deals: Maybe<DealsConnection>;
-  location: Location;
-  locations: Maybe<LocationsConnection>;
   supplier: Supplier;
   suppliers: Maybe<SuppliersConnection>;
 };
@@ -627,21 +567,6 @@ export type QuerydealsArgs = {
 };
 
 
-export type QuerylocationArgs = {
-  id: Scalars['UUID'];
-};
-
-
-export type QuerylocationsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  order?: InputMaybe<Array<LocationSortInput>>;
-  where?: InputMaybe<LocationFilterInput>;
-};
-
-
 export type QuerysupplierArgs = {
   id: Scalars['UUID'];
 };
@@ -686,9 +611,10 @@ export type Supplier = {
   lastUpdatedAt: Maybe<Scalars['Long']>;
   linkedInUrl: Maybe<Scalars['String']>;
   name: Maybe<Scalars['String']>;
-  officeLocations: Array<Location>;
+  officeLocation: Maybe<Scalars['String']>;
   phoneNumber: Maybe<Scalars['String']>;
   pictureUrl: Maybe<Scalars['String']>;
+  pipedriveDomain: Maybe<Scalars['String']>;
   refreshToken: Scalars['String'];
   websiteUrl: Maybe<Scalars['String']>;
 };
@@ -703,10 +629,11 @@ export type SupplierFilterInput = {
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   linkedInUrl?: InputMaybe<StringOperationFilterInput>;
   name?: InputMaybe<StringOperationFilterInput>;
-  officeLocations?: InputMaybe<ListFilterInputTypeOfLocationFilterInput>;
+  officeLocation?: InputMaybe<StringOperationFilterInput>;
   or?: InputMaybe<Array<SupplierFilterInput>>;
   phoneNumber?: InputMaybe<StringOperationFilterInput>;
   pictureUrl?: InputMaybe<StringOperationFilterInput>;
+  pipedriveDomain?: InputMaybe<StringOperationFilterInput>;
   refreshToken?: InputMaybe<StringOperationFilterInput>;
   websiteUrl?: InputMaybe<StringOperationFilterInput>;
 };
@@ -719,8 +646,10 @@ export type SupplierSortInput = {
   lastUpdatedAt?: InputMaybe<SortEnumType>;
   linkedInUrl?: InputMaybe<SortEnumType>;
   name?: InputMaybe<SortEnumType>;
+  officeLocation?: InputMaybe<SortEnumType>;
   phoneNumber?: InputMaybe<SortEnumType>;
   pictureUrl?: InputMaybe<SortEnumType>;
+  pipedriveDomain?: InputMaybe<SortEnumType>;
   refreshToken?: InputMaybe<SortEnumType>;
   websiteUrl?: InputMaybe<SortEnumType>;
 };
