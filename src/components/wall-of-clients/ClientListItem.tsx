@@ -161,7 +161,7 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 							animate={{ y: 0, opacity: 1, height: '100%' }}
 							exit={{ y: -15, height: '0%', opacity: '10%' }}
 						>
-							<Stack pl="10px" width="100%" gap="2">
+							<Stack pl="6px" width="100%" gap="2">
 								<Stack gap="3px" direction="row" alignItems="center">
 									<NestingIndicator onClick={() => handleCollapse()} height={nestedLineHeight} />
 									<Stack width="100%">{renderNestedContacts()}</Stack>

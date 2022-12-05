@@ -1,7 +1,7 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import React, { FC, useEffect, useRef, useState } from 'react';
-
+import { fixedWidth } from '../../utils/helperFunctions';
 import {
 	FRAGMENT_ACCOUNT_MANAGERFragment,
 	FRAGMENT_DEALFragment,
@@ -35,6 +35,8 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	const nestedContacts = useRef<HTMLDivElement>(null);
 	const [numberOfElements, setNumberOfElements] = useState(1);
 	const [lineHeight, setLineHeight] = useState(nestedContacts.current?.clientHeight || 68);
+	const theme = useTheme();
+	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
 	const contactArray = [contact];
 	const [dealsState, setDealsState] = useState<FRAGMENT_DEALFragment[]>([]);
 	const [accountManagersState, setAccountManagersState] = useState<
@@ -72,7 +74,6 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	};
 
 	const handleExpansion = () => {
-		console.log('handleExpansion', 'dealState', dealsState, 'numberOfElements', numberOfElements);
 		setLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
 		onExpand(id, dealsState.length);
 	};
@@ -91,22 +92,27 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 					height: '100%',
 				}}
 			>
-				<Box width="24%">
+				<Box {...fixedWidth(20, 28, isBelowMedium)}>
 					<PersonInfoSummary persons={contactArray} />
 				</Box>
-				<Box aria-label="company-name" width="19%" display="flex" justifyContent="center">
+				<Box
+					aria-label="company-name"
+					{...fixedWidth(14, 19, isBelowMedium)}
+					display="flex"
+					justifyContent="center"
+				>
 					<Typography variant="h6" noWrap>
 						{clientName}
 					</Typography>
 				</Box>
-				<Box width="14%" display="flex" justifyContent="center">
+				<Box {...fixedWidth(18, 18, isBelowMedium)} display="flex" justifyContent="center">
 					<DealsStatusSummary deals={dealsState} />
 				</Box>
-				<Box width="19%">
+				<Box {...fixedWidth(18, 20, isBelowMedium)}>
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
-				<Box width="19%">
-					<PersonInfoSummary persons={accountManagersState} />
+				<Box sx={{ display: isBelowMedium ? 'hidden' : 'flex' }} width="19%">
+					{isBelowMedium && <PersonInfoSummary persons={accountManagersState} />}
 				</Box>
 			</HorizontalDividedContainer>
 			<AnimatePresence>
@@ -117,7 +123,7 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 							animate={{ y: 0, opacity: 1, height: '100%' }}
 							exit={{ y: -15, height: '0%', opacity: '10%' }}
 						>
-							<Stack pl="10px" width="100%" gap="2">
+							<Stack pl="6px" width="100%" gap="2">
 								<Stack gap="3px" direction="row" alignItems="center">
 									<NestingIndicator
 										onClick={() => onExpand(id, dealsState.length)}

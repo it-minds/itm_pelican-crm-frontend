@@ -1,7 +1,10 @@
 import { Box } from '@mui/system';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
-import { FRAGMENT_DEALFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
+import {
+	FRAGMENT_ACCOUNT_MANAGERFragment,
+	FRAGMENT_DEALFragment,
+} from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { unixTimestampConverter } from '../../utils/unixTimestampConverter';
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 
@@ -11,6 +14,12 @@ type NestedContactPersonDealProps = {
 };
 
 const NestedContactPersonDeal: FC<NestedContactPersonDealProps> = ({ deal, height }) => {
+	useEffect(() => {
+		console.log('deal', deal);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const { accountManagerDeals, dealStatus, startDate, lastContactDate } = deal;
 	return (
 		<HorizontalDividedContainer
 			cardStyles={{
