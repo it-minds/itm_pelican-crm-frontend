@@ -3,25 +3,27 @@ import { FRAGMENT_DEALFragment } from './queries/__generated__/wallOfClientsQuer
 /**
  * Takes an array of Deal-objects and checks whether any deal has a specific status in the following order: Active, Dialog, Inactive. Returns the most relevant Deal from the highest priority, non-empty array.
  */
-export const extractMostRelevantDeal = (dealsArray: FRAGMENT_DEALFragment[]) => {
+export const extractMostRelevantDeal = (
+	dealsArray: FRAGMENT_DEALFragment[]
+): FRAGMENT_DEALFragment | undefined => {
 	const activeDeals: FRAGMENT_DEALFragment[] = dealsArray.filter(
 		deal => deal.dealStatus === 'Active'
 	);
-	if (activeDeals) {
+	if (!(activeDeals.length === 0)) {
 		return extractDeals(activeDeals);
 	}
 
 	const dialogDeals: FRAGMENT_DEALFragment[] = dealsArray.filter(
 		deal => deal.dealStatus === 'Dialog'
 	);
-	if (dialogDeals) {
+	if (!(dialogDeals.length === 0)) {
 		return extractDeals(dialogDeals);
 	}
 
 	const inactiveDeals: FRAGMENT_DEALFragment[] = dealsArray.filter(
 		deal => deal.dealStatus === 'InActive'
 	);
-	if (inactiveDeals) {
+	if (!(inactiveDeals.length === 0)) {
 		return extractDeals(inactiveDeals);
 	}
 
@@ -31,7 +33,9 @@ export const extractMostRelevantDeal = (dealsArray: FRAGMENT_DEALFragment[]) => 
 /**
  * Takes an aray of Deal-objects and returns the deal with the date of contact closest to now.
  */
-export const extractDeals = (dealsArray: FRAGMENT_DEALFragment[]) => {
+export const extractDeals = (
+	dealsArray: FRAGMENT_DEALFragment[]
+): FRAGMENT_DEALFragment | undefined => {
 	let latestContactDeal: number = 0;
 	let mostRelevantDeal: string = '';
 	dealsArray.forEach(deal => {

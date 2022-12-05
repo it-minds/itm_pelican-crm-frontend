@@ -15,13 +15,12 @@ import ClientListItem from '../components/wall-of-clients/ClientListItem';
 import { flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyCompanyNames } from '../utils/dummyClasses';
+// TODO: Remove dummy data when actual companies are available or a decisive decision to remove dropdown is made.
 import {
 	getFilteredClientsQuery,
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
-
-// TODO: Dummy suppliers above^ - remove when real data is available
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
