@@ -166,14 +166,14 @@ darkTheme.components = {
 				scrollbarColor: '#6b6b6b #2b2b2b',
 				'&::-webkit-scrollbar, & *::-webkit-scrollbar': {
 					backgroundColor: '#2b2b2b00', //transparent - color doesn't matter
-					width: '14px',
+					width: '16px',
 				},
 				'&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
 					borderRadius: 8,
 					backgroundColor: '#6b6b6b',
 					minHeight: 24,
 					boxSizing: 'borderBox',
-					border: '3px solid',
+					border: '4px solid',
 					borderColor: darkBackground,
 				},
 				'&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
@@ -221,14 +221,14 @@ lightTheme.components = {
 				scrollbarColor: '#6b6b6b #2b2b2b',
 				'&::-webkit-scrollbar, & *::-webkit-scrollbar': {
 					backgroundColor: '#2b2b2b00', //transparent - color doesn't matter
-					width: '14px',
+					width: '16px',
 				},
 				'&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
 					borderRadius: 8,
 					backgroundColor: '#6b6b6b',
 					minHeight: 24,
 					boxSizing: 'borderBox',
-					border: '3px solid',
+					border: '4px solid',
 					borderColor: 'white',
 				},
 				'&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
