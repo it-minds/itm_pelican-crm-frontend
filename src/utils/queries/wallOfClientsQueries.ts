@@ -1,8 +1,15 @@
 import { gql } from '@apollo/client';
 
 export const GET_FILTERED_CLIENTS = gql`
-	query getFilteredClients($currentClientSearch: String, $currentContactSearch: String) {
+	query getFilteredClients(
+		$currentClientSearch: String
+		$currentContactSearch: String
+		$first: Int
+		$after: String
+	) {
 		clients(
+			first: $first
+			after: $after
 			where: {
 				and: [
 					{ name: { contains: $currentClientSearch } }
@@ -15,6 +22,12 @@ export const GET_FILTERED_CLIENTS = gql`
 			}
 		) {
 			totalCount
+			pageInfo {
+				endCursor
+			}
+			edges {
+				cursor
+			}
 			nodes {
 				...FRAGMENT_CLIENT
 			}

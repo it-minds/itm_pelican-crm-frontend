@@ -20,14 +20,15 @@ export type AccountManager = {
   createdAt: Scalars['Long'];
   email: Scalars['String'];
   firstName: Scalars['String'];
-  hubSpotId: Scalars['String'];
-  hubSpotUserId: Scalars['Long'];
   id: Scalars['UUID'];
   lastName: Scalars['String'];
   lastUpdatedAt: Maybe<Scalars['Long']>;
   linkedInUrl: Maybe<Scalars['String']>;
   phoneNumber: Maybe<Scalars['String']>;
   pictureUrl: Maybe<Scalars['String']>;
+  source: Scalars['String'];
+  sourceId: Scalars['String'];
+  sourceUserId: Scalars['Long'];
   supplier: Supplier;
   supplierId: Scalars['UUID'];
 };
@@ -39,11 +40,11 @@ export type AccountManagerDeal = {
   createdAt: Scalars['Long'];
   deal: Deal;
   dealId: Scalars['UUID'];
-  hubSpotAccountManagerId: Scalars['String'];
-  hubSpotDealId: Scalars['String'];
   id: Scalars['UUID'];
   isActive: Scalars['Boolean'];
   lastUpdatedAt: Maybe<Scalars['Long']>;
+  sourceAccountManagerId: Scalars['String'];
+  sourceDealId: Scalars['String'];
 };
 
 export type AccountManagerDealFilterInput = {
@@ -53,12 +54,12 @@ export type AccountManagerDealFilterInput = {
   createdAt?: InputMaybe<ComparableInt64OperationFilterInput>;
   deal?: InputMaybe<DealFilterInput>;
   dealId?: InputMaybe<ComparableGuidOperationFilterInput>;
-  hubSpotAccountManagerId?: InputMaybe<StringOperationFilterInput>;
-  hubSpotDealId?: InputMaybe<StringOperationFilterInput>;
   id?: InputMaybe<ComparableGuidOperationFilterInput>;
   isActive?: InputMaybe<BooleanOperationFilterInput>;
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   or?: InputMaybe<Array<AccountManagerDealFilterInput>>;
+  sourceAccountManagerId?: InputMaybe<StringOperationFilterInput>;
+  sourceDealId?: InputMaybe<StringOperationFilterInput>;
 };
 
 export type AccountManagerFilterInput = {
@@ -67,8 +68,6 @@ export type AccountManagerFilterInput = {
   createdAt?: InputMaybe<ComparableInt64OperationFilterInput>;
   email?: InputMaybe<StringOperationFilterInput>;
   firstName?: InputMaybe<StringOperationFilterInput>;
-  hubSpotId?: InputMaybe<StringOperationFilterInput>;
-  hubSpotUserId?: InputMaybe<ComparableInt64OperationFilterInput>;
   id?: InputMaybe<ComparableGuidOperationFilterInput>;
   lastName?: InputMaybe<StringOperationFilterInput>;
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
@@ -76,6 +75,9 @@ export type AccountManagerFilterInput = {
   or?: InputMaybe<Array<AccountManagerFilterInput>>;
   phoneNumber?: InputMaybe<StringOperationFilterInput>;
   pictureUrl?: InputMaybe<StringOperationFilterInput>;
+  source?: InputMaybe<StringOperationFilterInput>;
+  sourceId?: InputMaybe<StringOperationFilterInput>;
+  sourceUserId?: InputMaybe<ComparableInt64OperationFilterInput>;
   supplier?: InputMaybe<SupplierFilterInput>;
   supplierId?: InputMaybe<ComparableGuidOperationFilterInput>;
 };
@@ -84,14 +86,15 @@ export type AccountManagerSortInput = {
   createdAt?: InputMaybe<SortEnumType>;
   email?: InputMaybe<SortEnumType>;
   firstName?: InputMaybe<SortEnumType>;
-  hubSpotId?: InputMaybe<SortEnumType>;
-  hubSpotUserId?: InputMaybe<SortEnumType>;
   id?: InputMaybe<SortEnumType>;
   lastName?: InputMaybe<SortEnumType>;
   lastUpdatedAt?: InputMaybe<SortEnumType>;
   linkedInUrl?: InputMaybe<SortEnumType>;
   phoneNumber?: InputMaybe<SortEnumType>;
   pictureUrl?: InputMaybe<SortEnumType>;
+  source?: InputMaybe<SortEnumType>;
+  sourceId?: InputMaybe<SortEnumType>;
+  sourceUserId?: InputMaybe<SortEnumType>;
   supplier?: InputMaybe<SupplierSortInput>;
   supplierId?: InputMaybe<SortEnumType>;
 };
@@ -127,12 +130,13 @@ export type Client = {
   clientContacts: Array<ClientContact>;
   createdAt: Scalars['Long'];
   deals: Array<Deal>;
-  hubSpotId: Scalars['String'];
   id: Scalars['UUID'];
   lastUpdatedAt: Maybe<Scalars['Long']>;
   name: Scalars['String'];
   officeLocation: Maybe<Scalars['String']>;
   pictureUrl: Maybe<Scalars['String']>;
+  source: Scalars['String'];
+  sourceId: Scalars['String'];
   website: Maybe<Scalars['String']>;
 };
 
@@ -143,11 +147,11 @@ export type ClientContact = {
   contact: Contact;
   contactId: Scalars['UUID'];
   createdAt: Scalars['Long'];
-  hubSpotClientId: Scalars['String'];
-  hubSpotContactId: Scalars['String'];
   id: Scalars['UUID'];
   isActive: Scalars['Boolean'];
   lastUpdatedAt: Maybe<Scalars['Long']>;
+  sourceClientId: Scalars['String'];
+  sourceContactId: Scalars['String'];
 };
 
 export type ClientContactFilterInput = {
@@ -157,12 +161,12 @@ export type ClientContactFilterInput = {
   contact?: InputMaybe<ContactFilterInput>;
   contactId?: InputMaybe<ComparableGuidOperationFilterInput>;
   createdAt?: InputMaybe<ComparableInt64OperationFilterInput>;
-  hubSpotClientId?: InputMaybe<StringOperationFilterInput>;
-  hubSpotContactId?: InputMaybe<StringOperationFilterInput>;
   id?: InputMaybe<ComparableGuidOperationFilterInput>;
   isActive?: InputMaybe<BooleanOperationFilterInput>;
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   or?: InputMaybe<Array<ClientContactFilterInput>>;
+  sourceClientId?: InputMaybe<StringOperationFilterInput>;
+  sourceContactId?: InputMaybe<StringOperationFilterInput>;
 };
 
 export type ClientFilterInput = {
@@ -170,24 +174,26 @@ export type ClientFilterInput = {
   clientContacts?: InputMaybe<ListFilterInputTypeOfClientContactFilterInput>;
   createdAt?: InputMaybe<ComparableInt64OperationFilterInput>;
   deals?: InputMaybe<ListFilterInputTypeOfDealFilterInput>;
-  hubSpotId?: InputMaybe<StringOperationFilterInput>;
   id?: InputMaybe<ComparableGuidOperationFilterInput>;
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   name?: InputMaybe<StringOperationFilterInput>;
   officeLocation?: InputMaybe<StringOperationFilterInput>;
   or?: InputMaybe<Array<ClientFilterInput>>;
   pictureUrl?: InputMaybe<StringOperationFilterInput>;
+  source?: InputMaybe<StringOperationFilterInput>;
+  sourceId?: InputMaybe<StringOperationFilterInput>;
   website?: InputMaybe<StringOperationFilterInput>;
 };
 
 export type ClientSortInput = {
   createdAt?: InputMaybe<SortEnumType>;
-  hubSpotId?: InputMaybe<SortEnumType>;
   id?: InputMaybe<SortEnumType>;
   lastUpdatedAt?: InputMaybe<SortEnumType>;
   name?: InputMaybe<SortEnumType>;
   officeLocation?: InputMaybe<SortEnumType>;
   pictureUrl?: InputMaybe<SortEnumType>;
+  source?: InputMaybe<SortEnumType>;
+  sourceId?: InputMaybe<SortEnumType>;
   website?: InputMaybe<SortEnumType>;
 };
 
@@ -279,13 +285,14 @@ export type Contact = {
   dealContacts: Array<DealContact>;
   email: Maybe<Scalars['String']>;
   firstName: Maybe<Scalars['String']>;
-  hubSpotId: Scalars['String'];
-  hubSpotOwnerId: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   jobTitle: Maybe<Scalars['String']>;
   lastName: Maybe<Scalars['String']>;
   lastUpdatedAt: Maybe<Scalars['Long']>;
   phoneNumber: Maybe<Scalars['String']>;
+  source: Scalars['String'];
+  sourceId: Scalars['String'];
+  sourceOwnerId: Maybe<Scalars['String']>;
 };
 
 export type ContactFilterInput = {
@@ -295,27 +302,29 @@ export type ContactFilterInput = {
   dealContacts?: InputMaybe<ListFilterInputTypeOfDealContactFilterInput>;
   email?: InputMaybe<StringOperationFilterInput>;
   firstName?: InputMaybe<StringOperationFilterInput>;
-  hubSpotId?: InputMaybe<StringOperationFilterInput>;
-  hubSpotOwnerId?: InputMaybe<StringOperationFilterInput>;
   id?: InputMaybe<ComparableGuidOperationFilterInput>;
   jobTitle?: InputMaybe<StringOperationFilterInput>;
   lastName?: InputMaybe<StringOperationFilterInput>;
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   or?: InputMaybe<Array<ContactFilterInput>>;
   phoneNumber?: InputMaybe<StringOperationFilterInput>;
+  source?: InputMaybe<StringOperationFilterInput>;
+  sourceId?: InputMaybe<StringOperationFilterInput>;
+  sourceOwnerId?: InputMaybe<StringOperationFilterInput>;
 };
 
 export type ContactSortInput = {
   createdAt?: InputMaybe<SortEnumType>;
   email?: InputMaybe<SortEnumType>;
   firstName?: InputMaybe<SortEnumType>;
-  hubSpotId?: InputMaybe<SortEnumType>;
-  hubSpotOwnerId?: InputMaybe<SortEnumType>;
   id?: InputMaybe<SortEnumType>;
   jobTitle?: InputMaybe<SortEnumType>;
   lastName?: InputMaybe<SortEnumType>;
   lastUpdatedAt?: InputMaybe<SortEnumType>;
   phoneNumber?: InputMaybe<SortEnumType>;
+  source?: InputMaybe<SortEnumType>;
+  sourceId?: InputMaybe<SortEnumType>;
+  sourceOwnerId?: InputMaybe<SortEnumType>;
 };
 
 /** A connection to a list of items. */
@@ -349,12 +358,13 @@ export type Deal = {
   dealStatus: Maybe<Scalars['String']>;
   description: Maybe<Scalars['String']>;
   endDate: Maybe<Scalars['Long']>;
-  hubSpotId: Scalars['String'];
-  hubSpotOwnerId: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   lastContactDate: Maybe<Scalars['Long']>;
   lastUpdatedAt: Maybe<Scalars['Long']>;
   name: Maybe<Scalars['String']>;
+  source: Scalars['String'];
+  sourceId: Scalars['String'];
+  sourceOwnerId: Maybe<Scalars['String']>;
   startDate: Maybe<Scalars['Long']>;
 };
 
@@ -365,11 +375,11 @@ export type DealContact = {
   createdAt: Scalars['Long'];
   deal: Deal;
   dealId: Scalars['UUID'];
-  hubSpotContactId: Scalars['String'];
-  hubSpotDealId: Scalars['String'];
   id: Scalars['UUID'];
   isActive: Scalars['Boolean'];
   lastUpdatedAt: Maybe<Scalars['Long']>;
+  sourceContactId: Scalars['String'];
+  sourceDealId: Scalars['String'];
 };
 
 export type DealContactFilterInput = {
@@ -379,12 +389,12 @@ export type DealContactFilterInput = {
   createdAt?: InputMaybe<ComparableInt64OperationFilterInput>;
   deal?: InputMaybe<DealFilterInput>;
   dealId?: InputMaybe<ComparableGuidOperationFilterInput>;
-  hubSpotContactId?: InputMaybe<StringOperationFilterInput>;
-  hubSpotDealId?: InputMaybe<StringOperationFilterInput>;
   id?: InputMaybe<ComparableGuidOperationFilterInput>;
   isActive?: InputMaybe<BooleanOperationFilterInput>;
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   or?: InputMaybe<Array<DealContactFilterInput>>;
+  sourceContactId?: InputMaybe<StringOperationFilterInput>;
+  sourceDealId?: InputMaybe<StringOperationFilterInput>;
 };
 
 export type DealFilterInput = {
@@ -397,13 +407,14 @@ export type DealFilterInput = {
   dealStatus?: InputMaybe<StringOperationFilterInput>;
   description?: InputMaybe<StringOperationFilterInput>;
   endDate?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
-  hubSpotId?: InputMaybe<StringOperationFilterInput>;
-  hubSpotOwnerId?: InputMaybe<StringOperationFilterInput>;
   id?: InputMaybe<ComparableGuidOperationFilterInput>;
   lastContactDate?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   name?: InputMaybe<StringOperationFilterInput>;
   or?: InputMaybe<Array<DealFilterInput>>;
+  source?: InputMaybe<StringOperationFilterInput>;
+  sourceId?: InputMaybe<StringOperationFilterInput>;
+  sourceOwnerId?: InputMaybe<StringOperationFilterInput>;
   startDate?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
 };
 
@@ -414,12 +425,13 @@ export type DealSortInput = {
   dealStatus?: InputMaybe<SortEnumType>;
   description?: InputMaybe<SortEnumType>;
   endDate?: InputMaybe<SortEnumType>;
-  hubSpotId?: InputMaybe<SortEnumType>;
-  hubSpotOwnerId?: InputMaybe<SortEnumType>;
   id?: InputMaybe<SortEnumType>;
   lastContactDate?: InputMaybe<SortEnumType>;
   lastUpdatedAt?: InputMaybe<SortEnumType>;
   name?: InputMaybe<SortEnumType>;
+  source?: InputMaybe<SortEnumType>;
+  sourceId?: InputMaybe<SortEnumType>;
+  sourceOwnerId?: InputMaybe<SortEnumType>;
   startDate?: InputMaybe<SortEnumType>;
 };
 
@@ -606,7 +618,6 @@ export type Supplier = {
   accountManagers: Array<AccountManager>;
   createdAt: Scalars['Long'];
   email: Maybe<Scalars['String']>;
-  hubSpotId: Scalars['Long'];
   id: Scalars['UUID'];
   lastUpdatedAt: Maybe<Scalars['Long']>;
   linkedInUrl: Maybe<Scalars['String']>;
@@ -616,6 +627,8 @@ export type Supplier = {
   pictureUrl: Maybe<Scalars['String']>;
   pipedriveDomain: Maybe<Scalars['String']>;
   refreshToken: Scalars['String'];
+  source: Scalars['String'];
+  sourceId: Scalars['Long'];
   websiteUrl: Maybe<Scalars['String']>;
 };
 
@@ -624,7 +637,6 @@ export type SupplierFilterInput = {
   and?: InputMaybe<Array<SupplierFilterInput>>;
   createdAt?: InputMaybe<ComparableInt64OperationFilterInput>;
   email?: InputMaybe<StringOperationFilterInput>;
-  hubSpotId?: InputMaybe<ComparableInt64OperationFilterInput>;
   id?: InputMaybe<ComparableGuidOperationFilterInput>;
   lastUpdatedAt?: InputMaybe<ComparableNullableOfInt64OperationFilterInput>;
   linkedInUrl?: InputMaybe<StringOperationFilterInput>;
@@ -635,13 +647,14 @@ export type SupplierFilterInput = {
   pictureUrl?: InputMaybe<StringOperationFilterInput>;
   pipedriveDomain?: InputMaybe<StringOperationFilterInput>;
   refreshToken?: InputMaybe<StringOperationFilterInput>;
+  source?: InputMaybe<StringOperationFilterInput>;
+  sourceId?: InputMaybe<ComparableInt64OperationFilterInput>;
   websiteUrl?: InputMaybe<StringOperationFilterInput>;
 };
 
 export type SupplierSortInput = {
   createdAt?: InputMaybe<SortEnumType>;
   email?: InputMaybe<SortEnumType>;
-  hubSpotId?: InputMaybe<SortEnumType>;
   id?: InputMaybe<SortEnumType>;
   lastUpdatedAt?: InputMaybe<SortEnumType>;
   linkedInUrl?: InputMaybe<SortEnumType>;
@@ -651,6 +664,8 @@ export type SupplierSortInput = {
   pictureUrl?: InputMaybe<SortEnumType>;
   pipedriveDomain?: InputMaybe<SortEnumType>;
   refreshToken?: InputMaybe<SortEnumType>;
+  source?: InputMaybe<SortEnumType>;
+  sourceId?: InputMaybe<SortEnumType>;
   websiteUrl?: InputMaybe<SortEnumType>;
 };
 

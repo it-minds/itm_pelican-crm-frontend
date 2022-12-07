@@ -3,6 +3,7 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import Button from '../components/common/Button';
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
 import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
 import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
@@ -21,7 +22,6 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
-import Button from '../components/common/Button';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -30,12 +30,15 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
+	const [loadMore, setLoadMore] = useState(false);
 	const { loading, error, data, refetch, fetchMore } = useQuery<getFilteredClientsQuery>(
 		GET_FILTERED_CLIENTS,
 		{
 			variables: {
 				currentClientSearch: clientFilterContent,
 				currentContactSearch: contactFilterContent,
+				first: 5,
+				after: null,
 			},
 		}
 	);
@@ -47,6 +50,17 @@ const WallOfClients = () => {
 		};
 		refetch(vars);
 	}, [clientFilterContent, contactFilterContent, refetch]);
+
+	useEffect(() => {
+		if (!loadMore) return;
+		setLoadMore(false);
+		console.log(data?.clients?.pageInfo.endCursor);
+		fetchMore({
+			variables: {
+				after: data?.clients?.pageInfo.endCursor ?? null,
+			},
+		});
+	}, [data?.clients?.pageInfo.endCursor, fetchMore, loadMore]);
 
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
@@ -67,15 +81,6 @@ const WallOfClients = () => {
 
 		setContactFilterContent(newValue);
 	};
-
-	const handleRefetch = () => {
-		fetchMore({
-			variables: {
-				offset: data?.clients?.totalCount,
-			},
-		});
-	};
-	// TODO: Cleanup refetch function
 
 	return (
 		<PageContainer>
@@ -136,7 +141,7 @@ const WallOfClients = () => {
 				</Box>
 			)}
 			<Box display="flex" justifyContent="center">
-				<Button onClick={() => handleRefetch()}>Load more</Button>
+				<Button onClick={() => setLoadMore(true)}>Load more</Button>
 			</Box>
 		</PageContainer>
 	);
