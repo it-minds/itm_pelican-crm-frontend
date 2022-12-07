@@ -1,6 +1,7 @@
 import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import React, { FC, useEffect, useRef, useState } from 'react';
+
 import { fixedWidth } from '../../utils/helperFunctions';
 import {
 	FRAGMENT_ACCOUNT_MANAGERFragment,
