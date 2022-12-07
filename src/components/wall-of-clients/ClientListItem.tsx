@@ -20,7 +20,7 @@ import PersonInfoSummary from '../summaries/PersonInfoSummary';
 import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 import NestedContactPerson from './NestedContactPerson';
 
-const NESTED_ELEMENTS_HEIGHT = 68;
+const NESTED_ELEMENTS_HEIGHT = 74;
 
 type ClientListItemProps = {
 	clientInput: FRAGMENT_CLIENTFragment;

@@ -17,7 +17,7 @@ import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 import { PersonSummary } from './ClientListItem';
 import NestedContactPersonDeal from './NestedContactPersonDeal';
 
-const NESTED_ELEMENTS_HEIGHT = 68;
+const NESTED_ELEMENTS_HEIGHT = 75;
 
 type NestedContactPersonProps = {
 	contact: PersonSummary;
@@ -35,15 +35,16 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 }) => {
 	const nestedContacts = useRef<HTMLDivElement>(null);
 	const [numberOfElements, setNumberOfElements] = useState(1);
-	const [lineHeight, setLineHeight] = useState(nestedContacts.current?.clientHeight || 68);
+	const [lineHeight, setLineHeight] = useState<number>();
 	const theme = useTheme();
 	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
-	const contactArray = [contact];
+	const isBelowLarge = useMediaQuery(theme.breakpoints.down('lg'));
 	const [dealsState, setDealsState] = useState<FRAGMENT_DEALFragment[]>([]);
 	const [accountManagersState, setAccountManagersState] = useState<
 		FRAGMENT_ACCOUNT_MANAGERFragment[]
 	>([]);
 	const [suppliersState, setSuppliersState] = useState<FRAGMENT_SUPPLIERFragment[]>([]);
+	const contactArray = [contact];
 
 	useEffect(() => {
 		setDealsState(
@@ -70,7 +71,12 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 
 	const renderContactDeals = () => {
 		return dealsState.map(deal => (
-			<NestedContactPersonDeal height={NESTED_ELEMENTS_HEIGHT} key={deal.id} deal={deal} />
+			<NestedContactPersonDeal
+				breakpoint={isBelowLarge}
+				height={NESTED_ELEMENTS_HEIGHT}
+				key={deal.id}
+				deal={deal}
+			/>
 		));
 	};
 
@@ -82,7 +88,7 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	return (
 		<Box width="100%" display="flex" flexDirection="column">
 			<HorizontalDividedContainer
-				isExpandable
+				isExpandable={dealsState.length > 0}
 				onExpand={() => handleExpansion()}
 				isExpanded={isExpanded}
 				key={contact.id}
@@ -128,7 +134,7 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 								>
 									<NestingIndicator
 										onClick={() => onExpand(id, dealsState.length)}
-										height={lineHeight}
+										height={lineHeight || NESTED_ELEMENTS_HEIGHT}
 									/>
 									<Stack width="100%" ref={nestedContacts}>
 										{renderContactDeals()}
