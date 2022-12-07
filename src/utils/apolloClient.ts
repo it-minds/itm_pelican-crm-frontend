@@ -8,7 +8,7 @@ export const client = new ApolloClient({
 				fields: {
 					getFilteredClients: {
 						keyArgs: false,
-						merge(existing = [], incoming) {
+						merge(existing, incoming) {
 							return [...existing, ...incoming];
 						},
 					},

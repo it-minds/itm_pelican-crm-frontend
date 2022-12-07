@@ -31,6 +31,7 @@ const WallOfClients = () => {
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
 	const [loadMore, setLoadMore] = useState(false);
+	const [cursor, setCursor] = useState<string | null | undefined>(null);
 	const { loading, error, data, refetch, fetchMore } = useQuery<getFilteredClientsQuery>(
 		GET_FILTERED_CLIENTS,
 		{
@@ -53,14 +54,17 @@ const WallOfClients = () => {
 
 	useEffect(() => {
 		if (!loadMore) return;
+		console.log(cursor);
 		setLoadMore(false);
 		console.log(data?.clients?.pageInfo.endCursor);
 		fetchMore({
 			variables: {
-				after: data?.clients?.pageInfo.endCursor ?? null,
+				after: cursor,
 			},
 		});
-	}, [data?.clients?.pageInfo.endCursor, fetchMore, loadMore]);
+		setCursor(data?.clients?.pageInfo.endCursor);
+		console.log(cursor);
+	}, [cursor, data?.clients?.pageInfo.endCursor, fetchMore, loadMore]);
 
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
@@ -141,7 +145,25 @@ const WallOfClients = () => {
 				</Box>
 			)}
 			<Box display="flex" justifyContent="center">
-				<Button onClick={() => setLoadMore(true)}>Load more</Button>
+				<Button
+					onClick={() => {
+						const endCursor = data?.clients?.pageInfo.endCursor;
+						console.log(endCursor);
+						fetchMore({
+							variables: { after: endCursor },
+							updateQuery: (prevResult, { fetchMoreResult }) => {
+								fetchMoreResult.clients.nodes = [
+									...prevResult.clients.nodes,
+									...fetchMoreResult.clients.nodes,
+								];
+								console.log(fetchMoreResult);
+								return fetchMoreResult;
+							},
+						});
+					}}
+				>
+					Load more
+				</Button>
 			</Box>
 		</PageContainer>
 	);
