@@ -30,8 +30,6 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
-	const [loadMore, setLoadMore] = useState(false);
-	const [cursor, setCursor] = useState<string | null | undefined>(null);
 	const { loading, error, data, refetch, fetchMore } = useQuery<getFilteredClientsQuery>(
 		GET_FILTERED_CLIENTS,
 		{
@@ -52,20 +50,6 @@ const WallOfClients = () => {
 		refetch(vars);
 	}, [clientFilterContent, contactFilterContent, refetch]);
 
-	useEffect(() => {
-		if (!loadMore) return;
-		console.log(cursor);
-		setLoadMore(false);
-		console.log(data?.clients?.pageInfo.endCursor);
-		fetchMore({
-			variables: {
-				after: cursor,
-			},
-		});
-		setCursor(data?.clients?.pageInfo.endCursor);
-		console.log(cursor);
-	}, [cursor, data?.clients?.pageInfo.endCursor, fetchMore, loadMore]);
-
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
 		if (!newValue) {
@@ -84,6 +68,21 @@ const WallOfClients = () => {
 		}
 
 		setContactFilterContent(newValue);
+	};
+
+	const handleFetchMore = () => {
+		const endCursor = data?.clients?.pageInfo.endCursor;
+		console.log(endCursor);
+		fetchMore({
+			variables: { after: endCursor },
+			updateQuery: (prevResult, { fetchMoreResult }) => {
+				fetchMoreResult.clients.nodes = [
+					...prevResult.clients.nodes,
+					...fetchMoreResult.clients.nodes,
+				];
+				return fetchMoreResult;
+			},
+		});
 	};
 
 	return (
@@ -145,25 +144,7 @@ const WallOfClients = () => {
 				</Box>
 			)}
 			<Box display="flex" justifyContent="center">
-				<Button
-					onClick={() => {
-						const endCursor = data?.clients?.pageInfo.endCursor;
-						console.log(endCursor);
-						fetchMore({
-							variables: { after: endCursor },
-							updateQuery: (prevResult, { fetchMoreResult }) => {
-								fetchMoreResult.clients.nodes = [
-									...prevResult.clients.nodes,
-									...fetchMoreResult.clients.nodes,
-								];
-								console.log(fetchMoreResult);
-								return fetchMoreResult;
-							},
-						});
-					}}
-				>
-					Load more
-				</Button>
+				<Button onClick={() => handleFetchMore()}>Load more</Button>
 			</Box>
 		</PageContainer>
 	);
