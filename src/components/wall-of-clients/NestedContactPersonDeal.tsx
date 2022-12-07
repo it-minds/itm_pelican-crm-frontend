@@ -57,7 +57,7 @@ const NestedContactPersonDeal: FC<NestedContactPersonDealProps> = ({
 					boxShadow: 'none',
 					borderRadius: 6,
 					height: '100%',
-					minHeight: `${height || 68}px`,
+					maxHeight: `${height || 68}px`,
 				}}
 			>
 				<Box width="22%">

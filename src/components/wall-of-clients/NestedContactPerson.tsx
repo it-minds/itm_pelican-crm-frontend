@@ -17,7 +17,7 @@ import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 import { PersonSummary } from './ClientListItem';
 import NestedContactPersonDeal from './NestedContactPersonDeal';
 
-const NESTED_ELEMENTS_HEIGHT = 75;
+const NESTED_ELEMENTS_HEIGHT = 68;
 
 type NestedContactPersonProps = {
 	contact: PersonSummary;
@@ -99,7 +99,7 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 					height: '100%',
 				}}
 			>
-				<Box {...fixedWidth(20, 28, isBelowMedium)}>
+				<Box {...fixedWidth(17, 28, isBelowMedium)}>
 					<PersonInfoSummary persons={contactArray} />
 				</Box>
 				<Box aria-label="company-name" {...fixedWidth(15)} display="flex" justifyContent="center">
