@@ -36,8 +36,6 @@ const WallOfClients = () => {
 			variables: {
 				currentClientSearch: clientFilterContent,
 				currentContactSearch: contactFilterContent,
-				first: 5,
-				after: '',
 			},
 		}
 	);
@@ -71,10 +69,9 @@ const WallOfClients = () => {
 	};
 
 	const handleRefetch = () => {
-		const numFetchedClients = data?.clients?.totalCount;
 		fetchMore({
 			variables: {
-				after: data?.clients?.nodes[numFetchedClients].id,
+				offset: data?.clients?.totalCount,
 			},
 		});
 	};
