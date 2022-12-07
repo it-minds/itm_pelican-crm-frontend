@@ -21,6 +21,7 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
+import Button from '../components/common/Button';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -29,15 +30,25 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
-	const { loading, error, data, refetch } = useQuery<getFilteredClientsQuery>(
+	const { loading, error, data, refetch, fetchMore } = useQuery<getFilteredClientsQuery>(
 		GET_FILTERED_CLIENTS,
 		{
 			variables: {
 				currentClientSearch: clientFilterContent,
 				currentContactSearch: contactFilterContent,
+				first: 5,
+				after: '',
 			},
 		}
 	);
+
+	useEffect(() => {
+		const vars: getFilteredClientsQueryVariables = {
+			currentClientSearch: clientFilterContent,
+			currentContactSearch: contactFilterContent,
+		};
+		refetch(vars);
+	}, [clientFilterContent, contactFilterContent, refetch]);
 
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
@@ -59,13 +70,15 @@ const WallOfClients = () => {
 		setContactFilterContent(newValue);
 	};
 
-	useEffect(() => {
-		const vars: getFilteredClientsQueryVariables = {
-			currentClientSearch: clientFilterContent,
-			currentContactSearch: contactFilterContent,
-		};
-		refetch(vars);
-	}, [clientFilterContent, contactFilterContent, refetch]);
+	const handleRefetch = () => {
+		const numFetchedClients = data?.clients?.totalCount;
+		fetchMore({
+			variables: {
+				after: data?.clients?.nodes[numFetchedClients].id,
+			},
+		});
+	};
+	// TODO: Cleanup refetch function
 
 	return (
 		<PageContainer>
@@ -125,6 +138,9 @@ const WallOfClients = () => {
 					))}
 				</Box>
 			)}
+			<Box display="flex" justifyContent="center">
+				<Button onClick={() => handleRefetch()}>Load more</Button>
+			</Box>
 		</PageContainer>
 	);
 };

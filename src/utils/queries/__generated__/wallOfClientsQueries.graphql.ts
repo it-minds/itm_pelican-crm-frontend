@@ -3,6 +3,8 @@ import * as Types from '../../../__generated__/globalTypes';
 export type getFilteredClientsQueryVariables = Types.Exact<{
   currentClientSearch?: Types.InputMaybe<Types.Scalars['String']>;
   currentContactSearch?: Types.InputMaybe<Types.Scalars['String']>;
+  first?: Types.InputMaybe<Types.Scalars['Int']>;
+  after?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 
