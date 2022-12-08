@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '../components/common/Button';
@@ -41,6 +41,45 @@ const WallOfClients = () => {
 			},
 		}
 	);
+	const isFetching = useRef(false);
+
+	const handleFetchMore = useCallback(() => {
+		if (!data?.clients?.pageInfo.hasNextPage) return;
+
+		console.log('FetchMore');
+
+		const endCursor = data?.clients?.pageInfo.endCursor;
+		fetchMore({
+			variables: { after: endCursor },
+			updateQuery: (prevResult, { fetchMoreResult }) => {
+				fetchMoreResult.clients.nodes = [
+					...prevResult.clients.nodes,
+					...fetchMoreResult.clients.nodes,
+				];
+				return fetchMoreResult;
+			},
+		});
+	}, [data?.clients?.pageInfo.endCursor, data?.clients?.pageInfo.hasNextPage, fetchMore]);
+
+	const handleScroll = useCallback(() => {
+		if (scrollAt() < 90) {
+			isFetching.current = false;
+			return;
+		}
+
+		if (isFetching.current) return;
+
+		isFetching.current = true;
+
+		handleFetchMore();
+	}, [handleFetchMore]);
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, [handleScroll]);
 
 	useEffect(() => {
 		const vars: getFilteredClientsQueryVariables = {
@@ -70,21 +109,15 @@ const WallOfClients = () => {
 		setContactFilterContent(newValue);
 	};
 
-	const handleFetchMore = () => {
-		if (!data?.clients?.pageInfo.hasNextPage) return;
+	const scrollAt = (): number => {
+		const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+		const clientHeight = document.documentElement.clientHeight;
 
-		const endCursor = data?.clients?.pageInfo.endCursor;
-		fetchMore({
-			variables: { after: endCursor },
-			updateQuery: (prevResult, { fetchMoreResult }) => {
-				fetchMoreResult.clients.nodes = [
-					...prevResult.clients.nodes,
-					...fetchMoreResult.clients.nodes,
-				];
-				return fetchMoreResult;
-			},
-		});
+		return (scrollTop / (scrollHeight - clientHeight)) * 100;
 	};
+
+	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
 
 	return (
 		<PageContainer>
@@ -144,9 +177,12 @@ const WallOfClients = () => {
 					))}
 				</Box>
 			)}
-			<Box display="flex" justifyContent="center">
-				<Button onClick={() => handleFetchMore()}>Load more</Button>
-			</Box>
+
+			{data?.clients?.pageInfo.hasNextPage && (
+				<Box display="flex" justifyContent="center">
+					<Button onClick={() => handleFetchMore()}>Load more</Button>
+				</Box>
+			)}
 		</PageContainer>
 	);
 };
