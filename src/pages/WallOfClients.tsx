@@ -30,6 +30,7 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
+	const isFetching = useRef(false);
 	const { loading, error, data, refetch, fetchMore } = useQuery<getFilteredClientsQuery>(
 		GET_FILTERED_CLIENTS,
 		{
@@ -41,7 +42,6 @@ const WallOfClients = () => {
 			},
 		}
 	);
-	const isFetching = useRef(false);
 
 	const handleFetchMore = useCallback(() => {
 		if (!data?.clients?.pageInfo.hasNextPage) return;
@@ -164,25 +164,28 @@ const WallOfClients = () => {
 				</>
 			)}
 			{data && (
-				<Box
-					sx={{
-						...flexCol,
-						alignItems: 'center',
-						my: 2,
-						gap: 3,
-					}}
-				>
-					{data?.clients?.nodes?.map(client => (
-						<ClientListItem clientInput={client} />
-					))}
-				</Box>
+				<>
+					<Typography variant="note">Found {data.clients?.totalCount} results.</Typography>
+					<Box
+						sx={{
+							...flexCol,
+							alignItems: 'center',
+							my: 2,
+							gap: 3,
+						}}
+					>
+						{data?.clients?.nodes?.map(client => (
+							<ClientListItem clientInput={client} />
+						))}
+					</Box>
+				</>
 			)}
 
-			{data?.clients?.pageInfo.hasNextPage && (
+			{/* {data?.clients?.pageInfo.hasNextPage && (
 				<Box display="flex" justifyContent="center">
 					<Button onClick={() => handleFetchMore()}>Load more</Button>
 				</Box>
-			)}
+			)} */}
 		</PageContainer>
 	);
 };
