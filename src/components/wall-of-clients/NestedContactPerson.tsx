@@ -73,7 +73,7 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	// TODO: We need the same data transformation as used in ClientListItem
 
 	return (
-		<Box>
+		<Box width="100%" height="100%" display="flex" flexDirection="column">
 			<HorizontalDividedContainer
 				isExpandable
 				onExpand={() => onExpand(id)}
@@ -82,7 +82,7 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 				cardStyles={{
 					border: 'none',
 					boxShadow: 'none',
-					borderRadius: 6,
+					borderRadius: 2,
 					height: '100%',
 				}}
 			>
@@ -106,23 +106,21 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 			</HorizontalDividedContainer>
 			<AnimatePresence>
 				{isExpanded && (
-					<MotionConfig transition={{ duration: 0.15 }}>
-						<motion.div
-							initial={{ y: -20, opacity: 0, width: '100%', height: '100%' }}
-							animate={{ y: 0, opacity: 1, height: '100%' }}
-							exit={{ y: -15, height: '0%', opacity: '10%' }}
-						>
-							<Stack pl="10px" width="100%" gap="2">
-								<Stack gap="3px" direction="row" alignItems="center">
-									<NestingIndicator onClick={() => onExpand(id)} height={lineHeight} />
-									<Stack width="100%" ref={nestedContacts}>
-										<Typography>Yoyo, whaddup?</Typography>
-										{/* {testNest()} */}
-									</Stack>
-								</Stack>
-							</Stack>
-						</motion.div>
-					</MotionConfig>
+					// <MotionConfig transition={{ duration: 0.15 }}>
+					// 	<motion.div
+					// 		initial={{ y: -20, opacity: 0, width: '100%', height: '100%' }}
+					// 		animate={{ y: 0, opacity: 1, height: '100%' }}
+					// 		exit={{ y: -15, height: '0%', opacity: '10%' }}
+					// 	>
+					<Stack gap="3px" direction="row" alignItems="center" width="100%">
+						<NestingIndicator onClick={() => onExpand(id)} height={lineHeight} />
+						<Stack ref={nestedContacts}>
+							<Typography>Yoyo, whaddup?</Typography>
+							{/* {testNest()} */}
+						</Stack>
+					</Stack>
+					// 	</motion.div>
+					// </MotionConfig>
 				)}
 			</AnimatePresence>
 		</Box>
