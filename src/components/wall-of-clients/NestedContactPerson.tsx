@@ -99,21 +99,26 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 					height: '100%',
 				}}
 			>
-				<Box {...fixedWidth(17, 28, isBelowMedium)}>
+				<Box {...fixedWidth(19, 28, isBelowMedium)}>
 					<PersonInfoSummary persons={contactArray} />
 				</Box>
-				<Box aria-label="company-name" {...fixedWidth(15)} display="flex" justifyContent="center">
+				<Box
+					aria-label="company-name"
+					{...fixedWidth(17, 25)}
+					display="flex"
+					justifyContent="center"
+				>
 					<Typography variant="h6" noWrap>
 						{clientName}
 					</Typography>
 				</Box>
-				<Box {...fixedWidth(17)} display="flex" justifyContent="center">
+				<Box {...fixedWidth(19)} display="flex" justifyContent="center">
 					<DealsStatusSummary deals={dealsState} />
 				</Box>
-				<Box {...fixedWidth(17)}>
+				<Box {...fixedWidth(19)}>
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
-				<Box {...fixedWidth(17)}>
+				<Box {...fixedWidth(19)}>
 					<PersonInfoSummary persons={accountManagersState} />
 				</Box>
 			</HorizontalDividedContainer>

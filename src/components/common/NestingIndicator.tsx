@@ -25,7 +25,6 @@ const NestingIndicator: FC<NestingIndicatorProps> = ({ height, onClick, ...rest 
 			onMouseEnter={() => setIsHovering(true)}
 			onMouseLeave={() => setIsHovering(false)}
 			onClick={onClick}
-			width="fit-content"
 		>
 			<Box
 				sx={{
