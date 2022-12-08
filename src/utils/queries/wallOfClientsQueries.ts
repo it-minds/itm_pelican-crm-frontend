@@ -24,6 +24,7 @@ export const GET_FILTERED_CLIENTS = gql`
 			totalCount
 			pageInfo {
 				endCursor
+				hasNextPage
 			}
 			edges {
 				cursor
