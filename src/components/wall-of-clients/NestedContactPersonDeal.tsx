@@ -1,5 +1,6 @@
 import { Box } from '@mui/system';
 import React, { FC } from 'react';
+
 import HorizontalDividedContainer from '../common/HorizontalDividedContainer';
 import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 

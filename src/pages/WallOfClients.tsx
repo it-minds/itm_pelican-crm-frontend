@@ -3,7 +3,6 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Button from '../components/common/Button';
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
 import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
 import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
@@ -73,6 +72,11 @@ const WallOfClients = () => {
 
 		handleFetchMore();
 	}, [handleFetchMore]);
+	// * I have an assumption that this function only works properly while the ammount of data is managable.
+	// * With huge data-sets you will keep fecthing more, because the newly fetched paginated data
+	// * isn't enough to move the scrollbar above the 90% threshold. At some point every time
+	// * you scroll, regardless of direction, you will fetch more data.
+	// TODO: Fix the above (potential) issue
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll);
@@ -180,12 +184,6 @@ const WallOfClients = () => {
 					</Box>
 				</>
 			)}
-
-			{/* {data?.clients?.pageInfo.hasNextPage && (
-				<Box display="flex" justifyContent="center">
-					<Button onClick={() => handleFetchMore()}>Load more</Button>
-				</Box>
-			)} */}
 		</PageContainer>
 	);
 };
