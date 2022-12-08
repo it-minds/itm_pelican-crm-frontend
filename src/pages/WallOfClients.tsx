@@ -74,7 +74,6 @@ const WallOfClients = () => {
 		if (!data?.clients?.pageInfo.hasNextPage) return;
 
 		const endCursor = data?.clients?.pageInfo.endCursor;
-		console.log(endCursor);
 		fetchMore({
 			variables: { after: endCursor },
 			updateQuery: (prevResult, { fetchMoreResult }) => {
