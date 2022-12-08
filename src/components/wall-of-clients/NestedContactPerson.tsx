@@ -1,7 +1,8 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
+import { fixedWidth } from '../../utils/helperFunctions';
 import {
 	FRAGMENT_ACCOUNT_MANAGERFragment,
 	FRAGMENT_DEALFragment,
@@ -14,45 +15,48 @@ import DealsStatusSummary from '../summaries/DealsStatusSummary';
 import PersonInfoSummary from '../summaries/PersonInfoSummary';
 import SupplierInfoSummary from '../summaries/SupplierInfoSummary';
 import { PersonSummary } from './ClientListItem';
+import NestedContactPersonDeal from './NestedContactPersonDeal';
 
-// type NestedContactPersonProps = {
-// 	id: string;
-// 	contactPerson: PersonSummary;
-// 	clientName: string;
-// 	deal: TestDeal;
-// 	onExpand: (id: string) => void;
-// 	isExpanded: boolean;
-// };
+const NESTED_ELEMENTS_HEIGHT = 68;
 
 type NestedContactPersonProps = {
-	isExpanded: boolean;
 	contact: PersonSummary;
 	clientName: string;
 	id: any;
-	onExpand: (id: string) => void;
+	isExpanded: boolean;
+	onExpand: (id: string, elements: number) => void;
 };
-// TODO: Doesn't work yet because parent rerenders when child is expanded
 const NestedContactPerson: FC<NestedContactPersonProps> = ({
 	contact,
 	clientName,
 	id,
-	onExpand,
 	isExpanded,
+	onExpand,
 }) => {
 	const nestedContacts = useRef<HTMLDivElement>(null);
-	const [lineHeight] = useState(nestedContacts.current?.clientHeight || 68);
-	const contactArray = [contact];
+	const [numberOfElements, setNumberOfElements] = useState(1);
+	const [lineHeight, setLineHeight] = useState<number>();
+	const theme = useTheme();
+	const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
+	const isBelowLarge = useMediaQuery(theme.breakpoints.down('lg'));
 	const [dealsState, setDealsState] = useState<FRAGMENT_DEALFragment[]>([]);
 	const [accountManagersState, setAccountManagersState] = useState<
 		FRAGMENT_ACCOUNT_MANAGERFragment[]
 	>([]);
 	const [suppliersState, setSuppliersState] = useState<FRAGMENT_SUPPLIERFragment[]>([]);
+	const contactArray = [contact];
 
 	useEffect(() => {
 		setDealsState(
 			removeArrayDuplicates(contact.dealContacts.flatMap(dealContact => dealContact.deal))
 		);
 	}, [contact]);
+
+	useEffect(() => {
+		setSuppliersState(
+			removeArrayDuplicates(accountManagersState.flatMap(accountManager => accountManager.supplier))
+		);
+	}, [accountManagersState]);
 
 	useEffect(() => {
 		setAccountManagersState(
@@ -62,23 +66,32 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 				)
 			)
 		);
+		setNumberOfElements(dealsState.length);
 	}, [dealsState]);
 
-	useEffect(() => {
-		setSuppliersState(
-			removeArrayDuplicates(accountManagersState.flatMap(accountManager => accountManager.supplier))
-		);
-	}, [accountManagersState]);
+	const renderContactDeals = () => {
+		return dealsState.map(deal => (
+			<NestedContactPersonDeal
+				breakpoint={isBelowLarge}
+				height={NESTED_ELEMENTS_HEIGHT}
+				key={deal.id}
+				deal={deal}
+			/>
+		));
+	};
 
-	// TODO: We need the same data transformation as used in ClientListItem
+	const handleExpansion = () => {
+		setLineHeight(NESTED_ELEMENTS_HEIGHT * numberOfElements);
+		onExpand(id, dealsState.length);
+	};
 
 	return (
-		<Box width="100%" height="100%" display="flex" flexDirection="column">
+		<Box width="100%" display="flex" flexDirection="column">
 			<HorizontalDividedContainer
-				isExpandable
-				onExpand={() => onExpand(id)}
+				isExpandable={dealsState.length > 0}
+				onExpand={() => handleExpansion()}
 				isExpanded={isExpanded}
-				key={contact.id + Math.random()}
+				key={contact.id}
 				cardStyles={{
 					border: 'none',
 					boxShadow: 'none',
@@ -86,41 +99,50 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 					height: '100%',
 				}}
 			>
-				<Box width="24%">
+				<Box {...fixedWidth(17, 28, isBelowMedium)}>
 					<PersonInfoSummary persons={contactArray} />
 				</Box>
-				<Box aria-label="company-name" width="19%" display="flex" justifyContent="center">
+				<Box aria-label="company-name" {...fixedWidth(15)} display="flex" justifyContent="center">
 					<Typography variant="h6" noWrap>
 						{clientName}
 					</Typography>
 				</Box>
-				<Box width="14%" display="flex" justifyContent="center">
+				<Box {...fixedWidth(17)} display="flex" justifyContent="center">
 					<DealsStatusSummary deals={dealsState} />
 				</Box>
-				<Box width="19%">
+				<Box {...fixedWidth(17)}>
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
-				<Box width="19%">
+				<Box {...fixedWidth(17)}>
 					<PersonInfoSummary persons={accountManagersState} />
 				</Box>
 			</HorizontalDividedContainer>
 			<AnimatePresence>
 				{isExpanded && (
-					// <MotionConfig transition={{ duration: 0.15 }}>
-					// 	<motion.div
-					// 		initial={{ y: -20, opacity: 0, width: '100%', height: '100%' }}
-					// 		animate={{ y: 0, opacity: 1, height: '100%' }}
-					// 		exit={{ y: -15, height: '0%', opacity: '10%' }}
-					// 	>
-					<Stack gap="3px" direction="row" alignItems="center" width="100%">
-						<NestingIndicator onClick={() => onExpand(id)} height={lineHeight} />
-						<Stack ref={nestedContacts}>
-							<Typography>Yoyo, whaddup?</Typography>
-							{/* {testNest()} */}
-						</Stack>
-					</Stack>
-					// 	</motion.div>
-					// </MotionConfig>
+					<MotionConfig transition={{ duration: 0.15 }}>
+						<motion.div
+							initial={{ y: -20, opacity: 0, width: '100%', height: '100%' }}
+							animate={{ y: 0, opacity: 1, height: '100%' }}
+							exit={{ y: -15, height: '0%', opacity: '10%' }}
+						>
+							<Stack pl="3px" width="100%" gap="2">
+								<Stack
+									direction="row"
+									alignItems="center"
+									justifyContent="space-between"
+									maxWidth="100%"
+								>
+									<NestingIndicator
+										onClick={() => onExpand(id, dealsState.length)}
+										height={lineHeight || NESTED_ELEMENTS_HEIGHT}
+									/>
+									<Stack width="100%" ref={nestedContacts}>
+										{renderContactDeals()}
+									</Stack>
+								</Stack>
+							</Stack>
+						</motion.div>
+					</MotionConfig>
 				)}
 			</AnimatePresence>
 		</Box>
