@@ -11,7 +11,7 @@ export type Props = {
 	fullWidth?: boolean;
 	highlight?: boolean;
 	sx?: SxProps;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 const BaseCard = styled('div')<Props>(({ theme }) => (props: Props) => ({
 	display: 'flex',
@@ -31,6 +31,7 @@ const BaseCard = styled('div')<Props>(({ theme }) => (props: Props) => ({
 const Card: FC<Props> = props => {
 	return (
 		<BaseCard
+			{...props}
 			sx={props.sx}
 			highlight={props.highlight}
 			direction={props.direction}

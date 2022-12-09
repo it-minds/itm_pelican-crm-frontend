@@ -13,7 +13,7 @@ export type HorizontalDividedContainerProps = {
 	isExpanded?: boolean;
 	onExpand?: () => void;
 	cardStyles?: SxProps;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 const darkModeDivider = { backgroundColor: '#fff', opacity: '20%' };
 
@@ -27,12 +27,14 @@ const HorizontalDividedContainer: FC<HorizontalDividedContainerProps> = ({
 	isExpandable,
 	onExpand,
 	cardStyles,
+	...rest
 }) => {
 	const theme = useTheme();
 	const isDarkMode = theme.palette.mode === 'dark';
 
 	return (
 		<Card
+			{...rest}
 			fullWidth
 			sx={{
 				...flexRow,
