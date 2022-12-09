@@ -3,6 +3,7 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import Button from '../components/common/Button';
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
 import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
 import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
@@ -29,15 +30,25 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
-	const { loading, error, data, refetch } = useQuery<getFilteredClientsQuery>(
+	const { loading, error, data, refetch, fetchMore } = useQuery<getFilteredClientsQuery>(
 		GET_FILTERED_CLIENTS,
 		{
 			variables: {
 				currentClientSearch: clientFilterContent,
 				currentContactSearch: contactFilterContent,
+				first: 5,
+				after: null,
 			},
 		}
 	);
+
+	useEffect(() => {
+		const vars: getFilteredClientsQueryVariables = {
+			currentClientSearch: clientFilterContent,
+			currentContactSearch: contactFilterContent,
+		};
+		refetch(vars);
+	}, [clientFilterContent, contactFilterContent, refetch]);
 
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
@@ -59,13 +70,21 @@ const WallOfClients = () => {
 		setContactFilterContent(newValue);
 	};
 
-	useEffect(() => {
-		const vars: getFilteredClientsQueryVariables = {
-			currentClientSearch: clientFilterContent,
-			currentContactSearch: contactFilterContent,
-		};
-		refetch(vars);
-	}, [clientFilterContent, contactFilterContent, refetch]);
+	const handleFetchMore = () => {
+		if (!data?.clients?.pageInfo.hasNextPage) return;
+
+		const endCursor = data?.clients?.pageInfo.endCursor;
+		fetchMore({
+			variables: { after: endCursor },
+			updateQuery: (prevResult, { fetchMoreResult }) => {
+				fetchMoreResult.clients.nodes = [
+					...prevResult.clients.nodes,
+					...fetchMoreResult.clients.nodes,
+				];
+				return fetchMoreResult;
+			},
+		});
+	};
 
 	return (
 		<PageContainer>
@@ -125,6 +144,9 @@ const WallOfClients = () => {
 					))}
 				</Box>
 			)}
+			<Box display="flex" justifyContent="center">
+				<Button onClick={() => handleFetchMore()}>Load more</Button>
+			</Box>
 		</PageContainer>
 	);
 };
