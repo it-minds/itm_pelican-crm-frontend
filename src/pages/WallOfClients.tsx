@@ -102,7 +102,7 @@ const WallOfClients = () => {
 					</PopupFilterWrapper>
 				</SecondaryFilterContainer>
 			</FilterContainer>
-			{loading && <CompanyCardsSkeleton numSkeletons={5} />}
+			{loading && <CompanyCardsSkeleton numSkeletons={10} />}
 			{error && (
 				<>
 					<Typography>
