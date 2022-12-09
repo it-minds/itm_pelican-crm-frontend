@@ -61,6 +61,7 @@ const WallOfClients = () => {
 	}, [data?.clients?.pageInfo.endCursor, data?.clients?.pageInfo.hasNextPage, fetchMore]);
 
 	const handleScroll = useCallback(() => {
+		console.log('DER SCROLLES!');
 		if (scrollAt() < 90) {
 			isFetching.current = false;
 			return;
