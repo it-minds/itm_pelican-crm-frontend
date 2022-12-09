@@ -33,23 +33,20 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 
 	useEffect(() => {
 		setClientName(client.name);
-	}, [client]);
-
-	useEffect(() => {
 		setClientAddress(client.officeLocation);
-	}, [client]);
-
-	useEffect(() => {
 		setClientUrl(client.website);
 	}, [client]);
 
 	const urlToDisplay = (): JSX.Element => {
+		// remove http:// or https:// from the url
+		const url = clientUrl?.replace(/(^\w+:|^)\/\//, '');
+
 		if (clientUrl && isMedium) {
 			return (
 				<>
 					<WebRoundedIcon fontSize="small" />
 					<Typography variant="note" noWrap sx={{ opacity: 0.7, mt: '1px' }}>
-						{titleCase(clientUrl || '')}
+						{titleCase(url ? url : '')}
 					</Typography>
 				</>
 			);
@@ -135,7 +132,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 					TransitionProps={{ timeout: 200 }}
 					enterDelay={500}
 					leaveDelay={200}
-					title={titleCase(clientUrl)}
+					title={clientUrl}
 				>
 					<Box
 						display="flex"
@@ -144,7 +141,7 @@ const ClientInfoSummary: FC<ClientSummaryProps> = ({ sx, client }) => {
 						width={isMedium ? '50%' : '30%'}
 						gap="2px"
 						sx={{ cursor: 'pointer', flexWrap: 'nowrap' }}
-						onClick={() => window.open(`https://www.${clientUrl}`, '_blank')}
+						onClick={() => window.open(`${clientUrl}`, '_blank')}
 					>
 						{urlToDisplay()}
 					</Box>
