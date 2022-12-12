@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
  * @param delay Debounce delay in miliseconds (number)
  * @returns New value for the debounced variable (Template type)
  */
-export function useDebounce<T>(value: T, delay: number): T {
+
+export const useHook = <T>(value: T, delay: number) => {
 	const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
 	useEffect(() => {
@@ -20,6 +21,4 @@ export function useDebounce<T>(value: T, delay: number): T {
 	}, [value, delay]);
 
 	return debouncedValue;
-}
-
-// TODO: Find out if hooks always are written as "function useHook<T>(...)" or can be written as "const useHook = (): T => {}"
+};
