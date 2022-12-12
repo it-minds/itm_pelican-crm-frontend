@@ -152,16 +152,24 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 					<PersonInfoSummary persons={accountManagersState} />
 				</Box>
 			</HorizontalDividedContainer>
-			{isExpanded && (
-				<>
-					<Stack gap="3px" direction="row" alignItems="center" width="100%">
-						<Box width="2%">
-							<NestingIndicator onClick={() => handleCollapse()} height={nestedLineHeight} />
-						</Box>
-						<Stack width="98%">{renderNestedContacts()}</Stack>
-					</Stack>
-				</>
-			)}
+			<AnimatePresence>
+				{isExpanded && (
+					<MotionConfig transition={{ duration: 0.15 }}>
+						<motion.div
+							initial={{ y: -20, opacity: 0, width: '100%', height: '100%' }}
+							animate={{ y: 0, opacity: 1, height: '100%' }}
+							exit={{ y: -15, height: '0%', opacity: '10%' }}
+						>
+							<Stack gap="3px" direction="row" alignItems="center" width="100%">
+								<Box width="2%">
+									<NestingIndicator onClick={() => handleCollapse()} height={nestedLineHeight} />
+								</Box>
+								<Stack width="98%">{renderNestedContacts()}</Stack>
+							</Stack>
+						</motion.div>
+					</MotionConfig>
+				)}
+			</AnimatePresence>
 		</Box>
 	);
 
