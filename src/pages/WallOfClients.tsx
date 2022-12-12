@@ -15,6 +15,7 @@ import ClientListItem from '../components/wall-of-clients/ClientListItem';
 import { flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyCompanyNames } from '../utils/dummyClasses';
+import { useInfinityScroll } from '../utils/hooks/useInfinityScroll';
 // TODO: Remove dummy data when actual companies are available or a decisive decision to remove dropdown is made.
 import {
 	getFilteredClientsQuery,
@@ -29,7 +30,6 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
-	const isFetching = useRef(false);
 	const { loading, error, data, refetch, fetchMore } = useQuery<getFilteredClientsQuery>(
 		GET_FILTERED_CLIENTS,
 		{
@@ -42,6 +42,9 @@ const WallOfClients = () => {
 		}
 	);
 
+	/**
+	 * Handles the fetching of additional paginated data and merging it onto the current query.
+	 */
 	const handleFetchMore = useCallback(() => {
 		if (!data?.clients?.pageInfo.hasNextPage) return;
 
@@ -58,30 +61,8 @@ const WallOfClients = () => {
 		});
 	}, [data?.clients?.pageInfo.endCursor, data?.clients?.pageInfo.hasNextPage, fetchMore]);
 
-	const handleScroll = useCallback(() => {
-		if (scrollAt() < 90) {
-			isFetching.current = false;
-			return;
-		}
-
-		if (isFetching.current) return;
-
-		isFetching.current = true;
-
-		handleFetchMore();
-	}, [handleFetchMore]);
-	// * I have an assumption that this function only works properly while the ammount of data is managable.
-	// * With huge data-sets you will keep fecthing more, because the newly fetched paginated data
-	// * isn't enough to move the scrollbar above the 90% threshold. At some point every time
-	// * you scroll, regardless of direction, you will fetch more data.
-	// TODO: Fix the above (potential) issue
-
-	useEffect(() => {
-		window.addEventListener('scroll', handleScroll);
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, [handleScroll]);
+	// Custom hook handles infinity scroll logic
+	useInfinityScroll(handleFetchMore);
 
 	useEffect(() => {
 		const vars: getFilteredClientsQueryVariables = {
@@ -109,14 +90,6 @@ const WallOfClients = () => {
 		}
 
 		setContactFilterContent(newValue);
-	};
-
-	const scrollAt = (): number => {
-		const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-		const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-		const clientHeight = document.documentElement.clientHeight;
-
-		return (scrollTop / (scrollHeight - clientHeight)) * 100;
 	};
 
 	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
