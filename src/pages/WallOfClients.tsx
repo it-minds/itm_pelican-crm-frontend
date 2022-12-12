@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import FilterContainer from '../components/common/filters/containers/FilterContainer';

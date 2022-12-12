@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 /**
- * Custom hook that handles infinity scroll logic. Also contains contant that determines percentage of progress to trigger infinity scroll.
+ * Custom hook that handles infinity scroll logic.
+ * Also contains contant that determines percentage of progress to trigger infinity scroll.
  * @param callback Callback-function that is called when infinity-scroll is triggered
  */
 export const useInfinityScroll = (callback: () => void) => {
 	const isActive = useRef(false);
 	const SCROLL_PROGRESS_CALLBACK_PERCENTAGE = 90;
 
+	/**
+	 * Handles the logic whenever a scroll-event triggers.
+	 * Callback should trigger each time scroll progress exceeds the predetermined progress.
+	 */
 	const handleScroll = useCallback(() => {
 		console.log('handleScroll');
 		if (scrollAt() < SCROLL_PROGRESS_CALLBACK_PERCENTAGE) {

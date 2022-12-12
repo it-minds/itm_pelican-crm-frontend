@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
  * @returns New value for the debounced variable (Template type)
  */
 
-export const useHook = <T>(value: T, delay: number) => {
+export const useDebounce = <T>(value: T, delay: number) => {
 	const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
 	useEffect(() => {
