@@ -1,9 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Button from '../components/common/Button';
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
 import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
 import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
@@ -16,6 +15,7 @@ import ClientListItem from '../components/wall-of-clients/ClientListItem';
 import { flexCol } from '../styles/generalStyles';
 // eslint-disable
 import { dummyCompanyNames } from '../utils/dummyClasses';
+import { useInfinityScroll } from '../utils/hooks/useInfinityScroll';
 // TODO: Remove dummy data when actual companies are available or a decisive decision to remove dropdown is made.
 import {
 	getFilteredClientsQuery,
@@ -36,11 +36,33 @@ const WallOfClients = () => {
 			variables: {
 				currentClientSearch: clientFilterContent,
 				currentContactSearch: contactFilterContent,
-				first: 5,
+				first: 10,
 				after: null,
 			},
 		}
 	);
+
+	/**
+	 * Handles the fetching of additional paginated data and merging it onto the current query.
+	 */
+	const handleFetchMore = useCallback(() => {
+		if (!data?.clients?.pageInfo.hasNextPage) return;
+
+		const endCursor = data?.clients?.pageInfo.endCursor;
+		fetchMore({
+			variables: { after: endCursor },
+			updateQuery: (prevResult, { fetchMoreResult }) => {
+				fetchMoreResult.clients.nodes = [
+					...prevResult.clients.nodes,
+					...fetchMoreResult.clients.nodes,
+				];
+				return fetchMoreResult;
+			},
+		});
+	}, [data?.clients?.pageInfo.endCursor, data?.clients?.pageInfo.hasNextPage, fetchMore]);
+
+	// Custom hook handles infinity scroll logic
+	useInfinityScroll(handleFetchMore);
 
 	useEffect(() => {
 		const vars: getFilteredClientsQueryVariables = {
@@ -70,21 +92,7 @@ const WallOfClients = () => {
 		setContactFilterContent(newValue);
 	};
 
-	const handleFetchMore = () => {
-		if (!data?.clients?.pageInfo.hasNextPage) return;
-
-		const endCursor = data?.clients?.pageInfo.endCursor;
-		fetchMore({
-			variables: { after: endCursor },
-			updateQuery: (prevResult, { fetchMoreResult }) => {
-				fetchMoreResult.clients.nodes = [
-					...prevResult.clients.nodes,
-					...fetchMoreResult.clients.nodes,
-				];
-				return fetchMoreResult;
-			},
-		});
-	};
+	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
 
 	return (
 		<PageContainer>
@@ -131,22 +139,22 @@ const WallOfClients = () => {
 				</>
 			)}
 			{data && (
-				<Box
-					sx={{
-						...flexCol,
-						alignItems: 'center',
-						my: 2,
-						gap: 3,
-					}}
-				>
-					{data?.clients?.nodes?.map(client => (
-						<ClientListItem clientInput={client} />
-					))}
-				</Box>
+				<>
+					<Typography variant="note">Found {data.clients?.totalCount} results.</Typography>
+					<Box
+						sx={{
+							...flexCol,
+							alignItems: 'center',
+							my: 2,
+							gap: 3,
+						}}
+					>
+						{data?.clients?.nodes?.map(client => (
+							<ClientListItem clientInput={client} />
+						))}
+					</Box>
+				</>
 			)}
-			<Box display="flex" justifyContent="center">
-				<Button onClick={() => handleFetchMore()}>Load more</Button>
-			</Box>
 		</PageContainer>
 	);
 };
