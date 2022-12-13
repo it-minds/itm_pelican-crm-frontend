@@ -27,6 +27,9 @@ export const useInfinityScroll = (callback: () => void) => {
 		callback();
 	}, [callback]);
 
+	/**
+	 * Setup scroll-event listener on mount and remove on unmount.
+	 */
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll);
 		return () => {
