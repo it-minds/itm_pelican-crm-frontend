@@ -1,7 +1,7 @@
 import AcUnitRoundedIcon from '@mui/icons-material/AcUnitRounded';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
 import HistoryEduRoundedIcon from '@mui/icons-material/HistoryEduRounded';
-import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Stack, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -18,80 +18,114 @@ type DealStatusProps = {
 const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo = true }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
+	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
+
 	const { t } = useTranslation();
 
 	// TODO: Update translation text for DealsStatusSummary
 
 	const deal: FRAGMENT_DEALFragment | undefined = extractMostRelevantDeal(deals);
 
+	const activeTooltiptext = () => {
+		const status = t('wallOfClients.clientListItemContent.dealStatus.active');
+		const untilDate = t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
+			date: unixTimestampConverter(deal?.endDate),
+		});
+		return isLarge ? '' : `${status}: ${untilDate}`;
+	};
+
+	const dialogTooltipText = () => {
+		const status = t('wallOfClients.clientListItemContent.dealStatus.dialog');
+		const lastContactDate = t('wallOfClients.clientListItemContent.dealStatus.dialogLastContact', {
+			date: unixTimestampConverter(deal?.endDate),
+		});
+		return isLarge ? '' : `${status}: ${lastContactDate}`;
+	};
+
+	const inactiveTooltipText = () => {
+		const status = t('wallOfClients.clientListItemContent.dealStatus.inactive');
+		const lastContactDate = t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
+			date: unixTimestampConverter(deal?.endDate),
+		});
+		return isLarge ? '' : `${status}: ${lastContactDate}`;
+	};
+
+	// TODO: Move text functions into helper functions and move out of component
+
 	switch (deal?.dealStatus) {
 		case 'Active': {
 			return (
-				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
-					<Box width="30%" sx={flexCenter}>
-						<HistoryEduRoundedIcon fontSize="large" />
-					</Box>
-					{isSmall && (
-						<Stack width="70%" sx={{ ml: 1 }}>
-							<Typography variant="body" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.active')}
-							</Typography>
-							{containsAdditionalInfo && (
-								<Typography variant="note" noWrap>
-									{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
-										date: unixTimestampConverter(deal.endDate),
-									})}
+				<Tooltip title={activeTooltiptext()} placement="top">
+					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
+						<Box width="30%" sx={flexCenter}>
+							<HistoryEduRoundedIcon fontSize="large" />
+						</Box>
+						{isSmall && (
+							<Stack width="70%" sx={{ ml: 1 }}>
+								<Typography variant="body" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.active')}
 								</Typography>
-							)}
-						</Stack>
-					)}
-				</Stack>
+								{containsAdditionalInfo && (
+									<Typography variant="note" noWrap>
+										{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
+											date: unixTimestampConverter(deal.endDate),
+										})}
+									</Typography>
+								)}
+							</Stack>
+						)}
+					</Stack>
+				</Tooltip>
 			);
 		}
 		case 'Dialog': {
 			return (
-				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
-					<Box width="30%" sx={flexCenter}>
-						<ForumRoundedIcon fontSize="large" />
-					</Box>
-					{isSmall && (
-						<Stack width="70%" sx={{ ml: 1 }}>
-							<Typography variant="body" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
-							</Typography>
-							{containsAdditionalInfo && (
-								<Typography variant="note">
-									{t('wallOfClients.clientListItemContent.dealStatus.dialogLastContact', {
-										date: unixTimestampConverter(deal.lastContactDate),
-									})}
+				<Tooltip title={dialogTooltipText()} placement="top">
+					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
+						<Box width="30%" sx={flexCenter}>
+							<ForumRoundedIcon fontSize="large" />
+						</Box>
+						{isSmall && (
+							<Stack width="70%" sx={{ ml: 1 }}>
+								<Typography variant="body" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
 								</Typography>
-							)}
-						</Stack>
-					)}
-				</Stack>
+								{containsAdditionalInfo && (
+									<Typography variant="note">
+										{t('wallOfClients.clientListItemContent.dealStatus.dialogLastContact', {
+											date: unixTimestampConverter(deal.lastContactDate),
+										})}
+									</Typography>
+								)}
+							</Stack>
+						)}
+					</Stack>
+				</Tooltip>
 			);
 		}
 		case 'InActive': {
 			return (
-				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
-					<Box width="30%" sx={flexCenter}>
-						<AcUnitRoundedIcon fontSize="large" />
-					</Box>
-					{isSmall && (
-						<Stack width="70%" sx={{ ml: 1 }}>
-							<Typography variant="body" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
-							</Typography>
-							{containsAdditionalInfo && (
-								<Typography variant="note" noWrap>
-									{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
-										date: unixTimestampConverter(deal.endDate),
-									})}
+				<Tooltip title={inactiveTooltipText()} placement="top">
+					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
+						<Box width="30%" sx={flexCenter}>
+							<AcUnitRoundedIcon fontSize="large" />
+						</Box>
+						{isSmall && (
+							<Stack width="70%" sx={{ ml: 1 }}>
+								<Typography variant="body" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
 								</Typography>
-							)}
-						</Stack>
-					)}
-				</Stack>
+								{containsAdditionalInfo && (
+									<Typography variant="note" noWrap>
+										{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
+											date: unixTimestampConverter(deal.endDate),
+										})}
+									</Typography>
+								)}
+							</Stack>
+						)}
+					</Stack>
+				</Tooltip>
 			);
 		}
 		default: {
