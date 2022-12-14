@@ -128,6 +128,12 @@ const WallOfClients = () => {
 					</PopupFilterWrapper>
 				</SecondaryFilterContainer>
 			</FilterContainer>
+			{/* TODO: Fix the bug that makes skeletons reappear above client list items
+			Problem only comes when loading is OR'd with networkStatus.loading
+			But the above constellation makes it so the skeleton is only shown very briefly
+			and not while the data actually loads. I suspects it needs additional loading
+			states added to the conditional statement and that i am not covering the full
+			loading period */}
 			{networkStatus === NetworkStatus.loading && <CompanyCardsSkeleton numSkeletons={10} />}
 			{networkStatus === NetworkStatus.error && (
 				<>
@@ -152,12 +158,12 @@ const WallOfClients = () => {
 							<ClientListItem clientInput={client} />
 						))}
 					</Box>
-					{networkStatus === NetworkStatus.fetchMore && (
-						<Box sx={{ display: 'flex' }} justifyContent="center">
-							<CircularProgress color="secondary" />
-						</Box>
-					)}
 				</>
+			)}
+			{networkStatus === NetworkStatus.fetchMore && (
+				<Box sx={{ display: 'flex' }} justifyContent="center">
+					<CircularProgress color="secondary" />
+				</Box>
 			)}
 		</PageContainer>
 	);
