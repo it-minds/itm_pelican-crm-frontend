@@ -21,7 +21,6 @@ jobs:
   build-and-deploy:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-    environment: test
     name: Build and Deploy
     permissions:
       contents: read
