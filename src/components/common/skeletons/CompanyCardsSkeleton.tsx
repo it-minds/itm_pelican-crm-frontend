@@ -11,7 +11,7 @@ const CompanyCardsSkeleton: FC<Props> = ({ numSkeletons }) => {
 		let skeletonCards: Array<ReactNode> = [];
 
 		for (let i = 0; i < numSkeletons; i++) {
-			skeletonCards.push(<Skeleton variant="rounded" height={50} sx={{ bgcolor: '#ebd234' }} />);
+			skeletonCards.push(<Skeleton variant="rounded" height={50} />);
 		}
 
 		return skeletonCards;
