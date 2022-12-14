@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { flexCenter } from '../../styles/generalStyles';
-import { dealTooltipText } from '../../utils/dealStatusTextFunctions';
+import { dealTooltipText } from '../../utils/dealTooltipText';
 import { extractMostRelevantDeal } from '../../utils/extractMostRelevantDeal';
 import { FRAGMENT_DEALFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { unixTimestampConverter } from '../../utils/unixTimestampConverter';
