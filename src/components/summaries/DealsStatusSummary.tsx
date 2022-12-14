@@ -6,6 +6,11 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { flexCenter } from '../../styles/generalStyles';
+import {
+	activeTooltiptext,
+	dialogTooltipText,
+	inactiveTooltipText,
+} from '../../utils/dealStatusTextFunctions';
 import { extractMostRelevantDeal } from '../../utils/extractMostRelevantDeal';
 import { FRAGMENT_DEALFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { unixTimestampConverter } from '../../utils/unixTimestampConverter';
@@ -26,36 +31,10 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 
 	const deal: FRAGMENT_DEALFragment | undefined = extractMostRelevantDeal(deals);
 
-	const activeTooltiptext = () => {
-		const status = t('wallOfClients.clientListItemContent.dealStatus.active');
-		const untilDate = t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
-			date: unixTimestampConverter(deal?.endDate),
-		});
-		return isLarge ? '' : `${status}: ${untilDate}`;
-	};
-
-	const dialogTooltipText = () => {
-		const status = t('wallOfClients.clientListItemContent.dealStatus.dialog');
-		const lastContactDate = t('wallOfClients.clientListItemContent.dealStatus.dialogLastContact', {
-			date: unixTimestampConverter(deal?.endDate),
-		});
-		return isLarge ? '' : `${status}: ${lastContactDate}`;
-	};
-
-	const inactiveTooltipText = () => {
-		const status = t('wallOfClients.clientListItemContent.dealStatus.inactive');
-		const lastContactDate = t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
-			date: unixTimestampConverter(deal?.endDate),
-		});
-		return isLarge ? '' : `${status}: ${lastContactDate}`;
-	};
-
-	// TODO: Move text functions into helper functions and move out of component
-
 	switch (deal?.dealStatus) {
 		case 'Active': {
 			return (
-				<Tooltip title={activeTooltiptext()} placement="top">
+				<Tooltip title={activeTooltiptext(deal, isLarge)} placement="top">
 					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 						<Box width="30%" sx={flexCenter}>
 							<HistoryEduRoundedIcon fontSize="large" />
@@ -80,7 +59,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 		}
 		case 'Dialog': {
 			return (
-				<Tooltip title={dialogTooltipText()} placement="top">
+				<Tooltip title={dialogTooltipText(deal, isLarge)} placement="top">
 					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 						<Box width="30%" sx={flexCenter}>
 							<ForumRoundedIcon fontSize="large" />
@@ -105,7 +84,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 		}
 		case 'InActive': {
 			return (
-				<Tooltip title={inactiveTooltipText()} placement="top">
+				<Tooltip title={inactiveTooltipText(deal, isLarge)} placement="top">
 					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 						<Box width="30%" sx={flexCenter}>
 							<AcUnitRoundedIcon fontSize="large" />
