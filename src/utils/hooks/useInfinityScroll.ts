@@ -14,7 +14,6 @@ export const useInfinityScroll = (callback: () => void) => {
 	 * Callback should trigger each time scroll progress exceeds the predetermined progress.
 	 */
 	const handleScroll = useCallback(() => {
-		console.log('handleScroll');
 		if (scrollAt() < SCROLL_PROGRESS_CALLBACK_PERCENTAGE) {
 			isActive.current = false;
 			return;
