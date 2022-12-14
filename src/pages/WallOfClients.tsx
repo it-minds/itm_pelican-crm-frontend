@@ -22,6 +22,7 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
+import CheckboxGroup, { CheckboxInfo } from '../components/common/CheckboxGroup';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -94,6 +95,35 @@ const WallOfClients = () => {
 
 	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
 
+	// create dummy CheckboxInfo[] for the CheckboxGroup
+	const [dummyCheckboxInfo, setDummyCheckboxInfo] = useState([
+		{
+			label: 'Checkbox 1',
+			name: 'checkbox1',
+			checked: false,
+		},
+		{
+			label: 'Checkbox 2',
+			name: 'checkbox2',
+			checked: false,
+		},
+		{
+			label: 'Checkbox 3',
+			name: 'checkbox3',
+			checked: false,
+		},
+	]);
+
+	const updateDummyCheckboxInfo = (name: string) => {
+		const updatedDummyCheckboxInfo = dummyCheckboxInfo.map(checkbox => {
+			if (checkbox.name === name) {
+				checkbox.checked = !checkbox.checked;
+			}
+			return checkbox;
+		});
+		setDummyCheckboxInfo(updatedDummyCheckboxInfo);
+	};
+
 	return (
 		<PageContainer>
 			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'}>
@@ -125,7 +155,10 @@ const WallOfClients = () => {
 							setIsFilterSet(true);
 						}}
 					>
-						<Typography>Yoyo, what's going on!</Typography>
+						<CheckboxGroup
+							checkboxes={dummyCheckboxInfo}
+							onCheckedChange={name => updateDummyCheckboxInfo(name)}
+						/>
 					</PopupFilterWrapper>
 				</SecondaryFilterContainer>
 			</FilterContainer>
