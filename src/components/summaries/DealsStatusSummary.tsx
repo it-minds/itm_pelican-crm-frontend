@@ -19,7 +19,6 @@ type DealStatusProps = {
 const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo = true }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
-	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
 
 	const { t } = useTranslation();
 
