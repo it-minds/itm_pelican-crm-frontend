@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/client';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { NetworkStatus, useQuery } from '@apollo/client';
+import { Box, CircularProgress, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -30,17 +30,16 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
-	const { loading, error, data, refetch, fetchMore } = useQuery<getFilteredClientsQuery>(
-		GET_FILTERED_CLIENTS,
-		{
+	const { loading, error, data, refetch, fetchMore, networkStatus } =
+		useQuery<getFilteredClientsQuery>(GET_FILTERED_CLIENTS, {
 			variables: {
 				currentClientSearch: clientFilterContent,
 				currentContactSearch: contactFilterContent,
 				first: 10,
 				after: null,
 			},
-		}
-	);
+			notifyOnNetworkStatusChange: true,
+		});
 
 	/**
 	 * Handles the fetching of additional paginated data and merging it onto the current query.
@@ -129,7 +128,9 @@ const WallOfClients = () => {
 					</PopupFilterWrapper>
 				</SecondaryFilterContainer>
 			</FilterContainer>
-			{loading && <CompanyCardsSkeleton numSkeletons={10} />}
+			{(loading || networkStatus === NetworkStatus.loading) && (
+				<CompanyCardsSkeleton numSkeletons={10} />
+			)}
 			{error && (
 				<>
 					<Typography>
@@ -153,6 +154,11 @@ const WallOfClients = () => {
 							<ClientListItem clientInput={client} />
 						))}
 					</Box>
+					{networkStatus === NetworkStatus.fetchMore && (
+						<Box sx={{ display: 'flex' }} justifyContent="center">
+							<CircularProgress />
+						</Box>
+					)}
 				</>
 			)}
 		</PageContainer>
