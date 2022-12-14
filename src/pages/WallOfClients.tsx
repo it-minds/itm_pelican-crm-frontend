@@ -3,6 +3,7 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import CheckboxGroup from '../components/common/CheckboxGroup';
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
 import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
 import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
@@ -22,7 +23,6 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
-import CheckboxGroup, { CheckboxInfo } from '../components/common/CheckboxGroup';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -158,6 +158,7 @@ const WallOfClients = () => {
 						<CheckboxGroup
 							checkboxes={dummyCheckboxInfo}
 							onCheckedChange={name => updateDummyCheckboxInfo(name)}
+							formHeader="Location"
 						/>
 					</PopupFilterWrapper>
 				</SecondaryFilterContainer>

@@ -1,13 +1,15 @@
 import {
 	Box,
 	Checkbox,
-	CheckboxProps,
 	FormControl,
 	FormControlLabel,
 	FormGroup,
 	FormLabel,
+	Typography,
 } from '@mui/material';
 import React, { FC, useCallback, useMemo } from 'react';
+
+import Button from './Button';
 
 export type CheckboxInfo = {
 	label: string;
@@ -17,19 +19,11 @@ export type CheckboxInfo = {
 
 type CheckboxGroupProps = {
 	checkboxes: CheckboxInfo[];
-	color?:
-		| 'primary'
-		| 'secondary'
-		| 'error'
-		| 'info'
-		| 'success'
-		| 'warning'
-		| 'default'
-		| undefined;
+	formHeader?: string;
 	onCheckedChange: (name: string) => void;
 };
 
-const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, color, onCheckedChange }) => {
+const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheckedChange }) => {
 	const handleChange = useCallback(
 		(name: string) => {
 			onCheckedChange(name);
@@ -56,10 +50,17 @@ const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, color, onCheckedCha
 	}, [checkboxes, handleChange]);
 
 	return (
-		<Box>
-			{' '}
+		<Box display="flex" flexDirection="column" alignItems="center" width="100%">
 			<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-				<FormLabel component="legend">Assign responsibility</FormLabel>
+				{formHeader ? (
+					<FormLabel component="legend">
+						<Box display="flex" width="100%" justifyItems="center">
+							<Typography variant="h5" width="100%">
+								{formHeader}
+							</Typography>
+						</Box>
+					</FormLabel>
+				) : null}
 				<FormGroup>{renderCheckboxes}</FormGroup>
 			</FormControl>
 		</Box>

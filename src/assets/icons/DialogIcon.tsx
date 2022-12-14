@@ -1,5 +1,5 @@
-import { createSvgIcon, IconProps, SvgIcon, SvgIconProps } from '@mui/material';
-import React, { FC } from 'react';
+import { createSvgIcon } from '@mui/material';
+import React from 'react';
 
 const DialogIcon = createSvgIcon(
 	<path
