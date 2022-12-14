@@ -128,10 +128,8 @@ const WallOfClients = () => {
 					</PopupFilterWrapper>
 				</SecondaryFilterContainer>
 			</FilterContainer>
-			{(loading || networkStatus === NetworkStatus.loading) && (
-				<CompanyCardsSkeleton numSkeletons={10} />
-			)}
-			{error && (
+			{networkStatus === NetworkStatus.loading && <CompanyCardsSkeleton numSkeletons={10} />}
+			{networkStatus === NetworkStatus.error && (
 				<>
 					<Typography>
 						Whoopsie-doo, looks like we are gonna punish some interns ¯\_(ツ)_/¯.
@@ -156,7 +154,7 @@ const WallOfClients = () => {
 					</Box>
 					{networkStatus === NetworkStatus.fetchMore && (
 						<Box sx={{ display: 'flex' }} justifyContent="center">
-							<CircularProgress />
+							<CircularProgress color="secondary" />
 						</Box>
 					)}
 				</>
