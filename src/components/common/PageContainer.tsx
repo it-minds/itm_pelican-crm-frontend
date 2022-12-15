@@ -41,7 +41,7 @@ const StyledPageContainer = styled(Grid)<PageContainerProps>(({ theme }) => ({
 		maxWidth: '95vw',
 	},
 	minHeight: '100vh',
-	marginBottom: '500px',
+	marginBottom: theme.spacing(20),
 }));
 
 // TODO: Remove marginBottom when pages contain enough content to enable scroll
