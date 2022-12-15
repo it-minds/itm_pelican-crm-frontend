@@ -95,25 +95,30 @@ const NestedContactPerson: FC<NestedContactPersonProps> = ({
 				cardStyles={{
 					border: 'none',
 					boxShadow: 'none',
-					borderRadius: 6,
+					borderRadius: 2,
 					height: '100%',
 				}}
 			>
-				<Box {...fixedWidth(17, 28, isBelowMedium)}>
+				<Box {...fixedWidth(20, 28, isBelowMedium)}>
 					<PersonInfoSummary persons={contactArray} />
 				</Box>
-				<Box aria-label="company-name" {...fixedWidth(15)} display="flex" justifyContent="center">
-					<Typography variant="h6" noWrap>
+				<Box
+					aria-label="company-name"
+					{...fixedWidth(18, 25)}
+					display="flex"
+					justifyContent="center"
+				>
+					<Typography variant="body2" fontSize="16px" noWrap>
 						{clientName}
 					</Typography>
 				</Box>
-				<Box {...fixedWidth(17)} display="flex" justifyContent="center">
+				<Box {...fixedWidth(18, 12, isBelowMedium)} display="flex" justifyContent="center">
 					<DealsStatusSummary deals={dealsState} />
 				</Box>
-				<Box {...fixedWidth(17)}>
+				<Box {...fixedWidth(18, 12, isBelowMedium)}>
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
-				<Box {...fixedWidth(17)}>
+				<Box {...fixedWidth(18, 28, isBelowMedium)}>
 					<PersonInfoSummary persons={accountManagersState} />
 				</Box>
 			</HorizontalDividedContainer>

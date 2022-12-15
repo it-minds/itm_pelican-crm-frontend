@@ -47,7 +47,7 @@ const PersonInfoSummary: FC<PersonInfoSummaryInfoSummaryProps> = ({ persons }) =
 
 	const suppliersOne = () => {
 		return (
-			<Stack width="100%">
+			<Stack width="90%">
 				<Tooltip
 					title={
 						!isBelowMedium
@@ -72,7 +72,7 @@ const PersonInfoSummary: FC<PersonInfoSummaryInfoSummaryProps> = ({ persons }) =
 					</Stack>
 				</Tooltip>
 				{!isBelowMedium && (
-					<Stack direction="row" gap={1} width="100%">
+					<Stack direction="row" gap={1} width="98%">
 						<Tooltip title={persons[0].email}>
 							<Stack
 								display="flex"
