@@ -65,7 +65,7 @@ const PersonInfoSummary: FC<PersonInfoSummaryInfoSummaryProps> = ({ persons }) =
 							}}
 						>
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
-								{`${persons[0].firstName.charAt(0)} ${persons[0].lastName.charAt(0)}`}
+								{`${persons[0]?.firstName?.charAt(0)} ${persons[0]?.lastName?.charAt(0)}`}
 							</Typography>
 						</Avatar>
 						<Typography noWrap>{`${persons[0].firstName} ${persons[0].lastName}`}</Typography>
@@ -125,7 +125,7 @@ const PersonInfoSummary: FC<PersonInfoSummaryInfoSummaryProps> = ({ persons }) =
 							sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}
 						>
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
-								{`${person.firstName.charAt(0)} ${person.lastName.charAt(0)}`}
+								{`${person?.firstName?.charAt(0)} ${person?.lastName?.charAt(0)}`}
 							</Typography>
 						</Avatar>
 					</Tooltip>
@@ -145,7 +145,7 @@ const PersonInfoSummary: FC<PersonInfoSummaryInfoSummaryProps> = ({ persons }) =
 					>
 						<Avatar sx={{ width: 32, height: 32, bgcolor: theme.palette.primary.main }}>
 							<Typography variant="note" sx={{ opacity: 0.7 }}>
-								{`${person.firstName.charAt(0)} ${person.lastName.charAt(0)}`}
+								{`${person?.firstName?.charAt(0)} ${person?.lastName?.charAt(0)}`}
 							</Typography>
 						</Avatar>
 					</Tooltip>
