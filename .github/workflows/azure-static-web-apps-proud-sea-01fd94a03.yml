@@ -14,7 +14,7 @@ on:
 
 env:
   NODE_OPTIONS: --max-old-space-size=8192
-  AZURE_WEBAPP_NAME: pelican-linux-web-app # set this to your application's name
+  AZURE_WEBAPP_NAME: pelican-linux-frontend-app # set this to your application's name
   NODE_VERSION: '16.17.0' # set this to the node version to use
 
 jobs:
