@@ -1,6 +1,3 @@
-import PersonSummary from '../components/summaries/PersonInfoSummary';
-import SupplierInfoSummary from '../components/summaries/SupplierInfoSummary';
-
 export const dummyCompanyNames: string[] = [
 	'IT-Minds',
 	'Kapacity',
