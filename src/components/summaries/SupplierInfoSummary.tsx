@@ -49,21 +49,14 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 		return (
 			<Tooltip title={isBelowMedium ? suppliers[0].name : ''}>
 				<>
-					<Box width="30%">
+					<Box width="28%">
 						<ImageContainer
 							imageHeight="40px"
 							imageSource={suppliers[0].pictureUrl ? suppliers[0].pictureUrl : ''}
 						/>
 					</Box>
 					{!isBelowMedium && (
-						<Box
-							width="70%"
-							display="flex"
-							flexDirection="column"
-							alignItems="start"
-							gap="0"
-							mt="2px"
-						>
+						<Box width="68%" display="flex" flexDirection="column" alignItems="start" mt="2px">
 							<Box width="100%" height="fit-content" maxHeight="22px">
 								<Typography noWrap>{suppliers[0].name}</Typography>
 							</Box>
@@ -89,7 +82,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 	function supplierLogos(suppliers: FRAGMENT_SUPPLIERFragment[]) {
 		return suppliers.map((supplier, index) => (
 			<Tooltip title={supplier.name} key={index}>
-				<Box>
+				<Box maxWidth="100%">
 					<ImageContainer
 						imageHeight="35px"
 						imageSource={!!supplier.pictureUrl ? supplier.pictureUrl : ''}
@@ -106,7 +99,7 @@ const SupplierInfoSummary: FC<SupplierInfoSummaryProps> = ({ suppliers }) => {
 			justifyContent="center"
 			alignItems="center"
 			width="100%"
-			gap="5px"
+			gap="2px"
 		>
 			{renderSupplierSummary()}
 		</Box>
