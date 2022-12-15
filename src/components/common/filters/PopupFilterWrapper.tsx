@@ -7,7 +7,7 @@ import ClearFilter from './ClearFilterButton';
 
 type PopupFilterWrapperProps = {
 	active?: boolean;
-	onClick: () => void;
+	onClick?: () => void;
 	onClearClick: () => void;
 	children?: React.ReactNode;
 	title: string;
@@ -32,7 +32,7 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
 		setOpen(true);
-		onClick();
+		onClick && onClick();
 	};
 
 	return (
@@ -61,6 +61,10 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 				anchorOrigin={{
 					vertical: 'top',
 					horizontal: 'left',
+				}}
+				sx={{
+					...rest.sx,
+					'.MuiPopover-paper': { borderRadius: '16px' },
 				}}
 				open={open}
 				anchorEl={anchorEl}

@@ -20,7 +20,7 @@ type CheckboxGroupProps = {
 	checkboxes: CheckboxInfo[];
 	formHeader?: string;
 	onCheckedChange: (name: string) => void;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheckedChange }) => {
 	const theme = useTheme();

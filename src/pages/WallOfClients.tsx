@@ -23,6 +23,7 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
+import LocationFilter from '../components/common/filters/LocationFilter';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -114,6 +115,8 @@ const WallOfClients = () => {
 		},
 	]);
 
+	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
+
 	const updateDummyCheckboxInfo = (name: string) => {
 		const updatedDummyCheckboxInfo = dummyCheckboxInfo.map(checkbox => {
 			if (checkbox.name === name) {
@@ -147,7 +150,7 @@ const WallOfClients = () => {
 					/>
 				</PrimaryFilterWrapper>
 				<SecondaryFilterContainer>
-					<PopupFilterWrapper
+					{/* <PopupFilterWrapper
 						onClearClick={() => setIsFilterSet(false)}
 						title={t('wallOfClients.locationFilterButtonDefault')}
 						active={isFilterSet}
@@ -160,7 +163,8 @@ const WallOfClients = () => {
 							onCheckedChange={name => updateDummyCheckboxInfo(name)}
 							formHeader="Location"
 						/>
-					</PopupFilterWrapper>
+					</PopupFilterWrapper> */}
+					<LocationFilter locations={dummyLocations} onClearClick={() => {}} />
 				</SecondaryFilterContainer>
 			</FilterContainer>
 			{loading && <CompanyCardsSkeleton numSkeletons={10} />}
