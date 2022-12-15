@@ -55,12 +55,12 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: backoffice-frontend-app
+          name: pelican-linux-frontend-app
           path: release.zip
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: backoffice-frontend-app
+          name: pelican-linux-frontend-app
       - name: Deploy Webapp
         uses: azure/webapps-deploy@v2
         with:
