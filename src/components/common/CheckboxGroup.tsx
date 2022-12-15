@@ -6,10 +6,9 @@ import {
 	FormGroup,
 	FormLabel,
 	Typography,
+	useTheme,
 } from '@mui/material';
 import React, { FC, useCallback, useMemo } from 'react';
-
-import Button from './Button';
 
 export type CheckboxInfo = {
 	label: string;
@@ -24,6 +23,7 @@ type CheckboxGroupProps = {
 };
 
 const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheckedChange }) => {
+	const theme = useTheme();
 	const handleChange = useCallback(
 		(name: string) => {
 			onCheckedChange(name);
@@ -53,9 +53,15 @@ const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheck
 		<Box display="flex" flexDirection="column" alignItems="center" width="100%">
 			<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
 				{formHeader ? (
-					<FormLabel component="legend">
+					<FormLabel
+						sx={{
+							'&.Mui-focused': {
+								color: theme.palette.text.primary,
+							},
+						}}
+					>
 						<Box display="flex" width="100%" justifyItems="center">
-							<Typography variant="h5" width="100%">
+							<Typography variant="h4" fontWeight="600">
 								{formHeader}
 							</Typography>
 						</Box>
