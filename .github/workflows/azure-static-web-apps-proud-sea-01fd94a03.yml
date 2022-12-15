@@ -43,6 +43,7 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install --pure-lockfile
+          yarn graphql-codegen
           yarn build
         env:
           NODE_ENV: prod
