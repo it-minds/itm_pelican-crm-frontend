@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
-import { GetDudesQuery } from '../gql/graphql';
+import { GetDudesQuery } from '../utils/queries/__generated__/contactsQueries.graphql';
 import { GET_DUDES } from '../utils/queries/contactsQueries';
 
 const DisplayDudes = () => {
