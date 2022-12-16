@@ -104,9 +104,11 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 		}
 		default: {
 			return (
-				<Typography noWrap>
-					{t('wallOfClients.clientListItemContent.dealStatus.noDeals')}
-				</Typography>
+				<Box width="100%" display="flex" justifyContent="center">
+					<Typography noWrap>
+						{t('wallOfClients.clientListItemContent.dealStatus.noDeals')}
+					</Typography>
+				</Box>
 			);
 		}
 	}
