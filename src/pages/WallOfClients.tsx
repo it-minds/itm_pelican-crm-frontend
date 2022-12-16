@@ -31,6 +31,7 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
+	const [initialLoad, setInitialLoad] = useState(true);
 	const { loading, error, data, refetch, fetchMore, networkStatus } =
 		useQuery<getFilteredClientsQuery>(GET_FILTERED_CLIENTS, {
 			variables: {
@@ -40,6 +41,9 @@ const WallOfClients = () => {
 				after: null,
 			},
 			notifyOnNetworkStatusChange: true,
+			onCompleted: () => {
+				setInitialLoad(false);
+			},
 		});
 
 	/**
@@ -140,13 +144,15 @@ const WallOfClients = () => {
 			and not while the data actually loads. I suspects it needs additional loading
 			states added to the conditional statement and that i am not covering the full
 			loading period */}
-			{networkStatus === NetworkStatus.loading && <CompanyCardsSkeleton numSkeletons={10} />}
+			{loading && networkStatus !== NetworkStatus.fetchMore && initialLoad && (
+				<CompanyCardsSkeleton numSkeletons={10} />
+			)}
 			{networkStatus === NetworkStatus.error && (
 				<>
 					<Typography>
 						Whoopsie-doo, looks like we are gonna punish some interns ¯\_(ツ)_/¯.
 					</Typography>
-					<Typography>An error occured when fetching data.</Typography>
+					<Typography>An error occured while fetching data.</Typography>
 				</>
 			)}
 			{data && (
@@ -166,7 +172,7 @@ const WallOfClients = () => {
 					</Box>
 				</>
 			)}
-			{networkStatus === NetworkStatus.fetchMore && (
+			{loading && !initialLoad && (
 				<Box sx={{ display: 'flex' }} justifyContent="center">
 					<CircularProgress color="secondary" />
 				</Box>
