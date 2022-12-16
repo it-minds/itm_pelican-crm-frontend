@@ -11,14 +11,14 @@ const CompanyCardsSkeleton: FC<Props> = ({ numSkeletons }) => {
 		let skeletonCards: Array<ReactNode> = [];
 
 		for (let i = 0; i < numSkeletons; i++) {
-			skeletonCards.push(<Skeleton variant="rounded" height={50} />);
+			skeletonCards.push(<Skeleton variant="rounded" height={75} />);
 		}
 
 		return skeletonCards;
 	};
 
 	return (
-		<Stack spacing={1} marginTop={2}>
+		<Stack spacing={3} marginTop={7}>
 			{skeletonsToRender()}
 		</Stack>
 	);

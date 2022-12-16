@@ -103,6 +103,9 @@ const WallOfClients = () => {
 
 	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
 
+	// TODO: Fix that the data is sometimes (rarely) double fetching data. Probably has something to do with policies being wrongly set.
+	// TODO: More specifically how data is concatenated onto existing data from apolloClient.ts
+
 	return (
 		<PageContainer>
 			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'}>
@@ -138,12 +141,6 @@ const WallOfClients = () => {
 					</PopupFilterWrapper>
 				</SecondaryFilterContainer>
 			</FilterContainer>
-			{/* TODO: Fix the bug that makes skeletons reappear above client list items
-			Problem only comes when loading is OR'd with networkStatus.loading
-			But the above constellation makes it so the skeleton is only shown very briefly
-			and not while the data actually loads. I suspects it needs additional loading
-			states added to the conditional statement and that i am not covering the full
-			loading period */}
 			{loading && networkStatus !== NetworkStatus.fetchMore && initialLoad && (
 				<CompanyCardsSkeleton numSkeletons={10} />
 			)}
