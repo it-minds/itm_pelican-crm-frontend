@@ -19,6 +19,7 @@ type DealStatusProps = {
 const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo = true }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
+	const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
 
 	const { t } = useTranslation();
 
@@ -29,7 +30,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 	switch (deal?.dealStatus) {
 		case 'Active': {
 			return (
-				<Tooltip title={dealTooltipText(deal)} placement="top">
+				<Tooltip title={dealTooltipText(deal, isLarge)} placement="top">
 					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 						<Box width="30%" sx={flexCenter}>
 							<HistoryEduRoundedIcon fontSize="large" />
@@ -54,7 +55,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 		}
 		case 'Dialog': {
 			return (
-				<Tooltip title={dealTooltipText(deal)} placement="top">
+				<Tooltip title={dealTooltipText(deal, isLarge)} placement="top">
 					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 						<Box width="30%" sx={flexCenter}>
 							<ForumRoundedIcon fontSize="large" />
@@ -79,7 +80,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 		}
 		case 'InActive': {
 			return (
-				<Tooltip title={dealTooltipText(deal)} placement="top">
+				<Tooltip title={dealTooltipText(deal, isLarge)} placement="top">
 					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
 						<Box width="30%" sx={flexCenter}>
 							<AcUnitRoundedIcon fontSize="large" />
