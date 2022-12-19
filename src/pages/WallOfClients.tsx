@@ -71,7 +71,7 @@ const WallOfClients = () => {
 	}, [data?.clients?.pageInfo.endCursor, data?.clients?.pageInfo.hasNextPage, fetchMore]);
 
 	// Custom hook handles infinity scroll logic
-	useInfinityScroll(handleFetchMore);
+	useInfinityScroll(handleFetchMore, data?.clients?.pageInfo.hasNextPage, networkStatus);
 
 	useEffect(() => {
 		const vars: getFilteredClientsQueryVariables = {
