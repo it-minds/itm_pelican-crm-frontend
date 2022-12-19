@@ -16,12 +16,6 @@ export const useInfinityScroll = (
 	const isActive = useRef(false);
 	const SCROLL_PROGRESS_CALLBACK_PERCENTAGE = 90;
 
-	// TODO: Add additional parameters to infinity scroll hook
-	// TODO: hasNextPage, to check if there is a next page
-	// TODO: networkStatus, to check if query is already fetching additional data
-
-	// TODO: Does the above additions make sense? Does the hook become too specific?
-
 	/**
 	 * Handles the logic whenever a scroll-event triggers.
 	 * Callback should trigger each time scroll progress exceeds the predetermined progress.
