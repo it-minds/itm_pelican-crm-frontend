@@ -1,11 +1,18 @@
+import { NetworkStatus } from '@apollo/client';
 import { useCallback, useEffect, useRef } from 'react';
 
 /**
- * Custom hook that handles infinity scroll logic.
- * Also contains contant that determines percentage of progress to trigger infinity scroll.
+ * Custom hook that handles infinity scroll logic. Uses Apollo and GraphQL specific input - see parameter descriptions.
+ * Also contains constant that determines percentage of progress to trigger infinity scroll.
  * @param callback Callback-function that is called when infinity-scroll is triggered
+ * @param hasNextPage Boolean that signals whether the query has a next page (true) or not (false or undefined). Parameter is generated from GraphQL backend and is a part of the GraphQL query.
+ * @param loadingStatus Apollo enum that shows the status of the loading query. Query is loading if `loadingStatus` < 7. Enum can be accessed by adding networkStatus to query parameters.
  */
-export const useInfinityScroll = (callback: () => void) => {
+export const useInfinityScroll = (
+	callback: () => void,
+	hasNextPage: boolean | undefined,
+	loadingStatus: NetworkStatus
+) => {
 	const isActive = useRef(false);
 	const SCROLL_PROGRESS_CALLBACK_PERCENTAGE = 90;
 
@@ -18,13 +25,14 @@ export const useInfinityScroll = (callback: () => void) => {
 			isActive.current = false;
 			return;
 		}
-
+		if (loadingStatus < 7) return;
+		if (!hasNextPage) return;
 		if (isActive.current) return;
 
 		isActive.current = true;
 
 		callback();
-	}, [callback]);
+	}, [callback, hasNextPage, loadingStatus]);
 
 	/**
 	 * Setup scroll-event listener on mount and remove on unmount.
