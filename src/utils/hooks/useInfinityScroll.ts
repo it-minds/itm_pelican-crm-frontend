@@ -22,21 +22,15 @@ export const useInfinityScroll = (
 	 */
 	const handleScroll = useCallback(() => {
 		if (scrollAt() < SCROLL_PROGRESS_CALLBACK_PERCENTAGE) {
-			console.log('less than tolerance');
 			isActive.current = false;
 			return;
 		}
 		if (loadingStatus < 7) return;
-		console.log('passed loadingStatus check');
 		if (!hasNextPage) return;
-		console.log('passed hasNextPage check');
 		if (isActive.current) return;
-		console.log('passed isActive check');
 
-		console.log('setting asActive to true');
 		isActive.current = true;
 
-		console.log('calling callback()');
 		callback();
 	}, [callback, hasNextPage, loadingStatus]);
 
