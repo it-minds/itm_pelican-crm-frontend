@@ -95,35 +95,6 @@ const WallOfClients = () => {
 
 	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
 
-	// create dummy CheckboxInfo[] for the CheckboxGroup
-	const [dummyCheckboxInfo, setDummyCheckboxInfo] = useState([
-		{
-			label: 'Checkbox 1',
-			name: 'checkbox1',
-			checked: false,
-		},
-		{
-			label: 'Checkbox 2',
-			name: 'checkbox2',
-			checked: false,
-		},
-		{
-			label: 'Checkbox 3',
-			name: 'checkbox3',
-			checked: false,
-		},
-	]);
-
-	const updateDummyCheckboxInfo = (name: string) => {
-		const updatedDummyCheckboxInfo = dummyCheckboxInfo.map(checkbox => {
-			if (checkbox.name === name) {
-				checkbox.checked = !checkbox.checked;
-			}
-			return checkbox;
-		});
-		setDummyCheckboxInfo(updatedDummyCheckboxInfo);
-	};
-
 	return (
 		<PageContainer>
 			<Box width="100%" display="flex" justifyContent={isMedium ? 'flexStart' : 'center'}>
@@ -146,22 +117,7 @@ const WallOfClients = () => {
 						onValueChange={handleContactFilterChange}
 					/>
 				</PrimaryFilterWrapper>
-				<SecondaryFilterContainer>
-					<PopupFilterWrapper
-						onClearClick={() => setIsFilterSet(false)}
-						title={t('wallOfClients.locationFilterButtonDefault')}
-						active={isFilterSet}
-						onClick={() => {
-							setIsFilterSet(true);
-						}}
-					>
-						<CheckboxGroup
-							checkboxes={dummyCheckboxInfo}
-							onCheckedChange={name => updateDummyCheckboxInfo(name)}
-							formHeader="Location"
-						/>
-					</PopupFilterWrapper>
-				</SecondaryFilterContainer>
+				<SecondaryFilterContainer></SecondaryFilterContainer>
 			</FilterContainer>
 			{loading && <CompanyCardsSkeleton numSkeletons={10} />}
 			{error && (

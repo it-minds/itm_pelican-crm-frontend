@@ -33,7 +33,7 @@ const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheck
 	);
 
 	const renderCheckboxes = useMemo(() => {
-		return checkboxes.map((checkbox, index) => {
+		return checkboxes.map(checkbox => {
 			return (
 				<FormControlLabel
 					control={
