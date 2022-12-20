@@ -3,11 +3,11 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import CheckboxGroup from '../components/common/CheckboxGroup';
+import { CheckboxInfo } from '../components/common/CheckboxGroup';
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
 import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
 import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
-import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
+import LocationFilter from '../components/common/filters/LocationFilter';
 import PrimaryFilter from '../components/common/filters/PrimaryFilter';
 import PageContainer from '../components/common/PageContainer';
 import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
@@ -23,7 +23,6 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
-import LocationFilter from '../components/common/filters/LocationFilter';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -93,6 +92,8 @@ const WallOfClients = () => {
 
 		setContactFilterContent(newValue);
 	};
+
+	const handleFilterUpdate = (checkboxState: CheckboxInfo[]) => {};
 
 	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
 
@@ -164,7 +165,10 @@ const WallOfClients = () => {
 							formHeader="Location"
 						/>
 					</PopupFilterWrapper> */}
-					<LocationFilter locations={dummyLocations} onClearClick={() => {}} />
+					<LocationFilter
+						locations={dummyLocations}
+						onFilterUpdate={(checkBoxState: CheckboxInfo[]) => handleFilterUpdate(checkBoxState)}
+					/>
 				</SecondaryFilterContainer>
 			</FilterContainer>
 			{loading && <CompanyCardsSkeleton numSkeletons={10} />}
