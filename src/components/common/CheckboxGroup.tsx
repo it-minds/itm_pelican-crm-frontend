@@ -23,7 +23,6 @@ type CheckboxGroupProps = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheckedChange }) => {
-	const theme = useTheme();
 	const handleChange = useCallback(
 		(name: string) => {
 			onCheckedChange(name);
@@ -51,22 +50,7 @@ const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheck
 
 	return (
 		<Box display="flex" flexDirection="column" alignItems="center" width="100%">
-			<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-				{formHeader ? (
-					<FormLabel
-						sx={{
-							'&.Mui-focused': {
-								color: theme.palette.text.primary,
-							},
-						}}
-					>
-						<Box display="flex" width="100%" justifyItems="center">
-							<Typography variant="h4" fontWeight="600">
-								{formHeader}
-							</Typography>
-						</Box>
-					</FormLabel>
-				) : null}
+			<FormControl component="fieldset" variant="standard">
 				<FormGroup>{renderCheckboxes}</FormGroup>
 			</FormControl>
 		</Box>
