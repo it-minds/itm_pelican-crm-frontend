@@ -62,7 +62,7 @@ export const GET_FILTERED_CLIENTS = gql`
 
 	fragment FRAGMENT_DEAL on Deal {
 		id
-		dealStatus
+		status
 		startDate
 		endDate
 		description

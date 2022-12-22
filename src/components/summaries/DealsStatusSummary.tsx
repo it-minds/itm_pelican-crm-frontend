@@ -26,7 +26,7 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 
 	const deal: FRAGMENT_DEALFragment | undefined = extractMostRelevantDeal(deals);
 
-	switch (deal?.dealStatus) {
+	switch (deal?.status) {
 		case 'Active': {
 			return (
 				<Tooltip title={dealTooltipText(deal, isSmall)} placement="top">

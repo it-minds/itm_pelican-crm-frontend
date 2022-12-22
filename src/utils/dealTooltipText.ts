@@ -15,7 +15,7 @@ export const dealTooltipText = (deal: FRAGMENT_DEALFragment | undefined, isShown
 	let status;
 	let dateExpression;
 
-	switch (deal.dealStatus) {
+	switch (deal.status) {
 		case 'Active': {
 			status = t('wallOfClients.clientListItemContent.dealStatus.active');
 			dateExpression = t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
