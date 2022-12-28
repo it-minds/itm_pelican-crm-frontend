@@ -1,13 +1,4 @@
-import {
-	Box,
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-	FormLabel,
-	Typography,
-	useTheme,
-} from '@mui/material';
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/material';
 import React, { FC, useCallback, useMemo } from 'react';
 
 export type CheckboxInfo = {
@@ -18,11 +9,10 @@ export type CheckboxInfo = {
 
 type CheckboxGroupProps = {
 	checkboxes: CheckboxInfo[];
-	formHeader?: string;
 	onCheckedChange: (name: string) => void;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheckedChange }) => {
+const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, onCheckedChange }) => {
 	const handleChange = useCallback(
 		(name: string) => {
 			onCheckedChange(name);
