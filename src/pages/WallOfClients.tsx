@@ -26,6 +26,7 @@ import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
+	const [dummyCheckboxInfo, setDummyCheckboxInfo] = useState([]);
 	const [isFilterSet, setIsFilterSet] = useState(false);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
@@ -97,6 +98,8 @@ const WallOfClients = () => {
 		console.log('checkboxState', checkboxState);
 	};
 
+	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
+
 	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
 
 	return (
@@ -121,7 +124,14 @@ const WallOfClients = () => {
 						onValueChange={handleContactFilterChange}
 					/>
 				</PrimaryFilterWrapper>
-				<SecondaryFilterContainer></SecondaryFilterContainer>
+				<SecondaryFilterContainer>
+					<LocationFilter
+						locations={dummyLocations}
+						onFilterUpdate={(checkBoxState: CheckboxInfo[]) =>
+							handleLocationFilterUpdate(checkBoxState)
+						}
+					/>
+				</SecondaryFilterContainer>
 			</FilterContainer>
 			{loading && <CompanyCardsSkeleton numSkeletons={10} />}
 			{error && (
