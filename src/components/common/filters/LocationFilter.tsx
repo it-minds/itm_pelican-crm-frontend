@@ -100,7 +100,6 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 					Location
 				</Typography>
 				<CheckboxGroup
-					formHeader="Location"
 					onCheckedChange={name => {
 						handleCheckChanged(name);
 					}}
