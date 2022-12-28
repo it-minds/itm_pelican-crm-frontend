@@ -3,6 +3,7 @@ import { Box, CircularProgress, Typography, useMediaQuery, useTheme } from '@mui
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import CheckboxGroup from '../components/common/CheckboxGroup';
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
 import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
 import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
@@ -128,18 +129,7 @@ const WallOfClients = () => {
 						onValueChange={handleContactFilterChange}
 					/>
 				</PrimaryFilterWrapper>
-				<SecondaryFilterContainer>
-					<PopupFilterWrapper
-						onClearClick={() => setIsFilterSet(false)}
-						title={t('wallOfClients.locationFilterButtonDefault')}
-						active={isFilterSet}
-						onClick={() => {
-							setIsFilterSet(true);
-						}}
-					>
-						<Typography>Yoyo, what's going on!</Typography>
-					</PopupFilterWrapper>
-				</SecondaryFilterContainer>
+				<SecondaryFilterContainer></SecondaryFilterContainer>
 			</FilterContainer>
 			{loading && networkStatus !== NetworkStatus.fetchMore && initialLoad && (
 				<CompanyCardsSkeleton numSkeletons={10} />
