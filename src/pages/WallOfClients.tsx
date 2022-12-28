@@ -93,7 +93,9 @@ const WallOfClients = () => {
 		setContactFilterContent(newValue);
 	};
 
-	const handleFilterUpdate = (checkboxState: CheckboxInfo[]) => {};
+	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
+		console.log('checkboxState', checkboxState);
+	};
 
 	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
 
@@ -167,7 +169,9 @@ const WallOfClients = () => {
 					</PopupFilterWrapper> */}
 					<LocationFilter
 						locations={dummyLocations}
-						onFilterUpdate={(checkBoxState: CheckboxInfo[]) => handleFilterUpdate(checkBoxState)}
+						onFilterUpdate={(checkBoxState: CheckboxInfo[]) =>
+							handleLocationFilterUpdate(checkBoxState)
+						}
 					/>
 				</SecondaryFilterContainer>
 			</FilterContainer>

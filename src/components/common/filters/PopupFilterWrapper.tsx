@@ -1,4 +1,4 @@
-import { Box, ButtonProps, Popover, Typography } from '@mui/material';
+import { Box, ButtonProps, Popover, Typography, useTheme } from '@mui/material';
 import { AnimatePresence } from 'framer-motion';
 import React, { FC, useState } from 'react';
 
@@ -23,7 +23,7 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 }) => {
 	const [open, setOpen] = useState(false);
 	const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
+	const theme = useTheme();
 	const onClearFilter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		event.stopPropagation();
 		onClearClick();
@@ -52,7 +52,15 @@ const PopupFilterWrapper: FC<PopupFilterWrapperProps> = ({
 			>
 				<AnimatePresence>{active && <ClearFilter onClick={onClearFilter} />}</AnimatePresence>
 				<Box>
-					<Typography ml={active ? '10px' : 0} variant="body">
+					<Typography
+						ml={active ? '10px' : 0}
+						variant="body"
+						sx={{
+							'&.Mui-focused': {
+								color: theme.palette.text.primary,
+							},
+						}}
+					>
 						{title}
 					</Typography>
 				</Box>
