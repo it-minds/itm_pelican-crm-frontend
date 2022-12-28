@@ -102,7 +102,8 @@ const WallOfClients = () => {
 	};
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
-		console.log('checkboxState', checkboxState);
+		// do something with the checkboxState and gql here :)
+		// console.log('checkboxState', checkboxState);
 	};
 
 	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
