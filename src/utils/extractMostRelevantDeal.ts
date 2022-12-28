@@ -6,22 +6,18 @@ import { FRAGMENT_DEALFragment } from './queries/__generated__/wallOfClientsQuer
 export const extractMostRelevantDeal = (
 	dealsArray: FRAGMENT_DEALFragment[]
 ): FRAGMENT_DEALFragment | undefined => {
-	const activeDeals: FRAGMENT_DEALFragment[] = dealsArray.filter(
-		deal => deal.dealStatus === 'Active'
-	);
+	const activeDeals: FRAGMENT_DEALFragment[] = dealsArray.filter(deal => deal.status === 'Active');
 	if (!(activeDeals.length === 0)) {
 		return extractDeals(activeDeals);
 	}
 
-	const dialogDeals: FRAGMENT_DEALFragment[] = dealsArray.filter(
-		deal => deal.dealStatus === 'Dialog'
-	);
+	const dialogDeals: FRAGMENT_DEALFragment[] = dealsArray.filter(deal => deal.status === 'Dialog');
 	if (!(dialogDeals.length === 0)) {
 		return extractDeals(dialogDeals);
 	}
 
 	const inactiveDeals: FRAGMENT_DEALFragment[] = dealsArray.filter(
-		deal => deal.dealStatus === 'InActive'
+		deal => deal.status === 'InActive'
 	);
 	if (!(inactiveDeals.length === 0)) {
 		return extractDeals(inactiveDeals);
