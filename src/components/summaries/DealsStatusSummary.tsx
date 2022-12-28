@@ -28,11 +28,11 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 		case 'Active': {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
-					<Box width="30%" sx={flexCenter}>
+					<Box width="28%" sx={flexCenter}>
 						<HistoryEduRoundedIcon fontSize="large" />
 					</Box>
 					{isSmall && (
-						<Stack width="70%" sx={{ ml: 1 }}>
+						<Stack width="68%" sx={{ ml: 1 }}>
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.active')}
 							</Typography>
@@ -51,11 +51,11 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 		case 'Dialog': {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
-					<Box width="30%" sx={flexCenter}>
+					<Box width="28%" sx={flexCenter}>
 						<ForumRoundedIcon fontSize="large" />
 					</Box>
 					{isSmall && (
-						<Stack width="70%" sx={{ ml: 1 }}>
+						<Stack width="68%" sx={{ ml: 1 }}>
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
 							</Typography>
@@ -74,11 +74,11 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 		case 'InActive': {
 			return (
 				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
-					<Box width="30%" sx={flexCenter}>
+					<Box width="28%" sx={flexCenter}>
 						<AcUnitRoundedIcon fontSize="large" />
 					</Box>
 					{isSmall && (
-						<Stack width="70%" sx={{ ml: 1 }}>
+						<Stack width="68%" sx={{ ml: 1 }}>
 							<Typography variant="body" noWrap>
 								{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
 							</Typography>
@@ -96,9 +96,11 @@ const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo
 		}
 		default: {
 			return (
-				<Typography noWrap>
-					{t('wallOfClients.clientListItemContent.dealStatus.noDeals')}
-				</Typography>
+				<Box width="100%" display="flex" justifyContent="center">
+					<Typography noWrap>
+						{t('wallOfClients.clientListItemContent.dealStatus.noDeals')}
+					</Typography>
+				</Box>
 			);
 		}
 	}

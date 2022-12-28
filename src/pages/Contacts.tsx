@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { ReactComponent as DialogIcon } from '../assets/icons/dialog.svg';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
-import { GetDudesQuery } from '../gql/graphql';
+import { GetDudesQuery } from '../utils/queries/__generated__/contactsQueries.graphql';
 import { GET_DUDES } from '../utils/queries/contactsQueries';
 
 const DisplayDudes = () => {

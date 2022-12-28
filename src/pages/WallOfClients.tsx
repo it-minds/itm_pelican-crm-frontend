@@ -19,6 +19,7 @@ import { dummyCompanyNames } from '../utils/dummyClasses';
 import { useInfinityScroll } from '../utils/hooks/useInfinityScroll';
 // TODO: Remove dummy data when actual companies are available or a decisive decision to remove dropdown is made.
 import {
+	FRAGMENT_CLIENTFragment,
 	getFilteredClientsQuery,
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
@@ -54,10 +55,15 @@ const WallOfClients = () => {
 		fetchMore({
 			variables: { after: endCursor },
 			updateQuery: (prevResult, { fetchMoreResult }) => {
-				fetchMoreResult.clients.nodes = [
-					...prevResult.clients.nodes,
-					...fetchMoreResult.clients.nodes,
-				];
+				if (!fetchMoreResult.clients?.nodes) return prevResult;
+				if (!prevResult.clients?.nodes) return prevResult;
+
+				const fetchedResult: FRAGMENT_CLIENTFragment[] = prevResult.clients.nodes.concat(
+					fetchMoreResult.clients.nodes
+				);
+
+				fetchMoreResult.clients.nodes = fetchedResult;
+
 				return fetchMoreResult;
 			},
 		});
