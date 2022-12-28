@@ -27,8 +27,6 @@ import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
-	const [dummyCheckboxInfo, setDummyCheckboxInfo] = useState([]);
-	const [isFilterSet, setIsFilterSet] = useState(false);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
