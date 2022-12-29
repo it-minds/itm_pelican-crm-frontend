@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
 //@ts-ignore
 import { ReactComponent as DialogIcon } from '../assets/icons/dialog.svg';
 import PageContainer from '../components/common/PageContainer';
