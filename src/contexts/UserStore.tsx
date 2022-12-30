@@ -7,7 +7,7 @@ export const activeUser = {
 	id: -1,
 	name: '',
 	role: 'admin',
-	isLoggedIn: false,
+	isLoggedIn: true,
 };
 
 export type ActiveUser = typeof activeUser;
@@ -33,7 +33,7 @@ type AccessType = {
 
 const Access: FC<AccessType> = ({ role, children }) => {
 	const user = useLoginState();
-	return user.role === role ? <>{children}</> : <div> no access</div>;
+	return user.role === role ? <>{children}</> : <div></div>;
 };
 
 export { Access };
