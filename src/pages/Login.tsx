@@ -1,29 +1,13 @@
-import {
-	Box,
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	Grid,
-	Link,
-	TextField,
-	Typography,
-} from '@mui/material';
-import React, { FC } from 'react';
+import { Box, Typography } from '@mui/material';
+import React, { FC, useState } from 'react';
 
-import Button from '../components/common/Button';
 import PageContainer from '../components/common/PageContainer';
+import LoginForm from '../components/login/LoginForm';
 
 type LoginPageProps = {};
 
 const LoginPage: FC<LoginPageProps> = ({}) => {
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-		});
-	};
+	const [failedLogin, setFailedLogin] = useState(false);
 
 	return (
 		<PageContainer>
@@ -41,47 +25,7 @@ const LoginPage: FC<LoginPageProps> = ({}) => {
 					width: '100%',
 				}}
 			>
-				<Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: '65%' }}>
-					<FormControl sx={{ width: '100%' }}>
-						<TextField
-							margin="normal"
-							required
-							fullWidth
-							id="email"
-							label="Email Address"
-							name="email"
-							type="email"
-							autoComplete="email"
-							autoFocus
-						/>
-						<TextField
-							margin="normal"
-							required
-							fullWidth
-							name="password"
-							label="Password"
-							type="password"
-							id="password"
-							autoComplete="current-password"
-						/>
-						<FormControlLabel
-							control={<Checkbox value="remember" color="primary" />}
-							label="Remember me"
-						/>
-						<Grid container flexDirection="column">
-							<Button
-								type="submit"
-								fullWidth
-								sx={{ mt: 3, mb: 1.5, maxHeight: '2.5em', padding: '1em' }}
-							>
-								<Typography variant="button">Sign In</Typography>
-							</Button>
-							<Link href="#" variant="body2">
-								Forgot password?
-							</Link>
-						</Grid>
-					</FormControl>
-				</Box>
+				<LoginForm failedLogin={failedLogin} />
 			</Box>
 		</PageContainer>
 	);
