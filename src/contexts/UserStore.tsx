@@ -33,7 +33,7 @@ type AccessType = {
 
 const Access: FC<AccessType> = ({ role, children }) => {
 	const user = useLoginState();
-	return user.role === role ? <>{children}</> : <div></div>;
+	return user.role === role ? <>{children}</> : <></>;
 };
 
 export { Access };

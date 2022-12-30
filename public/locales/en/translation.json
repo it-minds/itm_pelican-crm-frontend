@@ -10,7 +10,8 @@
 		"suppliersLink": "Suppliers",
 		"segmentsLink": "Segments",
 		"contactsLink": "Contacts",
-		"recommendationsLink": "Recommendations"
+		"recommendationsLink": "Recommendations",
+		"createUserLink": "New User"
 	},
 	"wallOfClients": {
 		"pageTitle": "Clients",
