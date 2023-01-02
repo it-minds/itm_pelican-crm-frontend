@@ -32,16 +32,16 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 		onFilterUpdate(checkboxState);
 	}, [checkboxState, onFilterUpdate]);
 
-	const anyThingChecked = useMemo(() => {
+	const isAnythingChecked = useMemo(() => {
 		return checkboxState.some(checkbox => checkbox.checked);
 	}, [checkboxState]);
 
-	const allChecked = useMemo(() => {
+	const isAllChecked = useMemo(() => {
 		return checkboxState.every(checkbox => checkbox.checked);
 	}, [checkboxState]);
 
 	const checkEverything = () => {
-		if (allChecked) return;
+		if (isAllChecked) return;
 		const checkedBoxes = checkboxState.map(checkbox => {
 			return {
 				...checkbox,
@@ -53,7 +53,7 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 	};
 
 	const uncheckEverything = () => {
-		if (!anyThingChecked) return;
+		if (!isAnythingChecked) return;
 
 		const checkedBoxes = checkboxState.map(checkbox => {
 			return {
@@ -85,7 +85,7 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 			sx={{ borderRadius: '18px' }}
 			title="Location"
 			onClearClick={() => uncheckEverything()}
-			active={anyThingChecked}
+			active={isAnythingChecked}
 		>
 			<Box
 				width="fit-content"
