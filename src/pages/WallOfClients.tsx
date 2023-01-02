@@ -103,15 +103,9 @@ const WallOfClients = () => {
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
 		// do something with the checkboxState and gql here :)
-		// console.log('checkboxState', checkboxState);
 	};
 
 	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
-
-	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
-
-	// TODO: Fix that the data is sometimes (rarely) double fetching data. Probably has something to do with policies being wrongly set.
-	// TODO: More specifically how data is concatenated onto existing data from apolloClient.ts
 
 	return (
 		<PageContainer>
