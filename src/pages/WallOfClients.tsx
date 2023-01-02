@@ -3,11 +3,11 @@ import { Box, CircularProgress, Typography, useMediaQuery, useTheme } from '@mui
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import CheckboxGroup from '../components/common/CheckboxGroup';
+import { CheckboxInfo } from '../components/common/CheckboxGroup';
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
 import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
 import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
-import PopupFilterWrapper from '../components/common/filters/PopupFilterWrapper';
+import LocationFilter from '../components/common/filters/LocationFilter';
 import PrimaryFilter from '../components/common/filters/PrimaryFilter';
 import PageContainer from '../components/common/PageContainer';
 import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
@@ -27,7 +27,6 @@ import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
-	const [isFilterSet, setIsFilterSet] = useState(false);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
@@ -102,6 +101,13 @@ const WallOfClients = () => {
 		setContactFilterContent(newValue);
 	};
 
+	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
+		// do something with the checkboxState and gql here :)
+		// console.log('checkboxState', checkboxState);
+	};
+
+	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
+
 	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
 
 	// TODO: Fix that the data is sometimes (rarely) double fetching data. Probably has something to do with policies being wrongly set.
@@ -129,7 +135,14 @@ const WallOfClients = () => {
 						onValueChange={handleContactFilterChange}
 					/>
 				</PrimaryFilterWrapper>
-				<SecondaryFilterContainer></SecondaryFilterContainer>
+				<SecondaryFilterContainer>
+					<LocationFilter
+						locations={dummyLocations}
+						onFilterUpdate={(checkBoxState: CheckboxInfo[]) =>
+							handleLocationFilterUpdate(checkBoxState)
+						}
+					/>
+				</SecondaryFilterContainer>
 			</FilterContainer>
 			{loading && networkStatus !== NetworkStatus.fetchMore && initialLoad && (
 				<CompanyCardsSkeleton numSkeletons={10} />
