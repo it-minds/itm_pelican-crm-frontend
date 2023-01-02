@@ -35,9 +35,6 @@ const Contacts = () => {
 
 	return (
 		<PageContainer>
-			{/* <Box width="24px" height="24px"> */}
-			<DialogIcon width="84px" />
-			{/* </Box> */}
 			<Underlined>
 				<Typography variant="h1">{t('contacts.pageTitle')}</Typography>
 			</Underlined>
