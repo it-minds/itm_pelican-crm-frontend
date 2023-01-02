@@ -4,7 +4,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 //@ts-ignore
-import { ReactComponent as DialogIcon } from '../assets/icons/dialog.svg';
 import PageContainer from '../components/common/PageContainer';
 import Underlined from '../components/common/Underlined';
 import { GetDudesQuery } from '../utils/queries/__generated__/contactsQueries.graphql';
