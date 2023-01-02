@@ -32,6 +32,7 @@ const StaticUnderline = styled(Box)<Props>(({ theme }) => (props: Props) => ({
 	display: 'inline-block',
 	position: 'relative',
 	width: 'fit-content',
+	margin: '10px 0',
 }));
 
 const DynamicUnderline = styled(Box)<Props>(({ theme }) => (props: Props) => ({
@@ -72,18 +73,27 @@ const DynamicUnderline = styled(Box)<Props>(({ theme }) => (props: Props) => ({
 	display: 'inline-block',
 	position: 'relative',
 	width: 'fit-content',
+	margin: '10px 0',
 }));
 
 const Underlined = ({ children, active = true, dynamic = false, ...props }: Props) => {
 	// <Box sx={{...(active && underlineStyles)}}>    Comment kept as a reference to previous, cleaner code
 	if (active) {
 		if (dynamic) {
-			return <DynamicUnderline>{children}</DynamicUnderline>;
+			return (
+				<DynamicUnderline>
+					<Box marginBottom={1}>{children}</Box>
+				</DynamicUnderline>
+			);
 		} else {
-			return <StaticUnderline>{children}</StaticUnderline>;
+			return (
+				<StaticUnderline>
+					<Box marginBottom={1}>{children}</Box>
+				</StaticUnderline>
+			);
 		}
 	} else {
-		return <Box>{children}</Box>;
+		return <Box marginBottom={1}>{children}</Box>;
 	}
 };
 
