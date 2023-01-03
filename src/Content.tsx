@@ -1,8 +1,7 @@
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import App from './App';
 import PageContainer from './components/common/PageContainer';
 import WithNav from './components/navWrapper/WithNav';
 import WithoutNav from './components/navWrapper/WithoutNav';
@@ -13,7 +12,6 @@ import NotFound404 from './pages/NotFound404';
 import Recommendations from './pages/Recommendations';
 import Suppliers from './pages/Suppliers';
 import WallOfClients from './pages/WallOfClients';
-import { flexCol } from './styles/generalStyles';
 
 const Content = () => {
 	const currentUser = UserStore.useLoginState();
@@ -21,15 +19,7 @@ const Content = () => {
 
 	return (
 		<>
-			{!currentUser.isLoggedIn ? (
-				<Routes>
-					<Route element={<WithoutNav />}>
-						{/* <Route path="/" element={<App />} /> */}
-						<Route path="/" element={<LoginPage />} />
-						<Route path="*" element={<NotFound404 />} />
-					</Route>
-				</Routes>
-			) : (
+			{currentUser.isLoggedIn ? (
 				<Routes>
 					<Route element={<WithNav />}>
 						<Route path="/clients" element={<WallOfClients />} />
@@ -50,7 +40,12 @@ const Content = () => {
 						)}
 						<Route path="*" element={<NotFound404 />} />
 					</Route>
-					{/* <Route path="*" element={<WallOfClients />} /> */}
+				</Routes>
+			) : (
+				<Routes>
+					<Route element={<WithoutNav />}>
+						<Route path="*" element={<LoginPage />} />
+					</Route>
 				</Routes>
 			)}
 		</>

@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
+
 import PageContainer from '../components/common/PageContainer';
 import LoginForm from '../components/login/LoginForm';
-import { useReactiveVar } from '@apollo/client';
 import userStore, { Access } from '../contexts/UserStore';
 
 type LoginPageProps = {};
@@ -12,21 +12,8 @@ const LoginPage: FC<LoginPageProps> = ({}) => {
 	const [failedLogin, setFailedLogin] = useState(false);
 
 	return (
-		<PageContainer>
-			{/* <Access role="admin">
-				<div> i am admin</div>
-			</Access>
-			{currentUser.isLoggedIn ? (
-				<div> I am logged in</div>
-			) : (
-				<div>
-					i am not logged in
-					<button onClick={() => userStore.setActiveUser({ ...currentUser, isLoggedIn: true })}>
-						login
-					</button>
-				</div>
-			)} */}
-			<Access role="guest">
+		<Access role="guest">
+			<PageContainer>
 				<Box width="100%" display="flex" justifyContent={'center'}>
 					<Typography variant="h1" color="text.primary">
 						Sign In
@@ -43,8 +30,8 @@ const LoginPage: FC<LoginPageProps> = ({}) => {
 				>
 					<LoginForm failedLogin={failedLogin} />
 				</Box>
-			</Access>
-		</PageContainer>
+			</PageContainer>
+		</Access>
 	);
 };
 

@@ -2,8 +2,8 @@ import { AppBar, Box, Grid, Toolbar, Typography, useMediaQuery, useTheme } from 
 import { Button as MuiButton } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import UserStore from '../../contexts/UserStore';
 
+import UserStore from '../../contexts/UserStore';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from '../common/HideOnScroll';
 import NavDropdown from './NavDropdown';
