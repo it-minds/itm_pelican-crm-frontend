@@ -1,13 +1,4 @@
-import {
-	Box,
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-	FormLabel,
-	Typography,
-	useTheme,
-} from '@mui/material';
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/material';
 import React, { FC, useCallback, useMemo } from 'react';
 
 export type CheckboxInfo = {
@@ -18,12 +9,10 @@ export type CheckboxInfo = {
 
 type CheckboxGroupProps = {
 	checkboxes: CheckboxInfo[];
-	formHeader?: string;
 	onCheckedChange: (name: string) => void;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
-const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheckedChange }) => {
-	const theme = useTheme();
+const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, onCheckedChange }) => {
 	const handleChange = useCallback(
 		(name: string) => {
 			onCheckedChange(name);
@@ -51,22 +40,7 @@ const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, formHeader, onCheck
 
 	return (
 		<Box display="flex" flexDirection="column" alignItems="center" width="100%">
-			<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-				{formHeader ? (
-					<FormLabel
-						sx={{
-							'&.Mui-focused': {
-								color: theme.palette.text.primary,
-							},
-						}}
-					>
-						<Box display="flex" width="100%" justifyItems="center">
-							<Typography variant="h4" fontWeight="600">
-								{formHeader}
-							</Typography>
-						</Box>
-					</FormLabel>
-				) : null}
+			<FormControl component="fieldset" variant="standard">
 				<FormGroup>{renderCheckboxes}</FormGroup>
 			</FormControl>
 		</Box>

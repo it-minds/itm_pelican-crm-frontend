@@ -26,11 +26,11 @@
 		"clientListItemContent": {
 			"dealStatus": {
 				"active": "Active",
-				"activeUntilDate": "Until: {{date}}",
+				"activeUntilDate": "Until {{date}}",
 				"inactive": "Inactive",
-				"inactiveSinceDate": "Since: {{date}}",
+				"inactiveSinceDate": "Since {{date}}",
 				"dialog": "Dialog",
-				"dialogLastContact": "Last contact: {{date}}",
+				"dialogLastContact": "Last contact {{date}}",
 				"multipleActive": "Multiple active",
 				"noDeals": "No deals to show"
 			},

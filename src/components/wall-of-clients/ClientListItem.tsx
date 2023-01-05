@@ -123,7 +123,6 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 			height="100%"
 			display="flex"
 			flexDirection="column"
-			alignItems="flex-end"
 			paddingBottom={isExpanded ? '.5rem' : '0'}
 			sx={{
 				backgroundColor: 'background.paper',
@@ -143,13 +142,13 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 				<Box sx={{ ...flexCenter }} {...fixedWidth(30, 35)}>
 					<ClientInfoSummary client={clientInput} />
 				</Box>
-				<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+				<Box {...fixedWidth(20, 20)} sx={{ ...flexCenter }}>
 					<SupplierInfoSummary suppliers={suppliersState} />
 				</Box>
 				<Box {...fixedWidth(20, 6)} sx={flexCenter}>
 					<DealsStatusSummary deals={dealsState} />
 				</Box>
-				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter, flexWrap: 'wrap' }}>
+				<Box {...fixedWidth(25, 35)} sx={{ ...flexCenter }}>
 					<PersonInfoSummary persons={accountManagersState} />
 				</Box>
 			</HorizontalDividedContainer>
@@ -161,11 +160,11 @@ const ClientListItem: FC<ClientListItemProps> = ({ clientInput }) => {
 							animate={{ y: 0, opacity: 1, height: '100%' }}
 							exit={{ y: -15, height: '0%', opacity: '10%' }}
 						>
-							<Stack pl="3px" width="100%" gap="2">
-								<Stack gap="3px" direction="row" alignItems="center" width="100%">
+							<Stack gap="3px" direction="row" alignItems="center" width="100%">
+								<Box width="2%">
 									<NestingIndicator onClick={() => handleCollapse()} height={nestedLineHeight} />
-									<Stack width="100%">{renderNestedContacts()}</Stack>
-								</Stack>
+								</Box>
+								<Stack width="98%">{renderNestedContacts()}</Stack>
 							</Stack>
 						</motion.div>
 					</MotionConfig>
