@@ -1,11 +1,13 @@
-import { useQuery } from '@apollo/client';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { NetworkStatus, useQuery } from '@apollo/client';
+import { Box, CircularProgress, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { CheckboxInfo } from '../components/common/CheckboxGroup';
 import FilterContainer from '../components/common/filters/containers/FilterContainer';
 import PrimaryFilterWrapper from '../components/common/filters/containers/PrimaryFilterContainer';
 import SecondaryFilterContainer from '../components/common/filters/containers/SecondaryFilterContainer';
+import LocationFilter from '../components/common/filters/LocationFilter';
 import PrimaryFilter from '../components/common/filters/PrimaryFilter';
 import PageContainer from '../components/common/PageContainer';
 import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSkeleton';
@@ -17,6 +19,7 @@ import { dummyCompanyNames } from '../utils/dummyClasses';
 import { useInfinityScroll } from '../utils/hooks/useInfinityScroll';
 // TODO: Remove dummy data when actual companies are available or a decisive decision to remove dropdown is made.
 import {
+	FRAGMENT_CLIENTFragment,
 	getFilteredClientsQuery,
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
@@ -24,22 +27,24 @@ import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
-	const [isFilterSet, setIsFilterSet] = useState(false);
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
-	const { loading, error, data, refetch, fetchMore } = useQuery<getFilteredClientsQuery>(
-		GET_FILTERED_CLIENTS,
-		{
+	const [initialLoad, setInitialLoad] = useState(true);
+	const { loading, error, data, refetch, fetchMore, networkStatus } =
+		useQuery<getFilteredClientsQuery>(GET_FILTERED_CLIENTS, {
 			variables: {
 				currentClientSearch: clientFilterContent,
 				currentContactSearch: contactFilterContent,
 				first: 10,
 				after: null,
 			},
-		}
-	);
+			notifyOnNetworkStatusChange: true,
+			onCompleted: () => {
+				setInitialLoad(false);
+			},
+		});
 
 	/**
 	 * Handles the fetching of additional paginated data and merging it onto the current query.
@@ -51,17 +56,22 @@ const WallOfClients = () => {
 		fetchMore({
 			variables: { after: endCursor },
 			updateQuery: (prevResult, { fetchMoreResult }) => {
-				fetchMoreResult.clients.nodes = [
-					...prevResult.clients.nodes,
-					...fetchMoreResult.clients.nodes,
-				];
+				if (!fetchMoreResult.clients?.nodes) return prevResult;
+				if (!prevResult.clients?.nodes) return prevResult;
+
+				const fetchedResult: FRAGMENT_CLIENTFragment[] = prevResult.clients.nodes.concat(
+					fetchMoreResult.clients.nodes
+				);
+
+				fetchMoreResult.clients.nodes = fetchedResult;
+
 				return fetchMoreResult;
 			},
 		});
 	}, [data?.clients?.pageInfo.endCursor, data?.clients?.pageInfo.hasNextPage, fetchMore]);
 
 	// Custom hook handles infinity scroll logic
-	useInfinityScroll(handleFetchMore);
+	useInfinityScroll(handleFetchMore, data?.clients?.pageInfo.hasNextPage, networkStatus);
 
 	useEffect(() => {
 		const vars: getFilteredClientsQueryVariables = {
@@ -91,7 +101,11 @@ const WallOfClients = () => {
 		setContactFilterContent(newValue);
 	};
 
-	// TODO: Maybe refactor the scroll position to a state? Or move to helper function?
+	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
+		// do something with the checkboxState and gql here :)
+	};
+
+	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
 
 	return (
 		<PageContainer>
@@ -115,15 +129,24 @@ const WallOfClients = () => {
 						onValueChange={handleContactFilterChange}
 					/>
 				</PrimaryFilterWrapper>
-				<SecondaryFilterContainer></SecondaryFilterContainer>
+				<SecondaryFilterContainer>
+					<LocationFilter
+						locations={dummyLocations}
+						onFilterUpdate={(checkBoxState: CheckboxInfo[]) =>
+							handleLocationFilterUpdate(checkBoxState)
+						}
+					/>
+				</SecondaryFilterContainer>
 			</FilterContainer>
-			{loading && <CompanyCardsSkeleton numSkeletons={10} />}
-			{error && (
+			{loading && networkStatus !== NetworkStatus.fetchMore && initialLoad && (
+				<CompanyCardsSkeleton numSkeletons={10} />
+			)}
+			{networkStatus === NetworkStatus.error && (
 				<>
 					<Typography>
 						Whoopsie-doo, looks like we are gonna punish some interns ¯\_(ツ)_/¯.
 					</Typography>
-					<Typography>An error occured when fetching data.</Typography>
+					<Typography>An error occured while fetching data.</Typography>
 				</>
 			)}
 			{data && (
@@ -142,6 +165,11 @@ const WallOfClients = () => {
 						))}
 					</Box>
 				</>
+			)}
+			{loading && !initialLoad && (
+				<Box sx={{ display: 'flex' }} justifyContent="center">
+					<CircularProgress color="secondary" />
+				</Box>
 			)}
 		</PageContainer>
 	);

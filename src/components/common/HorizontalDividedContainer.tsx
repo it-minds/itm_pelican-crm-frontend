@@ -48,7 +48,7 @@ const HorizontalDividedContainer: FC<HorizontalDividedContainerProps> = ({
 			}}
 		>
 			<Stack
-				width={isExpandable ? '95%' : '100%'}
+				width={'95%'}
 				gap=".3rem"
 				direction="row"
 				alignItems={'center'}

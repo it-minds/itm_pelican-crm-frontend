@@ -1,11 +1,12 @@
 import AcUnitRoundedIcon from '@mui/icons-material/AcUnitRounded';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
 import HistoryEduRoundedIcon from '@mui/icons-material/HistoryEduRounded';
-import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Stack, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { flexCenter } from '../../styles/generalStyles';
+import { dealTooltipText } from '../../utils/dealTooltipText';
 import { extractMostRelevantDeal } from '../../utils/extractMostRelevantDeal';
 import { FRAGMENT_DEALFragment } from '../../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { unixTimestampConverter } from '../../utils/unixTimestampConverter';
@@ -18,87 +19,96 @@ type DealStatusProps = {
 const DealsStatusSummary: FC<DealStatusProps> = ({ deals, containsAdditionalInfo = true }) => {
 	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.up('md'));
+
 	const { t } = useTranslation();
 
 	// TODO: Update translation text for DealsStatusSummary
 
 	const deal: FRAGMENT_DEALFragment | undefined = extractMostRelevantDeal(deals);
 
-	switch (deal?.dealStatus) {
+	switch (deal?.status) {
 		case 'Active': {
 			return (
-				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
-					<Box width="30%" sx={flexCenter}>
-						<HistoryEduRoundedIcon fontSize="large" />
-					</Box>
-					{isSmall && (
-						<Stack width="70%" sx={{ ml: 1 }}>
-							<Typography variant="body" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.active')}
-							</Typography>
-							{containsAdditionalInfo && (
-								<Typography variant="note" noWrap>
-									{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
-										date: unixTimestampConverter(deal.endDate),
-									})}
+				<Tooltip title={dealTooltipText(deal, isSmall)} placement="top">
+					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
+						<Box width="30%" sx={flexCenter}>
+							<HistoryEduRoundedIcon fontSize="large" />
+						</Box>
+						{isSmall && (
+							<Stack width="70%" sx={{ ml: 1 }}>
+								<Typography variant="body" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.active')}
 								</Typography>
-							)}
-						</Stack>
-					)}
-				</Stack>
+								{containsAdditionalInfo && (
+									<Typography variant="note" noWrap>
+										{t('wallOfClients.clientListItemContent.dealStatus.activeUntilDate', {
+											date: unixTimestampConverter(deal.endDate),
+										})}
+									</Typography>
+								)}
+							</Stack>
+						)}
+					</Stack>
+				</Tooltip>
 			);
 		}
 		case 'Dialog': {
 			return (
-				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
-					<Box width="30%" sx={flexCenter}>
-						<ForumRoundedIcon fontSize="large" />
-					</Box>
-					{isSmall && (
-						<Stack width="70%" sx={{ ml: 1 }}>
-							<Typography variant="body" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
-							</Typography>
-							{containsAdditionalInfo && (
-								<Typography variant="note">
-									{t('wallOfClients.clientListItemContent.dealStatus.dialogLastContact', {
-										date: unixTimestampConverter(deal.lastContactDate),
-									})}
+				<Tooltip title={dealTooltipText(deal, isSmall)} placement="top">
+					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
+						<Box width="30%" sx={flexCenter}>
+							<ForumRoundedIcon fontSize="large" />
+						</Box>
+						{isSmall && (
+							<Stack width="70%" sx={{ ml: 1 }}>
+								<Typography variant="body" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.dialog')}
 								</Typography>
-							)}
-						</Stack>
-					)}
-				</Stack>
+								{containsAdditionalInfo && (
+									<Typography variant="note">
+										{t('wallOfClients.clientListItemContent.dealStatus.dialogLastContact', {
+											date: unixTimestampConverter(deal.lastContactDate),
+										})}
+									</Typography>
+								)}
+							</Stack>
+						)}
+					</Stack>
+				</Tooltip>
 			);
 		}
 		case 'InActive': {
 			return (
-				<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
-					<Box width="30%" sx={flexCenter}>
-						<AcUnitRoundedIcon fontSize="large" />
-					</Box>
-					{isSmall && (
-						<Stack width="70%" sx={{ ml: 1 }}>
-							<Typography variant="body" noWrap>
-								{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
-							</Typography>
-							{containsAdditionalInfo && (
-								<Typography variant="note" noWrap>
-									{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
-										date: unixTimestampConverter(deal.endDate),
-									})}
+				<Tooltip title={dealTooltipText(deal, isSmall)} placement="top">
+					<Stack width="100%" direction="row" justifyContent="center" alignItems="center">
+						<Box width="30%" sx={flexCenter}>
+							<AcUnitRoundedIcon fontSize="large" />
+						</Box>
+						{isSmall && (
+							<Stack width="70%" sx={{ ml: 1 }}>
+								<Typography variant="body" noWrap>
+									{t('wallOfClients.clientListItemContent.dealStatus.inactive')}
 								</Typography>
-							)}
-						</Stack>
-					)}
-				</Stack>
+								{containsAdditionalInfo && (
+									<Typography variant="note" noWrap>
+										{t('wallOfClients.clientListItemContent.dealStatus.inactiveSinceDate', {
+											date: unixTimestampConverter(deal.endDate),
+										})}
+									</Typography>
+								)}
+							</Stack>
+						)}
+					</Stack>
+				</Tooltip>
 			);
 		}
 		default: {
 			return (
-				<Typography noWrap>
-					{t('wallOfClients.clientListItemContent.dealStatus.noDeals')}
-				</Typography>
+				<Box width="100%" display="flex" justifyContent="center">
+					<Typography noWrap>
+						{t('wallOfClients.clientListItemContent.dealStatus.noDeals')}
+					</Typography>
+				</Box>
 			);
 		}
 	}
