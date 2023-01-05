@@ -23,6 +23,7 @@ type LoginFormProps = {
 const LoginForm: FC<LoginFormProps> = ({ attemptedLogin, onFormSubmit }) => {
 	const [passwordError, setPasswordError] = useState(false);
 	const [password, setPassword] = useState('');
+	const { t } = useTranslation();
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
@@ -58,7 +59,7 @@ const LoginForm: FC<LoginFormProps> = ({ attemptedLogin, onFormSubmit }) => {
 					required
 					fullWidth
 					id="email"
-					label="Email Address"
+					label={t('login.form.emailLabel')}
 					name="email"
 					type="email"
 					autoComplete="email"
@@ -69,7 +70,7 @@ const LoginForm: FC<LoginFormProps> = ({ attemptedLogin, onFormSubmit }) => {
 					required
 					fullWidth
 					name="password"
-					label="Password"
+					label={t('login.form.passwordLabel')}
 					type="password"
 					id="password"
 					value={password}
@@ -79,11 +80,11 @@ const LoginForm: FC<LoginFormProps> = ({ attemptedLogin, onFormSubmit }) => {
 				/>
 				<FormControlLabel
 					control={<Checkbox value="remember" color="primary" />}
-					label="Remember me"
+					label={t('login.form.rememberMeLabel')}
 				/>
 				<Grid container flexDirection="column">
 					<Button type="submit" sx={{ mt: 2, mb: 1, maxHeight: '2.5em', padding: '1em' }}>
-						<Typography variant="button">Sign In</Typography>
+						<Typography variant="button">{t('login.form.loginButton')}</Typography>
 					</Button>
 					<ButtonBase
 						disableRipple
@@ -92,7 +93,7 @@ const LoginForm: FC<LoginFormProps> = ({ attemptedLogin, onFormSubmit }) => {
 						sx={{ placeSelf: 'start' }}
 					>
 						<Typography variant="body2" color="primary">
-							Forgot password?
+							{t('login.form.forgotPasswordButton')}
 						</Typography>
 					</ButtonBase>
 				</Grid>

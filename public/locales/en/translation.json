@@ -79,6 +79,17 @@
 			"multipleAccountManagers": "Multiple account managers"
 		}
 	},
+	"login": {
+		"pageTitle": "Sign In",
+		"errorAlert": "Either email or password could not be found",
+		"form": {
+			"emailLabel": "Email Address",
+			"passwordLabel": "Password",
+			"loginButton": "Sign In",
+			"rememberMeLabel": "Remember me",
+			"forgotPasswordButton": "Forgot password?"
+		}
+	},
 	"landingPage": {
 		"pageTitle": "Welcome to Pelican CRM",
 		"pageSubtitle": "Sign in via Google below.",

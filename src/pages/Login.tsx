@@ -3,12 +3,14 @@ import React, { FC, useState } from 'react';
 
 import PageContainer from '../components/common/PageContainer';
 import LoginForm from '../components/login/LoginForm';
+import { useTranslation } from 'react-i18next';
 
 type LoginPageProps = {};
 
 const LoginPage: FC<LoginPageProps> = ({}) => {
 	const [failedLogin, setFailedLogin] = useState(false);
 	const [showAlert, setShowAlert] = useState(false);
+	const { t } = useTranslation();
 	const handleLogin = (form: FormData) => {
 		console.log(form);
 		setShowAlert(true);
@@ -19,7 +21,7 @@ const LoginPage: FC<LoginPageProps> = ({}) => {
 		<PageContainer sx={{ position: 'relative' }}>
 			<Box width="100%" display="flex" justifyContent={'center'}>
 				<Typography variant="h1" color="text.primary">
-					Sign In
+					{t('login.pageTitle')}
 				</Typography>
 			</Box>
 			<Box
@@ -40,7 +42,7 @@ const LoginPage: FC<LoginPageProps> = ({}) => {
 				onClose={() => setShowAlert(false)}
 			>
 				<Alert sx={{ position: 'absolute', left: '50px', bottom: '50px' }} severity="error">
-					<Typography variant="body1">Either email or password could not be found</Typography>
+					<Typography variant="body1">{t('login.errorAlert')}</Typography>
 				</Alert>
 			</Snackbar>
 		</PageContainer>
