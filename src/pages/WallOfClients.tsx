@@ -24,7 +24,11 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
-import { checkboxGroupStateStringify } from '../utils/checkboxStateStringify';
+import {
+	checkboxGroupStateStringify,
+	checkboxGroupStateStringify2,
+	CheckboxObject,
+} from '../utils/checkboxStateStringify';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -32,6 +36,7 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
+	const [locationFilterSettings, setLocationFilterSettings] = useState<CheckboxObject[]>([]);
 	const [initialLoad, setInitialLoad] = useState(true);
 	const { loading, error, data, refetch, fetchMore, networkStatus } =
 		useQuery<getFilteredClientsQuery>(GET_FILTERED_CLIENTS, {
@@ -104,6 +109,7 @@ const WallOfClients = () => {
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
 		console.log(checkboxGroupStateStringify(checkboxState));
+		console.log(checkboxGroupStateStringify2(checkboxState));
 	};
 
 	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
