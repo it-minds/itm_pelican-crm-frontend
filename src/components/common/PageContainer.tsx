@@ -1,4 +1,4 @@
-import { Grid, useTheme } from '@mui/material';
+import { BoxProps, Grid, GridProps, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
 
@@ -7,7 +7,7 @@ import background from '../../assets/twoday-5th-element-square-dark-orange.png';
 
 export type PageContainerProps = {
 	children: ReactNode;
-};
+} & GridProps;
 
 const PageContainer: FC<PageContainerProps> = ({ children }) => {
 	const theme = useTheme();
