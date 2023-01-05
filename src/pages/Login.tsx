@@ -1,18 +1,14 @@
 import { Alert, Box, Snackbar, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PageContainer from '../components/common/PageContainer';
 import LoginForm from '../components/login/LoginForm';
-import { useTranslation } from 'react-i18next';
 
-type LoginPageProps = {};
-
-const LoginPage: FC<LoginPageProps> = ({}) => {
-	const [failedLogin, setFailedLogin] = useState(false);
+const LoginPage: FC = () => {
 	const [showAlert, setShowAlert] = useState(false);
 	const { t } = useTranslation();
 	const handleLogin = (form: FormData) => {
-		console.log(form);
 		setShowAlert(true);
 		//TODO: if positive response from backend, set user in context, else set failedLogin to true
 	};
@@ -33,7 +29,7 @@ const LoginPage: FC<LoginPageProps> = ({}) => {
 					width: '100%',
 				}}
 			>
-				<LoginForm attemptedLogin={failedLogin} onFormSubmit={form => handleLogin(form)} />
+				<LoginForm onFormSubmit={form => handleLogin(form)} />
 			</Box>
 			<Snackbar
 				sx={{ width: '600px' }}

@@ -1,4 +1,4 @@
-import { BoxProps, Grid, GridProps, useTheme } from '@mui/material';
+import { Grid, GridProps, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
 
