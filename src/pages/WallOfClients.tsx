@@ -24,6 +24,7 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
+import { checkboxGroupStateStringify } from '../utils/checkboxStateStringify';
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -102,7 +103,7 @@ const WallOfClients = () => {
 	};
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
-		// do something with the checkboxState and gql here :)
+		console.log(checkboxGroupStateStringify(checkboxState));
 	};
 
 	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
