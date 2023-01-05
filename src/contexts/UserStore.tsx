@@ -37,9 +37,5 @@ const Access: FC<AccessType> = ({ role, children }) => {
 };
 
 export { Access };
-
-export default {
-	setActiveUser,
-	logout,
-	useLoginState,
-};
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { setActiveUser, logout, useLoginState };
