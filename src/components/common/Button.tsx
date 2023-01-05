@@ -91,7 +91,14 @@ function determineBackgroundColor(
 	return 'transparent';
 }
 
-const Button: FC<Props> = ({ children, onClick, sx, disableRipple = false, ...styleProps }) => {
+const Button: FC<Props> = ({
+	children,
+	onClick,
+	sx,
+	type,
+	disableRipple = false,
+	...styleProps
+}) => {
 	const { size, btnType, isDisabled, isLoading, isFullWidth, noPad, secondary } = styleProps;
 
 	return (
@@ -106,6 +113,7 @@ const Button: FC<Props> = ({ children, onClick, sx, disableRipple = false, ...st
 			isFullWidth={isFullWidth}
 			noPad={isLoading ? false : noPad}
 			secondary={secondary}
+			type={type}
 			sx={{ ...sx }}
 		>
 			{children || "Ain't nothing here"}

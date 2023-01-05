@@ -3,13 +3,14 @@ import { Button as MuiButton } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
+import UserStore from '../../contexts/UserStore';
 import { ThemeContext } from '../../ThemeContext';
 import AppHideOnScroll from '../common/HideOnScroll';
 import NavDropdown from './NavDropdown';
 import NavHamburgerMenu from './NavHamburgerMenu';
 import NavLinks, { NavLinkElement } from './NavLinks';
 
-const links: NavLinkElement[] = [
+const userLinks: NavLinkElement[] = [
 	{
 		name: 'navbar.clientsLink',
 		path: '/clients',
@@ -24,6 +25,14 @@ const links: NavLinkElement[] = [
 	},
 ];
 
+const adminLinks: NavLinkElement[] = [
+	...userLinks,
+	{
+		name: 'navbar.createUserLink',
+		path: '/create-user',
+	},
+];
+
 const NavigationBar = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const [isDarkMode, setIsDarkMode] = useState(false);
@@ -32,7 +41,7 @@ const NavigationBar = () => {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 	const isMedium = useMediaQuery(currentTheme.breakpoints.up('md'));
-
+	const currentUser = UserStore.useLoginState();
 	const location = useLocation();
 
 	useEffect(() => {
@@ -59,7 +68,7 @@ const NavigationBar = () => {
 				>
 					<Grid container sx={{ justifyContent: 'space-between', width: '100%' }}>
 						<NavHamburgerMenu
-							links={links}
+							links={userLinks}
 							open={Boolean(anchorElNav)}
 							onOpen={setAnchorElNav}
 							onClose={() => setAnchorElNav(null)}
@@ -79,7 +88,10 @@ const NavigationBar = () => {
 							gap="10px"
 							alignItems="center"
 						>
-							<NavLinks links={links} activeLink={activeLink} />
+							<NavLinks
+								links={currentUser.role === 'admin' ? adminLinks : userLinks}
+								activeLink={activeLink}
+							/>
 						</Box>
 						<Box
 							display="flex"
