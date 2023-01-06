@@ -34,6 +34,40 @@ export type CheckboxObject = {
 
 const testLocations: CheckboxObject[] = [{ contains: 'Connell' }, { contains: 'mouth' }];
 
+/**
+ * Lige nu er mistanken at der kun kommer 10 resultater ind fordi querien bliver kørt
+ * med locationFilterSettings (Som er udledt fra den query man kører) at de clients uden
+ * byen bliver udelukket.
+ *
+ * Det kan være et problem at man baserer checkboxen på de locations der kommer fra query,
+ * da det betyder at checkboxen er afhængig af query, men query også er afhængig af checkbox
+ *
+ * Mulig løsning er at lave statisk array med de locations vi understøtter. Muligvis noget
+ * der skal understøttes fra BE i form af et endpoint, der giver alle de locations de kan
+ * finde i hele databasen.
+ *
+ * Lige nu er det locationFilterSettings der bliver det til objekt der indsættes i query,
+ * som også er den variabel der skal medsendes query, for at vi har mulighed for at lave
+ * query overhovedet.
+ *
+ * Det er en mulig udfordring at vi inddsætter checkbox variable ind som et objekt direkte
+ * i den query vi bruger, da det giver en masse hacking, i stedet for bare at få
+ * funktionaliteten lavet på BE.
+ *
+ * TODO: Få lavet en transformering af alle locations, der kun tager de locations med
+ * TODO: der er checked i checkboxGroup. Dette objekt skal medsendes query i stedet for
+ * TODO: hvad der lige nu er locationFilterSettings (Altså alle de locations vi kan finde).
+ * TODO: Skal rimelig sikkert laves ud fra checkboxGroupState, da det er her den faktiske
+ * TODO: state holdes, som er den vi gerne vil afspejle i query.
+ *
+ * TODO: LocationFilterSettings skal fjernes og der skal alves en dynamisk liste i stedet.
+ * TODO: De steder den blev brugt før skal bruge den nye variabel / state ovenfor.
+ *
+ * TODO: Tjek alle events nedefra og op og vær sikker på at de sender det rigtige med.
+ * TODO: Sørg for at den specifikke checkbox kan tilgås (sandsynligvis via name) gennem
+ * TODO: parent.
+ */
+
 const WallOfClients = () => {
 	const { t } = useTranslation();
 	const theme = useTheme();
