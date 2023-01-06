@@ -6,6 +6,7 @@ import PageContainer from './components/common/PageContainer';
 import WithNav from './components/navWrapper/WithNav';
 import WithoutNav from './components/navWrapper/WithoutNav';
 import UserStore from './contexts/UserStore';
+import AdminPage from './pages/Admin';
 import Contacts from './pages/Contacts';
 import LoginPage from './pages/Login';
 import NotFound404 from './pages/NotFound404';
@@ -26,18 +27,7 @@ const Content = () => {
 						<Route path="/contacts" element={<Contacts />} />
 						<Route path="/suppliers" element={<Suppliers />} />
 						<Route path="/recommendations" element={<Recommendations />} />
-						{currentUser.role === 'admin' && (
-							<Route
-								path="/create-user"
-								element={
-									<PageContainer>
-										<Typography variant="h5">
-											Here you should hopefully be able to create a new user :)
-										</Typography>
-									</PageContainer>
-								}
-							/>
-						)}
+						{currentUser.role === 'admin' && <Route path="/admin" element={<AdminPage />} />}
 						<Route path="*" element={<NotFound404 />} />
 					</Route>
 				</Routes>
