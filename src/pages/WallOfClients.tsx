@@ -57,6 +57,8 @@ const WallOfClients = () => {
 		console.log(extractLocations(data));
 		const locations = extractLocations(data);
 
+		console.log(calculateInitialCheckboxState(locations));
+
 		setCheckboxGroupState(calculateInitialCheckboxState(locations));
 	}, [data]);
 

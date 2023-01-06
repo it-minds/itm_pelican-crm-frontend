@@ -1,6 +1,6 @@
 import { CheckboxInfo } from '../components/common/CheckboxGroup';
 
-export const calculateInitialCheckboxState = (locations: (string | null)[]) => {
+export const calculateInitialCheckboxState = (locations: (string | null)[] | undefined) => {
 	if (!locations) {
 		return [] as CheckboxInfo[];
 	}
