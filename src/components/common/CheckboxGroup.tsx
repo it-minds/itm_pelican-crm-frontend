@@ -9,12 +9,12 @@ export type CheckboxInfo = {
 
 type CheckboxGroupProps = {
 	checkboxes: CheckboxInfo[];
-	onCheckedChange: (name: string) => void;
+	onCheckedChange: (name: string | null) => void;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, onCheckedChange }) => {
 	const handleChange = useCallback(
-		(name: string) => {
+		(name: string | null) => {
 			onCheckedChange(name);
 		},
 

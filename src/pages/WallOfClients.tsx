@@ -14,9 +14,12 @@ import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSke
 import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
 import { flexCol } from '../styles/generalStyles';
+import { calculateInitialCheckboxState } from '../utils/calculateInitialCheckboxState';
 // eslint-disable
 import { dummyCompanyNames } from '../utils/dummyClasses';
+import { extractLocations } from '../utils/extractLocations';
 import { useInfinityScroll } from '../utils/hooks/useInfinityScroll';
+import { locationsToObjects } from '../utils/locationsToObjects';
 // TODO: Remove dummy data when actual companies are available or a decisive decision to remove dropdown is made.
 import {
 	FRAGMENT_CLIENTFragment,
@@ -24,8 +27,10 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
-import { extractLocations } from '../utils/extractLocations';
-import { calculateInitialCheckboxState } from '../utils/calculateInitialCheckboxState';
+
+export type CheckboxObject = {
+	contains: string | null;
+};
 
 const testLocations: CheckboxObject[] = [{ contains: 'Connell' }, { contains: 'mouth' }];
 
@@ -35,7 +40,7 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
-	const [locationFilterSettings, setLocationFilterSettings] = useState<CheckboxInfo[]>([]);
+	const [locationFilterSettings, setLocationFilterSettings] = useState([] as CheckboxObject[]);
 	const [initialLoad, setInitialLoad] = useState(true);
 	const [checkboxGroupState, setCheckboxGroupState] = useState([] as CheckboxInfo[]);
 	const { loading, error, data, refetch, fetchMore, networkStatus } =
@@ -58,9 +63,23 @@ const WallOfClients = () => {
 		const locations = extractLocations(data);
 
 		console.log(calculateInitialCheckboxState(locations));
-
 		setCheckboxGroupState(calculateInitialCheckboxState(locations));
 	}, [data]);
+
+	useEffect(() => {
+		setLocationFilterSettings(locationsToObjects(checkboxGroupState));
+	}, [checkboxGroupState]);
+
+	useEffect(() => {
+		const vars: getFilteredClientsQueryVariables = {
+			currentClientSearch: clientFilterContent,
+			currentContactSearch: contactFilterContent,
+			currentLocationFilter: locationFilterSettings,
+		};
+		console.log('Refetching', clientFilterContent, contactFilterContent, locationFilterSettings);
+
+		refetch(vars);
+	}, [clientFilterContent, contactFilterContent, locationFilterSettings, refetch]);
 
 	/**
 	 * Handles the fetching of additional paginated data and merging it onto the current query.
@@ -89,17 +108,6 @@ const WallOfClients = () => {
 	// Custom hook handles infinity scroll logic
 	useInfinityScroll(handleFetchMore, data?.clients?.pageInfo.hasNextPage, networkStatus);
 
-	useEffect(() => {
-		const vars: getFilteredClientsQueryVariables = {
-			currentClientSearch: clientFilterContent,
-			currentContactSearch: contactFilterContent,
-			currentLocationFilter: locationFilterSettings,
-		};
-		console.log('Refetching', clientFilterContent, contactFilterContent, locationFilterSettings);
-
-		refetch(vars);
-	}, [clientFilterContent, contactFilterContent, locationFilterSettings, refetch]);
-
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
 		if (!newValue) {
@@ -122,11 +130,8 @@ const WallOfClients = () => {
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
 		console.log('New checkboxState', checkboxState);
-		console.log('New locationFilterState', locationFilterSettings);
 		setCheckboxGroupState(checkboxState);
 	};
-
-	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
 
 	return (
 		<PageContainer>
@@ -152,7 +157,7 @@ const WallOfClients = () => {
 				</PrimaryFilterWrapper>
 				<SecondaryFilterContainer>
 					<LocationFilter
-						locations={dummyLocations}
+						locations={extractLocations(data)}
 						onFilterUpdate={(checkBoxState: CheckboxInfo[]) =>
 							handleLocationFilterUpdate(checkBoxState)
 						}

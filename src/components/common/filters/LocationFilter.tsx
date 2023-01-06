@@ -7,7 +7,7 @@ import { CheckboxInfo } from '../CheckboxGroup';
 import PopupFilterWrapper from './PopupFilterWrapper';
 
 type LocationFilterProps = {
-	locations: string[];
+	locations: (string | null)[] | undefined;
 	checkboxGroupState: CheckboxInfo[];
 	onFilterUpdate: (newState: CheckboxInfo[]) => void;
 };
@@ -74,7 +74,7 @@ const LocationFilter: FC<LocationFilterProps> = ({
 		onFilterUpdate(checkedBoxes);
 	};
 
-	const handleCheckChanged = (name: string) => {
+	const handleCheckChanged = (name: string | null) => {
 		const newCheckboxState = checkboxGroupState.map(checkbox => {
 			if (checkbox.name === name) {
 				return {
