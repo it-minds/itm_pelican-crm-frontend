@@ -35,7 +35,7 @@ const WallOfClients = () => {
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
-	const [locationFilterSettings, setLocationFilterSettings] = useState<CheckboxObject[]>([]);
+	const [locationFilterSettings, setLocationFilterSettings] = useState<CheckboxInfo[]>([]);
 	const [initialLoad, setInitialLoad] = useState(true);
 	const [checkboxGroupState, setCheckboxGroupState] = useState([] as CheckboxInfo[]);
 	const { loading, error, data, refetch, fetchMore, networkStatus } =
@@ -95,10 +95,7 @@ const WallOfClients = () => {
 			currentContactSearch: contactFilterContent,
 			currentLocationFilter: locationFilterSettings,
 		};
-		console.log('Refetching');
-		console.log(clientFilterContent);
-		console.log(contactFilterContent);
-		console.log(locationFilterSettings);
+		console.log('Refetching', clientFilterContent, contactFilterContent, locationFilterSettings);
 
 		refetch(vars);
 	}, [clientFilterContent, contactFilterContent, locationFilterSettings, refetch]);
@@ -124,8 +121,9 @@ const WallOfClients = () => {
 	};
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
-		// setLocationFilterSettings(checkboxGroupObjectify(checkboxState));
+		console.log('New checkboxState', checkboxState);
 		console.log('New locationFilterState', locationFilterSettings);
+		setCheckboxGroupState(checkboxState);
 	};
 
 	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
