@@ -23,6 +23,7 @@ const Content = () => {
 			{currentUser.isLoggedIn ? (
 				<Routes>
 					<Route element={<WithNav />}>
+						<Route path="/" element={<WallOfClients />} />
 						<Route path="/clients" element={<WallOfClients />} />
 						<Route path="/contacts" element={<Contacts />} />
 						<Route path="/suppliers" element={<Suppliers />} />
