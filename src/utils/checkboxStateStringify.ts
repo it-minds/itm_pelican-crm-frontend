@@ -16,7 +16,7 @@ export const checkboxGroupStateStringify = (checkboxGroupState: CheckboxInfo[]) 
 	return result;
 };
 
-export const checkboxGroupStateStringify2 = (checkboxGroup: CheckboxInfo[]) => {
+export const checkboxGroupObjectify = (checkboxGroup: CheckboxInfo[]) => {
 	let result: CheckboxObject[] = [];
 
 	checkboxGroup.forEach(checkbox => {

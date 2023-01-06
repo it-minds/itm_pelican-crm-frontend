@@ -18,6 +18,8 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 
 	useMemo(() => {
 		const initialState = locations.map(location => {
+			console.log('setting checkbox state');
+
 			return {
 				label: location,
 				name: location,
@@ -30,6 +32,7 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 
 	useEffect(() => {
 		onFilterUpdate(checkboxState);
+		console.log('updating filter');
 	}, [checkboxState, onFilterUpdate]);
 
 	const isAnythingChecked = useMemo(() => {
@@ -76,6 +79,7 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 
 			return checkbox;
 		});
+		console.log('Handling change');
 
 		setCheckboxState(newCheckboxState);
 	};

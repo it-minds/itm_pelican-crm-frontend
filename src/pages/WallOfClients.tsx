@@ -25,10 +25,13 @@ import {
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
 import {
+	checkboxGroupObjectify,
 	checkboxGroupStateStringify,
 	checkboxGroupStateStringify2,
 	CheckboxObject,
 } from '../utils/checkboxStateStringify';
+
+const testLocations: CheckboxObject[] = [{ contains: 'Connell' }, { contains: 'mouth' }];
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -43,6 +46,7 @@ const WallOfClients = () => {
 			variables: {
 				currentClientSearch: clientFilterContent,
 				currentContactSearch: contactFilterContent,
+				currentLocationFilter: locationFilterSettings,
 				first: 10,
 				after: null,
 			},
@@ -83,9 +87,15 @@ const WallOfClients = () => {
 		const vars: getFilteredClientsQueryVariables = {
 			currentClientSearch: clientFilterContent,
 			currentContactSearch: contactFilterContent,
+			currentLocationFilter: locationFilterSettings,
 		};
+		console.log('Refetching');
+		console.log(clientFilterContent);
+		console.log(contactFilterContent);
+		console.log(locationFilterSettings);
+
 		refetch(vars);
-	}, [clientFilterContent, contactFilterContent, refetch]);
+	}, [clientFilterContent, contactFilterContent, locationFilterSettings, refetch]);
 
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
@@ -108,8 +118,9 @@ const WallOfClients = () => {
 	};
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
-		console.log(checkboxGroupStateStringify(checkboxState));
-		console.log(checkboxGroupStateStringify2(checkboxState));
+		console.log(checkboxGroupObjectify(checkboxState));
+		// setLocationFilterSettings(checkboxGroupObjectify(checkboxState));
+		console.log('New locationFilterState', locationFilterSettings);
 	};
 
 	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
