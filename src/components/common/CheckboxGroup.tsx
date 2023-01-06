@@ -2,8 +2,8 @@ import { Box, Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/ma
 import React, { FC, useCallback, useMemo } from 'react';
 
 export type CheckboxInfo = {
-	label: string;
-	name: string;
+	label: string | null;
+	name: string | null;
 	checked: boolean;
 };
 

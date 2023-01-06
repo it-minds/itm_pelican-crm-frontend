@@ -24,12 +24,8 @@ import {
 	getFilteredClientsQueryVariables,
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
-import {
-	checkboxGroupObjectify,
-	checkboxGroupStateStringify,
-	checkboxGroupStateStringify2,
-	CheckboxObject,
-} from '../utils/checkboxStateStringify';
+import { extractLocations } from '../utils/extractLocations';
+import { calculateInitialCheckboxState } from '../utils/calculateInitialCheckboxState';
 
 const testLocations: CheckboxObject[] = [{ contains: 'Connell' }, { contains: 'mouth' }];
 
@@ -41,6 +37,7 @@ const WallOfClients = () => {
 	const [contactFilterContent, setContactFilterContent] = useState('');
 	const [locationFilterSettings, setLocationFilterSettings] = useState<CheckboxObject[]>([]);
 	const [initialLoad, setInitialLoad] = useState(true);
+	const [checkboxGroupState, setCheckboxGroupState] = useState([] as CheckboxInfo[]);
 	const { loading, error, data, refetch, fetchMore, networkStatus } =
 		useQuery<getFilteredClientsQuery>(GET_FILTERED_CLIENTS, {
 			variables: {
@@ -55,6 +52,13 @@ const WallOfClients = () => {
 				setInitialLoad(false);
 			},
 		});
+
+	useEffect(() => {
+		console.log(extractLocations(data));
+		const locations = extractLocations(data);
+
+		setCheckboxGroupState(calculateInitialCheckboxState(locations));
+	}, [data]);
 
 	/**
 	 * Handles the fetching of additional paginated data and merging it onto the current query.
@@ -118,7 +122,6 @@ const WallOfClients = () => {
 	};
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
-		console.log(checkboxGroupObjectify(checkboxState));
 		// setLocationFilterSettings(checkboxGroupObjectify(checkboxState));
 		console.log('New locationFilterState', locationFilterSettings);
 	};
@@ -153,6 +156,7 @@ const WallOfClients = () => {
 						onFilterUpdate={(checkBoxState: CheckboxInfo[]) =>
 							handleLocationFilterUpdate(checkBoxState)
 						}
+						checkboxGroupState={checkboxGroupState}
 					/>
 				</SecondaryFilterContainer>
 			</FilterContainer>

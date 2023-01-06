@@ -8,68 +8,74 @@ import PopupFilterWrapper from './PopupFilterWrapper';
 
 type LocationFilterProps = {
 	locations: string[];
+	checkboxGroupState: CheckboxInfo[];
 	onFilterUpdate: (newState: CheckboxInfo[]) => void;
 };
 /**
  * Receives an array of strings representing the names of locations and returns a filter component
  */
-const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) => {
-	const [checkboxState, setCheckboxState] = useState([] as CheckboxInfo[]);
+const LocationFilter: FC<LocationFilterProps> = ({
+	locations,
+	checkboxGroupState,
+	onFilterUpdate,
+}) => {
+	/**
+	 * Is this useMemo necessary, when state is controlled by parent?
+	 */
+	// useMemo(() => {
+	// 	const initialState = locations.map(location => {
+	// 		console.log('setting checkbox state');
 
-	useMemo(() => {
-		const initialState = locations.map(location => {
-			console.log('setting checkbox state');
+	// 		return {
+	// 			label: location,
+	// 			name: location,
+	// 			checked: false,
+	// 		};
+	// 	});
 
-			return {
-				label: location,
-				name: location,
-				checked: false,
-			};
-		});
-
-		setCheckboxState(initialState);
-	}, [locations]);
+	// 	setCheckboxState(initialState);
+	// }, [locations]);
 
 	useEffect(() => {
-		onFilterUpdate(checkboxState);
+		onFilterUpdate(checkboxGroupState);
 		console.log('updating filter');
-	}, [checkboxState, onFilterUpdate]);
+	}, [checkboxGroupState, onFilterUpdate]);
 
 	const isAnythingChecked = useMemo(() => {
-		return checkboxState.some(checkbox => checkbox.checked);
-	}, [checkboxState]);
+		return checkboxGroupState?.some(checkbox => checkbox.checked);
+	}, [checkboxGroupState]);
 
 	const isAllChecked = useMemo(() => {
-		return checkboxState.every(checkbox => checkbox.checked);
-	}, [checkboxState]);
+		return checkboxGroupState?.every(checkbox => checkbox.checked);
+	}, [checkboxGroupState]);
 
 	const checkEverything = () => {
 		if (isAllChecked) return;
-		const checkedBoxes = checkboxState.map(checkbox => {
+		const checkedBoxes = checkboxGroupState.map(checkbox => {
 			return {
 				...checkbox,
 				checked: true,
 			};
 		});
 
-		setCheckboxState(checkedBoxes);
+		onFilterUpdate(checkedBoxes);
 	};
 
 	const uncheckEverything = () => {
 		if (!isAnythingChecked) return;
 
-		const checkedBoxes = checkboxState.map(checkbox => {
+		const checkedBoxes = checkboxGroupState.map(checkbox => {
 			return {
 				...checkbox,
 				checked: false,
 			};
 		});
 
-		setCheckboxState(checkedBoxes);
+		onFilterUpdate(checkedBoxes);
 	};
 
 	const handleCheckChanged = (name: string) => {
-		const newCheckboxState = checkboxState.map(checkbox => {
+		const newCheckboxState = checkboxGroupState.map(checkbox => {
 			if (checkbox.name === name) {
 				return {
 					...checkbox,
@@ -81,7 +87,7 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 		});
 		console.log('Handling change');
 
-		setCheckboxState(newCheckboxState);
+		onFilterUpdate(newCheckboxState);
 	};
 
 	return (
@@ -107,7 +113,7 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 					onCheckedChange={name => {
 						handleCheckChanged(name);
 					}}
-					checkboxes={checkboxState}
+					checkboxes={checkboxGroupState}
 				/>
 				<Box display="flex" width="100%" justifyContent="space-between">
 					<Button variant="contained" sx={{ width: '4rem' }} onClick={() => uncheckEverything()}>
