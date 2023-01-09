@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 
 import Button from '../Button';
 import CheckboxGroup from '../CheckboxGroup';
@@ -7,66 +7,57 @@ import { CheckboxInfo } from '../CheckboxGroup';
 import PopupFilterWrapper from './PopupFilterWrapper';
 
 type LocationFilterProps = {
-	locations: string[];
+	locations: (string | null)[] | undefined;
+	checkboxGroupState: CheckboxInfo[];
 	onFilterUpdate: (newState: CheckboxInfo[]) => void;
 };
 /**
  * Receives an array of strings representing the names of locations and returns a filter component
  */
-const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) => {
-	const [checkboxState, setCheckboxState] = useState([] as CheckboxInfo[]);
-
-	useMemo(() => {
-		const initialState = locations.map(location => {
-			return {
-				label: location,
-				name: location,
-				checked: false,
-			};
-		});
-
-		setCheckboxState(initialState);
-	}, [locations]);
-
+const LocationFilter: FC<LocationFilterProps> = ({
+	locations,
+	checkboxGroupState,
+	onFilterUpdate,
+}) => {
 	useEffect(() => {
-		onFilterUpdate(checkboxState);
-	}, [checkboxState, onFilterUpdate]);
+		onFilterUpdate(checkboxGroupState);
+	}, [checkboxGroupState, onFilterUpdate]);
 
 	const isAnythingChecked = useMemo(() => {
-		return checkboxState.some(checkbox => checkbox.checked);
-	}, [checkboxState]);
+		return checkboxGroupState?.some(checkbox => checkbox.checked);
+	}, [checkboxGroupState]);
 
 	const isAllChecked = useMemo(() => {
-		return checkboxState.every(checkbox => checkbox.checked);
-	}, [checkboxState]);
+		return checkboxGroupState?.every(checkbox => checkbox.checked);
+	}, [checkboxGroupState]);
 
 	const checkEverything = () => {
 		if (isAllChecked) return;
-		const checkedBoxes = checkboxState.map(checkbox => {
+		const checkedBoxes = checkboxGroupState.map(checkbox => {
 			return {
 				...checkbox,
 				checked: true,
 			};
 		});
 
-		setCheckboxState(checkedBoxes);
+		onFilterUpdate(checkedBoxes);
 	};
 
 	const uncheckEverything = () => {
 		if (!isAnythingChecked) return;
 
-		const checkedBoxes = checkboxState.map(checkbox => {
+		const checkedBoxes = checkboxGroupState.map(checkbox => {
 			return {
 				...checkbox,
 				checked: false,
 			};
 		});
 
-		setCheckboxState(checkedBoxes);
+		onFilterUpdate(checkedBoxes);
 	};
 
-	const handleCheckChanged = (name: string) => {
-		const newCheckboxState = checkboxState.map(checkbox => {
+	const handleCheckChanged = (name: string | null) => {
+		const newCheckboxState = checkboxGroupState.map(checkbox => {
 			if (checkbox.name === name) {
 				return {
 					...checkbox,
@@ -77,7 +68,7 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 			return checkbox;
 		});
 
-		setCheckboxState(newCheckboxState);
+		onFilterUpdate(newCheckboxState);
 	};
 
 	return (
@@ -103,7 +94,7 @@ const LocationFilter: FC<LocationFilterProps> = ({ locations, onFilterUpdate }) 
 					onCheckedChange={name => {
 						handleCheckChanged(name);
 					}}
-					checkboxes={checkboxState}
+					checkboxes={checkboxGroupState}
 				/>
 				<Box display="flex" width="100%" justifyContent="space-between">
 					<Button variant="contained" sx={{ width: '4rem' }} onClick={() => uncheckEverything()}>

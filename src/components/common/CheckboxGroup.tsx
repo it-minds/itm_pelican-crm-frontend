@@ -2,19 +2,19 @@ import { Box, Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/ma
 import React, { FC, useCallback, useMemo } from 'react';
 
 export type CheckboxInfo = {
-	label: string;
-	name: string;
+	label: string | null;
+	name: string | null;
 	checked: boolean;
 };
 
 type CheckboxGroupProps = {
 	checkboxes: CheckboxInfo[];
-	onCheckedChange: (name: string) => void;
+	onCheckedChange: (name: string | null) => void;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const CheckboxGroup: FC<CheckboxGroupProps> = ({ checkboxes, onCheckedChange }) => {
 	const handleChange = useCallback(
-		(name: string) => {
+		(name: string | null) => {
 			onCheckedChange(name);
 		},
 
