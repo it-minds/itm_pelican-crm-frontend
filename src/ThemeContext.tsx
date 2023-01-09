@@ -1,7 +1,7 @@
 import { ThemeOptions, ThemeProvider } from '@mui/material/styles';
 import React, { FC, useEffect, useState } from 'react';
 
-import { darkTheme, lightTheme } from '../theme';
+import { darkTheme, lightTheme } from './theme';
 
 // type Theme = 'light' | 'dark';
 type ThemeContextType = { theme: ThemeOptions; toggleTheme: () => void };
