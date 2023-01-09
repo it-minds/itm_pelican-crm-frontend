@@ -74,9 +74,7 @@ const LoginForm: FC<LoginFormProps> = ({ onFormSubmit }) => {
 						<Typography variant="button">{t('login.form.loginButton')}</Typography>
 					</Button>
 					<ButtonBase disableRipple component={Link} to={'/login'} sx={{ placeSelf: 'start' }}>
-						<Typography variant="body2" color="primary">
-							{t('login.form.forgotPasswordButton')}
-						</Typography>
+						<Typography variant="body2">{t('login.form.forgotPasswordButton')}</Typography>
 					</ButtonBase>
 				</Grid>
 			</FormControl>
