@@ -13,7 +13,7 @@ import NavLinks, { NavLinkElement } from './NavLinks';
 const userLinks: NavLinkElement[] = [
 	{
 		name: 'navbar.clientsLink',
-		path: '/clients',
+		path: '/',
 	},
 	{
 		name: 'navbar.contactsLink',
