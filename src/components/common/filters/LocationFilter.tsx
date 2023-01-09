@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 
 import Button from '../Button';
 import CheckboxGroup from '../CheckboxGroup';
@@ -19,26 +19,8 @@ const LocationFilter: FC<LocationFilterProps> = ({
 	checkboxGroupState,
 	onFilterUpdate,
 }) => {
-	/**
-	 * Is this useMemo necessary, when state is controlled by parent?
-	 */
-	// useMemo(() => {
-	// 	const initialState = locations.map(location => {
-	// 		console.log('setting checkbox state');
-
-	// 		return {
-	// 			label: location,
-	// 			name: location,
-	// 			checked: false,
-	// 		};
-	// 	});
-
-	// 	setCheckboxState(initialState);
-	// }, [locations]);
-
 	useEffect(() => {
 		onFilterUpdate(checkboxGroupState);
-		console.log('updating filter');
 	}, [checkboxGroupState, onFilterUpdate]);
 
 	const isAnythingChecked = useMemo(() => {
@@ -85,7 +67,6 @@ const LocationFilter: FC<LocationFilterProps> = ({
 
 			return checkbox;
 		});
-		console.log('Handling change');
 
 		onFilterUpdate(newCheckboxState);
 	};

@@ -14,12 +14,9 @@ import CompanyCardsSkeleton from '../components/common/skeletons/CompanyCardsSke
 import Underlined from '../components/common/Underlined';
 import ClientListItem from '../components/wall-of-clients/ClientListItem';
 import { flexCol } from '../styles/generalStyles';
-import { calculateInitialCheckboxState } from '../utils/calculateInitialCheckboxState';
 // eslint-disable
 import { dummyCompanyNames } from '../utils/dummyClasses';
-import { extractLocations } from '../utils/extractLocations';
 import { useInfinityScroll } from '../utils/hooks/useInfinityScroll';
-import { locationsToObjects } from '../utils/locationsToObjects';
 // TODO: Remove dummy data when actual companies are available or a decisive decision to remove dropdown is made.
 import {
 	FRAGMENT_CLIENTFragment,
@@ -32,41 +29,25 @@ export type CheckboxObject = {
 	contains: string | null;
 };
 
-const testLocations: CheckboxObject[] = [{ contains: 'Connell' }, { contains: 'mouth' }];
+const testLocations: (string | null)[] = [
+	"O'Connellview",
+	'New Karli',
+	'Leslymouth',
+	'South Ryleeside',
+	'East Nakiamouth',
+	'Koelpinland',
+	'East Gino',
+	'Camilleport',
+	'Kodyview',
+	'Presleyshire',
+	'Elysebury',
+	'Aarhus',
+	'den lille by',
+	'Miami',
+	'Copenhagen',
+];
 
-/**
- * Lige nu er mistanken at der kun kommer 10 resultater ind fordi querien bliver kørt
- * med locationFilterSettings (Som er udledt fra den query man kører) at de clients uden
- * byen bliver udelukket.
- *
- * Det kan være et problem at man baserer checkboxen på de locations der kommer fra query,
- * da det betyder at checkboxen er afhængig af query, men query også er afhængig af checkbox
- *
- * Mulig løsning er at lave statisk array med de locations vi understøtter. Muligvis noget
- * der skal understøttes fra BE i form af et endpoint, der giver alle de locations de kan
- * finde i hele databasen.
- *
- * Lige nu er det locationFilterSettings der bliver det til objekt der indsættes i query,
- * som også er den variabel der skal medsendes query, for at vi har mulighed for at lave
- * query overhovedet.
- *
- * Det er en mulig udfordring at vi inddsætter checkbox variable ind som et objekt direkte
- * i den query vi bruger, da det giver en masse hacking, i stedet for bare at få
- * funktionaliteten lavet på BE.
- *
- * TODO: Få lavet en transformering af alle locations, der kun tager de locations med
- * TODO: der er checked i checkboxGroup. Dette objekt skal medsendes query i stedet for
- * TODO: hvad der lige nu er locationFilterSettings (Altså alle de locations vi kan finde).
- * TODO: Skal rimelig sikkert laves ud fra checkboxGroupState, da det er her den faktiske
- * TODO: state holdes, som er den vi gerne vil afspejle i query.
- *
- * TODO: LocationFilterSettings skal fjernes og der skal alves en dynamisk liste i stedet.
- * TODO: De steder den blev brugt før skal bruge den nye variabel / state ovenfor.
- *
- * TODO: Tjek alle events nedefra og op og vær sikker på at de sender det rigtige med.
- * TODO: Sørg for at den specifikke checkbox kan tilgås (sandsynligvis via name) gennem
- * TODO: parent.
- */
+// TODO: Change the above testLocations to instead utilize the WIP endpoint that returns all locations from the database.
 
 const WallOfClients = () => {
 	const { t } = useTranslation();
@@ -93,12 +74,8 @@ const WallOfClients = () => {
 		});
 
 	useEffect(() => {
-		console.log(extractLocations(data));
-		const locations = extractLocations(data);
-
-		console.log(calculateInitialCheckboxState(locations));
-		setCheckboxGroupState(calculateInitialCheckboxState(locations));
-	}, [data]);
+		setCheckboxGroupState(calculateInitialCheckboxState(testLocations));
+	}, []);
 
 	useEffect(() => {
 		setLocationFilterSettings(locationsToObjects(checkboxGroupState));
@@ -110,7 +87,6 @@ const WallOfClients = () => {
 			currentContactSearch: contactFilterContent,
 			currentLocationFilter: locationFilterSettings,
 		};
-		console.log('Refetching', clientFilterContent, contactFilterContent, locationFilterSettings);
 
 		refetch(vars);
 	}, [clientFilterContent, contactFilterContent, locationFilterSettings, refetch]);
@@ -163,7 +139,6 @@ const WallOfClients = () => {
 	};
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
-		console.log('New checkboxState', checkboxState);
 		setCheckboxGroupState(checkboxState);
 	};
 
@@ -191,7 +166,7 @@ const WallOfClients = () => {
 				</PrimaryFilterWrapper>
 				<SecondaryFilterContainer>
 					<LocationFilter
-						locations={extractLocations(data)}
+						locations={testLocations}
 						onFilterUpdate={(checkBoxState: CheckboxInfo[]) =>
 							handleLocationFilterUpdate(checkBoxState)
 						}
@@ -237,3 +212,36 @@ const WallOfClients = () => {
 };
 
 export default WallOfClients;
+
+function locationsToObjects(checkboxGroup: CheckboxInfo[]) {
+	let result: CheckboxObject[] = [];
+
+	checkboxGroup.forEach(location => {
+		if (location.checked) {
+			const checkbox: CheckboxObject = {
+				contains: location.name,
+			};
+			result.push(checkbox);
+		}
+	});
+
+	return result;
+}
+
+function calculateInitialCheckboxState(locations: (string | null)[] | undefined) {
+	if (!locations) {
+		return [] as CheckboxInfo[];
+	}
+
+	const initialState = locations?.map(location => {
+		const checkbox: CheckboxInfo = {
+			checked: false,
+			label: location,
+			name: location,
+		};
+
+		return checkbox;
+	});
+
+	return initialState;
+}
