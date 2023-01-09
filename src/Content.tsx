@@ -15,14 +15,13 @@ import WallOfClients from './pages/WallOfClients';
 
 const Content = () => {
 	const currentUser = UserStore.useLoginState();
-	console.log('currentUser', currentUser);
 
 	return (
 		<>
 			{currentUser.isLoggedIn ? (
 				<Routes>
 					<Route element={<WithNav />}>
-						<Route path="/clients" element={<WallOfClients />} />
+						<Route path="/" element={<WallOfClients />} />
 						<Route path="/contacts" element={<Contacts />} />
 						<Route path="/suppliers" element={<Suppliers />} />
 						<Route path="/recommendations" element={<Recommendations />} />
