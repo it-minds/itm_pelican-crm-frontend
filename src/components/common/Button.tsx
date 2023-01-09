@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 import { darken, SxProps } from '@mui/system';
 import React, { FC, ReactNode } from 'react';
 
-import { cubicTransition } from '../../../theme';
+import { cubicTransition } from '../../theme';
 
 /**
  * * Possible refactor of styled():
