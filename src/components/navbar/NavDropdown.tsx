@@ -2,8 +2,17 @@ import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
 import Brightness7RoundedIcon from '@mui/icons-material/Brightness7Rounded';
 import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
-import { ButtonProps, Grid, Menu, MenuItem, MenuItemProps, Typography } from '@mui/material';
+import {
+	ButtonBase,
+	ButtonProps,
+	Grid,
+	Menu,
+	MenuItem,
+	MenuItemProps,
+	Typography,
+} from '@mui/material';
 import React, { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Button from '../common/Button';
 
@@ -86,9 +95,16 @@ const NavDropdown: FC<NavDropdownProps> = ({
 				anchorEl={anchorEl}
 				onClose={onClose}
 			>
-				<NavMenuItem onClick={() => alert("You can't login my dude :(")}>
-					<Typography variant="body">Login</Typography>
-					<LoginRoundedIcon sx={{ fontSize: ICON_SIZE }} />
+				<NavMenuItem>
+					<ButtonBase
+						component={Link}
+						to={'/login'}
+						disableRipple
+						sx={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}
+					>
+						<Typography variant="body">Login</Typography>
+						<LoginRoundedIcon sx={{ fontSize: ICON_SIZE }} />
+					</ButtonBase>
 				</NavMenuItem>
 				<NavMenuItem onClick={themeToggle}>
 					<Typography variant="body">Theme</Typography>

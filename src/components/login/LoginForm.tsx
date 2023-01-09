@@ -1,39 +1,43 @@
 import {
 	Box,
+	ButtonBase,
 	Checkbox,
 	FormControl,
 	FormControlLabel,
 	FormGroupProps,
 	Grid,
-	Link,
 	TextField,
 	Typography,
 } from '@mui/material';
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import Button from '../common/Button';
 
-type LoginFormProps = { failedLogin: boolean } & FormGroupProps;
+type LoginFormProps = {
+	onFormSubmit: (form: FormData) => void;
+} & FormGroupProps;
 
-const LoginForm: FC<LoginFormProps> = ({ failedLogin }) => {
+const LoginForm: FC<LoginFormProps> = ({ onFormSubmit }) => {
 	const [password, setPassword] = useState('');
+	const { t } = useTranslation();
+
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-		});
-		// fire event to parent
+
+		onFormSubmit(data);
 	};
 
-	const isPasswordValid = useMemo(() => {
-		if (!failedLogin) return true;
-		// Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number
-		const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+	//TODO: Move this logic to a create user page instead of login page
+	// const isPasswordValid = useMemo(() => {
+	// 	if (!attemptedLogin) return true;
+	// 	// Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number
+	// 	const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
-		return regex.test(password);
-	}, [password, failedLogin]);
+	// 	return regex.test(password);
+	// }, [password, attemptedLogin]);
 
 	return (
 		<Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: '65%' }}>
@@ -43,7 +47,7 @@ const LoginForm: FC<LoginFormProps> = ({ failedLogin }) => {
 					required
 					fullWidth
 					id="email"
-					label="Email Address"
+					label={t('login.form.emailLabel')}
 					name="email"
 					type="email"
 					autoComplete="email"
@@ -54,27 +58,24 @@ const LoginForm: FC<LoginFormProps> = ({ failedLogin }) => {
 					required
 					fullWidth
 					name="password"
-					label="Password"
+					label={t('login.form.passwordLabel')}
 					type="password"
 					id="password"
-					error={!isPasswordValid}
+					value={password}
+					onChange={e => setPassword(e.target.value)}
 					autoComplete="current-password"
 				/>
 				<FormControlLabel
 					control={<Checkbox value="remember" color="primary" />}
-					label="Remember me"
+					label={t('login.form.rememberMeLabel')}
 				/>
 				<Grid container flexDirection="column">
-					<Button
-						type="submit"
-						fullWidth
-						sx={{ mt: 3, mb: 1.5, maxHeight: '2.5em', padding: '1em' }}
-					>
-						<Typography variant="button">Sign In</Typography>
+					<Button type="submit" sx={{ mt: 2, mb: 1, maxHeight: '2.5em', padding: '1em' }}>
+						<Typography variant="button">{t('login.form.loginButton')}</Typography>
 					</Button>
-					<Link href="#" variant="body2">
-						Forgot password?
-					</Link>
+					<ButtonBase disableRipple component={Link} to={'/login'} sx={{ placeSelf: 'start' }}>
+						<Typography variant="body2">{t('login.form.forgotPasswordButton')}</Typography>
+					</ButtonBase>
 				</Grid>
 			</FormControl>
 		</Box>
