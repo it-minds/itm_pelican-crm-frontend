@@ -10,4 +10,6 @@ function App() {
 	);
 }
 
+// TODO: Change entry-point of the app from landing-page to Content.tsx
+
 export default App;

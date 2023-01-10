@@ -25,3 +25,5 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
+// TODO: Delete landing page when sign-up page is functional

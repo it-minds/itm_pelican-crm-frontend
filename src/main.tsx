@@ -27,3 +27,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 		</BrowserRouter>
 	</React.StrictMode>
 );
+
+// TODO: Change entry-point to App (which at that point should contain <Content> or the content of the Content-component)

@@ -16,6 +16,10 @@ import WallOfClients from './pages/WallOfClients';
 const Content = () => {
 	const currentUser = UserStore.useLoginState();
 
+	// TODO: Is is beneficial to move the routes into App instead for a better flow through the app?
+	// TODO: Right now Content is nothing but the routes and it feels more intuitive to have App.tsx as the entry point instead of Content.tsx
+	// TODO: Basically Content feels like an unnecessary component.
+
 	/**
 	 * Arbejdsopgaver:
 	 * Tjek om der ligger en token (JWT) i local storage
