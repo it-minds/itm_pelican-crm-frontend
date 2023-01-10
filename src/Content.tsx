@@ -16,6 +16,20 @@ import WallOfClients from './pages/WallOfClients';
 const Content = () => {
 	const currentUser = UserStore.useLoginState();
 
+	/**
+	 * Arbejdsopgaver:
+	 * Tjek om der ligger en token (JWT) i local storage
+	 * 		Hvis der gør, så valider denne token med backend
+	 * 		Hvis den er valid, så kør logikken for at dekode token og sætte nuværende bruger via "setLoginState" (fra UserStore.tsx)
+	 * Hvis ikke der er en JWT i local storage, så skal der laves en query til backend for at få en ny
+	 * 		Denne JWT skal så dekodes for at finde ud af rollen, navn, om de er logget ind, etc ...
+	 * 		Når JWT er dekodet, så bruges dennes information til at sætte brugeren via setLoginState (fra UserStore.tsx)
+	 * 		Herefter sættes currentUser til den nuværende bruger via "useLoginState" (fra UserStore.tsx)
+	 * Hver gang en route tilgås skal JWT valideres i backend
+	 * 		Der skal sandsynligvis opsættes i backend, så token refresher hver gang den bruges
+	 * 		Der sættes en bestemt levetid på token, så den udløber efter X timers inaktivitet
+	 */
+
 	return (
 		<>
 			{currentUser.isLoggedIn ? (

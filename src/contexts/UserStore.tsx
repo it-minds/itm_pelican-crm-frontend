@@ -6,8 +6,8 @@ type Role = 'admin' | 'user' | 'guest';
 export const activeUser = {
 	id: -1,
 	name: '',
-	role: '',
-	isLoggedIn: true,
+	role: 'guest',
+	isLoggedIn: false,
 };
 
 export type ActiveUser = typeof activeUser;
