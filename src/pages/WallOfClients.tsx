@@ -25,18 +25,45 @@ import {
 } from '../utils/queries/__generated__/wallOfClientsQueries.graphql';
 import { GET_FILTERED_CLIENTS } from '../utils/queries/wallOfClientsQueries';
 
+export type CheckboxObject = {
+	contains: string | null;
+};
+
+const testLocations: (string | null)[] = [
+	"O'Connellview",
+	'New Karli',
+	'Leslymouth',
+	'South Ryleeside',
+	'East Nakiamouth',
+	'Koelpinland',
+	'East Gino',
+	'Camilleport',
+	'Kodyview',
+	'Presleyshire',
+	'Elysebury',
+	'Aarhus',
+	'den lille by',
+	'Miami',
+	'Copenhagen',
+];
+
+// TODO: Change the above testLocations to instead utilize the WIP endpoint that returns all locations from the database.
+
 const WallOfClients = () => {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const isMedium = useMediaQuery(theme.breakpoints.up('md'));
 	const [clientFilterContent, setClientFilterContent] = useState('');
 	const [contactFilterContent, setContactFilterContent] = useState('');
+	const [locationFilterSettings, setLocationFilterSettings] = useState([] as CheckboxObject[]);
 	const [initialLoad, setInitialLoad] = useState(true);
+	const [checkboxGroupState, setCheckboxGroupState] = useState([] as CheckboxInfo[]);
 	const { loading, error, data, refetch, fetchMore, networkStatus } =
 		useQuery<getFilteredClientsQuery>(GET_FILTERED_CLIENTS, {
 			variables: {
 				currentClientSearch: clientFilterContent,
 				currentContactSearch: contactFilterContent,
+				currentLocationFilter: locationFilterSettings,
 				first: 10,
 				after: null,
 			},
@@ -45,6 +72,24 @@ const WallOfClients = () => {
 				setInitialLoad(false);
 			},
 		});
+
+	useEffect(() => {
+		setCheckboxGroupState(calculateInitialCheckboxState(testLocations));
+	}, []);
+
+	useEffect(() => {
+		setLocationFilterSettings(locationsToObjects(checkboxGroupState));
+	}, [checkboxGroupState]);
+
+	useEffect(() => {
+		const vars: getFilteredClientsQueryVariables = {
+			currentClientSearch: clientFilterContent,
+			currentContactSearch: contactFilterContent,
+			currentLocationFilter: locationFilterSettings,
+		};
+
+		refetch(vars);
+	}, [clientFilterContent, contactFilterContent, locationFilterSettings, refetch]);
 
 	/**
 	 * Handles the fetching of additional paginated data and merging it onto the current query.
@@ -73,14 +118,6 @@ const WallOfClients = () => {
 	// Custom hook handles infinity scroll logic
 	useInfinityScroll(handleFetchMore, data?.clients?.pageInfo.hasNextPage, networkStatus);
 
-	useEffect(() => {
-		const vars: getFilteredClientsQueryVariables = {
-			currentClientSearch: clientFilterContent,
-			currentContactSearch: contactFilterContent,
-		};
-		refetch(vars);
-	}, [clientFilterContent, contactFilterContent, refetch]);
-
 	const handleClientFilterChange = (newValue: string | string[] | null) => {
 		if (Array.isArray(newValue)) return;
 		if (!newValue) {
@@ -102,10 +139,8 @@ const WallOfClients = () => {
 	};
 
 	const handleLocationFilterUpdate = (checkboxState: CheckboxInfo[]) => {
-		// do something with the checkboxState and gql here :)
+		setCheckboxGroupState(checkboxState);
 	};
-
-	const dummyLocations = ['Aarhus', 'Copenhagen', 'Aalborg', 'Oslo'];
 
 	return (
 		<PageContainer>
@@ -131,10 +166,11 @@ const WallOfClients = () => {
 				</PrimaryFilterWrapper>
 				<SecondaryFilterContainer>
 					<LocationFilter
-						locations={dummyLocations}
+						locations={testLocations}
 						onFilterUpdate={(checkBoxState: CheckboxInfo[]) =>
 							handleLocationFilterUpdate(checkBoxState)
 						}
+						checkboxGroupState={checkboxGroupState}
 					/>
 				</SecondaryFilterContainer>
 			</FilterContainer>
@@ -176,3 +212,36 @@ const WallOfClients = () => {
 };
 
 export default WallOfClients;
+
+function locationsToObjects(checkboxGroup: CheckboxInfo[]) {
+	let result: CheckboxObject[] = [];
+
+	checkboxGroup.forEach(location => {
+		if (location.checked) {
+			const checkbox: CheckboxObject = {
+				contains: location.name,
+			};
+			result.push(checkbox);
+		}
+	});
+
+	return result;
+}
+
+function calculateInitialCheckboxState(locations: (string | null)[] | undefined) {
+	if (!locations) {
+		return [] as CheckboxInfo[];
+	}
+
+	const initialState = locations?.map(location => {
+		const checkbox: CheckboxInfo = {
+			checked: false,
+			label: location,
+			name: location,
+		};
+
+		return checkbox;
+	});
+
+	return initialState;
+}

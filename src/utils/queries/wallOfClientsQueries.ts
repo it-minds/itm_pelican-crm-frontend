@@ -4,6 +4,7 @@ export const GET_FILTERED_CLIENTS = gql`
 	query getFilteredClients(
 		$currentClientSearch: String
 		$currentContactSearch: String
+		$currentLocationFilter: [StringOperationFilterInput!]
 		$first: Int
 		$after: String
 	) {
@@ -12,7 +13,10 @@ export const GET_FILTERED_CLIENTS = gql`
 			after: $after
 			where: {
 				and: [
-					{ name: { contains: $currentClientSearch } }
+					{
+						name: { contains: $currentClientSearch }
+						officeLocation: { or: $currentLocationFilter }
+					}
 					{
 						clientContacts: {
 							some: { and: { contact: { firstName: { contains: $currentContactSearch } } } }
