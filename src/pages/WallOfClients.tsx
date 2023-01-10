@@ -73,6 +73,8 @@ const WallOfClients = () => {
 			},
 		});
 
+	// TODO: Insert new query and use to populate checkbox instead of static array
+
 	useEffect(() => {
 		setCheckboxGroupState(calculateInitialCheckboxState(testLocations));
 	}, []);
