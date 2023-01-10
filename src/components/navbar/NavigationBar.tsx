@@ -29,7 +29,7 @@ const adminLinks: NavLinkElement[] = [
 	...userLinks,
 	{
 		name: 'navbar.createUserLink',
-		path: '/create-user',
+		path: '/admin',
 	},
 ];
 
