@@ -98,6 +98,14 @@ export const GET_FILTERED_CLIENTS = gql`
 	}
 `;
 
+export const GET_UNIQUE_LOCATIONS = gql`
+	query getUniqueLocations {
+		locations {
+			officeLocation
+		}
+	}
+`;
+
 /**
  * Fragments are created to create specific types for use when
  * passing data down through nested components. These components
