@@ -91,6 +91,16 @@
 			"forgotPasswordButton": "Forgot password?"
 		}
 	},
+	"admin": {
+		"pageTitle": "Create New User",
+		"form": {
+			"fullNameLabel": "Full Name",
+			"emailLabel": "Email Address",
+			"passwordLabel": "Temporary Password",
+			"isAdminCheckboxLabel": "This user is an administrator",
+			"createUserButton": "Create User"
+		}
+	},
 	"landingPage": {
 		"pageTitle": "Welcome to Pelican CRM",
 		"pageSubtitle": "Sign in via Google below.",

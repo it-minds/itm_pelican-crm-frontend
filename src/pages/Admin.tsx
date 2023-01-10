@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import CreateUserForm from '../components/admin/CreateUserForm';
 import PageContainer from '../components/common/PageContainer';
@@ -13,6 +14,8 @@ type NewUser = {
 };
 
 const AdminPage: FC = () => {
+	const { t } = useTranslation();
+
 	const handleFormSubmit = (form: FormData) => {
 		const newUser: NewUser = {
 			name: form.get('name') as string,
@@ -32,7 +35,7 @@ const AdminPage: FC = () => {
 			<PageContainer>
 				<Box width="100%" display="flex" justifyContent={'center'}>
 					<Typography variant="h1" color="text.primary">
-						Create User
+						{t('admin.pageTitle')}
 					</Typography>
 				</Box>
 				<Box

@@ -44,7 +44,7 @@ const CreateUserForm: FC<CreateUserProps> = ({ onFormSubmit }) => {
 					required
 					fullWidth
 					id="fullName"
-					label="Full Name"
+					label={t('admin.form.fullNameLabel')}
 					name="fullName"
 					type="text"
 					autoComplete="name"
@@ -55,7 +55,7 @@ const CreateUserForm: FC<CreateUserProps> = ({ onFormSubmit }) => {
 					required
 					fullWidth
 					id="email"
-					label="Email Address"
+					label={t('admin.form.emailLabel')}
 					name="email"
 					type="email"
 					autoComplete="email"
@@ -65,7 +65,7 @@ const CreateUserForm: FC<CreateUserProps> = ({ onFormSubmit }) => {
 					required
 					fullWidth
 					name="password"
-					label={'Temporary Password'}
+					label={t('admin.form.passwordLabel')}
 					type="password"
 					id="password"
 					value={password}
@@ -82,11 +82,11 @@ const CreateUserForm: FC<CreateUserProps> = ({ onFormSubmit }) => {
 							color="primary"
 						/>
 					}
-					label="This user is an administrator"
+					label={t('admin.form.isAdminCheckboxLabel')}
 				/>
 				<Grid container flexDirection="column">
 					<Button type="submit" sx={{ mt: 2, mb: 1, maxHeight: '2.5em', padding: '1em' }}>
-						<Typography variant="button">Create User</Typography>
+						<Typography variant="button">{t('admin.form.createUserButton')}</Typography>
 					</Button>
 				</Grid>
 			</FormControl>
