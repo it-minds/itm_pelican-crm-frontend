@@ -94,5 +94,5 @@ export default Content;
  * 		Send cookie / JWT til validering i backenden
  * 		HVIS valid (200 OK) så sæt brugeroplysninger via UserStore.setLoginState - ellers så sæt brugeroplysninger til default (guest og ikke logget ind)
  * JWT (uanset om den kommer direkte fra local storage eller en cookie) skal medsendes alle GQL-requests (udover login) for validering, ud over når man prøver at logge ind
- *
+ * ! Al funktionalitet med at oprette JWT / cookie i localStorage skal ske i login-flowet - Denne komponent bruger blot brugeroplysninger
  */
