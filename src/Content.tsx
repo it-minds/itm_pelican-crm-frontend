@@ -87,14 +87,12 @@ export default Content;
 
 /**
  * Arbejdsopgaver:
- * Tjek om der ligger en token (JWT) i local storage
- * 		Hvis der gør, så valider denne token med backend
- * 		Hvis den er valid, så kør logikken for at dekode token og sætte nuværende bruger via "setLoginState" (fra UserStore.tsx)
- * Hvis ikke der er en JWT i local storage, så skal der laves en query til backend for at få en ny
- * 		Denne JWT skal så dekodes for at finde ud af rollen, navn, om de er logget ind, etc ...
- * 		Når JWT er dekodet, så bruges dennes information til at sætte brugeren via setLoginState (fra UserStore.tsx)
- * 		Herefter sættes currentUser til den nuværende bruger via "useLoginState" (fra UserStore.tsx)
- * Hver gang en route tilgås skal JWT valideres i backend
- * 		Der skal sandsynligvis opsættes i backend, så token refresher hver gang den bruges
- * 		Der sættes en bestemt levetid på token, så den udløber efter X timers inaktivitet
+ * HVIS der ikke er en cookie / JWT i localstorage
+ * 		redirect til /login og sørg for at brugeroplysninger er sat til default
+ * 		(For at få lov til at tilgå clients, skal login-flowet gennemføres)
+ * HVIS der allerede er en cookie / JWT i localstorage
+ * 		Send cookie / JWT til validering i backenden
+ * 		HVIS valid (200 OK) så sæt brugeroplysninger via UserStore.setLoginState - ellers så sæt brugeroplysninger til default (guest og ikke logget ind)
+ * JWT (uanset om den kommer direkte fra local storage eller en cookie) skal medsendes alle GQL-requests (udover login) for validering, ud over når man prøver at logge ind
+ *
  */
