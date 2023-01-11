@@ -68,9 +68,12 @@ function checkForJWT(credentials: ActiveUser) {
 	let user: ActiveUser = {} as ActiveUser;
 	if (!localStorage.getItem('user')) {
 		localStorage.setItem('user', JSON.stringify(credentials)); // TODO: Replace with query to backend that creates new token
+		// TODO: Still needs to validate token - If valid, then set user, else set user to default (guest, not logged in)
+		//? Does the auth workflow only trigger when updating the app (F5), or does this flow trigger every time the page is changed?
 		user = JSON.parse(localStorage.getItem('user') || '{}');
 	} else {
 		user = JSON.parse(localStorage.getItem('user') || '{}');
+		// TODO: Still needs to decode token to extract information
 	}
 	UserStore.setActiveUser(user);
 	//TODO: Probably need some kind of error handling
