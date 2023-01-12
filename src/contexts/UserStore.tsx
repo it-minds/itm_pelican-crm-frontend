@@ -15,14 +15,17 @@ export type ActiveUser = typeof activeUser;
 const userVar = makeVar<ActiveUser>(activeUser);
 
 const useLoginState = () => {
+	console.log('using login state');
 	return useReactiveVar(userVar);
 };
 
 const setActiveUser = (user: ActiveUser) => {
+	console.log('setting login state');
 	userVar(user);
 };
 
 const logout = () => {
+	console.log('logging out');
 	userVar(activeUser);
 };
 

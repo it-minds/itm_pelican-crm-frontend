@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import PageContainer from './components/common/PageContainer';
@@ -13,20 +13,21 @@ import Recommendations from './pages/Recommendations';
 import Suppliers from './pages/Suppliers';
 import WallOfClients from './pages/WallOfClients';
 
+const testCredentials: ActiveUser = {
+	id: 1,
+	isLoggedIn: true,
+	name: '',
+	role: 'admin',
+};
+
 const Content = () => {
+	useMemo(() => {
+		checkForJWT(testCredentials);
+	}, []);
+
 	const currentUser = UserStore.useLoginState();
 
-	//* Test variables and objects for preliminary auth
-	const testCredetials: ActiveUser = {
-		id: 1,
-		isLoggedIn: true,
-		name: 'Mads',
-		role: 'admin',
-	};
-
-	checkForJWT(testCredetials);
-
-	localStorage.setItem('user', JSON.stringify(testCredetials));
+	localStorage.setItem('user', JSON.stringify(testCredentials));
 
 	return (
 		<>
@@ -65,16 +66,22 @@ const Content = () => {
 
 // Preliminary auth with JWT in localstorage
 function checkForJWT(credentials: ActiveUser) {
+	console.log('checking for JWT');
 	let user: ActiveUser = {} as ActiveUser;
 	if (!localStorage.getItem('user')) {
+		console.log('nothing detected in local storage');
 		localStorage.setItem('user', JSON.stringify(credentials)); // TODO: Replace with query to backend that creates new token
 		// TODO: Still needs to validate token - If valid, then set user, else set user to default (guest, not logged in)
 		//? Does the auth workflow only trigger when updating the app (F5), or does this flow trigger every time the page is changed?
+		console.log('setting user to', JSON.parse(localStorage.getItem('user') || '{}'));
 		user = JSON.parse(localStorage.getItem('user') || '{}');
 	} else {
+		console.log('JWT detected in localstorage');
+		console.log('setting user to', JSON.parse(localStorage.getItem('user') || '{}'));
 		user = JSON.parse(localStorage.getItem('user') || '{}');
 		// TODO: Still needs to decode token to extract information
 	}
+	console.log('updating active user');
 	UserStore.setActiveUser(user);
 	//TODO: Probably need some kind of error handling
 }
